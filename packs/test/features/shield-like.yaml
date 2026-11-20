@@ -1,0 +1,12 @@
+# A synthetic hit-known reaction in Shield's shape (M3 step 8'a; SRD 5.2.1 Shield,
+# srd-raw.txt:30659-30670: "Until the start of your next turn, you have a +5 bonus to AC,
+# including against the triggering attack"). When an attack roll hits the bearer, before damage,
+# it spends its Reaction and one use of the character's "wards" pool (no spell slot) for +5 AC
+# until the start of its next turn, checked again against the triggering attack.
+kind: feature
+id: test:shield-like
+name: Shield-like Ward
+source: synthetic test fixture (generic hit-known AC reaction)
+reaction: { window: hitKnown, pool: wards, do: [{ apply: { effect: barrier, to: self } }] }
+effects:
+  - { id: barrier, name: Shield-like Ward, duration: { until: startOfNextTurn, of: bearer }, stats: [{ ac: 5 }] }

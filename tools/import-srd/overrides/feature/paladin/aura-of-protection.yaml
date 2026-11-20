@@ -1,0 +1,18 @@
+# Reviewed against SRD 5.2.1 p.55 (srd-raw.txt:11992-12000), Paladin level 6, at coverage step 7.5:
+# a 10-foot Emanation from the Paladin, inactive while it's Incapacitated (offWhen: the aura stays
+# and comes back). "You and your allies in the aura" is includesOrigin with affects: allies. The
+# bonus is the Charisma modifier, minimum +1. Of two Paladins' auras a creature "chooses which": it
+# takes the highest (sim/effects.ts foldAuras) [U: the reading]. Nothing else in the text.
+fidelity: full
+unimplemented: null
+spellAbility: cha
+effects:
+  - id: aura
+    name: Aura of Protection
+    zone: { shape: emanation, size: 10, includesOrigin: true, offWhen: [incapacitated], affects: allies }
+    mods:
+      - { on: [d20.save], op: flat, value: 'max(@mod, 1)' }
+passive: { effects: [aura] }
+provenance:
+  review: reviewed
+  pdfPage: 55

@@ -1,0 +1,58 @@
+# SRD 5.2.1 p.302, Knight ("Medium or Small"; modeled Medium). Numbers checked against the PDF text.
+# Heavy Crossbow Loading isn't applied: a stat block's attacks are self-contained and may
+# ignore the Equipment rules for an item (p.255).
+# "Two attacks, using Greatsword or Heavy Crossbow in any combination."
+# Moved here unchanged at M3 step 6 (docs/design/m3.md 4.6): the hand-written stat block stands in
+# for the Foundry record as replace: true, so its compiled template, every closure hash and every
+# golden stay byte-identical (tools/import-srd/test/step6-monsters.test.ts).
+# After step 6: Frightened immunity is now data ("Immunities Frightened", srd-raw.txt:50602).
+# Coverage step 9+: Parry ("Trigger: The knight is hit by a melee attack roll while holding a weapon.
+# Response: The knight adds 2 to its AC against that attack, possibly causing it to miss",
+# srd-raw.txt:50631-50633) in the hit-known window; a stat block has no hand model, so it holds its
+# Greatsword throughout [U]. Nothing on the block is unmodeled now, so fidelity is full.
+replace: true
+foundryPath: packs/_source/actors24/humanoid/knight.yml
+kind: monster
+id: srd:knight
+name: Knight
+source: SRD 5.2.1 p.302
+fidelity: full
+size: medium
+cr: 3
+pb: 2
+ac: 18
+hp: { average: 52, formula: 8d8 + 16 }
+speed: { walk: 30 }
+initiative: { mod: 0, score: 10 }
+abilities: { str: 16, dex: 11, con: 14, int: 11, wis: 11, cha: 15 }
+saves: { con: 4, wis: 2 }
+conditionImmune: [frightened]
+gear:
+  - { name: Greatsword }
+  - { name: Heavy Crossbow }
+  - { name: Plate Armor }
+attacks:
+  - id: greatsword
+    name: Greatsword
+    kind: melee
+    toHit: 5
+    reach: 5
+    damage:
+      - { roll: 2d6 + 3, type: slashing, avg: 10 }
+      - { roll: 1d8, type: radiant, avg: 4 }
+  - id: heavy-crossbow
+    name: Heavy Crossbow
+    kind: ranged
+    toHit: 2
+    range: [100, 400]
+    damage:
+      - { roll: 2d10, type: piercing, avg: 11 }
+      - { roll: 1d8, type: radiant, avg: 4 }
+multiattack:
+  alternatives:
+    - [{ count: 2, from: [greatsword, heavy-crossbow] }]
+reactions:
+  - { id: parry, name: Parry, window: hitKnown, attacks: [melee], ac: 2, whileHolding: weapon }
+provenance:
+  review: reviewed
+  pdfPage: 302

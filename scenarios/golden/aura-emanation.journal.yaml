@@ -1,0 +1,31 @@
+# Coverage step 7.5: scripted in full. Round 1 in initiative order: adp2 and adp1 cast Sacred Flame at pc4 and pc3; pc1 casts Spirit Guardians, walks onto gob1 (save), steps back and on again (no second save). Round 2: gob1's turn end is its second save.
+kind: journal
+scenario: "aura-emanation"
+seed: 2
+run: 0
+engine: "0.8.0"
+contentHash: "3d3082d01dbb7376"
+scenarioHash: "60828e1f84cb2cd4"
+entries:
+  - { seat: pc4, key: 'pass' }
+  - { seat: adp2, key: 'cast:sacred-flame@0' }
+  - { seat: adp2, key: 'target:pc4' }
+  - { seat: adp2, key: 'pass' }
+  - { seat: pc3, key: 'pass' }
+  - { seat: gob1, key: 'pass' }
+  - { seat: adp1, key: 'cast:sacred-flame@0' }
+  - { seat: adp1, key: 'target:pc3' }
+  - { seat: adp1, key: 'pass' }
+  - { seat: pc1, key: 'cast:spirit-guardians@3' }
+  - { seat: pc1, key: 'move:E2/p0' }
+  - { seat: pc1, key: 'move:D2/p0' }
+  - { seat: pc1, key: 'move:E2/p0' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: pc2, key: 'pass' }
+  - { seat: pc4, key: 'pass' }
+  - { seat: adp2, key: 'pass' }
+  - { seat: pc3, key: 'pass' }
+  - { seat: gob1, key: 'pass' }
+  - { seat: adp1, key: 'pass' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: pc2, key: 'pass' }

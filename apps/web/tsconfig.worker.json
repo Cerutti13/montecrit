@@ -1,0 +1,11 @@
+{
+  "//": "The browser worker entry: webworker lib, no DOM.",
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["es2024", "webworker"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "types": []
+  },
+  "include": ["src/worker"]
+}

@@ -1,0 +1,63 @@
+replay   engine 0.8.0 | content f6bf9acde1eb19a9 | scenario oa-interrupts-move a65ed768370e556f | seed 1 run 0 | journal 1
+policy   ally1 baseline | gob1 journal>baseline | gob2 baseline | pc1 baseline
+knobs    maxRounds=20 attackDowned=ifNoOtherTarget lossCounts=pcs downEnds=true
+flags read:
+  diagonalCost=uniform [verified: SRD 5.2.1 p.13 "Playing on a Grid": any adjacent square costs 1; alternating 5/10 is a 2024 DMG option (its use for range is unverified)]
+  initiativeMode=static [verified: SRD 5.2.1 p.184 "Initiative" and p.254: static initiative is a GM option]
+  groupInitiative=shared [verified: SRD 5.2.1 p.13: a group of identical creatures gets one roll]
+  monsterHp=listed [verified: SRD 5.2.1 p.255: use the number or the dice, the GM's choice]
+  statBlockAtZeroHp=dies [verified: SRD 5.2.1 p.17 "Monster Death": dies at 0 HP unless the GM treats it like a character]
+  corpseSpace=clear [UNVERIFIED: SRD 5.2.1 p.14 and glossary "Dead" (p.180) are silent on bodies; Sage Advice silent]
+notes    LOS: grid (losMethod=corners, creatureCover=on)
+notes    srd:goblin-warrior partial: unimplemented Nimble Escape: the Hide option
+
+   #1   initiative gob1 12 (static)
+   #2   initiative gob2 12 (static)
+   #3   initiative ally1 11 (static)
+   #4   initiative pc1 7 (static)
+   #5 == round 1 ==
+   #6 gob1's turn (B2, 4 HP, 30 ft) [Goblin Warrior]
+   #7   gob1 chooses move:F3/p1  [journal @0]
+   #8     gob1 steps B2 -> C1 (5 ft, 25 left)
+   #9     gob1 steps C1 -> D1 (5 ft, 20 left)
+  #10     gob1 leaves ally1's reach D1 -> E2
+  #11       ally1 chooses oa:spear  [baseline @1]
+  #12         ally1 Spear -> gob1: d20 13 +3 = 16 vs AC 15, hit [opportunity attack]  [ally1 attack r1 p2.0]
+  #13           gob1 takes 5 (5 piercing), HP 4 -> 0  [ally1 damage r1 p2.0]
+  #14             gob1 dies (0 HP)
+  #15     gob1's move ends at D1: died, 2 of 4 steps
+  #16   gob1's turn ends
+  #17 gob2's turn (B4, 10 HP, 30 ft) [Goblin Warrior]
+  #18   gob2 chooses attack:shortbow>ally1  [baseline @2]
+  #19     gob2: Attack
+  #20     gob2 Shortbow -> ally1: d20 15 +4 = 19 vs AC 16, hit  [gob2 attack r1 p0.0]
+  #21       ally1 takes 3 (3 piercing), HP 11 -> 8  [gob2 damage r1 p0.0]
+  #22   gob2 chooses move:B3/p0  [baseline @3]
+  #23     gob2 steps B4 -> B3 (5 ft, 25 left)
+  #24     gob2's move ends at B3
+  #25   gob2 chooses pass  [baseline @4]
+  #26   gob2's turn ends
+  #27 ally1's turn (C2, 8 HP, 30 ft) [Guard]
+  #28   ally1 chooses attack:spear>gob2  [baseline @5]
+  #29     ally1: Attack
+  #30     ally1 Spear -> gob2: d20 7 +3 = 10 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #31   ally1 chooses pass  [baseline @6]
+  #32   ally1's turn ends
+  #33 pc1's turn (G3, 44 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses move:C3/p0  [baseline @7]
+  #35     pc1 steps G3 -> F2 (5 ft, 25 left)
+  #36     pc1 steps F2 -> E1 (5 ft, 20 left)
+  #37     pc1 steps E1 -> D2 (5 ft, 15 left)
+  #38     pc1 steps D2 -> C3 (5 ft, 10 left)
+  #39     pc1's move ends at C3
+  #40   pc1 chooses attack:longsword>gob2  [baseline @8]
+  #41     pc1: Attack
+  #42     pc1 Longsword -> gob2: d20 15 +6 = 21 vs AC 15, hit  [pc1 attack r1 p0.0]
+  #43       gob2 takes 6 (6 slashing), HP 10 -> 4  [pc1 damage r1 p0.0]
+  #44   pc1 chooses attack:longsword>gob2  [baseline @9]
+  #45     pc1 Longsword -> gob2: d20 14 +6 = 20 vs AC 15, hit  [pc1 attack r1 p0.1]
+  #46       gob2 takes 6 (6 slashing), HP 4 -> 0  [pc1 damage r1 p0.1]
+  #47         gob2 dies (0 HP)
+  #48   pc1's turn ends
+  #49 fight ends: win in round 1
+logHash 458527d9b74cb114

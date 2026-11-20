@@ -1,0 +1,935 @@
+{
+  "title": "montecrit character",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "character"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "default": "character file",
+      "type": "string",
+      "minLength": 1
+    },
+    "placeholder": {
+      "default": false,
+      "type": "boolean"
+    },
+    "unimplemented": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rules": {
+      "type": "string",
+      "const": "2024"
+    },
+    "classes": {
+      "minItems": 1,
+      "maxItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "class": {
+            "type": "string",
+            "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+          },
+          "level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "subclass": {
+            "type": "string",
+            "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+          }
+        },
+        "required": [
+          "class",
+          "level"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "species": {
+      "type": "string",
+      "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+    },
+    "size": {
+      "type": "string",
+      "enum": [
+        "tiny",
+        "small",
+        "medium",
+        "large",
+        "huge",
+        "gargantuan"
+      ]
+    },
+    "background": {
+      "type": "string",
+      "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+    },
+    "abilities": {
+      "type": "object",
+      "properties": {
+        "str": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        },
+        "dex": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        },
+        "con": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        },
+        "int": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        },
+        "wis": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        },
+        "cha": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        }
+      },
+      "required": [
+        "str",
+        "dex",
+        "con",
+        "int",
+        "wis",
+        "cha"
+      ],
+      "additionalProperties": false
+    },
+    "hp": {
+      "default": "average",
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "average",
+            "max"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "rolled": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 12
+              }
+            }
+          },
+          "required": [
+            "rolled"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "picks": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*#[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "asi": {
+                "type": "object",
+                "properties": {
+                  "str": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2
+                  },
+                  "dex": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2
+                  },
+                  "con": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2
+                  },
+                  "int": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2
+                  },
+                  "wis": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2
+                  },
+                  "cha": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "asi"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "feat": {
+                "type": "string",
+                "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+              }
+            },
+            "required": [
+              "feat"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "equipment": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "armor": {
+          "default": null,
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "shield": {
+          "default": false,
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+            }
+          ]
+        },
+        "weapons": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "items": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "shield",
+                  "focus",
+                  "pouch",
+                  "object"
+                ]
+              },
+              "focusFor": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                }
+              },
+              "shieldAc": {
+                "default": 0,
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "magic": {
+                "type": "string",
+                "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "kind"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "hands": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "additionalProperties": false
+    },
+    "acSource": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "armor",
+            "unarmored"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+        }
+      ]
+    },
+    "casting": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+          },
+          "cantrips": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+            }
+          },
+          "prepared": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+            }
+          }
+        },
+        "required": [
+          "source"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "features": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+      }
+    },
+    "overrides": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "pb": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "why": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "value",
+            "why"
+          ],
+          "additionalProperties": false
+        },
+        "hpMax": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "why": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "value",
+            "why"
+          ],
+          "additionalProperties": false
+        },
+        "ac": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "why": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "value",
+            "why"
+          ],
+          "additionalProperties": false
+        },
+        "speed": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "why": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "value",
+            "why"
+          ],
+          "additionalProperties": false
+        },
+        "initiativeBonus": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "why": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "value",
+            "why"
+          ],
+          "additionalProperties": false
+        },
+        "extraAttacks": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "why": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "value",
+            "why"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "flags": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "natOnChecksAndSaves": {
+          "type": "string",
+          "enum": [
+            "none",
+            "autoPassFail"
+          ]
+        },
+        "expandedCritAutoHits": {
+          "type": "boolean",
+          "enum": [
+            false,
+            true
+          ]
+        },
+        "diagonalCost": {
+          "type": "string",
+          "enum": [
+            "uniform",
+            "alternate"
+          ]
+        },
+        "diagonalCorner": {
+          "type": "string",
+          "enum": [
+            "eitherBlocks",
+            "bothBlock"
+          ]
+        },
+        "initiativeMode": {
+          "type": "string",
+          "enum": [
+            "roll",
+            "static"
+          ]
+        },
+        "initiativeTies": {
+          "type": "string",
+          "enum": [
+            "rollOff",
+            "pcsFirst",
+            "monstersFirst"
+          ]
+        },
+        "groupInitiative": {
+          "type": "string",
+          "enum": [
+            "shared",
+            "individual"
+          ]
+        },
+        "monsterHp": {
+          "type": "string",
+          "enum": [
+            "listed",
+            "rolled"
+          ]
+        },
+        "statBlockAtZeroHp": {
+          "type": "string",
+          "enum": [
+            "dies",
+            "deathSaves"
+          ]
+        },
+        "corpseSpace": {
+          "type": "string",
+          "enum": [
+            "clear",
+            "difficult"
+          ]
+        },
+        "moveBetweenAttacks": {
+          "type": "string",
+          "enum": [
+            "all",
+            "extraAttackOnly"
+          ]
+        },
+        "monsterThrownWeapons": {
+          "type": "string",
+          "enum": [
+            "gearCount",
+            "unlimited"
+          ]
+        },
+        "tempHpSoakAtZeroIsDamage": {
+          "type": "boolean",
+          "enum": [
+            true,
+            false
+          ]
+        },
+        "pauseInOccupiedSpace": {
+          "type": "boolean",
+          "enum": [
+            false,
+            true
+          ]
+        },
+        "focusHandSomatic": {
+          "type": "string",
+          "enum": [
+            "strict",
+            "lenient"
+          ]
+        },
+        "conjuredHandEffectBlocksHand": {
+          "type": "boolean",
+          "enum": [
+            false,
+            true
+          ]
+        },
+        "concentrationSaveGrouping": {
+          "type": "string",
+          "enum": [
+            "perDamageEvent",
+            "perDamageType"
+          ]
+        },
+        "concentrationSaveOnZeroDamage": {
+          "type": "string",
+          "enum": [
+            "noSave",
+            "save"
+          ]
+        },
+        "timedDurationExpiryPoint": {
+          "type": "string",
+          "enum": [
+            "startOfCreatorTurn",
+            "endOfCreatorTurn"
+          ]
+        },
+        "deadAnchorTurnBoundary": {
+          "type": "string",
+          "enum": [
+            "keepInitiativeSlot",
+            "fireOnDeath"
+          ]
+        },
+        "nextRollRiderConsumedWhenRedundant": {
+          "type": "string",
+          "enum": [
+            "consumed",
+            "notConsumed"
+          ]
+        },
+        "selfTargetWhenTextSilent": {
+          "type": "string",
+          "enum": [
+            "allowed",
+            "notAllowed"
+          ]
+        },
+        "areaOriginOnGrid": {
+          "type": "string",
+          "enum": [
+            "squareCenter",
+            "gridIntersection"
+          ]
+        },
+        "areaGridCoverage": {
+          "type": "string",
+          "enum": [
+            "atLeastHalfSquare",
+            "squareCenterInside",
+            "anyOverlap"
+          ]
+        },
+        "areaSaveGroupingPerEvent": {
+          "type": "string",
+          "enum": [
+            "groupByEvent",
+            "perCreature"
+          ]
+        },
+        "movedAreaTriggersAlongPath": {
+          "type": "string",
+          "enum": [
+            "sweepPath",
+            "destinationOnly"
+          ]
+        },
+        "involuntaryMovementTriggersArea": {
+          "type": "boolean",
+          "enum": [
+            true,
+            false
+          ]
+        },
+        "perDistanceDamageRolls": {
+          "type": "string",
+          "enum": [
+            "perIncrement",
+            "perMove"
+          ]
+        },
+        "areaExitStepCounts": {
+          "type": "boolean",
+          "enum": [
+            false,
+            true
+          ]
+        },
+        "forcedMovementPath": {
+          "type": "string",
+          "enum": [
+            "eachStepCloser",
+            "straightLineOnly"
+          ]
+        },
+        "forcedMovementObstacle": {
+          "type": "string",
+          "enum": [
+            "stopBefore",
+            "passThroughCreatures"
+          ]
+        },
+        "forcedMovementTerrainCost": {
+          "type": "string",
+          "enum": [
+            "ignoresTerrain",
+            "terrainShortens"
+          ]
+        },
+        "losingSpellSourceEndsActiveSpell": {
+          "type": "boolean",
+          "enum": [
+            false,
+            true
+          ]
+        },
+        "unconsciousDropsShield": {
+          "type": "boolean",
+          "enum": [
+            true,
+            false
+          ]
+        },
+        "zoneKnowledge": {
+          "type": "string",
+          "enum": [
+            "sawCast",
+            "all",
+            "none"
+          ]
+        },
+        "flyingAvoidsGroundZones": {
+          "type": "boolean",
+          "enum": [
+            false,
+            true
+          ]
+        },
+        "riderDiceCritDouble": {
+          "type": "boolean",
+          "enum": [
+            true,
+            false
+          ]
+        },
+        "reduceBeforeResistance": {
+          "type": "boolean",
+          "enum": [
+            true,
+            false
+          ]
+        },
+        "losMethod": {
+          "type": "string",
+          "enum": [
+            "corners",
+            "centers",
+            "stubbed"
+          ]
+        },
+        "creatureCover": {
+          "type": "string",
+          "enum": [
+            "on",
+            "off"
+          ]
+        },
+        "splitActions": {
+          "type": "string",
+          "enum": [
+            "allowed",
+            "notAllowed"
+          ]
+        },
+        "selfAreaOrigin": {
+          "type": "string",
+          "enum": [
+            "squareCenter",
+            "squareEdge"
+          ]
+        },
+        "emanationReach": {
+          "type": "string",
+          "enum": [
+            "gridDistance",
+            "radial"
+          ]
+        },
+        "emanationCastTrigger": {
+          "type": "string",
+          "enum": [
+            "none",
+            "onCast"
+          ]
+        },
+        "searchSkill": {
+          "type": "string",
+          "enum": [
+            "best",
+            "perception"
+          ]
+        },
+        "hiddenHazardRevealedByDamage": {
+          "type": "boolean",
+          "enum": [
+            true,
+            false
+          ]
+        },
+        "hiddenHazardPartialViewCountsAsSeen": {
+          "type": "boolean",
+          "enum": [
+            true,
+            false
+          ]
+        },
+        "swapProvokesOpportunityAttacks": {
+          "type": "boolean",
+          "enum": [
+            false,
+            true
+          ]
+        },
+        "freeMoveUsesMovement": {
+          "type": "boolean",
+          "enum": [
+            false,
+            true
+          ]
+        },
+        "frenzyRageCheck": {
+          "type": "string",
+          "enum": [
+            "declaration",
+            "hit"
+          ]
+        },
+        "thrownWeaponLands": {
+          "type": "string",
+          "enum": [
+            "targetSquare",
+            "gone"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "kind",
+    "id",
+    "name",
+    "rules",
+    "classes",
+    "species",
+    "background",
+    "abilities"
+  ],
+  "additionalProperties": false
+}

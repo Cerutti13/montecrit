@@ -1,0 +1,26 @@
+# Coverage step 9+ golden (docs/design/coverage.md, "Step 9+ build note"): Redirect Attack and Parry.
+# Redirect Attack: "Trigger: A creature the goblin can see makes an attack roll against it. Response:
+# The goblin chooses a Small or Medium ally within 5 feet of itself. The goblin and that ally swap
+# places, and the ally becomes the target of the attack instead" (SRD 5.2.1 p.290,
+# srd-raw.txt:48831-48834). Parry: "Trigger: The warrior is hit by a melee attack roll while holding a
+# weapon. Response: The warrior adds 2 to its AC against that attack, possibly causing it to miss"
+# (p.337, srd-raw.txt:55655-55657).
+# An open 8 x 6 map: the Warrior Veteran (ally1, C3) against a Goblin Boss at 6 HP (boss1, D3) with a
+# Goblin Warrior beside it (gob1, D4). Static initiative, PCs' side first; every seat is greedy; seed 2.
+#   Round 1: ally1's first Greatsword swing at boss1 is declared; before the roll boss1 swaps gob1 in
+#   (greedy: the 10.03 it no longer risks against the 7.19 gob1 risks where it stood), gob1 now on D3
+#   takes the hit at AC 15 and dies, boss1 on D4. ally1's second swing misses boss1. boss1's first
+#   Scimitar hits ally1 at 22 vs AC 17: Parry can't turn it (22 is past 19), so ally1 keeps its Reaction.
+#   Round 2: boss1's second Scimitar hits ally1 at 17 vs AC 17; ally1 Parries, 17 vs 19, a miss.
+kind: scenario
+id: redirect-attack
+name: Redirect Attack and Parry
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid: { w: 8, h: 6 }
+flags: { initiativeMode: static, initiativeTies: pcsFirst }
+knobs: { maxRounds: 2 }
+units:
+  - { seat: ally1, team: party, use: 'srd:warrior-veteran', at: C3, decider: greedy }
+  - { seat: boss1, team: enemies, use: 'srd:goblin-boss', at: D3, hp: 6, decider: greedy }
+  - { seat: gob1, team: enemies, use: 'srd:goblin-warrior', at: D4, decider: greedy }

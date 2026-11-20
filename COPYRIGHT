@@ -1,0 +1,14 @@
+MonteCrit
+Copyright (C) 2026 Shane Cerutti
+
+This program is free software: you can redistribute it and/or modify it under the terms of
+the GNU Affero General Public License as published by the Free Software Foundation, version 3
+(AGPL-3.0-only). It is distributed WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See LICENSE for the full text.
+
+Additional term under AGPL-3.0 section 7(b): you must keep the attribution "MonteCrit by
+Shane Cerutti" and a link to https://github.com/Cerutti13/montecrit in the About screen (or an
+equivalent place) of any version you convey or make available over a network.
+
+The SRD 5.2.1 content under packs/srd-5.2.1/ is not covered by this license. It is licensed
+under CC-BY-4.0; see packs/srd-5.2.1/ATTRIBUTION.md.

@@ -1,0 +1,6 @@
+# Paths exempt from check-private's content checks (never from the API-key check).
+# A trailing / means a whole folder; anything else matches that one file. Every line
+# needs a reason.
+
+tools/check-private.ts    # the checker holds the name list
+tools/test/               # the checker's tests spell out what it must catch

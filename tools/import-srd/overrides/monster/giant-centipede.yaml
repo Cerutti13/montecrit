@@ -1,0 +1,35 @@
+# SRD 5.2.1 p.349, Giant Centipede (srd-raw.txt:57689-57716 and its Bite at 57730-57731), written
+# from the PDF at coverage C0 (X1: no monster at CR 10 or below whose block has an attack roll is
+# inert). Foundry's record carries no license (license-empty, quarantined, C21), so this stand-in
+# replaces it; every number is the stat block's, as pdf/monsters.ts reads it into srd-index.json
+# (tools/import-srd/test/c0-coverage.test.ts checks the attack against the index).
+replace: true
+foundryPath: packs/_source/actors24/beast/giant-centipede.yml
+kind: monster
+id: srd:giant-centipede
+name: Giant Centipede
+source: SRD 5.2.1 p.349
+fidelity: partial
+size: small
+cr: 1/4
+pb: 2
+ac: 14
+hp: { average: 9, formula: 2d6 + 2 }
+speed: { walk: 30, climb: 30 }
+initiative: { mod: 2, score: 12 }
+abilities: { str: 5, dex: 14, con: 12, int: 1, wis: 7, cha: 3 }
+senses: { blindsight: 30, passivePerception: 8 }
+attacks:
+  - id: bite
+    name: Bite
+    kind: melee
+    toHit: 4
+    reach: 5
+    damage:
+      - { roll: 1d4 + 2, type: piercing, avg: 4 }
+unimplemented:
+  - 'monster attack bite: text after the damage not modeled'
+  - monster speed climb not modeled
+provenance:
+  review: reviewed
+  pdfPage: 349

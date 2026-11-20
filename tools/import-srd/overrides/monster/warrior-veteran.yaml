@@ -1,0 +1,58 @@
+# SRD 5.2.1 p.337, Warrior Veteran ("Medium or Small"; modeled Medium).
+# Numbers checked against the PDF text. Initiative +3 includes PB (DEX alone is +1).
+# Heavy Crossbow Loading isn't applied: a stat block's attacks are self-contained and may
+# ignore the Equipment rules for an item (p.255).
+# "Makes two Greatsword or Heavy Crossbow attacks." Read as two of the same attack: other
+# stat blocks say "in any combination" when mixing is allowed (Knight, Goblin Boss).
+# Moved here unchanged at M3 step 6 (docs/design/m3.md 4.6): the hand-written stat block stands in
+# for the Foundry record as replace: true, so its compiled template, every closure hash and every
+# golden stay byte-identical (tools/import-srd/test/step6-monsters.test.ts).
+# Coverage step 9+: Parry ("Trigger: The warrior is hit by a melee attack roll while holding a weapon.
+# Response: The warrior adds 2 to its AC against that attack, possibly causing it to miss",
+# srd-raw.txt:55655-55657) in the hit-known window; a stat block has no hand model, so it holds its
+# Greatsword throughout [U].
+replace: true
+foundryPath: packs/_source/actors24/humanoid/warrior-veteran.yml
+kind: monster
+id: srd:warrior-veteran
+name: Warrior Veteran
+source: SRD 5.2.1 p.337
+fidelity: partial
+size: medium
+cr: 3
+pb: 2
+ac: 17
+hp: { average: 65, formula: 10d8 + 20 }
+speed: { walk: 30 }
+initiative: { mod: 3, score: 13 }
+abilities: { str: 16, dex: 13, con: 14, int: 10, wis: 11, cha: 10 }
+gear:
+  - { name: Greatsword }
+  - { name: Heavy Crossbow }
+  - { name: Splint Armor }
+attacks:
+  - id: greatsword
+    name: Greatsword
+    kind: melee
+    toHit: 5
+    reach: 5
+    damage:
+      - { roll: 2d6 + 3, type: slashing, avg: 10 }
+  - id: heavy-crossbow
+    name: Heavy Crossbow
+    kind: ranged
+    toHit: 3
+    range: [100, 400]
+    damage:
+      - { roll: 2d10 + 1, type: piercing, avg: 12 }
+multiattack:
+  alternatives:
+    - [{ count: 2, from: [greatsword] }]
+    - [{ count: 2, from: [heavy-crossbow] }]
+reactions:
+  - { id: parry, name: Parry, window: hitKnown, attacks: [melee], ac: 2, whileHolding: weapon }
+unimplemented:
+  - 'Multiattack reading: two of the same attack (the text does not say "in any combination")'
+provenance:
+  review: reviewed
+  pdfPage: 337

@@ -1,0 +1,15 @@
+# A synthetic damage-taken reaction in Hellish Rebuke's shape (M3 step 8'a; SRD 5.2.1 Hellish
+# Rebuke, srd-raw.txt:27953-27961: "in response to taking damage from a creature that you can see
+# within 60 feet of yourself ... It makes a Dexterity saving throw, taking 2d10 Fire damage on a
+# failed save or half as much damage on a successful one"). It spends the Reaction and one use of
+# the character's "wards" pool (no spell slot); the save DC is the character's CHA save DC.
+kind: feature
+id: test:rebuke-like
+name: Rebuke-like Flames
+source: synthetic test fixture (generic damage-taken reaction)
+spellAbility: cha
+reaction:
+  window: damageTaken
+  range: 60
+  pool: wards
+  do: [{ save: { ability: dex, damage: [{ roll: 2d10, type: fire }], half: true } }]

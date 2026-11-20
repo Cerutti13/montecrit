@@ -1,0 +1,8 @@
+# The greedy AI on M1c's acceptance scenario: the first three rounds of scenarios/stars-ambush
+# at seed 42, every seat greedy (an empty journal). Any change in what the AI decides shows up
+# here as a diff to review on purpose.
+kind: scenario
+id: stars-ambush-greedy
+name: Stars Ambush, greedy, three rounds
+extends: stars-ambush
+knobs: { maxRounds: 3 }

@@ -1,0 +1,17 @@
+# A synthetic species (session S, the repo half): the shape a private species file takes. Two traits
+# with their own once-per-Long-Rest pools (a species' pools, named like the feature they count): a
+# touch heal from level 1 and a one-minute transformation from character level 3. Neutral names;
+# nothing here comes from a published species.
+kind: species
+id: test:sample-kin
+name: Sample Kin
+source: synthetic test fixture (generic species with pooled traits)
+size: [medium, small]
+speed: 30
+resist: [radiant]
+features:
+  - test:mending-touch
+  - { id: test:radiant-shift, level: 3 }
+pools:
+  - { id: mending-touch, name: Mending Touch, max: 1, recharge: longRest }
+  - { id: radiant-shift, name: Radiant Shift, max: 1, recharge: longRest }

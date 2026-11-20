@@ -1,0 +1,6 @@
+# A synthetic Reaction before a creature's D20 Test within 30 ft: roll 1d6 and subtract it from the total.
+kind: feature
+id: test:fate-twist-bane
+name: Fate Twist (bane)
+source: synthetic test fixture (generic pre-roll reaction)
+reaction: { window: beforeD20Test, range: 30, self: textSilent, pool: twist, die: 1d6, sign: subtract }

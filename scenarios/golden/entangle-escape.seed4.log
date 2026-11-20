@@ -1,0 +1,66 @@
+replay   engine 0.8.0 | content c9661a56ed4d9a2f | scenario entangle-escape d61e3da5c672d2e4 | seed 4 run 0 | journal 7
+policy   gob1 journal>greedy | gob2 greedy | pc1 journal>greedy
+knobs    maxRounds=2 attackDowned=ifNoOtherTarget lossCounts=pcs downEnds=true
+flags read:
+  diagonalCost=uniform [verified: SRD 5.2.1 p.13 "Playing on a Grid": any adjacent square costs 1; alternating 5/10 is a 2024 DMG option (its use for range is unverified)]
+  initiativeMode=static [verified: SRD 5.2.1 p.184 "Initiative" and p.254: static initiative is a GM option]
+  initiativeTies=rollOff [UNVERIFIED: SRD 5.2.1 p.13: the GM orders tied monsters and mixed ties, players order tied PCs; no procedure given (policy)]
+  groupInitiative=shared [verified: SRD 5.2.1 p.13: a group of identical creatures gets one roll]
+  monsterHp=listed [verified: SRD 5.2.1 p.255: use the number or the dice, the GM's choice]
+  areaOriginOnGrid=squareCenter [UNVERIFIED: Shane's table ruling 2026-11-01 (areas land on a square); SRD 5.2.1 has no grid-area rule; the 2024 DMG intersection rule is known only secondhand]
+  areaGridCoverage=atLeastHalfSquare [UNVERIFIED: SRD 5.2.1 has no grid-area rule (p.13 covers movement and range); the 2024 DMG half-square rule is known only secondhand; 2024 SAC-Spells-CloudofDaggers1]
+notes    LOS: grid (losMethod=corners, creatureCover=on)
+notes    ending concentration or dismissing an effect: offered only on your own turn
+notes    srd:goblin-warrior partial: unimplemented Nimble Escape: the Hide option
+
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #6   pc1 chooses cast:entangle@1  [journal @0]
+   #7     pc1 casts Entangle with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Entangle
+   #9       pc1 chooses place:G4  [journal @1]
+  #10       Entangle appears at G4: 16 squares, Difficult Terrain (seen by gob1, gob2, pc1)
+  #11         gob1 STR save vs Entangle: d20 5 -1 = 4 vs DC 13, fail  [gob1 save r1 p3.0]
+  #12         gob2 STR save vs Entangle: d20 18 -1 = 17 vs DC 13, success  [gob2 save r1 p3.0]
+  #13         Restrained on gob1
+  #14         gob1 is Restrained (srd:entangle/entangle-restrained)
+  #15   pc1 chooses pass  [journal @2]
+  #16   pc1's turn ends
+  #17 gob1's turn (G3, 10 HP, 0 ft) [Goblin Warrior]
+  #18   gob1 chooses use:pc1/entangle-restrained/escape  [journal @3]
+  #19     gob1: Escape (Restrained)
+  #20       gob1 STR (Athletics) check for Restrained: d20 19 -1 = 18 vs DC 13, success  [gob1 check r1 p0.0]
+  #21         Restrained on gob1 ends (escaped)
+  #22           gob1 is no longer Restrained (srd:entangle/entangle-restrained)
+  #23   gob1 chooses move:F3/p0  [journal @4]
+  #24     gob1 steps G3 -> F3 (10 ft, 20 left)
+  #25     gob1's move ends at F3
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob2 chooses attack:shortbow>pc1  [greedy @6]
+  #30     gob2: Attack
+  #31     gob2 Shortbow -> pc1: d20 8 +4 = 12 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #32   gob2 chooses pass  [greedy @7]
+  #33   gob2's turn ends
+  #34 == round 2 ==
+  #35 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #36   pc1 chooses pass  [journal @8]
+  #37   pc1's turn ends
+  #38 gob1's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #39   gob1 chooses attack:shortbow>pc1  [greedy @9]
+  #40     gob1: Attack
+  #41     gob1 Shortbow -> pc1: d20 7 +4 = 11 vs AC 13, miss  [gob1 attack r2 p0.0]
+  #42   gob1 chooses pass  [greedy @10]
+  #43   gob1's turn ends
+  #44 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #45   gob2 chooses attack:shortbow>pc1  [greedy @11]
+  #46     gob2: Attack
+  #47     gob2 Shortbow -> pc1: d20 2 +4 = 6 vs AC 13, miss  [gob2 attack r2 p0.0]
+  #48   gob2 chooses pass  [greedy @12]
+  #49   gob2's turn ends
+  #50 fight ends: stalemate in round 2
+logHash ff6da04d93cdeb1f

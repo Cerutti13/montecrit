@@ -1,0 +1,43 @@
+name: pages
+
+# Deploys the browser app to GitHub Pages. Manual only: run it from the Actions tab when a
+# release should go live. The site is fully static; fights run in Web Workers in the browser.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      # BASE is the project-site path: https://<user>.github.io/<repo>/
+      - run: npm run build:web
+        env:
+          BASE: /${{ github.event.repository.name }}/
+      - run: "! grep -rI 'sk-ant' apps/web/dist"
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web/dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

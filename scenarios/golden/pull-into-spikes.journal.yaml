@@ -1,0 +1,17 @@
+# Round 1: pc1 grows the spikes; gob1 shoots and holds. Round 2: pc1's cantrip hits and it
+# pulls gob1 two squares into the spikes.
+kind: journal
+scenario: pull-into-spikes
+seed: 21
+run: 0
+engine: '0.8.0'
+contentHash: 'ac52cef5f68b3928'
+entries:
+  - { seat: pc1, key: 'cast:spike-growth@2' }
+  - { seat: pc1, key: 'place:E4' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: gob1, key: 'attack:shortbow>pc1' }
+  - { seat: gob1, key: 'pass' }
+  - { seat: pc1, key: 'cast:tether@0' }
+  - { seat: pc1, key: 'pull:G1' }
+  - { seat: pc1, key: 'pull:F1' }

@@ -1,0 +1,38 @@
+# Reviewed against SRD 5.2.1 p.63 (srd-raw.txt:13809-13836), Rogue level 5, Cunning Strike (coverage
+# W1, docs/design/w1-plan.md section 3, P9, P10): "When you deal Sneak Attack damage, you can add one
+# of the following Cunning Strike effects. Each effect has a die cost, which is the number of Sneak
+# Attack damage dice you must forgo to add the effect. You remove the die before rolling, and the
+# effect occurs immediately after the attack's damage is dealt." (13811-13817)
+#   - An augment on Sneak Attack's rider (srd:rogue/sneak-attack): its options join that rider's one
+#     decision, after Sneak Attack's own (one rider, one ledger, one decision).
+#   - Withdraw (Cost: 1d6): "Immediately after the attack, you move up to half your Speed without
+#     provoking Opportunity Attacks" (13835-13836): Sneak Attack with one die fewer (rolled before
+#     the damage, of the weapon's type), then a move step (half Speed, no Opportunity Attacks) after
+#     the damage is dealt. Whose movement it spends is the freeMoveUsesMovement flag (false by
+#     default, Shane 2026-11-12), unverified, so partial.
+#   - "One die fewer" in the expression grammar (no division, no dice-count accessor; R7): the
+#     Sneak Attack column is ceil(L / 2) d6 at Rogue level L (1d6 at 1, +1d6 every odd level,
+#     srd-raw.txt:13564-13567 and the table), so one fewer is the count of k in 1..9 with L > 2k,
+#     written as a sum of min(1, max(0, @classLevel - 2k)); it folds to a plain NdM when the
+#     character compiles (2d6 at Rogue 5 and 6, 3d6 at 7 and 8, 4d6 at 9 and 10). [U] a cleaner
+#     form waits for a grammar addition; tools/import-srd/test/w1-overrides.test.ts checks it
+#     against the Sneak Attack column at every level 1-20.
+#   - Poison needs a Poisoner's Kit (13830-13831), which no character file carries yet; Trip needs a
+#     target-size gate (W1b). Both are lines.
+fidelity: partial
+augments:
+  feature: srd:rogue/sneak-attack
+  rider: sneak-attack
+  options:
+    - id: withdraw
+      name: Withdraw
+      do:
+        - damage: [{ roll: '(min(1, max(0, @classLevel - 2)) + min(1, max(0, @classLevel - 4)) + min(1, max(0, @classLevel - 6)) + min(1, max(0, @classLevel - 8)) + min(1, max(0, @classLevel - 10)) + min(1, max(0, @classLevel - 12)) + min(1, max(0, @classLevel - 14)) + min(1, max(0, @classLevel - 16)) + min(1, max(0, @classLevel - 18)))d6', type: weapon }]
+        - move: { speed: half, noOpportunityAttacks: true }
+unimplemented:
+  - part free-move-budget-unverified not modeled
+  - part poison not modeled
+  - part trip not modeled
+provenance:
+  review: reviewed
+  pdfPage: 63

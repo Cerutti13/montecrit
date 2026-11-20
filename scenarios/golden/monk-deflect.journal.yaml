@@ -1,0 +1,34 @@
+# Round 1: pc1 does nothing. gob1's Scimitar (Slashing) hits and pc1 takes its Reaction for
+# Deflect Attacks; gob2's Shortbow misses; the caster readies Produce Flame and hurls it, a Fire
+# hit that offers no Deflect (its damage includes no Bludgeoning, Piercing or Slashing). Round 2:
+# pc1's Reaction is back; gob1's Scimitar hit is deflected again, then gob2's Shortbow crit hits
+# with the Reaction spent, so nothing is offered; the second Hurl Flame is Fire again. Every seat
+# is scripted, so the AI never moves this golden.
+kind: journal
+scenario: monk-deflect
+seed: 30
+run: 0
+engine: '0.8.0'
+contentHash: 'fe1726049f9cf40d'
+scenarioHash: '6fa7fceebc6fbaee'
+entries:
+  - { seat: pc1, key: 'pick:pass' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: gob1, key: 'attack:scimitar>pc1' }
+  - { seat: pc1, key: 'react:monk/deflect-attacks' }
+  - { seat: gob1, key: 'pass' }
+  - { seat: gob2, key: 'attack:shortbow>pc1' }
+  - { seat: gob2, key: 'pass' }
+  - { seat: caster, key: 'cast:produce-flame@0' }
+  - { seat: caster, key: 'use:caster/flame/hurl' }
+  - { seat: caster, key: 'target:pc1' }
+  - { seat: caster, key: 'pass' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: gob1, key: 'attack:scimitar>pc1' }
+  - { seat: pc1, key: 'react:monk/deflect-attacks' }
+  - { seat: gob1, key: 'pass' }
+  - { seat: gob2, key: 'attack:shortbow>pc1' }
+  - { seat: gob2, key: 'pass' }
+  - { seat: caster, key: 'use:caster/flame/hurl' }
+  - { seat: caster, key: 'target:pc1' }
+  - { seat: caster, key: 'pass' }

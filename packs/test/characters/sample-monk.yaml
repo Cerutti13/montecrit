@@ -1,0 +1,31 @@
+# The M3 second character (docs/design/m3.md 2.6 and 5): a class-built Monk 6, Warrior of the
+# Open Hand. Synthetic test fixture built only from SRD 5.2.1 data; `montecrit build` shows where
+# every number comes from.
+kind: character
+id: test:sample-monk
+name: Sample Monk
+source: synthetic test fixture
+rules: '2024'
+classes:
+  - { class: srd:monk, level: 6, subclass: srd:warrior-of-the-open-hand }
+species: srd:dwarf               # Dwarven Toughness exercises a species HP grant (C9a)
+background: srd:soldier
+abilities: { str: 10, dex: 16, con: 14, int: 10, wis: 16, cha: 8 }   # final scores
+hp: average
+picks:
+  srd:monk#skills: [acrobatics, insight]
+  srd:monk#asi-4: { asi: { dex: 1, wis: 1 } }            # recorded; the scores above are final
+  srd:soldier#abilities: { asi: { dex: 2, con: 1 } }
+  srd:soldier#tools: [Gaming Set (Dice)]
+equipment:
+  armor: null
+  shield: false
+  weapons: [srd:shortsword, { id: srd:dart, count: 10 }]
+  items: []
+  hands: [shortsword, null]
+casting: []
+features: []
+# Speed 45 is derived: the Dwarf's 30 plus Unarmored Movement's +15 at Monk 6 (a passive speed
+# stat since M3 step 4, gated on no armor and no shield).
+overrides: {}
+flags: {}

@@ -1,0 +1,7 @@
+# Cure Wounds, SRD 5.2.1 p.121, read against the mapped item (M3 step 6): a creature you touch regains 2d8 + your spellcasting modifier; +2d8 per slot level above 1.
+# Nothing in the text is left out, so the importer's C7 review lines are cleared and the spell is full.
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 121

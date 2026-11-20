@@ -1,0 +1,20 @@
+# Reviewed against SRD 5.2.1 p.51 (srd-raw.txt:11154-11169), Monk level 3, Deflect Attacks.
+#   - "When an attack roll hits you and its damage includes Bludgeoning, Piercing, or Slashing
+#     damage, you can take a Reaction to reduce the attack's total damage against you. The
+#     reduction equals 1d10 plus your Dexterity modifier and Monk level." (11156-11159): the
+#     hitTaken reaction window (C12), filtered on those three types, reduce 1d10 + DEX + Monk
+#     level (@classLevel). Before or after Resistance is the reduceBeforeResistance flag.
+#   - The redirect (11160-11169: reduced to 0, 1 Focus Point, a DEX save or two Martial Arts dice
+#     + DEX) needs "a creature you can see ... that isn't behind Total Cover", which waits for
+#     cover (step 8), so it is the one line left and the feature stays partial.
+# Reaction activations are never promoted without a review (C7); this is that review.
+fidelity: partial
+reaction:
+  window: hitTaken
+  reduce: 1d10 + @mod.dex + @classLevel
+  damageTypes: [bludgeoning, piercing, slashing]
+unimplemented:
+  - part deflect-redirect not modeled
+provenance:
+  review: reviewed
+  pdfPage: 51

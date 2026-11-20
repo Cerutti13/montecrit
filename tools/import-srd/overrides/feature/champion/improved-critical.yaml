@@ -1,0 +1,9 @@
+# Reviewed against SRD 5.2.1 p.49 (srd-raw.txt:10711-10715), Champion level 3: "Your attack rolls
+# with weapons and Unarmed Strikes can score a Critical Hit on a roll of 19 or 20 on the d20."
+# The mapped item is that whole text: a passive critMin 19 stat, which the engine applies to weapon
+# attacks and Unarmed Strikes only, never spell attacks (sim/stats.ts critMinOf), so full.
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 49

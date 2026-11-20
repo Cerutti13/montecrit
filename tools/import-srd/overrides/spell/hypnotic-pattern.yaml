@@ -1,0 +1,36 @@
+# SRD 5.2.1 p.141, Hypnotic Pattern (srd-raw.txt:28129-28144), read by hand at coverage step 7.4. A
+# 30-foot Cube within 120 feet; WIS save or Charmed for the duration, "While Charmed, the creature has
+# the Incapacitated condition and a Speed of 0" (28141-28142), so one instance: a Charmed-immune
+# creature gets none of it. It ends "if it takes any damage" (28143).
+replace: true
+foundryPath: packs/_source/spells24/3rd-level/hypnotic-pattern.yml
+kind: spell
+id: srd:hypnotic-pattern
+name: Hypnotic Pattern
+source: SRD 5.2.1 p.141
+fidelity: partial
+unimplemented:
+  - only creatures who can see the pattern make the save (sight is stubbed outside walls)
+  - someone else can use an action to shake the creature out of its stupor
+level: 3
+castingTime: action
+range: 120
+components: { v: false, s: true, m: focus }
+concentration: true
+duration: { minutes: 1 }
+area: pattern
+effects:
+  - id: pattern
+    name: Hypnotic Pattern
+    zone: { shape: cube, size: 30 }
+    on:
+      - when: [appear]
+        do:
+          - save:
+              ability: wis
+              onFail:
+                - condition: { id: charmed, also: [incapacitated], speed: zero, endsOnDamage: true }
+do: [{ apply: { effect: pattern, to: point } }]
+provenance:
+  review: reviewed
+  pdfPage: 141

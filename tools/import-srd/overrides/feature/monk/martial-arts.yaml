@@ -1,0 +1,29 @@
+# Reviewed against SRD 5.2.1 p.50 (srd-raw.txt:11071-11100), Monk level 1, Martial Arts. Monk
+# weapons are Simple Melee weapons and Martial Melee weapons with the Light property
+# (11075-11085). "While you are unarmed or wielding only Monk weapons and you aren't wearing armor
+# or wielding a Shield" (11087) you gain:
+#   - Bonus Unarmed Strike (11088): this activation, a Bonus Action Unarmed Strike, gated on
+#     unarmored and noShield. "Wielding only Monk weapons" is read from the build's hands by
+#     content/character.ts (weapons aren't hand items in a fight until step 5b, so the hands at
+#     the start are the hands all fight).
+#   - Martial Arts Die (11089-11093) and Dexterous Attacks (11094-11097): applied by
+#     content/character.ts to the Unarmed Strike and each Monk weapon (PcSource.unarmedStrike and
+#     the weapon's damage and ability), the die being the class column @scale.monk.die
+#     (1d6/1d8/1d10/1d12 at Monk 1/5/11/17, cross-checked against the PDF table). "Can roll ...
+#     in place of" is a choice: the larger average is taken, the weapon's own die on a tie.
+#   - The DEX save DC for Grapple and Shove (11097-11100): not modeled (Grapple is deferred, M3
+#     section 3), so the feature stays partial.
+# Foundry's enchant activity and its damage-override effect keys are replaced by the above.
+fidelity: partial
+activate:
+  id: bonus-strike
+  name: Bonus Unarmed Strike
+  cost: bonus
+  when: [unarmored, noShield]
+  do:
+    - weaponAttack: { with: unarmed }
+unimplemented:
+  - part grapple-shove-dex-dc not modeled
+provenance:
+  review: reviewed
+  pdfPage: 50

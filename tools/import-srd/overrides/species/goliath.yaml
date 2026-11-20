@@ -1,0 +1,15 @@
+# Reviewed against SRD 5.2.1 p.85 (srd-raw.txt:19841-19845), the Goliath's Giant Ancestry (coverage
+# W1, docs/design/w1-plan.md section 3): "you can use the chosen benefit a number of times equal to
+# your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest". The uses
+# are the species pool giant-ancestry, max @pb, named like the trait that grants it (from character
+# level 1). Rest recovery is metadata (hard rule 4). Stone's Endurance spends it
+# (overrides/feature/goliath/stones-endurance.yaml); the other benefits wait for W1b.
+pools:
+  - id: giant-ancestry
+    name: Giant Ancestry
+    max: '@pb'
+    recharge:
+      - { period: long, amount: all }
+provenance:
+  review: reviewed
+  pdfPage: 85

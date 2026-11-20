@@ -1,0 +1,19 @@
+# M1a demo: an opportunity attack interrupts a move.
+# gob1 starts next to the Guard and walks away without Disengaging; the Guard's spear lands
+# while gob1 is still on the square it's leaving. A second goblin keeps the fight going.
+# Static initiative keeps the turn order fixed (goblins 12, Guard 11, fighter 12 - surprised 5).
+kind: scenario
+id: oa-interrupts-move
+name: Opportunity attack interrupts a move
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid:
+  w: 8
+  h: 4
+flags:
+  initiativeMode: static
+units:
+  - { seat: gob1, team: enemies, use: 'srd:goblin-warrior', at: B2, hp: 4 }
+  - { seat: gob2, team: enemies, use: 'srd:goblin-warrior', at: B4 }
+  - { seat: ally1, team: party, use: 'srd:guard', at: C2 }
+  - { seat: pc1, team: party, use: 'test:sample-fighter', at: G3, surprised: true }

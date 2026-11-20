@@ -1,0 +1,7 @@
+This work includes material from the System Reference Document 5.2.1 (“SRD 5.2.1”) by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD 5.2.1 is licensed under the Creative Commons Attribution 4.0 International License, available at https://creativecommons.org/licenses/by/4.0/legalcode.
+
+Section 5 of CC-BY-4.0 includes a Disclaimer of Warranties and Limitation of Liability that limits our liability to you.
+
+Modifications: stat blocks, classes, spells, monsters and equipment converted to structured YAML data from the SRD 5.2.1, in part by way of the Foundry VTT dnd5e system's CC-BY-4.0 data (commit 87e94db); no rules text is reproduced (short notes paraphrase it).
+
+Part of this pack's structured data is adapted from the data files of the Foundry Virtual Tabletop "Dungeons & Dragons Fifth Edition" game system (dnd5e) by the dnd5e project and its contributors, available at https://github.com/foundryvtt/dnd5e/tree/87e94dbd9f930135e0694cd7e7d49f210603cd2c (release-6.0.6). That data is licensed under the Creative Commons Attribution 4.0 International License, available at https://creativecommons.org/licenses/by/4.0/legalcode. We modified it: records were kept only where they match the SRD 5.2.1, converted to this project's own data format, and stripped of all descriptive text, images and links to other content; hand corrections are kept in tools/import-srd/overrides/. No Foundry software code is included.

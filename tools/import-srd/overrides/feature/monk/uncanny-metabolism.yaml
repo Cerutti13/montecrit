@@ -1,0 +1,20 @@
+# Reviewed against SRD 5.2.1 p.51 (srd-raw.txt:11146-11152), Monk level 2: "When you roll
+# Initiative, you can regain all expended Focus Points. When you do so, roll your Martial Arts
+# die, and regain a number of Hit Points equal to your Monk level plus the number rolled. Once you
+# use this feature, you can't use it again until you finish a Long Rest."
+# Mapped whole (C14): an optional initiative decision (HOOKX) spending the class pool
+# uncanny-metabolism (max 1, recharge long: metadata), refilling monks-focus (POOLX) and healing
+# the Monk @classLevel + @scale.monk.die, its die on its own initiative stream slot. Nothing else
+# in the text, so full.
+fidelity: full
+initiative:
+  id: uncanny-metabolism
+  name: Uncanny Metabolism
+  uses: { pool: uncanny-metabolism }
+  do:
+    - pool: { id: monks-focus, delta: refill }
+    - heal: { roll: '@classLevel + @scale.monk.die' }
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 51

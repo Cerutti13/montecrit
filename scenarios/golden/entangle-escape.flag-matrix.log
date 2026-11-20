@@ -1,0 +1,525 @@
+# Flag matrix for scenarios/golden/entangle-escape.yaml with scenarios/golden/entangle-escape.journal.yaml (docs/design/m1b.md, Critique resolutions item 9).
+# Every rule flag the default run read, re-run under each of its other values: same seed, same journal.
+# Matrix mode only: at the journal's first mismatch every journal seat hands over to its fallback (baseline if none).
+# Regenerate: UPDATE_FLAG_MATRIX=1 npx vitest run apps/cli/test/flag-matrix.test.ts
+
+#### seed 4 ####
+default  run 0 | journal of 7 entries: held | logHash ff6da04d93cdeb1f
+flags read: diagonalCost, initiativeMode, initiativeTies, groupInitiative, monsterHp, areaOriginOnGrid, areaGridCoverage
+
+== diagonalCost=alternate (journal diverged at @4) ==
+flags read vs default: +conjuredHandEffectBlocksHand
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #6   pc1 chooses cast:entangle@1  [journal @0]
+   #7     pc1 casts Entangle with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Entangle
+   #9       pc1 chooses place:G4  [journal @1]
+  #10       Entangle appears at G4: 16 squares, Difficult Terrain (seen by gob1, gob2, pc1)
+  #11         gob1 STR save vs Entangle: d20 5 -1 = 4 vs DC 13, fail  [gob1 save r1 p3.0]
+  #12         gob2 STR save vs Entangle: d20 18 -1 = 17 vs DC 13, success  [gob2 save r1 p3.0]
+  #13         Restrained on gob1
+  #14         gob1 is Restrained (srd:entangle/entangle-restrained)
+  #15   pc1 chooses pass  [journal @2]
+  #16   pc1's turn ends
+  #17 gob1's turn (G3, 10 HP, 0 ft) [Goblin Warrior]
+  #18   gob1 chooses use:pc1/entangle-restrained/escape  [journal @3]
+  #19     gob1: Escape (Restrained)
+  #20       gob1 STR (Athletics) check for Restrained: d20 19 -1 = 18 vs DC 13, success  [gob1 check r1 p0.0]
+  #21         Restrained on gob1 ends (escaped)
+  #22           gob1 is no longer Restrained (srd:entangle/entangle-restrained)
+  #23   gob1 chooses pass  [greedy @4]
+  #24   gob1's turn ends
+  #25 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #26   gob2 chooses attack:shortbow>pc1  [greedy @5]
+  #27     gob2: Attack
+  #28     gob2 Shortbow -> pc1: d20 8 +4 = 12 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #29   gob2 chooses pass  [greedy @6]
+  #30   gob2's turn ends
+  #31 == round 2 ==
+  #32 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #33   pc1 chooses cast:entangle@1  [greedy @7]
+  #34     pc1 casts Entangle with a level 1 slot (2 left)
+  #35       Entangle (pc1) ends (concentrating on something else)
+  #36         Entangle ends (its source ended)
+  #37       pc1 is concentrating on Entangle
+  #38       pc1 chooses place:F3  [greedy @8]
+  #39       Entangle appears at F3: 16 squares, Difficult Terrain (seen by gob1, gob2, pc1)
+  #40         gob1 STR save vs Entangle: d20 15 -1 = 14 vs DC 13, success  [gob1 save r2 p3.0]
+  #41         gob2 STR save vs Entangle: d20 9 -1 = 8 vs DC 13, fail  [gob2 save r2 p3.0]
+  #42         Restrained on gob2
+  #43         gob2 is Restrained (srd:entangle/entangle-restrained)
+  #44   pc1 chooses cast:produce-flame@0  [greedy @9]
+  #45     pc1 casts Produce Flame (cantrip)
+  #46       Produce Flame on pc1
+  #47   pc1 chooses pass  [greedy @10]
+  #48   pc1's turn ends
+  #49 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #50   gob1 chooses attack:shortbow>pc1  [greedy @11]
+  #51     gob1: Attack
+  #52     gob1 Shortbow -> pc1: d20 7 +4 = 11 vs AC 13, miss  [gob1 attack r2 p0.0]
+  #53   gob1 chooses pass  [greedy @12]
+  #54   gob1's turn ends
+  #55 gob2's turn (H4, 10 HP, 0 ft) [Goblin Warrior]
+  #56   gob2 chooses attack:shortbow>pc1  [greedy @13]
+  #57     gob2: Attack
+  #58     gob2 Shortbow -> pc1: d20 2/11 dis -> 2 (-attacker-restrained) +4 = 6 vs AC 13, miss  [gob2 attack r2 p0.0]
+  #59   gob2 chooses pass  [greedy @14]
+  #60   gob2's turn ends
+  #61 fight ends: stalemate in round 2
+logHash f9798c4ea7c92103
+
+== initiativeMode=roll (journal held) ==
+flags read vs default: -initiativeTies
+   #1   initiative pc1 17 (d20 15+2)
+   #2   initiative gob1 5 (d20 3+2)
+   #3   initiative gob2 5 (shares gob1's roll)
+   #4 == round 1 ==
+   #5 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #6   pc1 chooses cast:entangle@1  [journal @0]
+   #7     pc1 casts Entangle with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Entangle
+   #9       pc1 chooses place:G4  [journal @1]
+  #10       Entangle appears at G4: 16 squares, Difficult Terrain (seen by gob1, gob2, pc1)
+  #11         gob1 STR save vs Entangle: d20 5 -1 = 4 vs DC 13, fail  [gob1 save r1 p3.0]
+  #12         gob2 STR save vs Entangle: d20 18 -1 = 17 vs DC 13, success  [gob2 save r1 p3.0]
+  #13         Restrained on gob1
+  #14         gob1 is Restrained (srd:entangle/entangle-restrained)
+  #15   pc1 chooses pass  [journal @2]
+  #16   pc1's turn ends
+  #17 gob1's turn (G3, 10 HP, 0 ft) [Goblin Warrior]
+  #18   gob1 chooses use:pc1/entangle-restrained/escape  [journal @3]
+  #19     gob1: Escape (Restrained)
+  #20       gob1 STR (Athletics) check for Restrained: d20 19 -1 = 18 vs DC 13, success  [gob1 check r1 p0.0]
+  #21         Restrained on gob1 ends (escaped)
+  #22           gob1 is no longer Restrained (srd:entangle/entangle-restrained)
+  #23   gob1 chooses move:F3/p0  [journal @4]
+  #24     gob1 steps G3 -> F3 (10 ft, 20 left)
+  #25     gob1's move ends at F3
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob2 chooses attack:shortbow>pc1  [greedy @6]
+  #30     gob2: Attack
+  #31     gob2 Shortbow -> pc1: d20 8 +4 = 12 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #32   gob2 chooses pass  [greedy @7]
+  #33   gob2's turn ends
+  #34 == round 2 ==
+  #35 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #36   pc1 chooses pass  [journal @8]
+  #37   pc1's turn ends
+  #38 gob1's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #39   gob1 chooses attack:shortbow>pc1  [greedy @9]
+  #40     gob1: Attack
+  #41     gob1 Shortbow -> pc1: d20 7 +4 = 11 vs AC 13, miss  [gob1 attack r2 p0.0]
+  #42   gob1 chooses pass  [greedy @10]
+  #43   gob1's turn ends
+  #44 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #45   gob2 chooses attack:shortbow>pc1  [greedy @11]
+  #46     gob2: Attack
+  #47     gob2 Shortbow -> pc1: d20 2 +4 = 6 vs AC 13, miss  [gob2 attack r2 p0.0]
+  #48   gob2 chooses pass  [greedy @12]
+  #49   gob2's turn ends
+  #50 fight ends: stalemate in round 2
+logHash 6061095dd5c5107b
+
+== initiativeTies=pcsFirst (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #6   pc1 chooses cast:entangle@1  [journal @0]
+   #7     pc1 casts Entangle with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Entangle
+   #9       pc1 chooses place:G4  [journal @1]
+  #10       Entangle appears at G4: 16 squares, Difficult Terrain (seen by gob1, gob2, pc1)
+  #11         gob1 STR save vs Entangle: d20 5 -1 = 4 vs DC 13, fail  [gob1 save r1 p3.0]
+  #12         gob2 STR save vs Entangle: d20 18 -1 = 17 vs DC 13, success  [gob2 save r1 p3.0]
+  #13         Restrained on gob1
+  #14         gob1 is Restrained (srd:entangle/entangle-restrained)
+  #15   pc1 chooses pass  [journal @2]
+  #16   pc1's turn ends
+  #17 gob1's turn (G3, 10 HP, 0 ft) [Goblin Warrior]
+  #18   gob1 chooses use:pc1/entangle-restrained/escape  [journal @3]
+  #19     gob1: Escape (Restrained)
+  #20       gob1 STR (Athletics) check for Restrained: d20 19 -1 = 18 vs DC 13, success  [gob1 check r1 p0.0]
+  #21         Restrained on gob1 ends (escaped)
+  #22           gob1 is no longer Restrained (srd:entangle/entangle-restrained)
+  #23   gob1 chooses move:F3/p0  [journal @4]
+  #24     gob1 steps G3 -> F3 (10 ft, 20 left)
+  #25     gob1's move ends at F3
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob2 chooses attack:shortbow>pc1  [greedy @6]
+  #30     gob2: Attack
+  #31     gob2 Shortbow -> pc1: d20 8 +4 = 12 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #32   gob2 chooses pass  [greedy @7]
+  #33   gob2's turn ends
+  #34 == round 2 ==
+  #35 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #36   pc1 chooses pass  [journal @8]
+  #37   pc1's turn ends
+  #38 gob1's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #39   gob1 chooses attack:shortbow>pc1  [greedy @9]
+  #40     gob1: Attack
+  #41     gob1 Shortbow -> pc1: d20 7 +4 = 11 vs AC 13, miss  [gob1 attack r2 p0.0]
+  #42   gob1 chooses pass  [greedy @10]
+  #43   gob1's turn ends
+  #44 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #45   gob2 chooses attack:shortbow>pc1  [greedy @11]
+  #46     gob2: Attack
+  #47     gob2 Shortbow -> pc1: d20 2 +4 = 6 vs AC 13, miss  [gob2 attack r2 p0.0]
+  #48   gob2 chooses pass  [greedy @12]
+  #49   gob2's turn ends
+  #50 fight ends: stalemate in round 2
+logHash 73ea81ca1c4f263c
+
+== initiativeTies=monstersFirst (journal diverged at @0) ==
+flags read vs default: +conjuredHandEffectBlocksHand +losMethod +creatureCover
+   #1   initiative gob1 12 (static)
+   #2   initiative gob2 12 (static)
+   #3   initiative pc1 12 (static)
+   #4 == round 1 ==
+   #5 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+   #6   gob1 chooses attack:shortbow>pc1  [greedy @0]
+   #7     gob1: Attack
+   #8     gob1 Shortbow -> pc1: d20 1 +4 = 5 vs AC 13, miss  [gob1 attack r1 p0.0]
+   #9   gob1 chooses pass  [greedy @1]
+  #10   gob1's turn ends
+  #11 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #12   gob2 chooses move:I3/p0  [greedy @2]
+  #13     gob2 steps H4 -> I3 (5 ft, 25 left)
+  #14     gob2's move ends at I3
+  #15   gob2 chooses attack:shortbow>pc1  [greedy @3]
+  #16     gob2: Attack
+  #17     gob2 Shortbow -> pc1: d20 8 +4 = 12 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #18   gob2 chooses pass  [greedy @4]
+  #19   gob2's turn ends
+  #20 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #21   pc1 chooses move:A3/p0  [greedy @5]
+  #22     pc1 steps A4 -> A3 (5 ft, 25 left)
+  #23     pc1's move ends at A3
+  #24   pc1 chooses cast:entangle@1  [greedy @6]
+  #25     pc1 casts Entangle with a level 1 slot (3 left)
+  #26       pc1 is concentrating on Entangle
+  #27       pc1 chooses place:G1  [greedy @7]
+  #28       Entangle appears at G1: 12 squares, Difficult Terrain (seen by gob1, gob2, pc1)
+  #29         gob1 STR save vs Entangle: d20 5 -1 = 4 vs DC 13, fail  [gob1 save r1 p3.0]
+  #30         gob2 STR save vs Entangle: d20 18 -1 = 17 vs DC 13, success  [gob2 save r1 p3.0]
+  #31         Restrained on gob1
+  #32         gob1 is Restrained (srd:entangle/entangle-restrained)
+  #33   pc1 chooses cast:produce-flame@0  [greedy @8]
+  #34     pc1 casts Produce Flame (cantrip)
+  #35       Produce Flame on pc1
+  #36   pc1 chooses pass  [greedy @9]
+  #37   pc1's turn ends
+  #38 == round 2 ==
+  #39 gob1's turn (G3, 10 HP, 0 ft) [Goblin Warrior]
+  #40   gob1 chooses attack:shortbow>pc1  [greedy @10]
+  #41     gob1: Attack
+  #42     gob1 Shortbow -> pc1: d20 7/18 dis -> 7 (-attacker-restrained) +4 = 11 vs AC 13, miss  [gob1 attack r2 p0.0]
+  #43   gob1 chooses pass  [greedy @11]
+  #44   gob1's turn ends
+  #45 gob2's turn (I3, 10 HP, 30 ft) [Goblin Warrior]
+  #46   gob2 chooses move:J2/p0  [greedy @12]
+  #47     gob2 steps I3 -> J2 (5 ft, 25 left)
+  #48     gob2's move ends at J2
+  #49   gob2 chooses attack:shortbow>pc1  [greedy @13]
+  #50     gob2: Attack
+  #51     gob2 Shortbow -> pc1: d20 2 +4 = 6 vs AC 13, miss  [gob2 attack r2 p0.0]
+  #52   gob2 chooses pass  [greedy @14]
+  #53   gob2's turn ends
+  #54 pc1's turn (A3, 24 HP, 30 ft) [Sample Grove]
+  #55   pc1 chooses move:A4/p0  [greedy @15]
+  #56     pc1 steps A3 -> A4 (5 ft, 25 left)
+  #57     pc1's move ends at A4
+  #58   pc1 chooses use:pc1/flame/hurl  [greedy @16]
+  #59     pc1: Hurl Flame
+  #60       pc1 chooses target:gob1  [greedy @17]
+  #61       pc1 Hurl Flame -> gob1: d20 3/2 adv -> 3 (+target-restrained) +5 = 8 vs AC 15, miss  [pc1 attack r2 p0.0]
+  #62   pc1 chooses pass  [greedy @18]
+  #63   pc1's turn ends
+  #64 fight ends: stalemate in round 2
+logHash f31bbc7ee3929e20
+
+== groupInitiative=individual (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #6   pc1 chooses cast:entangle@1  [journal @0]
+   #7     pc1 casts Entangle with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Entangle
+   #9       pc1 chooses place:G4  [journal @1]
+  #10       Entangle appears at G4: 16 squares, Difficult Terrain (seen by gob1, gob2, pc1)
+  #11         gob1 STR save vs Entangle: d20 5 -1 = 4 vs DC 13, fail  [gob1 save r1 p3.0]
+  #12         gob2 STR save vs Entangle: d20 18 -1 = 17 vs DC 13, success  [gob2 save r1 p3.0]
+  #13         Restrained on gob1
+  #14         gob1 is Restrained (srd:entangle/entangle-restrained)
+  #15   pc1 chooses pass  [journal @2]
+  #16   pc1's turn ends
+  #17 gob1's turn (G3, 10 HP, 0 ft) [Goblin Warrior]
+  #18   gob1 chooses use:pc1/entangle-restrained/escape  [journal @3]
+  #19     gob1: Escape (Restrained)
+  #20       gob1 STR (Athletics) check for Restrained: d20 19 -1 = 18 vs DC 13, success  [gob1 check r1 p0.0]
+  #21         Restrained on gob1 ends (escaped)
+  #22           gob1 is no longer Restrained (srd:entangle/entangle-restrained)
+  #23   gob1 chooses move:F3/p0  [journal @4]
+  #24     gob1 steps G3 -> F3 (10 ft, 20 left)
+  #25     gob1's move ends at F3
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob2 chooses attack:shortbow>pc1  [greedy @6]
+  #30     gob2: Attack
+  #31     gob2 Shortbow -> pc1: d20 8 +4 = 12 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #32   gob2 chooses pass  [greedy @7]
+  #33   gob2's turn ends
+  #34 == round 2 ==
+  #35 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #36   pc1 chooses pass  [journal @8]
+  #37   pc1's turn ends
+  #38 gob1's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #39   gob1 chooses attack:shortbow>pc1  [greedy @9]
+  #40     gob1: Attack
+  #41     gob1 Shortbow -> pc1: d20 7 +4 = 11 vs AC 13, miss  [gob1 attack r2 p0.0]
+  #42   gob1 chooses pass  [greedy @10]
+  #43   gob1's turn ends
+  #44 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #45   gob2 chooses attack:shortbow>pc1  [greedy @11]
+  #46     gob2: Attack
+  #47     gob2 Shortbow -> pc1: d20 2 +4 = 6 vs AC 13, miss  [gob2 attack r2 p0.0]
+  #48   gob2 chooses pass  [greedy @12]
+  #49   gob2's turn ends
+  #50 fight ends: stalemate in round 2
+logHash 0f409ca7cd4d5cda
+
+== monsterHp=rolled (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #6   pc1 chooses cast:entangle@1  [journal @0]
+   #7     pc1 casts Entangle with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Entangle
+   #9       pc1 chooses place:G4  [journal @1]
+  #10       Entangle appears at G4: 16 squares, Difficult Terrain (seen by gob1, gob2, pc1)
+  #11         gob1 STR save vs Entangle: d20 5 -1 = 4 vs DC 13, fail  [gob1 save r1 p3.0]
+  #12         gob2 STR save vs Entangle: d20 18 -1 = 17 vs DC 13, success  [gob2 save r1 p3.0]
+  #13         Restrained on gob1
+  #14         gob1 is Restrained (srd:entangle/entangle-restrained)
+  #15   pc1 chooses pass  [journal @2]
+  #16   pc1's turn ends
+  #17 gob1's turn (G3, 13 HP, 0 ft) [Goblin Warrior]
+  #18   gob1 chooses use:pc1/entangle-restrained/escape  [journal @3]
+  #19     gob1: Escape (Restrained)
+  #20       gob1 STR (Athletics) check for Restrained: d20 19 -1 = 18 vs DC 13, success  [gob1 check r1 p0.0]
+  #21         Restrained on gob1 ends (escaped)
+  #22           gob1 is no longer Restrained (srd:entangle/entangle-restrained)
+  #23   gob1 chooses move:F3/p0  [journal @4]
+  #24     gob1 steps G3 -> F3 (10 ft, 20 left)
+  #25     gob1's move ends at F3
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob2 chooses attack:shortbow>pc1  [greedy @6]
+  #30     gob2: Attack
+  #31     gob2 Shortbow -> pc1: d20 8 +4 = 12 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #32   gob2 chooses pass  [greedy @7]
+  #33   gob2's turn ends
+  #34 == round 2 ==
+  #35 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #36   pc1 chooses pass  [journal @8]
+  #37   pc1's turn ends
+  #38 gob1's turn (F3, 13 HP, 30 ft) [Goblin Warrior]
+  #39   gob1 chooses attack:shortbow>pc1  [greedy @9]
+  #40     gob1: Attack
+  #41     gob1 Shortbow -> pc1: d20 7 +4 = 11 vs AC 13, miss  [gob1 attack r2 p0.0]
+  #42   gob1 chooses pass  [greedy @10]
+  #43   gob1's turn ends
+  #44 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #45   gob2 chooses attack:shortbow>pc1  [greedy @11]
+  #46     gob2: Attack
+  #47     gob2 Shortbow -> pc1: d20 2 +4 = 6 vs AC 13, miss  [gob2 attack r2 p0.0]
+  #48   gob2 chooses pass  [greedy @12]
+  #49   gob2's turn ends
+  #50 fight ends: stalemate in round 2
+logHash d3ee2c946ef0ddc5
+
+== areaOriginOnGrid=gridIntersection (journal diverged at @1) ==
+flags read vs default: +conjuredHandEffectBlocksHand +losMethod +creatureCover
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #6   pc1 chooses cast:entangle@1  [journal @0]
+   #7     pc1 casts Entangle with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Entangle
+   #9       pc1 chooses place:^E1  [greedy @1]
+  #10       Entangle appears at ^E1: 16 squares, Difficult Terrain (seen by gob1, gob2, pc1)
+  #11         gob1 STR save vs Entangle: d20 5 -1 = 4 vs DC 13, fail  [gob1 save r1 p3.0]
+  #12         gob2 STR save vs Entangle: d20 18 -1 = 17 vs DC 13, success  [gob2 save r1 p3.0]
+  #13         Restrained on gob1
+  #14         gob1 is Restrained (srd:entangle/entangle-restrained)
+  #15   pc1 chooses cast:produce-flame@0  [greedy @2]
+  #16     pc1 casts Produce Flame (cantrip)
+  #17       Produce Flame on pc1
+  #18   pc1 chooses pass  [greedy @3]
+  #19   pc1's turn ends
+  #20 gob1's turn (G3, 10 HP, 0 ft) [Goblin Warrior]
+  #21   gob1 chooses attack:shortbow>pc1  [greedy @4]
+  #22     gob1: Attack
+  #23     gob1 Shortbow -> pc1: d20 1/19 dis -> 1 (-attacker-restrained) +4 = 5 vs AC 13, miss  [gob1 attack r1 p0.0]
+  #24   gob1 chooses pass  [greedy @5]
+  #25   gob1's turn ends
+  #26 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #27   gob2 chooses move:I3/p0  [greedy @6]
+  #28     gob2 steps H4 -> I3 (5 ft, 25 left)
+  #29     gob2's move ends at I3
+  #30   gob2 chooses attack:shortbow>pc1  [greedy @7]
+  #31     gob2: Attack
+  #32     gob2 Shortbow -> pc1: d20 8 +4 = 12 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #33   gob2 chooses pass  [greedy @8]
+  #34   gob2's turn ends
+  #35 == round 2 ==
+  #36 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #37   pc1 chooses move:A3/p0  [greedy @9]
+  #38     pc1 steps A4 -> A3 (5 ft, 25 left)
+  #39     pc1's move ends at A3
+  #40   pc1 chooses use:pc1/flame/hurl  [greedy @10]
+  #41     pc1: Hurl Flame
+  #42       pc1 chooses target:gob1  [greedy @11]
+  #43       pc1 Hurl Flame -> gob1: d20 3/2 adv -> 3 (+target-restrained) +5 = 8 vs AC 15, miss  [pc1 attack r2 p0.0]
+  #44   pc1 chooses pass  [greedy @12]
+  #45   pc1's turn ends
+  #46 gob1's turn (G3, 10 HP, 0 ft) [Goblin Warrior]
+  #47   gob1 chooses attack:shortbow>pc1  [greedy @13]
+  #48     gob1: Attack
+  #49     gob1 Shortbow -> pc1: d20 7/18 dis -> 7 (-attacker-restrained) +4 = 11 vs AC 13, miss  [gob1 attack r2 p0.0]
+  #50   gob1 chooses pass  [greedy @14]
+  #51   gob1's turn ends
+  #52 gob2's turn (I3, 10 HP, 30 ft) [Goblin Warrior]
+  #53   gob2 chooses move:I2/p0  [greedy @15]
+  #54     gob2 steps I3 -> I2 (5 ft, 25 left)
+  #55     gob2's move ends at I2
+  #56   gob2 chooses attack:shortbow>pc1  [greedy @16]
+  #57     gob2: Attack
+  #58     gob2 Shortbow -> pc1: d20 2 +4 = 6 vs AC 13, miss  [gob2 attack r2 p0.0]
+  #59   gob2 chooses pass  [greedy @17]
+  #60   gob2's turn ends
+  #61 fight ends: stalemate in round 2
+logHash c9093ae917e723cd
+
+== areaGridCoverage=squareCenterInside (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #6   pc1 chooses cast:entangle@1  [journal @0]
+   #7     pc1 casts Entangle with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Entangle
+   #9       pc1 chooses place:G4  [journal @1]
+  #10       Entangle appears at G4: 16 squares, Difficult Terrain (seen by gob1, gob2, pc1)
+  #11         gob1 STR save vs Entangle: d20 5 -1 = 4 vs DC 13, fail  [gob1 save r1 p3.0]
+  #12         gob2 STR save vs Entangle: d20 18 -1 = 17 vs DC 13, success  [gob2 save r1 p3.0]
+  #13         Restrained on gob1
+  #14         gob1 is Restrained (srd:entangle/entangle-restrained)
+  #15   pc1 chooses pass  [journal @2]
+  #16   pc1's turn ends
+  #17 gob1's turn (G3, 10 HP, 0 ft) [Goblin Warrior]
+  #18   gob1 chooses use:pc1/entangle-restrained/escape  [journal @3]
+  #19     gob1: Escape (Restrained)
+  #20       gob1 STR (Athletics) check for Restrained: d20 19 -1 = 18 vs DC 13, success  [gob1 check r1 p0.0]
+  #21         Restrained on gob1 ends (escaped)
+  #22           gob1 is no longer Restrained (srd:entangle/entangle-restrained)
+  #23   gob1 chooses move:F3/p0  [journal @4]
+  #24     gob1 steps G3 -> F3 (10 ft, 20 left)
+  #25     gob1's move ends at F3
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob2 chooses attack:shortbow>pc1  [greedy @6]
+  #30     gob2: Attack
+  #31     gob2 Shortbow -> pc1: d20 8 +4 = 12 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #32   gob2 chooses pass  [greedy @7]
+  #33   gob2's turn ends
+  #34 == round 2 ==
+  #35 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #36   pc1 chooses pass  [journal @8]
+  #37   pc1's turn ends
+  #38 gob1's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #39   gob1 chooses attack:shortbow>pc1  [greedy @9]
+  #40     gob1: Attack
+  #41     gob1 Shortbow -> pc1: d20 7 +4 = 11 vs AC 13, miss  [gob1 attack r2 p0.0]
+  #42   gob1 chooses pass  [greedy @10]
+  #43   gob1's turn ends
+  #44 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #45   gob2 chooses attack:shortbow>pc1  [greedy @11]
+  #46     gob2: Attack
+  #47     gob2 Shortbow -> pc1: d20 2 +4 = 6 vs AC 13, miss  [gob2 attack r2 p0.0]
+  #48   gob2 chooses pass  [greedy @12]
+  #49   gob2's turn ends
+  #50 fight ends: stalemate in round 2
+logHash 6ea706698173646e
+
+== areaGridCoverage=anyOverlap (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #6   pc1 chooses cast:entangle@1  [journal @0]
+   #7     pc1 casts Entangle with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Entangle
+   #9       pc1 chooses place:G4  [journal @1]
+  #10       Entangle appears at G4: 16 squares, Difficult Terrain (seen by gob1, gob2, pc1)
+  #11         gob1 STR save vs Entangle: d20 5 -1 = 4 vs DC 13, fail  [gob1 save r1 p3.0]
+  #12         gob2 STR save vs Entangle: d20 18 -1 = 17 vs DC 13, success  [gob2 save r1 p3.0]
+  #13         Restrained on gob1
+  #14         gob1 is Restrained (srd:entangle/entangle-restrained)
+  #15   pc1 chooses pass  [journal @2]
+  #16   pc1's turn ends
+  #17 gob1's turn (G3, 10 HP, 0 ft) [Goblin Warrior]
+  #18   gob1 chooses use:pc1/entangle-restrained/escape  [journal @3]
+  #19     gob1: Escape (Restrained)
+  #20       gob1 STR (Athletics) check for Restrained: d20 19 -1 = 18 vs DC 13, success  [gob1 check r1 p0.0]
+  #21         Restrained on gob1 ends (escaped)
+  #22           gob1 is no longer Restrained (srd:entangle/entangle-restrained)
+  #23   gob1 chooses move:F3/p0  [journal @4]
+  #24     gob1 steps G3 -> F3 (10 ft, 20 left)
+  #25     gob1's move ends at F3
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob2 chooses attack:shortbow>pc1  [greedy @6]
+  #30     gob2: Attack
+  #31     gob2 Shortbow -> pc1: d20 8 +4 = 12 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #32   gob2 chooses pass  [greedy @7]
+  #33   gob2's turn ends
+  #34 == round 2 ==
+  #35 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #36   pc1 chooses pass  [journal @8]
+  #37   pc1's turn ends
+  #38 gob1's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #39   gob1 chooses attack:shortbow>pc1  [greedy @9]
+  #40     gob1: Attack
+  #41     gob1 Shortbow -> pc1: d20 7 +4 = 11 vs AC 13, miss  [gob1 attack r2 p0.0]
+  #42   gob1 chooses pass  [greedy @10]
+  #43   gob1's turn ends
+  #44 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+  #45   gob2 chooses attack:shortbow>pc1  [greedy @11]
+  #46     gob2: Attack
+  #47     gob2 Shortbow -> pc1: d20 2 +4 = 6 vs AC 13, miss  [gob2 attack r2 p0.0]
+  #48   gob2 chooses pass  [greedy @12]
+  #49   gob2's turn ends
+  #50 fight ends: stalemate in round 2
+logHash a7cfa789c008669d

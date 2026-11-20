@@ -1,0 +1,653 @@
+# Flag matrix for scenarios/golden/pull-into-spikes.yaml with scenarios/golden/pull-into-spikes.journal.yaml (docs/design/m1b.md, Critique resolutions item 9).
+# Every rule flag the default run read, re-run under each of its other values: same seed, same journal.
+# Matrix mode only: at the journal's first mismatch every journal seat hands over to its fallback (baseline if none).
+# Regenerate: UPDATE_FLAG_MATRIX=1 npx vitest run apps/cli/test/flag-matrix.test.ts
+
+#### seed 21 ####
+default  run 0 | journal of 8 entries: held | logHash b2beadc97c2df031
+flags read: diagonalCost, initiativeMode, groupInitiative, monsterHp, statBlockAtZeroHp, focusHandSomatic, conjuredHandEffectBlocksHand, areaOriginOnGrid, areaGridCoverage, involuntaryMovementTriggersArea, perDistanceDamageRolls, forcedMovementPath, forcedMovementTerrainCost, zoneKnowledge
+
+== diagonalCost=alternate (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 45 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27             gob1 takes 5 (5 piercing) from Spike Growth, HP 7 -> 2  [pc1 zone r2 p0.0]
+  #28           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #29             gob1 takes 3 (3 piercing) from Spike Growth, HP 2 -> 0  [pc1 zone r2 p0.1]
+  #30               gob1 dies (0 HP)
+  #31           gob1's forced move ends at F1: died, 2 of 2 steps
+  #32   pc1's turn ends
+  #33 fight ends: win in round 2
+logHash 13f24e7d3c8235e6
+
+== initiativeMode=roll (journal diverged at @0) ==
+flags read vs default: -statBlockAtZeroHp -areaOriginOnGrid -areaGridCoverage -involuntaryMovementTriggersArea -perDistanceDamageRolls -forcedMovementPath -forcedMovementTerrainCost -zoneKnowledge
+   #1   initiative gob1 6 (d20 4+2)
+   #2   initiative pc1 5 (d20 3+2)
+   #3 == round 1 ==
+   #4 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+   #5   gob1 chooses attack:shortbow>pc1  [baseline @0]
+   #6     gob1: Attack
+   #7     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+   #8   gob1 chooses move:C1/p0  [baseline @1]
+   #9     gob1 steps H1 -> G1 (5 ft, 25 left)
+  #10     gob1 steps G1 -> F1 (5 ft, 20 left)
+  #11     gob1 steps F1 -> E1 (5 ft, 15 left)
+  #12     gob1 steps E1 -> D1 (5 ft, 10 left)
+  #13     gob1 steps D1 -> C1 (5 ft, 5 left)
+  #14     gob1's move ends at C1
+  #15   gob1 chooses pass  [baseline @2]
+  #16   gob1's turn ends
+  #17 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #18   pc1 chooses attack:unarmed-strike>gob1  [baseline @3]
+  #19     pc1: Attack
+  #20     pc1 Unarmed Strike -> gob1: d20 12 +2 = 14 vs AC 15, miss  [pc1 attack r1 p0.0]
+  #21   pc1 chooses pass  [baseline @4]
+  #22   pc1's turn ends
+  #23 == round 2 ==
+  #24 gob1's turn (C1, 10 HP, 30 ft) [Goblin Warrior]
+  #25   gob1 chooses attack:scimitar>pc1  [baseline @5]
+  #26     gob1: Attack
+  #27     gob1 Scimitar -> pc1: d20 9 +4 = 13 vs AC 15, miss  [gob1 attack r2 p0.0]
+  #28   gob1 chooses pass  [baseline @6]
+  #29   gob1's turn ends
+  #30 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #31   pc1 chooses attack:unarmed-strike>gob1  [baseline @7]
+  #32     pc1: Attack
+  #33     pc1 Unarmed Strike -> gob1: d20 14 +2 = 16 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #34       gob1 takes 0 (0 bludgeoning), HP 10 -> 10  [pc1 damage r2 p0.0]
+  #35   pc1 chooses pass  [baseline @8]
+  #36   pc1's turn ends
+  #37 fight ends: stalemate in round 2
+logHash 9bda98209dae0099
+
+== groupInitiative=individual (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 45 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27             gob1 takes 5 (5 piercing) from Spike Growth, HP 7 -> 2  [pc1 zone r2 p0.0]
+  #28           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #29             gob1 takes 3 (3 piercing) from Spike Growth, HP 2 -> 0  [pc1 zone r2 p0.1]
+  #30               gob1 dies (0 HP)
+  #31           gob1's forced move ends at F1: died, 2 of 2 steps
+  #32   pc1's turn ends
+  #33 fight ends: win in round 2
+logHash 1870f1460ebc411d
+
+== monsterHp=rolled (journal held) ==
+flags read vs default: -statBlockAtZeroHp
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 45 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 13 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 13 -> 10  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27             gob1 takes 5 (5 piercing) from Spike Growth, HP 10 -> 5  [pc1 zone r2 p0.0]
+  #28           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #29             gob1 takes 3 (3 piercing) from Spike Growth, HP 5 -> 2  [pc1 zone r2 p0.1]
+  #30           gob1's forced move ends at F1
+  #31   pc1 chooses move:E1/p0/h3  [baseline @8]
+  #32     pc1 steps B1 -> C1 (10 ft, 20 left)
+  #33       pc1 takes 7 (7 piercing) from Spike Growth, HP 45 -> 38  [pc1 zone r2 p0.2]
+  #34         pc1 concentration save (Spike Growth): d20 13 +2 = 15 vs DC 10, holds  [pc1 conc r2 p0.0]
+  #35     pc1 steps C1 -> D1 (10 ft, 10 left)
+  #36       pc1 takes 4 (4 piercing) from Spike Growth, HP 38 -> 34  [pc1 zone r2 p0.3]
+  #37         pc1 concentration save (Spike Growth): d20 1 +2 = 3 vs DC 10, breaks  [pc1 conc r2 p0.1]
+  #38           Spike Growth (pc1) ends (concentration broken)
+  #39             Spike Growth ends (its source ended)
+  #40     pc1 steps D1 -> E1 (5 ft, 5 left)
+  #41     pc1's move ends at E1
+  #42   pc1 chooses pass  [baseline @9]
+  #43   pc1's turn ends
+  #44 gob1's turn (F1, 2 HP, 30 ft) [Goblin Warrior]
+  #45   gob1 chooses attack:scimitar>pc1  [baseline @10]
+  #46     gob1: Attack
+  #47     gob1 Scimitar -> pc1: d20 9 +4 = 13 vs AC 15, miss  [gob1 attack r2 p0.0]
+  #48   gob1 chooses pass  [baseline @11]
+  #49   gob1's turn ends
+  #50 fight ends: stalemate in round 2
+logHash 51cb63c21f3c9168
+
+== statBlockAtZeroHp=deathSaves (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 45 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27             gob1 takes 5 (5 piercing) from Spike Growth, HP 7 -> 2  [pc1 zone r2 p0.0]
+  #28           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #29             gob1 takes 3 (3 piercing) from Spike Growth, HP 2 -> 0  [pc1 zone r2 p0.1]
+  #30               gob1 drops to 0 HP and falls Unconscious
+  #31                 gob1 is Unconscious (downed)
+  #32                 gob1 is Incapacitated (downed)
+  #33                 gob1 is Prone (fell-prone)
+  #34           gob1's forced move ends at F1: ended, 2 of 2 steps
+  #35   pc1's turn ends
+  #36 fight ends: win in round 2
+logHash 84382979e7d7f2f8
+
+== focusHandSomatic=lenient (journal held; log identical to default) ==
+flags read vs default: +selfTargetWhenTextSilent
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 45 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27             gob1 takes 5 (5 piercing) from Spike Growth, HP 7 -> 2  [pc1 zone r2 p0.0]
+  #28           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #29             gob1 takes 3 (3 piercing) from Spike Growth, HP 2 -> 0  [pc1 zone r2 p0.1]
+  #30               gob1 dies (0 HP)
+  #31           gob1's forced move ends at F1: died, 2 of 2 steps
+  #32   pc1's turn ends
+  #33 fight ends: win in round 2
+logHash b5a962404b8da9f0
+
+== conjuredHandEffectBlocksHand=true (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 45 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27             gob1 takes 5 (5 piercing) from Spike Growth, HP 7 -> 2  [pc1 zone r2 p0.0]
+  #28           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #29             gob1 takes 3 (3 piercing) from Spike Growth, HP 2 -> 0  [pc1 zone r2 p0.1]
+  #30               gob1 dies (0 HP)
+  #31           gob1's forced move ends at F1: died, 2 of 2 steps
+  #32   pc1's turn ends
+  #33 fight ends: win in round 2
+logHash 5c70d599d29a7739
+
+== areaOriginOnGrid=gridIntersection (journal diverged at @1) ==
+flags read vs default: +areaExitStepCounts -statBlockAtZeroHp -involuntaryMovementTriggersArea -forcedMovementPath -forcedMovementTerrainCost
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:^A1  [baseline @1]
+   #9       Spike Growth appears at ^A1: 13 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses move:G1/p0/h1  [baseline @2]
+  #11     pc1 steps B1 -> C2 (10 ft, 20 left)
+  #12       pc1 takes 5 (5 piercing) from Spike Growth, HP 45 -> 40  [pc1 zone r1 p0.0]
+  #13         pc1 concentration save (Spike Growth): d20 19 +2 = 21 vs DC 10, holds  [pc1 conc r1 p0.0]
+  #14     pc1 steps C2 -> D3 (5 ft, 15 left)
+  #15     pc1 steps D3 -> E2 (5 ft, 10 left)
+  #16     pc1 steps E2 -> F1 (5 ft, 5 left)
+  #17     pc1 steps F1 -> G1 (5 ft, 0 left)
+  #18     pc1's move ends at G1
+  #19   pc1 chooses pass  [baseline @3]
+  #20   pc1's turn ends
+  #21 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob1 chooses attack:scimitar>pc1  [baseline @4]
+  #23     gob1: Attack
+  #24     gob1 Scimitar -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #25   gob1 chooses pass  [baseline @5]
+  #26   gob1's turn ends
+  #27 == round 2 ==
+  #28 pc1's turn (G1, 40 HP, 30 ft) [Sample Druid]
+  #29   pc1 chooses attack:unarmed-strike>gob1  [baseline @6]
+  #30     pc1: Attack
+  #31     pc1 Unarmed Strike -> gob1: d20 14 +2 = 16 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #32       gob1 takes 0 (0 bludgeoning), HP 10 -> 10  [pc1 damage r2 p0.0]
+  #33   pc1 chooses pass  [baseline @7]
+  #34   pc1's turn ends
+  #35 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #36   gob1 chooses attack:scimitar>pc1  [baseline @8]
+  #37     gob1: Attack
+  #38     gob1 Scimitar -> pc1: d20 9 +4 = 13 vs AC 15, miss  [gob1 attack r2 p0.0]
+  #39   gob1 chooses pass  [baseline @9]
+  #40   gob1's turn ends
+  #41 fight ends: stalemate in round 2
+logHash 5bb776cda79dd4f5
+
+== areaGridCoverage=squareCenterInside (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 47 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27             gob1 takes 5 (5 piercing) from Spike Growth, HP 7 -> 2  [pc1 zone r2 p0.0]
+  #28           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #29             gob1 takes 3 (3 piercing) from Spike Growth, HP 2 -> 0  [pc1 zone r2 p0.1]
+  #30               gob1 dies (0 HP)
+  #31           gob1's forced move ends at F1: died, 2 of 2 steps
+  #32   pc1's turn ends
+  #33 fight ends: win in round 2
+logHash d9162391776ee342
+
+== areaGridCoverage=anyOverlap (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 59 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27             gob1 takes 5 (5 piercing) from Spike Growth, HP 7 -> 2  [pc1 zone r2 p0.0]
+  #28           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #29             gob1 takes 3 (3 piercing) from Spike Growth, HP 2 -> 0  [pc1 zone r2 p0.1]
+  #30               gob1 dies (0 HP)
+  #31           gob1's forced move ends at F1: died, 2 of 2 steps
+  #32   pc1's turn ends
+  #33 fight ends: win in round 2
+logHash ad6f2f9b344a82bc
+
+== involuntaryMovementTriggersArea=false (journal held) ==
+flags read vs default: -statBlockAtZeroHp
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 45 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #28           gob1's forced move ends at F1
+  #29   pc1 chooses move:E1/p0/h3  [baseline @8]
+  #30     pc1 steps B1 -> C1 (10 ft, 20 left)
+  #31       pc1 takes 5 (5 piercing) from Spike Growth, HP 45 -> 40  [pc1 zone r2 p0.0]
+  #32         pc1 concentration save (Spike Growth): d20 13 +2 = 15 vs DC 10, holds  [pc1 conc r2 p0.0]
+  #33     pc1 steps C1 -> D1 (10 ft, 10 left)
+  #34       pc1 takes 3 (3 piercing) from Spike Growth, HP 40 -> 37  [pc1 zone r2 p0.1]
+  #35         pc1 concentration save (Spike Growth): d20 1 +2 = 3 vs DC 10, breaks  [pc1 conc r2 p0.1]
+  #36           Spike Growth (pc1) ends (concentration broken)
+  #37             Spike Growth ends (its source ended)
+  #38     pc1 steps D1 -> E1 (5 ft, 5 left)
+  #39     pc1's move ends at E1
+  #40   pc1 chooses pass  [baseline @9]
+  #41   pc1's turn ends
+  #42 gob1's turn (F1, 7 HP, 30 ft) [Goblin Warrior]
+  #43   gob1 chooses attack:scimitar>pc1  [baseline @10]
+  #44     gob1: Attack
+  #45     gob1 Scimitar -> pc1: d20 9 +4 = 13 vs AC 15, miss  [gob1 attack r2 p0.0]
+  #46   gob1 chooses pass  [baseline @11]
+  #47   gob1's turn ends
+  #48 fight ends: stalemate in round 2
+logHash ce7034c96c28dd06
+
+== perDistanceDamageRolls=perMove (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 45 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #28           gob1's forced move ends at F1
+  #29             gob1 takes 10 (10 piercing) from Spike Growth, HP 7 -> 0  [pc1 zone r2 p0.0]
+  #30               gob1 dies (0 HP)
+  #31   pc1's turn ends
+  #32 fight ends: win in round 2
+logHash 9df026060643f6ac
+
+== forcedMovementPath=straightLineOnly (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 45 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27             gob1 takes 5 (5 piercing) from Spike Growth, HP 7 -> 2  [pc1 zone r2 p0.0]
+  #28           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #29             gob1 takes 3 (3 piercing) from Spike Growth, HP 2 -> 0  [pc1 zone r2 p0.1]
+  #30               gob1 dies (0 HP)
+  #31           gob1's forced move ends at F1: died, 2 of 2 steps
+  #32   pc1's turn ends
+  #33 fight ends: win in round 2
+logHash 44f1fcb7a3341565
+
+== forcedMovementTerrainCost=terrainShortens (journal diverged at @7) ==
+flags read vs default: -statBlockAtZeroHp
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 45 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25           gob1 is pulled H1 -> G1 (10 ft, forced)
+  #26             gob1 takes 5 (5 piercing) from Spike Growth, HP 7 -> 2  [pc1 zone r2 p0.0]
+  #27           gob1's forced move ends at G1
+  #28   pc1 chooses move:E1/p0/h3  [baseline @7]
+  #29     pc1 steps B1 -> C1 (10 ft, 20 left)
+  #30       pc1 takes 3 (3 piercing) from Spike Growth, HP 45 -> 42  [pc1 zone r2 p0.1]
+  #31         pc1 concentration save (Spike Growth): d20 13 +2 = 15 vs DC 10, holds  [pc1 conc r2 p0.0]
+  #32     pc1 steps C1 -> D1 (10 ft, 10 left)
+  #33       pc1 takes 7 (7 piercing) from Spike Growth, HP 42 -> 35  [pc1 zone r2 p0.2]
+  #34         pc1 concentration save (Spike Growth): d20 1 +2 = 3 vs DC 10, breaks  [pc1 conc r2 p0.1]
+  #35           Spike Growth (pc1) ends (concentration broken)
+  #36             Spike Growth ends (its source ended)
+  #37     pc1 steps D1 -> E1 (5 ft, 5 left)
+  #38     pc1's move ends at E1
+  #39   pc1 chooses move:F1/p0  [baseline @8]
+  #40     pc1 steps E1 -> F1 (5 ft, 0 left)
+  #41     pc1's move ends at F1
+  #42   pc1 chooses pass  [baseline @9]
+  #43   pc1's turn ends
+  #44 gob1's turn (G1, 2 HP, 30 ft) [Goblin Warrior]
+  #45   gob1 chooses attack:scimitar>pc1  [baseline @10]
+  #46     gob1: Attack
+  #47     gob1 Scimitar -> pc1: d20 9 +4 = 13 vs AC 15, miss  [gob1 attack r2 p0.0]
+  #48   gob1 chooses pass  [baseline @11]
+  #49   gob1's turn ends
+  #50 fight ends: stalemate in round 2
+logHash fe1d4d71aa210ccf
+
+== zoneKnowledge=all (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 45 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27             gob1 takes 5 (5 piercing) from Spike Growth, HP 7 -> 2  [pc1 zone r2 p0.0]
+  #28           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #29             gob1 takes 3 (3 piercing) from Spike Growth, HP 2 -> 0  [pc1 zone r2 p0.1]
+  #30               gob1 dies (0 HP)
+  #31           gob1's forced move ends at F1: died, 2 of 2 steps
+  #32   pc1's turn ends
+  #33 fight ends: win in round 2
+logHash 8836a2a38097bf25
+
+== zoneKnowledge=none (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 45 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27             gob1 takes 5 (5 piercing) from Spike Growth, HP 7 -> 2  [pc1 zone r2 p0.0]
+  #28           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #29             gob1 takes 3 (3 piercing) from Spike Growth, HP 2 -> 0  [pc1 zone r2 p0.1]
+  #30               gob1 dies (0 HP)
+  #31           gob1's forced move ends at F1: died, 2 of 2 steps
+  #32   pc1's turn ends
+  #33 fight ends: win in round 2
+logHash 27f276de74bbb4c7

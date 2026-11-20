@@ -1,0 +1,18 @@
+{
+  "name": "@montecrit/web",
+  "private": true,
+  "type": "module",
+  "description": "Browser app: Monte Carlo runs in Web Workers, the Results screen and the replay viewer. Dev server only.",
+  "license": "AGPL-3.0-only",
+  "dependencies": {
+    "@montecrit/engine": "*",
+    "@montecrit/host": "*",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2"
+  }
+}

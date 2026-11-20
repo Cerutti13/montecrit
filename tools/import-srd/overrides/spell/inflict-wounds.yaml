@@ -1,0 +1,7 @@
+# Inflict Wounds, SRD 5.2.1 p.143, read against the mapped item (M3 step 6): a creature you touch makes a CON save, 2d10 Necrotic, half on a success; +1d10 per slot level above 1.
+# Nothing in the text is left out, so the importer's C7 review lines are cleared and the spell is full.
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 143

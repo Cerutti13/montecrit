@@ -1,0 +1,35 @@
+# SRD 5.2.1 p.130, Fear (srd-raw.txt:26740-26756), read by hand at coverage step 7.4. A 30-foot Cone;
+# WIS save "or drop whatever it is holding and have the Frightened condition for the duration"
+# (26749-26751). A creature immune to Frightened skips the whole instance, the drop too [U].
+replace: true
+foundryPath: packs/_source/spells24/3rd-level/fear.yml
+kind: spell
+id: srd:fear
+name: Fear
+source: SRD 5.2.1 p.130
+fidelity: partial
+unimplemented:
+  - a Frightened creature takes the Dash action and moves away by the safest route on each of its turns
+  - a creature that ends its turn out of line of sight of the caster repeats the save, ending the spell on itself on a success
+level: 3
+castingTime: action
+range: self
+components: { v: true, s: true, m: focus }
+concentration: true
+duration: { minutes: 1 }
+area: dread
+effects:
+  - id: dread
+    name: Fear
+    zone: { shape: cone, size: 30 }
+    on:
+      - when: [appear]
+        do:
+          - save:
+              ability: wis
+              onFail:
+                - condition: { id: frightened, dropHeld: true }
+do: [{ apply: { effect: dread, to: point } }]
+provenance:
+  review: reviewed
+  pdfPage: 130

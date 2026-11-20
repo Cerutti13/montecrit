@@ -1,0 +1,36 @@
+# M3 step 5b (docs/design/m3.md section 5's last paragraph, C8): a class-built Fighter 5 for weapon
+# mastery, the Light property and gainAction. Synthetic test fixture built only from SRD 5.2.1
+# data. Weapon Mastery at Fighter 5 is four kinds (the Fighter table's Weapon Mastery column):
+#   - Scimitar (Nick) and Shortsword (Vex): the Light pair, both in hand at the start, so the
+#     Light property's extra attack is offered, and Nick makes it part of the Attack action.
+#   - Maul (Topple): Two-Handed and Heavy (STR 16 clears Heavy's 13), sheathed: drawing it is an
+#     Attack action strike's equip.
+#   - Javelin (Slow): Thrown, a counted stack of 4.
+# Second Wind (full) and Action Surge (gainAction) come from the class; Improved Critical from
+# the Champion. Defense is the fighting style (+1 AC while armored, full since M3 step 4).
+kind: character
+id: test:sample-fighter-masteries
+name: Sample Fighter (masteries)
+source: synthetic test fixture
+rules: '2024'
+classes:
+  - { class: srd:fighter, level: 5, subclass: srd:champion }
+species: srd:human
+size: medium
+background: srd:soldier
+abilities: { str: 16, dex: 14, con: 14, int: 10, wis: 12, cha: 8 }
+hp: average
+picks:
+  srd:fighter#skills: [acrobatics, perception]
+  srd:fighter#fighting-style: [srd:defense]
+  srd:fighter#weapon-mastery: [srd:scimitar, srd:shortsword, srd:maul, srd:javelin]
+  srd:fighter#asi-4: { asi: { str: 1, con: 1 } }
+  srd:human#skillful: [insight]
+  srd:human#versatile: [srd:skilled]
+  srd:skilled#skills: [history, survival, stealth]
+  srd:soldier#tools: [Gaming Set (Dice)]
+equipment:
+  armor: srd:chain-mail
+  shield: false
+  weapons: [srd:scimitar, srd:shortsword, srd:maul, { id: srd:javelin, count: 4 }]
+  hands: [scimitar, shortsword]

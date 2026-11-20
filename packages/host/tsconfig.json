@@ -1,0 +1,9 @@
+{
+  "//": "Host source only. No DOM lib and no Node types: it runs in Node and in browser workers alike.",
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["es2024"],
+    "types": []
+  },
+  "include": ["src"]
+}

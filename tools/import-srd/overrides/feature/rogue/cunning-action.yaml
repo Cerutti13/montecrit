@@ -1,0 +1,23 @@
+# Reviewed against SRD 5.2.1 p.62 (srd-raw.txt:13773-13777), Rogue level 2, Cunning Action
+# (coverage W1, docs/design/w1-plan.md section 3): "On your turn, you can take one of the following
+# actions as a Bonus Action: Dash, Disengage, or Hide."
+# Two bonus activations running the core Dash and Disengage (the Step of the Wind pattern,
+# overrides/feature/monk/monks-focus.yaml). Hide isn't modeled (no Hide action in the engine), so it
+# is the one line left and the feature stays partial.
+fidelity: partial
+activate:
+  - id: dash
+    name: Cunning Action (Dash)
+    cost: bonus
+    do:
+      - core: dash
+  - id: disengage
+    name: Cunning Action (Disengage)
+    cost: bonus
+    do:
+      - core: disengage
+unimplemented:
+  - part hide not modeled
+provenance:
+  review: reviewed
+  pdfPage: 62

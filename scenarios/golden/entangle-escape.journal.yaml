@@ -1,0 +1,17 @@
+# Round 1: pc1 casts Entangle over both goblins and ends its turn; gob1 Escapes (success) and steps out at 10 ft.
+# Round 2: pc1 passes, so the plants stay. Everything else is the AI.
+kind: journal
+scenario: "entangle-escape"
+seed: 4
+run: 0
+engine: "0.8.0"
+contentHash: "c9661a56ed4d9a2f"
+scenarioHash: "d61e3da5c672d2e4"
+entries:
+  - { seat: pc1, key: 'cast:entangle@1' }
+  - { seat: pc1, key: 'place:G4' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: gob1, key: 'use:pc1/entangle-restrained/escape' }
+  - { seat: gob1, key: 'move:F3/p0' }
+  - { seat: gob1, key: 'pass' }
+  - { seat: pc1, key: 'pass' }

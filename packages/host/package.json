@@ -1,0 +1,13 @@
+{
+  "name": "@montecrit/host",
+  "private": true,
+  "type": "module",
+  "description": "Platform-free host code shared by the CLI and the browser: content sources as texts, run jobs, report hashes, and (M2 step 4) the worker pool. No node:, no DOM.",
+  "license": "AGPL-3.0-only",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@montecrit/engine": "*"
+  }
+}

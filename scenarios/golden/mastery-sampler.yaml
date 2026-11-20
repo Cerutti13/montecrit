@@ -1,0 +1,45 @@
+# M3 step 5b golden (docs/design/m3.md section 12, C8): all 8 weapon mastery properties fire once
+# each, plus the Light property's extra attack both ways (Nick as part of the Attack action, and
+# as a Bonus Action). SRD 5.2.1 Equipment: Light (srd-raw.txt:20339-20349), Thrown (20387-20389),
+# Two-Handed (20392-20393), the Mastery Properties (20406-20467); Equipping and Unequipping
+# Weapons in the Attack action (32707-32712). Two class-built Fighter 5 (Champion) fixtures, since
+# one Fighter 5 masters four kinds:
+#   pc2 test:sample-fighter-heavy (Warhammer and Mace in hand; Greataxe and Greatsword sheathed).
+#     Round 1: Mace hit, Sap (always on; no choice); stows the Mace with that strike's equip;
+#     Warhammer hit, Push: ogre2 goes 10 ft straight away, G5 -> H5 -> I5 (Large or smaller);
+#     stows the Warhammer; Action Surge; the second Attack action's first strike draws the
+#     Greataxe (both hands empty, Two-Handed), hits ogre3, Cleave: one more attack against ogre4
+#     (within 5 ft of ogre3 and in reach), a crit with no ability modifier (2d12); the free object
+#     interaction stows the Greataxe; the last strike draws the Greatsword and misses, Graze: ogre3
+#     takes the STR modifier (3, Slashing) anyway.
+#   pc1 test:sample-fighter-masteries (Shortsword and Scimitar in hand; Maul and 4 Javelins).
+#     Round 1: Shortsword hit, Vex: Advantage on its next attack roll against ogre1; Nick: the
+#     Light extra attack with the Scimitar as part of the Attack action (no Bonus Action), at that
+#     Advantage, no ability modifier to damage; stows the Scimitar (the first strike's unused
+#     equip); throws a Javelin (drawn as part of the attack; Disadvantage, ogre1 is within 5 ft),
+#     hit, Slow: ogre1's Speed 40 -> 30 until the start of pc1's next turn; stows the Shortsword;
+#     Action Surge; draws the Maul (Two-Handed, Heavy; STR 16), hit, Topple: ogre1 fails the CON
+#     save (DC 8 + STR 3 + PB 3 = 14) and is Prone; the journal ends the turn.
+#     Round 2: Slowed ends as pc1's turn starts; the free object interaction stows the Maul; the
+#     Attack action draws the Shortsword (hit, Advantage on the Prone ogre1, Vex again) and the
+#     Scimitar (Advantage, Vex spent); the Bonus Action Light extra attack with the Shortsword (two
+#     Light weapons used: either will do [U]), no ability modifier.
+#   ogre2 walks back to pc2 and attacks with Disadvantage from Sap ("its next attack roll before
+#   the start of your next turn"); every other ogre turn passes. Every seat is scripted, so the AI
+#   never moves this golden. Static initiative; the tie between the Fighters is rolled (seed 254:
+#   pc2 first).
+kind: scenario
+id: mastery-sampler
+name: Mastery Sampler
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid: { w: 10, h: 8 }
+flags: { initiativeMode: static }
+knobs: { maxRounds: 2, downEnds: false }
+units:
+  - { seat: pc1, team: party, use: 'test:sample-fighter-masteries', at: B2, decider: greedy }
+  - { seat: pc2, team: party, use: 'test:sample-fighter-heavy', at: F5, decider: greedy }
+  - { seat: ogre1, team: enemies, use: 'srd:ogre', at: C2, decider: greedy }
+  - { seat: ogre2, team: enemies, use: 'srd:ogre', at: G5, decider: greedy }
+  - { seat: ogre3, team: enemies, use: 'srd:ogre', at: F6, decider: greedy }
+  - { seat: ogre4, team: enemies, use: 'srd:ogre', at: E6, decider: greedy }

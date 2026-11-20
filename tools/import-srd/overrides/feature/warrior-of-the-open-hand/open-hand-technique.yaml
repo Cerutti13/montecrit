@@ -1,0 +1,49 @@
+# Reviewed against SRD 5.2.1 p.52 (srd-raw.txt:11310-11319), Warrior of the Open Hand level 3:
+# "Whenever you hit a creature with an attack granted by your Flurry of Blows, you can impose one
+# of the following effects on that target."
+#   - Addle (11315-11316): it can't make Opportunity Attacks until the start of its next turn: an
+#     effect on the target with noOpportunityAttacks, until the start of the bearer's next turn.
+#   - Push (11317): a Strength save or pushed up to 15 feet away from you. The text sets no size
+#     limit, so maxSize is gargantuan (every size).
+#   - Topple (11318-11319): a Dexterity save or the Prone condition.
+# A rider (RIDER) with grantedBy: flurry (the Flurry of Blows activation of srd:monk/monks-focus)
+# and a choice of the three; no once-per-turn limit ("whenever"). [U] The text gives no DC; it is
+# read as the Monk's Focus DC, 8 + WIS + PB (11123-11125: "some features that use Focus Points
+# require your target to make a saving throw"; these strikes come from spending one), through
+# spellAbility: wis. Nothing else, so full.
+fidelity: full
+spellAbility: wis
+effects:
+  - id: addled
+    name: Addle
+    duration: { until: startOfNextTurn, of: bearer }
+    stats:
+      - noOpportunityAttacks: true
+riders:
+  - id: open-hand-technique
+    name: Open Hand Technique
+    on: hit
+    filter: { grantedBy: flurry }
+    choose:
+      - id: addle
+        name: Addle
+        do:
+          - apply: { effect: addled, to: target }
+      - id: push
+        name: Push
+        do:
+          - save:
+              ability: str
+              onFail:
+                - forcedMove: { mode: push, maxFt: 15, maxSize: gargantuan }
+      - id: topple
+        name: Topple
+        do:
+          - save:
+              ability: dex
+              onFail:
+                - condition: { id: prone }
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 52

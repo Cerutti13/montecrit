@@ -1,0 +1,7 @@
+# Synthetic fixtures for tests. Nothing here comes from a published stat block.
+kind: manifest
+pack: test
+version: '1'
+rules: '2024'
+namespace: test
+license: test

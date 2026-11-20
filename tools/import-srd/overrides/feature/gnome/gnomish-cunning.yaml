@@ -1,0 +1,9 @@
+# Reviewed against SRD 5.2.1 p.85 (srd-raw.txt:19800), the Gnome's Gnomish Cunning (coverage W1,
+# docs/design/w1-plan.md section 3): "You have Advantage on Intelligence, Wisdom, and Charisma saving
+# throws." The mapped item is that whole text: a passive Advantage mod on d20.save.int, .wis and
+# .cha, with no condition in the text (no gate). Nothing else, so full.
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 85

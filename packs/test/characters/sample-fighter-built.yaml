@@ -1,0 +1,29 @@
+# C15 (docs/design/m3.md): a class-built Fighter 5 beside the hand-filled test:sample-fighter,
+# which stays a kind: pc because scenarios/golden/oa-interrupts-move.yaml uses it. Derived numbers
+# are compared with the hand sheet in apps/cli/test/sample-characters.test.ts; the template
+# hashes differ by design (class data adds pools, features, skills and the shield).
+kind: character
+id: test:sample-fighter-built
+name: Sample Fighter (built)
+source: synthetic test fixture
+rules: '2024'
+classes:
+  - { class: srd:fighter, level: 5, subclass: srd:champion }
+species: srd:human
+size: medium
+background: srd:soldier
+abilities: { str: 16, dex: 14, con: 14, int: 10, wis: 12, cha: 8 }
+hp: average
+picks:
+  srd:fighter#skills: [acrobatics, perception]
+  srd:fighter#fighting-style: [srd:great-weapon-fighting]   # no effect with a shield; Defense (+1 AC while armored, full since M3 step 4) would make AC 19 and break the C15 match
+  srd:fighter#weapon-mastery: [srd:longsword, srd:handaxe, srd:greatsword, srd:javelin]   # M3 step 5b: four kinds at Fighter 5
+  srd:fighter#asi-4: { asi: { str: 1, con: 1 } }
+  srd:human#skillful: [insight]
+  srd:human#versatile: [srd:skilled]
+  srd:skilled#skills: [history, survival, stealth]
+  srd:soldier#tools: [Gaming Set (Dice)]
+equipment:
+  armor: srd:chain-mail
+  shield: true
+  weapons: [srd:longsword, { id: srd:handaxe, count: 2 }]

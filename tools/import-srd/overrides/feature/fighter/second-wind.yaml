@@ -1,0 +1,19 @@
+# Reviewed against SRD 5.2.1 p.48 (srd-raw.txt:10592-10607), Fighter level 1: "As a Bonus Action,
+# you can use it to regain Hit Points equal to 1d10 plus your Fighter level." Uses: the class's
+# second-wind pool (@scale.fighter.second-wind, the Second Wind column; rest recovery is metadata).
+# Mapped whole (M3 step 6): a bonus activation that acts on its user only (target: self, the
+# levers' self-only activation) and heals 1d10 + @classLevel. Level 5's Tactical Shift is its own
+# feature (srd-raw.txt:10659). Nothing else in the text, so full.
+fidelity: full
+activate:
+  id: second-wind
+  name: Second Wind
+  cost: bonus
+  uses: { pool: second-wind }
+  target: self
+  do:
+    - heal: { roll: '1d10 + @classLevel' }
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 48

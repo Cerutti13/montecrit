@@ -1,0 +1,29 @@
+# Written from SRD 5.2.1 p.87 (srd-raw.txt:20027-20036), the Alert origin feat's feature (coverage
+# W1, docs/design/w1-plan.md section 3). "Initiative Proficiency. When you roll Initiative, you can
+# add your Proficiency Bonus to the roll." (20032-20033): a passive flat @pb on the Initiative roll
+# (d20.check.initiative, the DEX check with the initiative bit); always taken, since adding it never
+# hurts. "Initiative Swap. Immediately after you roll Initiative, you can swap your Initiative with
+# the Initiative of one willing ally in the same combat. You can't make this swap if you or the ally
+# has the Incapacitated condition." (20034-20036) isn't modeled, so partial with that line.
+# The feat's Foundry record has no mapped effect (its Initiative flag has no mapping), so nothing was
+# imported to patch: this replaces nothing the importer emitted and names the feat's record. The
+# reading is in tools/import-srd/pdf-gates.ts (no gate).
+replace: true
+foundryPath: packs/_source/feats24/origin-feats/alert.yml
+kind: feature
+id: srd:alert/alert
+name: Alert
+source: SRD 5.2.1 p.87
+fidelity: partial
+effects:
+  - id: alert
+    name: Alert (Initiative Proficiency)
+    mods:
+      - { on: [d20.check.initiative], op: flat, value: '@pb' }
+passive:
+  effects: [alert]
+unimplemented:
+  - part initiative-swap not modeled
+provenance:
+  review: reviewed
+  pdfPage: 87

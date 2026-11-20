@@ -1,0 +1,377 @@
+# Flag matrix for scenarios/golden/conc-break-cascade.yaml with scenarios/golden/conc-break-cascade.journal.yaml (docs/design/m1b.md, Critique resolutions item 9).
+# Every rule flag the default run read, re-run under each of its other values: same seed, same journal.
+# Matrix mode only: at the journal's first mismatch every journal seat hands over to its fallback (baseline if none).
+# Regenerate: UPDATE_FLAG_MATRIX=1 npx vitest run apps/cli/test/flag-matrix.test.ts
+
+#### seed 3 ####
+default  run 0 | journal of 7 entries: held | logHash 3e2f29101ffa76e4
+flags read: diagonalCost, initiativeMode, groupInitiative, monsterHp, areaOriginOnGrid, areaGridCoverage, losMethod, creatureCover
+
+== diagonalCost=alternate (journal held; log identical to default) ==
+   #1   initiative pc1 11 (static)
+   #2   initiative gob1 7 (static)
+   #3   initiative gob2 7 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B2, 24 HP, 30 ft) [Sample Warden]
+   #6   pc1 chooses cast:conc-ward@1  [journal @0]
+   #7     pc1 casts Concentration Ward with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Concentration Ward
+   #9       pc1 chooses place:E2  [journal @1]
+  #10       Ward appears at E2: 9 squares (seen by gob1, gob2, pc1)
+  #11         Ward (attacks against it have Advantage) on gob1
+  #12         Ward (attacks against it have Advantage) on gob2
+  #13   pc1 chooses pass  [journal @2]
+  #14   pc1's turn ends
+  #15 gob1's turn (E2, 10 HP, 30 ft) [Goblin Warrior]
+  #16   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #17     gob1: Attack
+  #18     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 13, miss  [gob1 attack r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 15 +4 = 19 vs AC 13, hit  [gob2 attack r1 p0.0]
+  #25       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r1 p0.0]
+  #26         pc1 concentration save (Concentration Ward): d20 8 +1 = 9 vs DC 10, breaks  [pc1 conc r1 p2.0]
+  #27           Concentration Ward (pc1) ends (concentration broken)
+  #28             Ward ends (its source ended)
+  #29               Ward (attacks against it have Advantage) on gob1 ends (its source ended)
+  #30               Ward (attacks against it have Advantage) on gob2 ends (its source ended)
+  #31   gob2 chooses pass  [journal @6]
+  #32   gob2's turn ends
+  #33 fight ends: stalemate in round 1
+logHash 441c797b8eb6ac29
+
+== initiativeMode=roll (journal diverged at @0) ==
+flags read vs default: -areaOriginOnGrid -areaGridCoverage
+   #1   initiative gob1 8 (d20 6+2)
+   #2   initiative gob2 8 (shares gob1's roll)
+   #3   initiative pc1 2 (d20 1+1)
+   #4 == round 1 ==
+   #5 gob1's turn (E2, 10 HP, 30 ft) [Goblin Warrior]
+   #6   gob1 chooses attack:shortbow>pc1  [baseline @0]
+   #7     gob1: Attack
+   #8     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 13, miss  [gob1 attack r1 p0.0]
+   #9   gob1 chooses move:C1/p0  [baseline @1]
+  #10     gob1 steps E2 -> D1 (5 ft, 25 left)
+  #11     gob1 steps D1 -> C1 (5 ft, 20 left)
+  #12     gob1's move ends at C1
+  #13   gob1 chooses pass  [baseline @2]
+  #14   gob1's turn ends
+  #15 gob2's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #16   gob2 chooses attack:shortbow>pc1  [baseline @3]
+  #17     gob2: Attack
+  #18     gob2 Shortbow -> pc1: d20 15 +4 = 19 vs AC 13, hit  [gob2 attack r1 p0.0]
+  #19       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r1 p0.0]
+  #20   gob2 chooses move:C2/p0  [baseline @4]
+  #21     gob2 steps F3 -> E2 (5 ft, 25 left)
+  #22     gob2 steps E2 -> D1 (5 ft, 20 left)
+  #23     gob2 steps D1 -> C2 (5 ft, 15 left)
+  #24     gob2's move ends at C2
+  #25   gob2 chooses pass  [baseline @5]
+  #26   gob2's turn ends
+  #27 pc1's turn (B2, 18 HP, 30 ft) [Sample Warden]
+  #28   pc1 chooses attack:unarmed-strike>gob1  [baseline @6]
+  #29     pc1: Attack
+  #30     pc1 Unarmed Strike -> gob1: d20 5 +2 = 7 vs AC 15, miss  [pc1 attack r1 p0.0]
+  #31   pc1 chooses pass  [baseline @7]
+  #32   pc1's turn ends
+  #33 fight ends: stalemate in round 1
+logHash 0d338faac6497c2a
+
+== groupInitiative=individual (journal held; log identical to default) ==
+flags read vs default: +initiativeTies
+   #1   initiative pc1 11 (static)
+   #2   initiative gob1 7 (static)
+   #3   initiative gob2 7 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B2, 24 HP, 30 ft) [Sample Warden]
+   #6   pc1 chooses cast:conc-ward@1  [journal @0]
+   #7     pc1 casts Concentration Ward with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Concentration Ward
+   #9       pc1 chooses place:E2  [journal @1]
+  #10       Ward appears at E2: 9 squares (seen by gob1, gob2, pc1)
+  #11         Ward (attacks against it have Advantage) on gob1
+  #12         Ward (attacks against it have Advantage) on gob2
+  #13   pc1 chooses pass  [journal @2]
+  #14   pc1's turn ends
+  #15 gob1's turn (E2, 10 HP, 30 ft) [Goblin Warrior]
+  #16   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #17     gob1: Attack
+  #18     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 13, miss  [gob1 attack r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 15 +4 = 19 vs AC 13, hit  [gob2 attack r1 p0.0]
+  #25       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r1 p0.0]
+  #26         pc1 concentration save (Concentration Ward): d20 8 +1 = 9 vs DC 10, breaks  [pc1 conc r1 p2.0]
+  #27           Concentration Ward (pc1) ends (concentration broken)
+  #28             Ward ends (its source ended)
+  #29               Ward (attacks against it have Advantage) on gob1 ends (its source ended)
+  #30               Ward (attacks against it have Advantage) on gob2 ends (its source ended)
+  #31   gob2 chooses pass  [journal @6]
+  #32   gob2's turn ends
+  #33 fight ends: stalemate in round 1
+logHash b34dfa40e8a5cb2c
+
+== monsterHp=rolled (journal held) ==
+   #1   initiative pc1 11 (static)
+   #2   initiative gob1 7 (static)
+   #3   initiative gob2 7 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B2, 24 HP, 30 ft) [Sample Warden]
+   #6   pc1 chooses cast:conc-ward@1  [journal @0]
+   #7     pc1 casts Concentration Ward with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Concentration Ward
+   #9       pc1 chooses place:E2  [journal @1]
+  #10       Ward appears at E2: 9 squares (seen by gob1, gob2, pc1)
+  #11         Ward (attacks against it have Advantage) on gob1
+  #12         Ward (attacks against it have Advantage) on gob2
+  #13   pc1 chooses pass  [journal @2]
+  #14   pc1's turn ends
+  #15 gob1's turn (E2, 12 HP, 30 ft) [Goblin Warrior]
+  #16   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #17     gob1: Attack
+  #18     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 13, miss  [gob1 attack r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (F3, 11 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 15 +4 = 19 vs AC 13, hit  [gob2 attack r1 p0.0]
+  #25       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r1 p0.0]
+  #26         pc1 concentration save (Concentration Ward): d20 8 +1 = 9 vs DC 10, breaks  [pc1 conc r1 p2.0]
+  #27           Concentration Ward (pc1) ends (concentration broken)
+  #28             Ward ends (its source ended)
+  #29               Ward (attacks against it have Advantage) on gob1 ends (its source ended)
+  #30               Ward (attacks against it have Advantage) on gob2 ends (its source ended)
+  #31   gob2 chooses pass  [journal @6]
+  #32   gob2's turn ends
+  #33 fight ends: stalemate in round 1
+logHash 0cc95f1dd4bfdc02
+
+== areaOriginOnGrid=gridIntersection (journal diverged at @1) ==
+flags read vs default: +pauseInOccupiedSpace
+   #1   initiative pc1 11 (static)
+   #2   initiative gob1 7 (static)
+   #3   initiative gob2 7 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B2, 24 HP, 30 ft) [Sample Warden]
+   #6   pc1 chooses cast:conc-ward@1  [journal @0]
+   #7     pc1 casts Concentration Ward with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Concentration Ward
+   #9       pc1 chooses place:^A1  [baseline @1]
+  #10       Ward appears at ^A1: 3 squares (seen by gob1, gob2, pc1)
+  #11   pc1 chooses move:D1/p0  [baseline @2]
+  #12     pc1 steps B2 -> C1 (5 ft, 25 left)
+  #13     pc1 steps C1 -> D1 (5 ft, 20 left)
+  #14     pc1's move ends at D1
+  #15   pc1 chooses pass  [baseline @3]
+  #16   pc1's turn ends
+  #17 gob1's turn (E2, 10 HP, 30 ft) [Goblin Warrior]
+  #18   gob1 chooses attack:scimitar>pc1  [baseline @4]
+  #19     gob1: Attack
+  #20     gob1 Scimitar -> pc1: d20 3 +4 = 7 vs AC 13, miss  [gob1 attack r1 p0.0]
+  #21   gob1 chooses pass  [baseline @5]
+  #22   gob1's turn ends
+  #23 gob2's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #24   gob2 chooses attack:shortbow>pc1  [baseline @6]
+  #25     gob2: Attack
+  #26     gob2 Shortbow -> pc1: d20 15 +4 = 19 vs AC 15 (Half Cover +2), hit  [gob2 attack r1 p0.0]
+  #27       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r1 p0.0]
+  #28         pc1 concentration save (Concentration Ward): d20 8 +1 = 9 vs DC 10, breaks  [pc1 conc r1 p2.0]
+  #29           Concentration Ward (pc1) ends (concentration broken)
+  #30             Ward ends (its source ended)
+  #31   gob2 chooses move:E1/p0  [baseline @7]
+  #32     gob2 steps F3 -> E2 (5 ft, 25 left)
+  #33     gob2 steps E2 -> E1 (5 ft, 20 left)
+  #34     gob2's move ends at E1
+  #35   gob2 chooses pass  [baseline @8]
+  #36   gob2's turn ends
+  #37 fight ends: stalemate in round 1
+logHash a4a83bf9ef6b2610
+
+== areaGridCoverage=squareCenterInside (journal held) ==
+   #1   initiative pc1 11 (static)
+   #2   initiative gob1 7 (static)
+   #3   initiative gob2 7 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B2, 24 HP, 30 ft) [Sample Warden]
+   #6   pc1 chooses cast:conc-ward@1  [journal @0]
+   #7     pc1 casts Concentration Ward with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Concentration Ward
+   #9       pc1 chooses place:E2  [journal @1]
+  #10       Ward appears at E2: 12 squares (seen by gob1, gob2, pc1)
+  #11         Ward (attacks against it have Advantage) on gob1
+  #12         Ward (attacks against it have Advantage) on gob2
+  #13   pc1 chooses pass  [journal @2]
+  #14   pc1's turn ends
+  #15 gob1's turn (E2, 10 HP, 30 ft) [Goblin Warrior]
+  #16   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #17     gob1: Attack
+  #18     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 13, miss  [gob1 attack r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 15 +4 = 19 vs AC 13, hit  [gob2 attack r1 p0.0]
+  #25       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r1 p0.0]
+  #26         pc1 concentration save (Concentration Ward): d20 8 +1 = 9 vs DC 10, breaks  [pc1 conc r1 p2.0]
+  #27           Concentration Ward (pc1) ends (concentration broken)
+  #28             Ward ends (its source ended)
+  #29               Ward (attacks against it have Advantage) on gob1 ends (its source ended)
+  #30               Ward (attacks against it have Advantage) on gob2 ends (its source ended)
+  #31   gob2 chooses pass  [journal @6]
+  #32   gob2's turn ends
+  #33 fight ends: stalemate in round 1
+logHash 1d638ecea88cb85f
+
+== areaGridCoverage=anyOverlap (journal held) ==
+   #1   initiative pc1 11 (static)
+   #2   initiative gob1 7 (static)
+   #3   initiative gob2 7 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B2, 24 HP, 30 ft) [Sample Warden]
+   #6   pc1 chooses cast:conc-ward@1  [journal @0]
+   #7     pc1 casts Concentration Ward with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Concentration Ward
+   #9       pc1 chooses place:E2  [journal @1]
+  #10       Ward appears at E2: 18 squares (seen by gob1, gob2, pc1)
+  #11         Ward (attacks against it have Advantage) on gob1
+  #12         Ward (attacks against it have Advantage) on gob2
+  #13   pc1 chooses pass  [journal @2]
+  #14   pc1's turn ends
+  #15 gob1's turn (E2, 10 HP, 30 ft) [Goblin Warrior]
+  #16   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #17     gob1: Attack
+  #18     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 13, miss  [gob1 attack r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 15 +4 = 19 vs AC 13, hit  [gob2 attack r1 p0.0]
+  #25       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r1 p0.0]
+  #26         pc1 concentration save (Concentration Ward): d20 8 +1 = 9 vs DC 10, breaks  [pc1 conc r1 p2.0]
+  #27           Concentration Ward (pc1) ends (concentration broken)
+  #28             Ward ends (its source ended)
+  #29               Ward (attacks against it have Advantage) on gob1 ends (its source ended)
+  #30               Ward (attacks against it have Advantage) on gob2 ends (its source ended)
+  #31   gob2 chooses pass  [journal @6]
+  #32   gob2's turn ends
+  #33 fight ends: stalemate in round 1
+logHash f208a9f38ac6c2d1
+
+== losMethod=centers (journal held; log identical to default) ==
+   #1   initiative pc1 11 (static)
+   #2   initiative gob1 7 (static)
+   #3   initiative gob2 7 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B2, 24 HP, 30 ft) [Sample Warden]
+   #6   pc1 chooses cast:conc-ward@1  [journal @0]
+   #7     pc1 casts Concentration Ward with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Concentration Ward
+   #9       pc1 chooses place:E2  [journal @1]
+  #10       Ward appears at E2: 9 squares (seen by gob1, gob2, pc1)
+  #11         Ward (attacks against it have Advantage) on gob1
+  #12         Ward (attacks against it have Advantage) on gob2
+  #13   pc1 chooses pass  [journal @2]
+  #14   pc1's turn ends
+  #15 gob1's turn (E2, 10 HP, 30 ft) [Goblin Warrior]
+  #16   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #17     gob1: Attack
+  #18     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 13, miss  [gob1 attack r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 15 +4 = 19 vs AC 13, hit  [gob2 attack r1 p0.0]
+  #25       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r1 p0.0]
+  #26         pc1 concentration save (Concentration Ward): d20 8 +1 = 9 vs DC 10, breaks  [pc1 conc r1 p2.0]
+  #27           Concentration Ward (pc1) ends (concentration broken)
+  #28             Ward ends (its source ended)
+  #29               Ward (attacks against it have Advantage) on gob1 ends (its source ended)
+  #30               Ward (attacks against it have Advantage) on gob2 ends (its source ended)
+  #31   gob2 chooses pass  [journal @6]
+  #32   gob2's turn ends
+  #33 fight ends: stalemate in round 1
+logHash 0f349f1aa6027cf2
+
+== losMethod=stubbed (journal held; log identical to default) ==
+flags read vs default: -losMethod -creatureCover
+   #1   initiative pc1 11 (static)
+   #2   initiative gob1 7 (static)
+   #3   initiative gob2 7 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B2, 24 HP, 30 ft) [Sample Warden]
+   #6   pc1 chooses cast:conc-ward@1  [journal @0]
+   #7     pc1 casts Concentration Ward with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Concentration Ward
+   #9       pc1 chooses place:E2  [journal @1]
+  #10       Ward appears at E2: 9 squares (seen by gob1, gob2, pc1)
+  #11         Ward (attacks against it have Advantage) on gob1
+  #12         Ward (attacks against it have Advantage) on gob2
+  #13   pc1 chooses pass  [journal @2]
+  #14   pc1's turn ends
+  #15 gob1's turn (E2, 10 HP, 30 ft) [Goblin Warrior]
+  #16   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #17     gob1: Attack
+  #18     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 13, miss  [gob1 attack r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 15 +4 = 19 vs AC 13, hit  [gob2 attack r1 p0.0]
+  #25       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r1 p0.0]
+  #26         pc1 concentration save (Concentration Ward): d20 8 +1 = 9 vs DC 10, breaks  [pc1 conc r1 p2.0]
+  #27           Concentration Ward (pc1) ends (concentration broken)
+  #28             Ward ends (its source ended)
+  #29               Ward (attacks against it have Advantage) on gob1 ends (its source ended)
+  #30               Ward (attacks against it have Advantage) on gob2 ends (its source ended)
+  #31   gob2 chooses pass  [journal @6]
+  #32   gob2's turn ends
+  #33 fight ends: stalemate in round 1
+logHash 110f043adff099f7
+
+== creatureCover=off (journal held; log identical to default) ==
+flags read vs default: -losMethod
+   #1   initiative pc1 11 (static)
+   #2   initiative gob1 7 (static)
+   #3   initiative gob2 7 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B2, 24 HP, 30 ft) [Sample Warden]
+   #6   pc1 chooses cast:conc-ward@1  [journal @0]
+   #7     pc1 casts Concentration Ward with a level 1 slot (3 left)
+   #8       pc1 is concentrating on Concentration Ward
+   #9       pc1 chooses place:E2  [journal @1]
+  #10       Ward appears at E2: 9 squares (seen by gob1, gob2, pc1)
+  #11         Ward (attacks against it have Advantage) on gob1
+  #12         Ward (attacks against it have Advantage) on gob2
+  #13   pc1 chooses pass  [journal @2]
+  #14   pc1's turn ends
+  #15 gob1's turn (E2, 10 HP, 30 ft) [Goblin Warrior]
+  #16   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #17     gob1: Attack
+  #18     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 13, miss  [gob1 attack r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 15 +4 = 19 vs AC 13, hit  [gob2 attack r1 p0.0]
+  #25       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r1 p0.0]
+  #26         pc1 concentration save (Concentration Ward): d20 8 +1 = 9 vs DC 10, breaks  [pc1 conc r1 p2.0]
+  #27           Concentration Ward (pc1) ends (concentration broken)
+  #28             Ward ends (its source ended)
+  #29               Ward (attacks against it have Advantage) on gob1 ends (its source ended)
+  #30               Ward (attacks against it have Advantage) on gob2 ends (its source ended)
+  #31   gob2 chooses pass  [journal @6]
+  #32   gob2's turn ends
+  #33 fight ends: stalemate in round 1
+logHash 7d46dbc36489a0de

@@ -1,0 +1,12 @@
+# Reviewed against SRD 5.2.1 p.29 (srd-raw.txt:5065-5068), Barbarian level 5, Fast Movement
+# (coverage W1, docs/design/w1-plan.md section 3, P11): "Your speed increases by 10 feet while you
+# aren't wearing Heavy armor."
+# The mapped item is that whole text: a passive speed +10 stat gated on notHeavyArmor (armor none,
+# light or medium; a template with no armor field fails closed), the reading in
+# tools/import-srd/pdf-gates.ts. Nothing else in the feature, so full. A hand-written kind: pc
+# Barbarian with no armor field gets no Fast Movement (the gate fails closed).
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 29

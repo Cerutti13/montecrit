@@ -1,0 +1,48 @@
+# SRD 5.2.1 p.290, Goblin Warrior. Numbers checked against the PDF text.
+# Moved here unchanged at M3 step 6 (docs/design/m3.md 4.6): the hand-written stat block stands in
+# for the Foundry record as replace: true, so its compiled template, every closure hash and every
+# golden stay byte-identical (tools/import-srd/test/step6-monsters.test.ts).
+replace: true
+foundryPath: packs/_source/actors24/fey/goblin-warrior.yml
+kind: monster
+id: srd:goblin-warrior
+name: Goblin Warrior
+source: SRD 5.2.1 p.290
+fidelity: partial
+size: small
+cr: 1/4
+pb: 2
+ac: 15
+hp: { average: 10, formula: 3d6 }
+speed: { walk: 30 }
+initiative: { mod: 2, score: 12 }
+abilities: { str: 8, dex: 15, con: 10, int: 10, wis: 8, cha: 8 }
+gear:
+  - { name: Leather Armor }
+  - { name: Scimitar }
+  - { name: Shield }
+  - { name: Shortbow }
+attacks:
+  - id: scimitar
+    name: Scimitar
+    kind: melee
+    toHit: 4
+    reach: 5
+    damage:
+      - { roll: 1d6 + 2, type: slashing, avg: 5 }
+      - { roll: 1d4, type: slashing, avg: 2, ifAdvantage: true }
+  - id: shortbow
+    name: Shortbow
+    kind: ranged
+    toHit: 4
+    range: [80, 320]
+    damage:
+      - { roll: 1d6 + 2, type: piercing, avg: 5 }
+      - { roll: 1d4, type: piercing, avg: 2, ifAdvantage: true }
+options:
+  - { id: nimble-escape-disengage, name: Nimble Escape (Disengage), cost: bonus, core: 'core:disengage' }
+unimplemented:
+  - 'Nimble Escape: the Hide option'
+provenance:
+  review: reviewed
+  pdfPage: 290

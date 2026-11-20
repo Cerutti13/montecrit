@@ -1,0 +1,1087 @@
+# Flag matrix for scenarios/golden/monk-deflect.yaml with scenarios/golden/monk-deflect.journal.yaml (docs/design/m1b.md, Critique resolutions item 9).
+# Every rule flag the default run read, re-run under each of its other values: same seed, same journal.
+# Matrix mode only: at the journal's first mismatch every journal seat hands over to its fallback (baseline if none).
+# Regenerate: UPDATE_FLAG_MATRIX=1 npx vitest run apps/cli/test/flag-matrix.test.ts
+
+#### seed 30 ####
+default  run 0 | journal of 20 entries: held | logHash 0196848cf1e659f8
+flags read: diagonalCost, initiativeMode, initiativeTies, groupInitiative, monsterHp, focusHandSomatic, conjuredHandEffectBlocksHand, selfTargetWhenTextSilent, reduceBeforeResistance, losMethod, creatureCover
+
+== diagonalCost=alternate (journal held; log identical to default) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative gob1 12 (static)
+   #5   initiative gob2 12 (static)
+   #6   initiative caster 12 (static)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:scimitar>pc1  [journal @2]
+  #14     gob1: Attack
+  #15     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #16       pc1 chooses react:monk/deflect-attacks  [journal @3]
+  #17         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #18       pc1 takes 0 (8 slashing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 6 +4 = 10 vs AC 18 (Half Cover +2), miss  [gob2 attack r1 p0.0]
+  #25   gob2 chooses pass  [journal @6]
+  #26   gob2's turn ends
+  #27 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #28   caster chooses cast:produce-flame@0  [journal @7]
+  #29     caster casts Produce Flame (cantrip)
+  #30       Produce Flame on caster
+  #31   caster chooses use:caster/flame/hurl  [journal @8]
+  #32     caster: Hurl Flame
+  #33       caster chooses target:pc1  [journal @9]
+  #34       caster Hurl Flame -> pc1: d20 11 +7 = 18 vs AC 18 (Half Cover +2), hit  [caster attack r1 p0.0]
+  #35         pc1 takes 9 (9 fire), HP 51 -> 42  [caster damage r1 p0.0]
+  #36   caster chooses pass  [journal @10]
+  #37   caster's turn ends
+  #38 == round 2 ==
+  #39 pc1's turn (C3, 42 HP, 45 ft) [Sample Monk]
+  #40   pc1 chooses pass  [journal @11]
+  #41   pc1's turn ends
+  #42 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #43   gob1 chooses attack:scimitar>pc1  [journal @12]
+  #44     gob1: Attack
+  #45     gob1 Scimitar -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #46       pc1 chooses react:monk/deflect-attacks  [journal @13]
+  #47         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #48       pc1 takes 0 (5 slashing), HP 42 -> 42  [gob1 damage r2 p0.0]
+  #49   gob1 chooses pass  [journal @14]
+  #50   gob1's turn ends
+  #51 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #52   gob2 chooses attack:shortbow>pc1  [journal @15]
+  #53     gob2: Attack
+  #54     gob2 Shortbow -> pc1: d20 20 +4 = 24 vs AC 18 (Half Cover +2), CRITICAL HIT  [gob2 attack r2 p0.0]
+  #55       pc1 takes 5 (5 piercing, crit), HP 42 -> 37  [gob2 damage r2 p0.0]
+  #56   gob2 chooses pass  [journal @16]
+  #57   gob2's turn ends
+  #58 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #59   caster chooses use:caster/flame/hurl  [journal @17]
+  #60     caster: Hurl Flame
+  #61       caster chooses target:pc1  [journal @18]
+  #62       caster Hurl Flame -> pc1: d20 4 +7 = 11 vs AC 18 (Half Cover +2), miss  [caster attack r2 p0.0]
+  #63   caster chooses pass  [journal @19]
+  #64   caster's turn ends
+  #65 fight ends: stalemate in round 2
+logHash d5bbf7864457522b
+
+== initiativeMode=roll (journal diverged at @2) ==
+flags read vs default: +statBlockAtZeroHp +corpseSpace +areaOriginOnGrid +areaGridCoverage +zoneKnowledge -initiativeTies
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 22 (d20 19+3)
+   #4   initiative caster 14 (d20 12+2)
+   #5   initiative gob1 5 (d20 3+2)
+   #6   initiative gob2 5 (shares gob1's roll)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #13   caster chooses cast:moonbeam@3  [greedy @2]
+  #14     caster casts Moonbeam with a level 3 slot (2 left)
+  #15       caster is concentrating on Moonbeam
+  #16       caster chooses place:C3  [greedy @3]
+  #17       Moonbeam appears at C3: 1 square (seen by caster, gob1, gob2, pc1)
+  #18         pc1 CON save vs Moonbeam: d20 20 +2 = 22 vs DC 15, success  [pc1 save r1 p1.0]
+  #19         pc1 takes 13 (27 radiant, half) from Moonbeam, HP 51 -> 38  [caster zone r1 p0.0]
+  #20   caster chooses use:stance  [greedy @4]
+  #21     caster: Assume Stance
+  #22       caster spends Forms (2 left)
+  #23       Stance on caster
+  #24       caster chooses pick:volley  [greedy @5]
+  #25       Stance (Volley) on caster
+  #26       caster chooses target:pc1  [greedy @6]
+  #27       caster Volley Shot -> pc1: d20 11 +7 = 18 vs AC 18 (Half Cover +2), hit  [caster attack r1 p0.0]
+  #28         pc1 takes 7 (7 radiant), HP 38 -> 31  [caster damage r1 p0.0]
+  #29   caster chooses pass  [greedy @7]
+  #30   caster's turn ends
+  #31 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #32   gob1 chooses attack:scimitar>pc1  [greedy @8]
+  #33     gob1: Attack
+  #34     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #35       pc1 chooses react:monk/deflect-attacks  [greedy @9]
+  #36         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #37       pc1 takes 0 (8 slashing), HP 31 -> 31  [gob1 damage r1 p0.0]
+  #38   gob1 chooses pass  [greedy @10]
+  #39   gob1's turn ends
+  #40 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #41   gob2 chooses move:D2/p0  [greedy @11]
+  #42     gob2 steps H6 -> G5 (5 ft, 25 left)
+  #43     gob2 steps G5 -> F4 (5 ft, 20 left)
+  #44     gob2 steps F4 -> E3 (5 ft, 15 left)
+  #45     gob2 steps E3 -> D2 (5 ft, 10 left)
+  #46     gob2's move ends at D2
+  #47   gob2 chooses attack:scimitar>pc1  [greedy @12]
+  #48     gob2: Attack
+  #49     gob2 Scimitar -> pc1: d20 6 +4 = 10 vs AC 16, miss  [gob2 attack r1 p0.0]
+  #50   gob2 chooses pass  [greedy @13]
+  #51   gob2's turn ends
+  #52 == round 2 ==
+  #53 pc1's turn (C3, 31 HP, 45 ft) [Sample Monk]
+  #54   pc1 chooses attack:shortsword>gob1  [greedy @14]
+  #55     pc1: Attack
+  #56     pc1 Shortsword -> gob1: d20 4 +6 = 10 vs AC 15, miss  [pc1 attack r2 p0.0]
+  #57   pc1 chooses use:monk/monks-focus/flurry  [greedy @15]
+  #58     pc1: Flurry of Blows
+  #59       pc1 spends Monk's Focus (5 left)
+  #60       pc1 chooses attack:unarmed-strike>gob1  [greedy @16]
+  #61         pc1 Unarmed Strike -> gob1: d20 10 +6 = 16 vs AC 15, hit  [pc1 attack r2 p0.1]
+  #62           pc1 chooses pass  [greedy @17]
+  #63           pc1 chooses rider:open-hand-technique/topple  [greedy @18]
+  #64             pc1: Open Hand Technique: Topple
+  #65           gob1 takes 6 (6 bludgeoning), HP 10 -> 4  [pc1 damage r2 p0.1]
+  #66               gob1 DEX save vs Open Hand Technique: d20 4 +2 = 6 vs DC 14, fail  [gob1 rider r2 p4.0]
+  #67               gob1 is Prone (srd:warrior-of-the-open-hand/open-hand-technique)
+  #68       pc1 chooses attack:unarmed-strike>gob1  [greedy @19]
+  #69         pc1 Unarmed Strike -> gob1: d20 3/7 adv -> 7 (+target-prone) +6 = 13 vs AC 15, miss  [pc1 attack r2 p0.2]
+  #70   pc1 chooses attack:shortsword>gob1  [greedy @20]
+  #71     pc1 Shortsword -> gob1: d20 13/1 adv -> 13 (+target-prone) +6 = 19 vs AC 15, hit  [pc1 attack r2 p0.3]
+  #72       pc1 chooses pass  [greedy @21]
+  #73       gob1 takes 8 (8 piercing), HP 4 -> 0  [pc1 damage r2 p0.3]
+  #74         gob1 dies (0 HP)
+  #75   pc1 chooses pass  [greedy @22]
+  #76   pc1 CON save vs Moonbeam: d20 8 +2 = 10 vs DC 15, fail  [pc1 save r2 p0.0]
+  #77   pc1 takes 13 (13 radiant) from Moonbeam, HP 31 -> 18  [caster zone r2 p4.0]
+  #78   pc1's turn ends
+  #79 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #80   caster chooses cast:moonbeam@3  [greedy @23]
+  #81     caster casts Moonbeam with a level 3 slot (1 left)
+  #82       Moonbeam (caster) ends (concentrating on something else)
+  #83         Moonbeam ends (its source ended)
+  #84       caster is concentrating on Moonbeam
+  #85       caster chooses place:C3  [greedy @24]
+  #86       Moonbeam appears at C3: 1 square (seen by caster, gob2, pc1)
+  #87         pc1 CON save vs Moonbeam: d20 7 +2 = 9 vs DC 15, fail  [pc1 save r2 p1.0]
+  #88         pc1 takes 17 (17 radiant) from Moonbeam, HP 18 -> 1  [caster zone r2 p0.0]
+  #89   caster chooses move:G2/p0  [greedy @25]
+  #90     caster steps H1 -> G2 (5 ft, 25 left)
+  #91     caster's move ends at G2
+  #92   caster chooses use:caster/volley/shot  [greedy @26]
+  #93     caster: Volley Shot
+  #94       caster chooses target:pc1  [greedy @27]
+  #95       caster Volley Shot -> pc1: d20 4 +7 = 11 vs AC 16, miss  [caster attack r2 p0.0]
+  #96   caster chooses pass  [greedy @28]
+  #97   caster's turn ends
+  #98 gob2's turn (D2, 10 HP, 30 ft) [Goblin Warrior]
+  #99   gob2 chooses attack:scimitar>pc1  [greedy @29]
+ #100     gob2: Attack
+ #101     gob2 Scimitar -> pc1: d20 20 +4 = 24 vs AC 16, CRITICAL HIT  [gob2 attack r2 p0.0]
+ #102       pc1 chooses react:monk/deflect-attacks  [greedy @30]
+ #103         pc1 reacts to gob2's hit: Deflect Attacks reduces the damage by 11  [pc1 hitTaken r2 p3.0]
+ #104       pc1 takes 0 (5 slashing, crit), HP 1 -> 1  [gob2 damage r2 p0.0]
+ #105   gob2 chooses pass  [greedy @31]
+ #106   gob2's turn ends
+ #107 fight ends: stalemate in round 2
+logHash 4c24c2cbb3157ece
+
+== initiativeTies=pcsFirst (journal diverged at @2) ==
+flags read vs default: +statBlockAtZeroHp +corpseSpace +areaOriginOnGrid +areaGridCoverage +zoneKnowledge
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative caster 12 (static)
+   #5   initiative gob1 12 (static)
+   #6   initiative gob2 12 (static)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #13   caster chooses cast:moonbeam@3  [greedy @2]
+  #14     caster casts Moonbeam with a level 3 slot (2 left)
+  #15       caster is concentrating on Moonbeam
+  #16       caster chooses place:C3  [greedy @3]
+  #17       Moonbeam appears at C3: 1 square (seen by caster, gob1, gob2, pc1)
+  #18         pc1 CON save vs Moonbeam: d20 20 +2 = 22 vs DC 15, success  [pc1 save r1 p1.0]
+  #19         pc1 takes 13 (27 radiant, half) from Moonbeam, HP 51 -> 38  [caster zone r1 p0.0]
+  #20   caster chooses use:stance  [greedy @4]
+  #21     caster: Assume Stance
+  #22       caster spends Forms (2 left)
+  #23       Stance on caster
+  #24       caster chooses pick:volley  [greedy @5]
+  #25       Stance (Volley) on caster
+  #26       caster chooses target:pc1  [greedy @6]
+  #27       caster Volley Shot -> pc1: d20 11 +7 = 18 vs AC 18 (Half Cover +2), hit  [caster attack r1 p0.0]
+  #28         pc1 takes 7 (7 radiant), HP 38 -> 31  [caster damage r1 p0.0]
+  #29   caster chooses pass  [greedy @7]
+  #30   caster's turn ends
+  #31 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #32   gob1 chooses attack:scimitar>pc1  [greedy @8]
+  #33     gob1: Attack
+  #34     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #35       pc1 chooses react:monk/deflect-attacks  [greedy @9]
+  #36         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #37       pc1 takes 0 (8 slashing), HP 31 -> 31  [gob1 damage r1 p0.0]
+  #38   gob1 chooses pass  [greedy @10]
+  #39   gob1's turn ends
+  #40 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #41   gob2 chooses move:D2/p0  [greedy @11]
+  #42     gob2 steps H6 -> G5 (5 ft, 25 left)
+  #43     gob2 steps G5 -> F4 (5 ft, 20 left)
+  #44     gob2 steps F4 -> E3 (5 ft, 15 left)
+  #45     gob2 steps E3 -> D2 (5 ft, 10 left)
+  #46     gob2's move ends at D2
+  #47   gob2 chooses attack:scimitar>pc1  [greedy @12]
+  #48     gob2: Attack
+  #49     gob2 Scimitar -> pc1: d20 6 +4 = 10 vs AC 16, miss  [gob2 attack r1 p0.0]
+  #50   gob2 chooses pass  [greedy @13]
+  #51   gob2's turn ends
+  #52 == round 2 ==
+  #53 pc1's turn (C3, 31 HP, 45 ft) [Sample Monk]
+  #54   pc1 chooses attack:shortsword>gob1  [greedy @14]
+  #55     pc1: Attack
+  #56     pc1 Shortsword -> gob1: d20 4 +6 = 10 vs AC 15, miss  [pc1 attack r2 p0.0]
+  #57   pc1 chooses use:monk/monks-focus/flurry  [greedy @15]
+  #58     pc1: Flurry of Blows
+  #59       pc1 spends Monk's Focus (5 left)
+  #60       pc1 chooses attack:unarmed-strike>gob1  [greedy @16]
+  #61         pc1 Unarmed Strike -> gob1: d20 10 +6 = 16 vs AC 15, hit  [pc1 attack r2 p0.1]
+  #62           pc1 chooses pass  [greedy @17]
+  #63           pc1 chooses rider:open-hand-technique/topple  [greedy @18]
+  #64             pc1: Open Hand Technique: Topple
+  #65           gob1 takes 6 (6 bludgeoning), HP 10 -> 4  [pc1 damage r2 p0.1]
+  #66               gob1 DEX save vs Open Hand Technique: d20 4 +2 = 6 vs DC 14, fail  [gob1 rider r2 p4.0]
+  #67               gob1 is Prone (srd:warrior-of-the-open-hand/open-hand-technique)
+  #68       pc1 chooses attack:unarmed-strike>gob1  [greedy @19]
+  #69         pc1 Unarmed Strike -> gob1: d20 3/7 adv -> 7 (+target-prone) +6 = 13 vs AC 15, miss  [pc1 attack r2 p0.2]
+  #70   pc1 chooses attack:shortsword>gob1  [greedy @20]
+  #71     pc1 Shortsword -> gob1: d20 13/1 adv -> 13 (+target-prone) +6 = 19 vs AC 15, hit  [pc1 attack r2 p0.3]
+  #72       pc1 chooses pass  [greedy @21]
+  #73       gob1 takes 8 (8 piercing), HP 4 -> 0  [pc1 damage r2 p0.3]
+  #74         gob1 dies (0 HP)
+  #75   pc1 chooses pass  [greedy @22]
+  #76   pc1 CON save vs Moonbeam: d20 8 +2 = 10 vs DC 15, fail  [pc1 save r2 p0.0]
+  #77   pc1 takes 13 (13 radiant) from Moonbeam, HP 31 -> 18  [caster zone r2 p4.0]
+  #78   pc1's turn ends
+  #79 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #80   caster chooses cast:moonbeam@3  [greedy @23]
+  #81     caster casts Moonbeam with a level 3 slot (1 left)
+  #82       Moonbeam (caster) ends (concentrating on something else)
+  #83         Moonbeam ends (its source ended)
+  #84       caster is concentrating on Moonbeam
+  #85       caster chooses place:C3  [greedy @24]
+  #86       Moonbeam appears at C3: 1 square (seen by caster, gob2, pc1)
+  #87         pc1 CON save vs Moonbeam: d20 7 +2 = 9 vs DC 15, fail  [pc1 save r2 p1.0]
+  #88         pc1 takes 17 (17 radiant) from Moonbeam, HP 18 -> 1  [caster zone r2 p0.0]
+  #89   caster chooses move:G2/p0  [greedy @25]
+  #90     caster steps H1 -> G2 (5 ft, 25 left)
+  #91     caster's move ends at G2
+  #92   caster chooses use:caster/volley/shot  [greedy @26]
+  #93     caster: Volley Shot
+  #94       caster chooses target:pc1  [greedy @27]
+  #95       caster Volley Shot -> pc1: d20 4 +7 = 11 vs AC 16, miss  [caster attack r2 p0.0]
+  #96   caster chooses pass  [greedy @28]
+  #97   caster's turn ends
+  #98 gob2's turn (D2, 10 HP, 30 ft) [Goblin Warrior]
+  #99   gob2 chooses attack:scimitar>pc1  [greedy @29]
+ #100     gob2: Attack
+ #101     gob2 Scimitar -> pc1: d20 20 +4 = 24 vs AC 16, CRITICAL HIT  [gob2 attack r2 p0.0]
+ #102       pc1 chooses react:monk/deflect-attacks  [greedy @30]
+ #103         pc1 reacts to gob2's hit: Deflect Attacks reduces the damage by 11  [pc1 hitTaken r2 p3.0]
+ #104       pc1 takes 0 (5 slashing, crit), HP 1 -> 1  [gob2 damage r2 p0.0]
+ #105   gob2 chooses pass  [greedy @31]
+ #106   gob2's turn ends
+ #107 fight ends: stalemate in round 2
+logHash 70846eb317a83e43
+
+== initiativeTies=monstersFirst (journal held; log identical to default) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative gob1 12 (static)
+   #5   initiative gob2 12 (static)
+   #6   initiative caster 12 (static)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:scimitar>pc1  [journal @2]
+  #14     gob1: Attack
+  #15     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #16       pc1 chooses react:monk/deflect-attacks  [journal @3]
+  #17         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #18       pc1 takes 0 (8 slashing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 6 +4 = 10 vs AC 18 (Half Cover +2), miss  [gob2 attack r1 p0.0]
+  #25   gob2 chooses pass  [journal @6]
+  #26   gob2's turn ends
+  #27 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #28   caster chooses cast:produce-flame@0  [journal @7]
+  #29     caster casts Produce Flame (cantrip)
+  #30       Produce Flame on caster
+  #31   caster chooses use:caster/flame/hurl  [journal @8]
+  #32     caster: Hurl Flame
+  #33       caster chooses target:pc1  [journal @9]
+  #34       caster Hurl Flame -> pc1: d20 11 +7 = 18 vs AC 18 (Half Cover +2), hit  [caster attack r1 p0.0]
+  #35         pc1 takes 9 (9 fire), HP 51 -> 42  [caster damage r1 p0.0]
+  #36   caster chooses pass  [journal @10]
+  #37   caster's turn ends
+  #38 == round 2 ==
+  #39 pc1's turn (C3, 42 HP, 45 ft) [Sample Monk]
+  #40   pc1 chooses pass  [journal @11]
+  #41   pc1's turn ends
+  #42 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #43   gob1 chooses attack:scimitar>pc1  [journal @12]
+  #44     gob1: Attack
+  #45     gob1 Scimitar -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #46       pc1 chooses react:monk/deflect-attacks  [journal @13]
+  #47         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #48       pc1 takes 0 (5 slashing), HP 42 -> 42  [gob1 damage r2 p0.0]
+  #49   gob1 chooses pass  [journal @14]
+  #50   gob1's turn ends
+  #51 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #52   gob2 chooses attack:shortbow>pc1  [journal @15]
+  #53     gob2: Attack
+  #54     gob2 Shortbow -> pc1: d20 20 +4 = 24 vs AC 18 (Half Cover +2), CRITICAL HIT  [gob2 attack r2 p0.0]
+  #55       pc1 takes 5 (5 piercing, crit), HP 42 -> 37  [gob2 damage r2 p0.0]
+  #56   gob2 chooses pass  [journal @16]
+  #57   gob2's turn ends
+  #58 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #59   caster chooses use:caster/flame/hurl  [journal @17]
+  #60     caster: Hurl Flame
+  #61       caster chooses target:pc1  [journal @18]
+  #62       caster Hurl Flame -> pc1: d20 4 +7 = 11 vs AC 18 (Half Cover +2), miss  [caster attack r2 p0.0]
+  #63   caster chooses pass  [journal @19]
+  #64   caster's turn ends
+  #65 fight ends: stalemate in round 2
+logHash 9639437fb4248d4b
+
+== groupInitiative=individual (journal diverged at @5) ==
+flags read vs default: +statBlockAtZeroHp +corpseSpace +areaOriginOnGrid +areaGridCoverage +zoneKnowledge
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative gob1 12 (static)
+   #5   initiative caster 12 (static)
+   #6   initiative gob2 12 (static)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:scimitar>pc1  [journal @2]
+  #14     gob1: Attack
+  #15     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #16       pc1 chooses react:monk/deflect-attacks  [journal @3]
+  #17         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #18       pc1 takes 0 (8 slashing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #22   caster chooses cast:moonbeam@3  [greedy @5]
+  #23     caster casts Moonbeam with a level 3 slot (2 left)
+  #24       caster is concentrating on Moonbeam
+  #25       caster chooses place:C3  [greedy @6]
+  #26       Moonbeam appears at C3: 1 square (seen by caster, gob1, gob2, pc1)
+  #27         pc1 CON save vs Moonbeam: d20 20 +2 = 22 vs DC 15, success  [pc1 save r1 p1.0]
+  #28         pc1 takes 13 (27 radiant, half) from Moonbeam, HP 51 -> 38  [caster zone r1 p0.0]
+  #29   caster chooses use:stance  [greedy @7]
+  #30     caster: Assume Stance
+  #31       caster spends Forms (2 left)
+  #32       Stance on caster
+  #33       caster chooses pick:volley  [greedy @8]
+  #34       Stance (Volley) on caster
+  #35       caster chooses target:pc1  [greedy @9]
+  #36       caster Volley Shot -> pc1: d20 11 +7 = 18 vs AC 18 (Half Cover +2), hit  [caster attack r1 p0.0]
+  #37         pc1 takes 7 (7 radiant), HP 38 -> 31  [caster damage r1 p0.0]
+  #38   caster chooses pass  [greedy @10]
+  #39   caster's turn ends
+  #40 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #41   gob2 chooses move:D2/p0  [greedy @11]
+  #42     gob2 steps H6 -> G5 (5 ft, 25 left)
+  #43     gob2 steps G5 -> F4 (5 ft, 20 left)
+  #44     gob2 steps F4 -> E3 (5 ft, 15 left)
+  #45     gob2 steps E3 -> D2 (5 ft, 10 left)
+  #46     gob2's move ends at D2
+  #47   gob2 chooses attack:scimitar>pc1  [greedy @12]
+  #48     gob2: Attack
+  #49     gob2 Scimitar -> pc1: d20 6 +4 = 10 vs AC 16, miss  [gob2 attack r1 p0.0]
+  #50   gob2 chooses pass  [greedy @13]
+  #51   gob2's turn ends
+  #52 == round 2 ==
+  #53 pc1's turn (C3, 31 HP, 45 ft) [Sample Monk]
+  #54   pc1 chooses attack:shortsword>gob1  [greedy @14]
+  #55     pc1: Attack
+  #56     pc1 Shortsword -> gob1: d20 4 +6 = 10 vs AC 15, miss  [pc1 attack r2 p0.0]
+  #57   pc1 chooses use:monk/monks-focus/flurry  [greedy @15]
+  #58     pc1: Flurry of Blows
+  #59       pc1 spends Monk's Focus (5 left)
+  #60       pc1 chooses attack:unarmed-strike>gob1  [greedy @16]
+  #61         pc1 Unarmed Strike -> gob1: d20 10 +6 = 16 vs AC 15, hit  [pc1 attack r2 p0.1]
+  #62           pc1 chooses pass  [greedy @17]
+  #63           pc1 chooses rider:open-hand-technique/topple  [greedy @18]
+  #64             pc1: Open Hand Technique: Topple
+  #65           gob1 takes 6 (6 bludgeoning), HP 10 -> 4  [pc1 damage r2 p0.1]
+  #66               gob1 DEX save vs Open Hand Technique: d20 4 +2 = 6 vs DC 14, fail  [gob1 rider r2 p4.0]
+  #67               gob1 is Prone (srd:warrior-of-the-open-hand/open-hand-technique)
+  #68       pc1 chooses attack:unarmed-strike>gob1  [greedy @19]
+  #69         pc1 Unarmed Strike -> gob1: d20 3/7 adv -> 7 (+target-prone) +6 = 13 vs AC 15, miss  [pc1 attack r2 p0.2]
+  #70   pc1 chooses attack:shortsword>gob1  [greedy @20]
+  #71     pc1 Shortsword -> gob1: d20 13/1 adv -> 13 (+target-prone) +6 = 19 vs AC 15, hit  [pc1 attack r2 p0.3]
+  #72       pc1 chooses pass  [greedy @21]
+  #73       gob1 takes 8 (8 piercing), HP 4 -> 0  [pc1 damage r2 p0.3]
+  #74         gob1 dies (0 HP)
+  #75   pc1 chooses pass  [greedy @22]
+  #76   pc1 CON save vs Moonbeam: d20 8 +2 = 10 vs DC 15, fail  [pc1 save r2 p0.0]
+  #77   pc1 takes 13 (13 radiant) from Moonbeam, HP 31 -> 18  [caster zone r2 p4.0]
+  #78   pc1's turn ends
+  #79 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #80   caster chooses cast:moonbeam@3  [greedy @23]
+  #81     caster casts Moonbeam with a level 3 slot (1 left)
+  #82       Moonbeam (caster) ends (concentrating on something else)
+  #83         Moonbeam ends (its source ended)
+  #84       caster is concentrating on Moonbeam
+  #85       caster chooses place:C3  [greedy @24]
+  #86       Moonbeam appears at C3: 1 square (seen by caster, gob2, pc1)
+  #87         pc1 CON save vs Moonbeam: d20 7 +2 = 9 vs DC 15, fail  [pc1 save r2 p1.0]
+  #88         pc1 takes 17 (17 radiant) from Moonbeam, HP 18 -> 1  [caster zone r2 p0.0]
+  #89   caster chooses move:G2/p0  [greedy @25]
+  #90     caster steps H1 -> G2 (5 ft, 25 left)
+  #91     caster's move ends at G2
+  #92   caster chooses use:caster/volley/shot  [greedy @26]
+  #93     caster: Volley Shot
+  #94       caster chooses target:pc1  [greedy @27]
+  #95       caster Volley Shot -> pc1: d20 4 +7 = 11 vs AC 16, miss  [caster attack r2 p0.0]
+  #96   caster chooses pass  [greedy @28]
+  #97   caster's turn ends
+  #98 gob2's turn (D2, 10 HP, 30 ft) [Goblin Warrior]
+  #99   gob2 chooses attack:scimitar>pc1  [greedy @29]
+ #100     gob2: Attack
+ #101     gob2 Scimitar -> pc1: d20 20 +4 = 24 vs AC 16, CRITICAL HIT  [gob2 attack r2 p0.0]
+ #102       pc1 chooses react:monk/deflect-attacks  [greedy @30]
+ #103         pc1 reacts to gob2's hit: Deflect Attacks reduces the damage by 11  [pc1 hitTaken r2 p3.0]
+ #104       pc1 takes 0 (5 slashing, crit), HP 1 -> 1  [gob2 damage r2 p0.0]
+ #105   gob2 chooses pass  [greedy @31]
+ #106   gob2's turn ends
+ #107 fight ends: stalemate in round 2
+logHash b0ea258a68505179
+
+== monsterHp=rolled (journal held) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative gob1 12 (static)
+   #5   initiative gob2 12 (static)
+   #6   initiative caster 12 (static)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 gob1's turn (D3, 14 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:scimitar>pc1  [journal @2]
+  #14     gob1: Attack
+  #15     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #16       pc1 chooses react:monk/deflect-attacks  [journal @3]
+  #17         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #18       pc1 takes 0 (8 slashing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (H6, 13 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 6 +4 = 10 vs AC 18 (Half Cover +2), miss  [gob2 attack r1 p0.0]
+  #25   gob2 chooses pass  [journal @6]
+  #26   gob2's turn ends
+  #27 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #28   caster chooses cast:produce-flame@0  [journal @7]
+  #29     caster casts Produce Flame (cantrip)
+  #30       Produce Flame on caster
+  #31   caster chooses use:caster/flame/hurl  [journal @8]
+  #32     caster: Hurl Flame
+  #33       caster chooses target:pc1  [journal @9]
+  #34       caster Hurl Flame -> pc1: d20 11 +7 = 18 vs AC 18 (Half Cover +2), hit  [caster attack r1 p0.0]
+  #35         pc1 takes 9 (9 fire), HP 51 -> 42  [caster damage r1 p0.0]
+  #36   caster chooses pass  [journal @10]
+  #37   caster's turn ends
+  #38 == round 2 ==
+  #39 pc1's turn (C3, 42 HP, 45 ft) [Sample Monk]
+  #40   pc1 chooses pass  [journal @11]
+  #41   pc1's turn ends
+  #42 gob1's turn (D3, 14 HP, 30 ft) [Goblin Warrior]
+  #43   gob1 chooses attack:scimitar>pc1  [journal @12]
+  #44     gob1: Attack
+  #45     gob1 Scimitar -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #46       pc1 chooses react:monk/deflect-attacks  [journal @13]
+  #47         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #48       pc1 takes 0 (5 slashing), HP 42 -> 42  [gob1 damage r2 p0.0]
+  #49   gob1 chooses pass  [journal @14]
+  #50   gob1's turn ends
+  #51 gob2's turn (H6, 13 HP, 30 ft) [Goblin Warrior]
+  #52   gob2 chooses attack:shortbow>pc1  [journal @15]
+  #53     gob2: Attack
+  #54     gob2 Shortbow -> pc1: d20 20 +4 = 24 vs AC 18 (Half Cover +2), CRITICAL HIT  [gob2 attack r2 p0.0]
+  #55       pc1 takes 5 (5 piercing, crit), HP 42 -> 37  [gob2 damage r2 p0.0]
+  #56   gob2 chooses pass  [journal @16]
+  #57   gob2's turn ends
+  #58 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #59   caster chooses use:caster/flame/hurl  [journal @17]
+  #60     caster: Hurl Flame
+  #61       caster chooses target:pc1  [journal @18]
+  #62       caster Hurl Flame -> pc1: d20 4 +7 = 11 vs AC 18 (Half Cover +2), miss  [caster attack r2 p0.0]
+  #63   caster chooses pass  [journal @19]
+  #64   caster's turn ends
+  #65 fight ends: stalemate in round 2
+logHash 77b40ae0a29d2368
+
+== focusHandSomatic=strict (journal diverged at @7) ==
+flags read vs default: +statBlockAtZeroHp +areaOriginOnGrid +areaGridCoverage +zoneKnowledge -selfTargetWhenTextSilent
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative gob1 12 (static)
+   #5   initiative gob2 12 (static)
+   #6   initiative caster 12 (static)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:scimitar>pc1  [journal @2]
+  #14     gob1: Attack
+  #15     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #16       pc1 chooses react:monk/deflect-attacks  [journal @3]
+  #17         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #18       pc1 takes 0 (8 slashing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 6 +4 = 10 vs AC 18 (Half Cover +2), miss  [gob2 attack r1 p0.0]
+  #25   gob2 chooses pass  [journal @6]
+  #26   gob2's turn ends
+  #27 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #28   caster chooses cast:moonbeam@3  [greedy @7]
+  #29     caster casts Moonbeam with a level 3 slot (2 left)
+  #30       caster is concentrating on Moonbeam
+  #31       caster chooses place:C3  [greedy @8]
+  #32       Moonbeam appears at C3: 1 square (seen by caster, gob1, gob2, pc1)
+  #33         pc1 CON save vs Moonbeam: d20 20 +2 = 22 vs DC 15, success  [pc1 save r1 p1.0]
+  #34         pc1 takes 13 (27 radiant, half) from Moonbeam, HP 51 -> 38  [caster zone r1 p0.0]
+  #35   caster chooses use:stance  [greedy @9]
+  #36     caster: Assume Stance
+  #37       caster spends Forms (2 left)
+  #38       Stance on caster
+  #39       caster chooses pick:volley  [greedy @10]
+  #40       Stance (Volley) on caster
+  #41       caster chooses target:pc1  [greedy @11]
+  #42       caster Volley Shot -> pc1: d20 11 +7 = 18 vs AC 18 (Half Cover +2), hit  [caster attack r1 p0.0]
+  #43         pc1 takes 7 (7 radiant), HP 38 -> 31  [caster damage r1 p0.0]
+  #44   caster chooses pass  [greedy @12]
+  #45   caster's turn ends
+  #46 == round 2 ==
+  #47 pc1's turn (C3, 31 HP, 45 ft) [Sample Monk]
+  #48   pc1 chooses attack:shortsword>gob1  [greedy @13]
+  #49     pc1: Attack
+  #50     pc1 Shortsword -> gob1: d20 4 +6 = 10 vs AC 15, miss  [pc1 attack r2 p0.0]
+  #51   pc1 chooses use:monk/monks-focus/flurry  [greedy @14]
+  #52     pc1: Flurry of Blows
+  #53       pc1 spends Monk's Focus (5 left)
+  #54       pc1 Unarmed Strike -> gob1: d20 10 +6 = 16 vs AC 15, hit  [pc1 attack r2 p0.1]
+  #55         pc1 chooses pass  [greedy @15]
+  #56         pc1 chooses rider:open-hand-technique/topple  [greedy @16]
+  #57           pc1: Open Hand Technique: Topple
+  #58         gob1 takes 6 (6 bludgeoning), HP 10 -> 4  [pc1 damage r2 p0.1]
+  #59             gob1 DEX save vs Open Hand Technique: d20 4 +2 = 6 vs DC 14, fail  [gob1 rider r2 p4.0]
+  #60             gob1 is Prone (srd:warrior-of-the-open-hand/open-hand-technique)
+  #61       pc1 Unarmed Strike -> gob1: d20 3/7 adv -> 7 (+target-prone) +6 = 13 vs AC 15, miss  [pc1 attack r2 p0.2]
+  #62   pc1 chooses attack:shortsword>gob1  [greedy @17]
+  #63     pc1 Shortsword -> gob1: d20 13/1 adv -> 13 (+target-prone) +6 = 19 vs AC 15, hit  [pc1 attack r2 p0.3]
+  #64       pc1 chooses pass  [greedy @18]
+  #65       gob1 takes 8 (8 piercing), HP 4 -> 0  [pc1 damage r2 p0.3]
+  #66         gob1 dies (0 HP)
+  #67   pc1 chooses pass  [greedy @19]
+  #68   pc1 CON save vs Moonbeam: d20 8 +2 = 10 vs DC 15, fail  [pc1 save r2 p0.0]
+  #69   pc1 takes 13 (13 radiant) from Moonbeam, HP 31 -> 18  [caster zone r2 p4.0]
+  #70   pc1's turn ends
+  #71 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #72   gob2 chooses attack:shortbow>pc1  [greedy @20]
+  #73     gob2: Attack
+  #74     gob2 Shortbow -> pc1: d20 20 +4 = 24 vs AC 16, CRITICAL HIT  [gob2 attack r2 p0.0]
+  #75       pc1 chooses react:monk/deflect-attacks  [greedy @21]
+  #76         pc1 reacts to gob2's hit: Deflect Attacks reduces the damage by 11  [pc1 hitTaken r2 p3.0]
+  #77       pc1 takes 0 (5 piercing, crit), HP 18 -> 18  [gob2 damage r2 p0.0]
+  #78   gob2 chooses pass  [greedy @22]
+  #79   gob2's turn ends
+  #80 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #81   caster chooses cast:moonbeam@3  [greedy @23]
+  #82     caster casts Moonbeam with a level 3 slot (1 left)
+  #83       Moonbeam (caster) ends (concentrating on something else)
+  #84         Moonbeam ends (its source ended)
+  #85       caster is concentrating on Moonbeam
+  #86       caster chooses place:C3  [greedy @24]
+  #87       Moonbeam appears at C3: 1 square (seen by caster, gob2, pc1)
+  #88         pc1 CON save vs Moonbeam: d20 7 +2 = 9 vs DC 15, fail  [pc1 save r2 p1.0]
+  #89         pc1 takes 17 (17 radiant) from Moonbeam, HP 18 -> 1  [caster zone r2 p0.0]
+  #90   caster chooses use:caster/volley/shot  [greedy @25]
+  #91     caster: Volley Shot
+  #92       caster chooses target:pc1  [greedy @26]
+  #93       caster Volley Shot -> pc1: d20 4 +7 = 11 vs AC 16, miss  [caster attack r2 p0.0]
+  #94   caster chooses pass  [greedy @27]
+  #95   caster's turn ends
+  #96 fight ends: stalemate in round 2
+logHash da958459e8ed5a7a
+
+== conjuredHandEffectBlocksHand=true (journal diverged at @7) ==
+flags read vs default: +statBlockAtZeroHp +areaOriginOnGrid +areaGridCoverage +zoneKnowledge
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative gob1 12 (static)
+   #5   initiative gob2 12 (static)
+   #6   initiative caster 12 (static)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:scimitar>pc1  [journal @2]
+  #14     gob1: Attack
+  #15     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #16       pc1 chooses react:monk/deflect-attacks  [journal @3]
+  #17         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #18       pc1 takes 0 (8 slashing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 6 +4 = 10 vs AC 18 (Half Cover +2), miss  [gob2 attack r1 p0.0]
+  #25   gob2 chooses pass  [journal @6]
+  #26   gob2's turn ends
+  #27 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #28   caster chooses cast:moonbeam@3  [greedy @7]
+  #29     caster casts Moonbeam with a level 3 slot (2 left)
+  #30       caster is concentrating on Moonbeam
+  #31       caster chooses place:C3  [greedy @8]
+  #32       Moonbeam appears at C3: 1 square (seen by caster, gob1, gob2, pc1)
+  #33         pc1 CON save vs Moonbeam: d20 20 +2 = 22 vs DC 15, success  [pc1 save r1 p1.0]
+  #34         pc1 takes 13 (27 radiant, half) from Moonbeam, HP 51 -> 38  [caster zone r1 p0.0]
+  #35   caster chooses use:stance  [greedy @9]
+  #36     caster: Assume Stance
+  #37       caster spends Forms (2 left)
+  #38       Stance on caster
+  #39       caster chooses pick:volley  [greedy @10]
+  #40       Stance (Volley) on caster
+  #41       caster chooses target:pc1  [greedy @11]
+  #42       caster Volley Shot -> pc1: d20 11 +7 = 18 vs AC 18 (Half Cover +2), hit  [caster attack r1 p0.0]
+  #43         pc1 takes 7 (7 radiant), HP 38 -> 31  [caster damage r1 p0.0]
+  #44   caster chooses pass  [greedy @12]
+  #45   caster's turn ends
+  #46 == round 2 ==
+  #47 pc1's turn (C3, 31 HP, 45 ft) [Sample Monk]
+  #48   pc1 chooses attack:shortsword>gob1  [greedy @13]
+  #49     pc1: Attack
+  #50     pc1 Shortsword -> gob1: d20 4 +6 = 10 vs AC 15, miss  [pc1 attack r2 p0.0]
+  #51   pc1 chooses use:monk/monks-focus/flurry  [greedy @14]
+  #52     pc1: Flurry of Blows
+  #53       pc1 spends Monk's Focus (5 left)
+  #54       pc1 Unarmed Strike -> gob1: d20 10 +6 = 16 vs AC 15, hit  [pc1 attack r2 p0.1]
+  #55         pc1 chooses pass  [greedy @15]
+  #56         pc1 chooses rider:open-hand-technique/topple  [greedy @16]
+  #57           pc1: Open Hand Technique: Topple
+  #58         gob1 takes 6 (6 bludgeoning), HP 10 -> 4  [pc1 damage r2 p0.1]
+  #59             gob1 DEX save vs Open Hand Technique: d20 4 +2 = 6 vs DC 14, fail  [gob1 rider r2 p4.0]
+  #60             gob1 is Prone (srd:warrior-of-the-open-hand/open-hand-technique)
+  #61       pc1 Unarmed Strike -> gob1: d20 3/7 adv -> 7 (+target-prone) +6 = 13 vs AC 15, miss  [pc1 attack r2 p0.2]
+  #62   pc1 chooses attack:shortsword>gob1  [greedy @17]
+  #63     pc1 Shortsword -> gob1: d20 13/1 adv -> 13 (+target-prone) +6 = 19 vs AC 15, hit  [pc1 attack r2 p0.3]
+  #64       pc1 chooses pass  [greedy @18]
+  #65       gob1 takes 8 (8 piercing), HP 4 -> 0  [pc1 damage r2 p0.3]
+  #66         gob1 dies (0 HP)
+  #67   pc1 chooses pass  [greedy @19]
+  #68   pc1 CON save vs Moonbeam: d20 8 +2 = 10 vs DC 15, fail  [pc1 save r2 p0.0]
+  #69   pc1 takes 13 (13 radiant) from Moonbeam, HP 31 -> 18  [caster zone r2 p4.0]
+  #70   pc1's turn ends
+  #71 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #72   gob2 chooses attack:shortbow>pc1  [greedy @20]
+  #73     gob2: Attack
+  #74     gob2 Shortbow -> pc1: d20 20 +4 = 24 vs AC 16, CRITICAL HIT  [gob2 attack r2 p0.0]
+  #75       pc1 chooses react:monk/deflect-attacks  [greedy @21]
+  #76         pc1 reacts to gob2's hit: Deflect Attacks reduces the damage by 11  [pc1 hitTaken r2 p3.0]
+  #77       pc1 takes 0 (5 piercing, crit), HP 18 -> 18  [gob2 damage r2 p0.0]
+  #78   gob2 chooses pass  [greedy @22]
+  #79   gob2's turn ends
+  #80 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #81   caster chooses cast:moonbeam@3  [greedy @23]
+  #82     caster casts Moonbeam with a level 3 slot (1 left)
+  #83       Moonbeam (caster) ends (concentrating on something else)
+  #84         Moonbeam ends (its source ended)
+  #85       caster is concentrating on Moonbeam
+  #86       caster chooses place:C3  [greedy @24]
+  #87       Moonbeam appears at C3: 1 square (seen by caster, gob2, pc1)
+  #88         pc1 CON save vs Moonbeam: d20 7 +2 = 9 vs DC 15, fail  [pc1 save r2 p1.0]
+  #89         pc1 takes 17 (17 radiant) from Moonbeam, HP 18 -> 1  [caster zone r2 p0.0]
+  #90   caster chooses use:caster/volley/shot  [greedy @25]
+  #91     caster: Volley Shot
+  #92       caster chooses target:pc1  [greedy @26]
+  #93       caster Volley Shot -> pc1: d20 4 +7 = 11 vs AC 16, miss  [caster attack r2 p0.0]
+  #94   caster chooses pass  [greedy @27]
+  #95   caster's turn ends
+  #96 fight ends: stalemate in round 2
+logHash 7e014ccdfae302f0
+
+== selfTargetWhenTextSilent=notAllowed (journal held; log identical to default) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative gob1 12 (static)
+   #5   initiative gob2 12 (static)
+   #6   initiative caster 12 (static)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:scimitar>pc1  [journal @2]
+  #14     gob1: Attack
+  #15     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #16       pc1 chooses react:monk/deflect-attacks  [journal @3]
+  #17         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #18       pc1 takes 0 (8 slashing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 6 +4 = 10 vs AC 18 (Half Cover +2), miss  [gob2 attack r1 p0.0]
+  #25   gob2 chooses pass  [journal @6]
+  #26   gob2's turn ends
+  #27 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #28   caster chooses cast:produce-flame@0  [journal @7]
+  #29     caster casts Produce Flame (cantrip)
+  #30       Produce Flame on caster
+  #31   caster chooses use:caster/flame/hurl  [journal @8]
+  #32     caster: Hurl Flame
+  #33       caster chooses target:pc1  [journal @9]
+  #34       caster Hurl Flame -> pc1: d20 11 +7 = 18 vs AC 18 (Half Cover +2), hit  [caster attack r1 p0.0]
+  #35         pc1 takes 9 (9 fire), HP 51 -> 42  [caster damage r1 p0.0]
+  #36   caster chooses pass  [journal @10]
+  #37   caster's turn ends
+  #38 == round 2 ==
+  #39 pc1's turn (C3, 42 HP, 45 ft) [Sample Monk]
+  #40   pc1 chooses pass  [journal @11]
+  #41   pc1's turn ends
+  #42 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #43   gob1 chooses attack:scimitar>pc1  [journal @12]
+  #44     gob1: Attack
+  #45     gob1 Scimitar -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #46       pc1 chooses react:monk/deflect-attacks  [journal @13]
+  #47         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #48       pc1 takes 0 (5 slashing), HP 42 -> 42  [gob1 damage r2 p0.0]
+  #49   gob1 chooses pass  [journal @14]
+  #50   gob1's turn ends
+  #51 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #52   gob2 chooses attack:shortbow>pc1  [journal @15]
+  #53     gob2: Attack
+  #54     gob2 Shortbow -> pc1: d20 20 +4 = 24 vs AC 18 (Half Cover +2), CRITICAL HIT  [gob2 attack r2 p0.0]
+  #55       pc1 takes 5 (5 piercing, crit), HP 42 -> 37  [gob2 damage r2 p0.0]
+  #56   gob2 chooses pass  [journal @16]
+  #57   gob2's turn ends
+  #58 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #59   caster chooses use:caster/flame/hurl  [journal @17]
+  #60     caster: Hurl Flame
+  #61       caster chooses target:pc1  [journal @18]
+  #62       caster Hurl Flame -> pc1: d20 4 +7 = 11 vs AC 18 (Half Cover +2), miss  [caster attack r2 p0.0]
+  #63   caster chooses pass  [journal @19]
+  #64   caster's turn ends
+  #65 fight ends: stalemate in round 2
+logHash 386e3c40ec3c5844
+
+== reduceBeforeResistance=false (journal held; log identical to default) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative gob1 12 (static)
+   #5   initiative gob2 12 (static)
+   #6   initiative caster 12 (static)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:scimitar>pc1  [journal @2]
+  #14     gob1: Attack
+  #15     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #16       pc1 chooses react:monk/deflect-attacks  [journal @3]
+  #17         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #18       pc1 takes 0 (8 slashing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 6 +4 = 10 vs AC 18 (Half Cover +2), miss  [gob2 attack r1 p0.0]
+  #25   gob2 chooses pass  [journal @6]
+  #26   gob2's turn ends
+  #27 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #28   caster chooses cast:produce-flame@0  [journal @7]
+  #29     caster casts Produce Flame (cantrip)
+  #30       Produce Flame on caster
+  #31   caster chooses use:caster/flame/hurl  [journal @8]
+  #32     caster: Hurl Flame
+  #33       caster chooses target:pc1  [journal @9]
+  #34       caster Hurl Flame -> pc1: d20 11 +7 = 18 vs AC 18 (Half Cover +2), hit  [caster attack r1 p0.0]
+  #35         pc1 takes 9 (9 fire), HP 51 -> 42  [caster damage r1 p0.0]
+  #36   caster chooses pass  [journal @10]
+  #37   caster's turn ends
+  #38 == round 2 ==
+  #39 pc1's turn (C3, 42 HP, 45 ft) [Sample Monk]
+  #40   pc1 chooses pass  [journal @11]
+  #41   pc1's turn ends
+  #42 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #43   gob1 chooses attack:scimitar>pc1  [journal @12]
+  #44     gob1: Attack
+  #45     gob1 Scimitar -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #46       pc1 chooses react:monk/deflect-attacks  [journal @13]
+  #47         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #48       pc1 takes 0 (5 slashing), HP 42 -> 42  [gob1 damage r2 p0.0]
+  #49   gob1 chooses pass  [journal @14]
+  #50   gob1's turn ends
+  #51 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #52   gob2 chooses attack:shortbow>pc1  [journal @15]
+  #53     gob2: Attack
+  #54     gob2 Shortbow -> pc1: d20 20 +4 = 24 vs AC 18 (Half Cover +2), CRITICAL HIT  [gob2 attack r2 p0.0]
+  #55       pc1 takes 5 (5 piercing, crit), HP 42 -> 37  [gob2 damage r2 p0.0]
+  #56   gob2 chooses pass  [journal @16]
+  #57   gob2's turn ends
+  #58 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #59   caster chooses use:caster/flame/hurl  [journal @17]
+  #60     caster: Hurl Flame
+  #61       caster chooses target:pc1  [journal @18]
+  #62       caster Hurl Flame -> pc1: d20 4 +7 = 11 vs AC 18 (Half Cover +2), miss  [caster attack r2 p0.0]
+  #63   caster chooses pass  [journal @19]
+  #64   caster's turn ends
+  #65 fight ends: stalemate in round 2
+logHash 8502fb1dcd31ea59
+
+== losMethod=centers (journal held; log identical to default) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative gob1 12 (static)
+   #5   initiative gob2 12 (static)
+   #6   initiative caster 12 (static)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:scimitar>pc1  [journal @2]
+  #14     gob1: Attack
+  #15     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #16       pc1 chooses react:monk/deflect-attacks  [journal @3]
+  #17         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #18       pc1 takes 0 (8 slashing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 6 +4 = 10 vs AC 18 (Half Cover +2), miss  [gob2 attack r1 p0.0]
+  #25   gob2 chooses pass  [journal @6]
+  #26   gob2's turn ends
+  #27 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #28   caster chooses cast:produce-flame@0  [journal @7]
+  #29     caster casts Produce Flame (cantrip)
+  #30       Produce Flame on caster
+  #31   caster chooses use:caster/flame/hurl  [journal @8]
+  #32     caster: Hurl Flame
+  #33       caster chooses target:pc1  [journal @9]
+  #34       caster Hurl Flame -> pc1: d20 11 +7 = 18 vs AC 18 (Half Cover +2), hit  [caster attack r1 p0.0]
+  #35         pc1 takes 9 (9 fire), HP 51 -> 42  [caster damage r1 p0.0]
+  #36   caster chooses pass  [journal @10]
+  #37   caster's turn ends
+  #38 == round 2 ==
+  #39 pc1's turn (C3, 42 HP, 45 ft) [Sample Monk]
+  #40   pc1 chooses pass  [journal @11]
+  #41   pc1's turn ends
+  #42 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #43   gob1 chooses attack:scimitar>pc1  [journal @12]
+  #44     gob1: Attack
+  #45     gob1 Scimitar -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #46       pc1 chooses react:monk/deflect-attacks  [journal @13]
+  #47         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #48       pc1 takes 0 (5 slashing), HP 42 -> 42  [gob1 damage r2 p0.0]
+  #49   gob1 chooses pass  [journal @14]
+  #50   gob1's turn ends
+  #51 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #52   gob2 chooses attack:shortbow>pc1  [journal @15]
+  #53     gob2: Attack
+  #54     gob2 Shortbow -> pc1: d20 20 +4 = 24 vs AC 18 (Half Cover +2), CRITICAL HIT  [gob2 attack r2 p0.0]
+  #55       pc1 takes 5 (5 piercing, crit), HP 42 -> 37  [gob2 damage r2 p0.0]
+  #56   gob2 chooses pass  [journal @16]
+  #57   gob2's turn ends
+  #58 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #59   caster chooses use:caster/flame/hurl  [journal @17]
+  #60     caster: Hurl Flame
+  #61       caster chooses target:pc1  [journal @18]
+  #62       caster Hurl Flame -> pc1: d20 4 +7 = 11 vs AC 18 (Half Cover +2), miss  [caster attack r2 p0.0]
+  #63   caster chooses pass  [journal @19]
+  #64   caster's turn ends
+  #65 fight ends: stalemate in round 2
+logHash 22650f94f0794428
+
+== losMethod=stubbed (journal held) ==
+flags read vs default: -losMethod -creatureCover
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative gob1 12 (static)
+   #5   initiative gob2 12 (static)
+   #6   initiative caster 12 (static)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:scimitar>pc1  [journal @2]
+  #14     gob1: Attack
+  #15     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #16       pc1 chooses react:monk/deflect-attacks  [journal @3]
+  #17         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #18       pc1 takes 0 (8 slashing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 6 +4 = 10 vs AC 16, miss  [gob2 attack r1 p0.0]
+  #25   gob2 chooses pass  [journal @6]
+  #26   gob2's turn ends
+  #27 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #28   caster chooses cast:produce-flame@0  [journal @7]
+  #29     caster casts Produce Flame (cantrip)
+  #30       Produce Flame on caster
+  #31   caster chooses use:caster/flame/hurl  [journal @8]
+  #32     caster: Hurl Flame
+  #33       caster chooses target:pc1  [journal @9]
+  #34       caster Hurl Flame -> pc1: d20 11 +7 = 18 vs AC 16, hit  [caster attack r1 p0.0]
+  #35         pc1 takes 9 (9 fire), HP 51 -> 42  [caster damage r1 p0.0]
+  #36   caster chooses pass  [journal @10]
+  #37   caster's turn ends
+  #38 == round 2 ==
+  #39 pc1's turn (C3, 42 HP, 45 ft) [Sample Monk]
+  #40   pc1 chooses pass  [journal @11]
+  #41   pc1's turn ends
+  #42 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #43   gob1 chooses attack:scimitar>pc1  [journal @12]
+  #44     gob1: Attack
+  #45     gob1 Scimitar -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #46       pc1 chooses react:monk/deflect-attacks  [journal @13]
+  #47         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #48       pc1 takes 0 (5 slashing), HP 42 -> 42  [gob1 damage r2 p0.0]
+  #49   gob1 chooses pass  [journal @14]
+  #50   gob1's turn ends
+  #51 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #52   gob2 chooses attack:shortbow>pc1  [journal @15]
+  #53     gob2: Attack
+  #54     gob2 Shortbow -> pc1: d20 20 +4 = 24 vs AC 16, CRITICAL HIT  [gob2 attack r2 p0.0]
+  #55       pc1 takes 5 (5 piercing, crit), HP 42 -> 37  [gob2 damage r2 p0.0]
+  #56   gob2 chooses pass  [journal @16]
+  #57   gob2's turn ends
+  #58 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #59   caster chooses use:caster/flame/hurl  [journal @17]
+  #60     caster: Hurl Flame
+  #61       caster chooses target:pc1  [journal @18]
+  #62       caster Hurl Flame -> pc1: d20 4 +7 = 11 vs AC 16, miss  [caster attack r2 p0.0]
+  #63   caster chooses pass  [journal @19]
+  #64   caster's turn ends
+  #65 fight ends: stalemate in round 2
+logHash 783292a7751a7911
+
+== creatureCover=off (journal held) ==
+flags read vs default: -losMethod
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative gob1 12 (static)
+   #5   initiative gob2 12 (static)
+   #6   initiative caster 12 (static)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:scimitar>pc1  [journal @2]
+  #14     gob1: Attack
+  #15     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #16       pc1 chooses react:monk/deflect-attacks  [journal @3]
+  #17         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #18       pc1 takes 0 (8 slashing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 6 +4 = 10 vs AC 16, miss  [gob2 attack r1 p0.0]
+  #25   gob2 chooses pass  [journal @6]
+  #26   gob2's turn ends
+  #27 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #28   caster chooses cast:produce-flame@0  [journal @7]
+  #29     caster casts Produce Flame (cantrip)
+  #30       Produce Flame on caster
+  #31   caster chooses use:caster/flame/hurl  [journal @8]
+  #32     caster: Hurl Flame
+  #33       caster chooses target:pc1  [journal @9]
+  #34       caster Hurl Flame -> pc1: d20 11 +7 = 18 vs AC 16, hit  [caster attack r1 p0.0]
+  #35         pc1 takes 9 (9 fire), HP 51 -> 42  [caster damage r1 p0.0]
+  #36   caster chooses pass  [journal @10]
+  #37   caster's turn ends
+  #38 == round 2 ==
+  #39 pc1's turn (C3, 42 HP, 45 ft) [Sample Monk]
+  #40   pc1 chooses pass  [journal @11]
+  #41   pc1's turn ends
+  #42 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #43   gob1 chooses attack:scimitar>pc1  [journal @12]
+  #44     gob1: Attack
+  #45     gob1 Scimitar -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #46       pc1 chooses react:monk/deflect-attacks  [journal @13]
+  #47         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #48       pc1 takes 0 (5 slashing), HP 42 -> 42  [gob1 damage r2 p0.0]
+  #49   gob1 chooses pass  [journal @14]
+  #50   gob1's turn ends
+  #51 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #52   gob2 chooses attack:shortbow>pc1  [journal @15]
+  #53     gob2: Attack
+  #54     gob2 Shortbow -> pc1: d20 20 +4 = 24 vs AC 16, CRITICAL HIT  [gob2 attack r2 p0.0]
+  #55       pc1 takes 5 (5 piercing, crit), HP 42 -> 37  [gob2 damage r2 p0.0]
+  #56   gob2 chooses pass  [journal @16]
+  #57   gob2's turn ends
+  #58 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #59   caster chooses use:caster/flame/hurl  [journal @17]
+  #60     caster: Hurl Flame
+  #61       caster chooses target:pc1  [journal @18]
+  #62       caster Hurl Flame -> pc1: d20 4 +7 = 11 vs AC 16, miss  [caster attack r2 p0.0]
+  #63   caster chooses pass  [journal @19]
+  #64   caster's turn ends
+  #65 fight ends: stalemate in round 2
+logHash b209077087e46cf3

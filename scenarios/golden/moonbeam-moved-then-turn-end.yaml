@@ -1,0 +1,20 @@
+# M1b golden (the plan's case): Moonbeam moved onto a creature, which then ends its turn there.
+# pc1 casts Moonbeam in an empty corner. On its next turn it moves the beam onto the knight, which
+# saves (the beam moved into its space). On the knight's own turn it stays and ends its turn in the
+# beam: a different turn, so it saves again. Once per turn means per turn, not per round.
+kind: scenario
+id: moonbeam-moved-then-turn-end
+name: Moonbeam moved, then a turn ends in it
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid:
+  w: 10
+  h: 7
+flags:
+  initiativeMode: static
+knobs:
+  maxRounds: 2
+units:
+  - { seat: pc1, team: party, use: 'test:sample-druid', at: B1 }
+  - { seat: knight, team: enemies, use: 'srd:knight', at: H3, surprised: true }
+  - { seat: gob2, team: enemies, use: 'srd:goblin-warrior', at: J7, surprised: true }

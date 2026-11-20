@@ -1,0 +1,11 @@
+# Reviewed against SRD 5.2.1 p.51 (srd-raw.txt:11139-11144), Monk level 2: "Your speed increases
+# by 10 feet while you aren't wearing armor or wielding a Shield. This bonus increases when you
+# reach certain Monk levels, as shown on the Monk Features table."
+# The mapped item is that whole text: a passive speed stat of @scale.monk.unarmored-movement (the
+# table column, cross-checked against the PDF: 10/15/20 ft at Monk 2/6/10) gated on unarmored and
+# noShield (the reading in tools/import-srd/pdf-gates.ts). Nothing else in the feature, so full.
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 51

@@ -1,0 +1,55 @@
+# Round 1, pc2: Mace (Sap), stow, Warhammer (Push 10 ft: two 5-ft steps), stow, Action Surge,
+# Greataxe drawn (Cleave), stow by the free object interaction, Greatsword drawn (a miss: Graze).
+# Round 1, pc1: Shortsword (Vex), Nick (the Scimitar's Light extra attack in the Attack action),
+# stow, thrown Javelin (Slow), stow, Action Surge, Maul drawn (Topple: Prone), end of turn.
+# Ogres: ogre2 walks back and attacks pc2 at Disadvantage (Sap); the rest pass.
+# Round 2: pc2 passes; pc1 stows the Maul, draws and strikes with the Shortsword and the
+# Scimitar, then the Light extra attack as a Bonus Action with the Shortsword. Every seat is
+# scripted, so the AI never moves this golden.
+kind: journal
+scenario: mastery-sampler
+seed: 254
+run: 0
+engine: '0.8.0'
+contentHash: '79d7ed3c3c8ebc89'
+scenarioHash: '165e8701a221d5d8'
+entries:
+  - { seat: pc2, key: 'attack:mace>ogre2' }
+  - { seat: pc2, key: 'item:stow/mace' }
+  - { seat: pc2, key: 'attack:warhammer>ogre2' }
+  - { seat: pc2, key: 'rider:push-warhammer' }
+  - { seat: pc2, key: 'pull:H5' }
+  - { seat: pc2, key: 'pull:I5' }
+  - { seat: pc2, key: 'item:stow/warhammer' }
+  - { seat: pc2, key: 'use:fighter/action-surge' }
+  - { seat: pc2, key: 'attack:greataxe>ogre3' }
+  - { seat: pc2, key: 'rider:cleave-greataxe' }
+  - { seat: pc2, key: 'item:stow/greataxe' }
+  - { seat: pc2, key: 'attack:greatsword>ogre3' }
+  - { seat: pc2, key: 'pass' }
+  - { seat: pc1, key: 'attack:shortsword>ogre1' }
+  - { seat: pc1, key: 'use:light-weapons/nick-scimitar' }
+  - { seat: pc1, key: 'item:stow/scimitar' }
+  - { seat: pc1, key: 'attack:javelin-thrown>ogre1' }
+  - { seat: pc1, key: 'item:stow/shortsword' }
+  - { seat: pc1, key: 'use:fighter/action-surge' }
+  - { seat: pc1, key: 'attack:maul>ogre1' }
+  - { seat: pc1, key: 'rider:topple-maul' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: ogre1, key: 'pass' }
+  - { seat: ogre2, key: 'move:G5/p0' }
+  - { seat: ogre2, key: 'attack:greatclub>pc2' }
+  - { seat: ogre2, key: 'pass' }
+  - { seat: ogre3, key: 'pass' }
+  - { seat: ogre4, key: 'pass' }
+  - { seat: pc2, key: 'pass' }
+  - { seat: pc1, key: 'item:stow/maul' }
+  - { seat: pc1, key: 'attack:shortsword>ogre1' }
+  - { seat: pc1, key: 'attack:scimitar>ogre1' }
+  - { seat: pc1, key: 'use:light-weapons/extra-attack' }
+  - { seat: pc1, key: 'attack:shortsword>ogre1' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: ogre1, key: 'pass' }
+  - { seat: ogre2, key: 'pass' }
+  - { seat: ogre3, key: 'pass' }
+  - { seat: ogre4, key: 'pass' }

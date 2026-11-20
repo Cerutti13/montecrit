@@ -1,0 +1,23 @@
+# Resists slashing, takes double bludgeoning, ignores poison: for damage-adjustment tests.
+kind: monster
+id: test:warded-construct
+name: Warded Construct
+source: synthetic test fixture
+size: medium
+cr: 1
+pb: 2
+ac: 14
+hp: { average: 30, formula: 6d8 + 3 }
+speed: { walk: 25 }
+initiative: { mod: 0, score: 10 }
+abilities: { str: 14, dex: 10, con: 11, int: 3, wis: 10, cha: 1 }
+resist: [slashing]
+vuln: [bludgeoning]
+immune: [poison]
+attacks:
+  - id: slam
+    name: Slam
+    kind: melee
+    toHit: 4
+    damage:
+      - { roll: 1d8 + 2, type: bludgeoning, avg: 6 }

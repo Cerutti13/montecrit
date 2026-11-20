@@ -1,0 +1,16 @@
+# Hand-authored from the SRD 5.2.1 PDF, standing in for Foundry's Monk Unarmed Strike record
+# (C21). That record has an empty license at the pin, so the filter quarantines it, and its
+# provenance is therefore source srd-pdf, with the record named only under `replaces`. It is
+# not a Monk table feature (the PDF Monk table at level 1 has Martial Arts and Unarmored
+# Defense only), so the Monk class does not list it (C4); it is the Rules Glossary entry,
+# p.190, that Martial Arts (p.50) modifies, kept here for the WATK primitive (step 5a).
+# Narrative until then.
+replace: true
+foundryPath: packs/_source/classes24/monk/class-features/unarmed-strike.yml
+kind: feature
+id: srd:monk/unarmed-strike
+name: Unarmed Strike
+source: SRD 5.2.1 p.190
+fidelity: narrative
+provenance:
+  pdfPage: 190

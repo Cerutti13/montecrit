@@ -1,0 +1,115 @@
+{
+  "counts": {
+    "byKind": {
+      "armor": {
+        "full": 13,
+        "narrative": 0,
+        "partial": 0
+      },
+      "background": {
+        "full": 2,
+        "narrative": 0,
+        "partial": 2
+      },
+      "class": {
+        "full": 6,
+        "narrative": 0,
+        "partial": 6
+      },
+      "feat": {
+        "full": 1,
+        "narrative": 14,
+        "partial": 2
+      },
+      "feature": {
+        "full": 51,
+        "narrative": 487,
+        "partial": 24
+      },
+      "monster": {
+        "full": 8,
+        "narrative": 0,
+        "partial": 320
+      },
+      "species": {
+        "full": 3,
+        "narrative": 0,
+        "partial": 6
+      },
+      "spell": {
+        "full": 12,
+        "narrative": 0,
+        "partial": 37
+      },
+      "subclass": {
+        "full": 7,
+        "narrative": 0,
+        "partial": 5
+      },
+      "weapon": {
+        "full": 38,
+        "narrative": 0,
+        "partial": 0
+      }
+    },
+    "drops": {
+      "book-set": 0,
+      "kind-out-of-scope": 228,
+      "license-empty": 2,
+      "license-missing": 60,
+      "license-other": 0,
+      "no-owner": 12,
+      "not-in-srd-pdf": 143,
+      "rules-not-2024": 4
+    }
+  },
+  "importer": 1,
+  "output": {
+    "files": 1044,
+    "sha256": "ea28cde976c73713a609d2aadaa0969ee6d515e18e983ca1fa82517a1eaa4a06"
+  },
+  "pins": {
+    "bits": {
+      "commit": "f4eac5a08e",
+      "files": {
+        "Classes.json": "ad5c12cbccfbe85df310040ee7164bb20224e563d11b6df939b3897cf7c3d16b",
+        "Feats.json": "f80bf64d46b4addb5d991c6b4b1e05e8c0f9209ffbae297222c5439022abcbc3",
+        "Features.json": "6390b3a1ad2ae68ad21516c38309799f610f893cb008cd3ad920d0eed89f8249",
+        "Levels.json": "963a7b1c597e51f2d6e22068940344193fbb78bf2f0a81274777dec06b3a3fb1",
+        "Monsters.json": "eb7e79e0b6903e2ac90463f027de817dd6888b8a72325509a1e5331e7fddb132",
+        "Spells.json": "16aa8e47a84c6b21ccc101c1ee7ab5b8a026da940985bc826b6b58aa1fe0b6bc",
+        "Subclasses.json": "eac4c9f975490f0953e389eeae28bc655527f6ed277146eff6757a9fe1953178"
+      }
+    },
+    "foundry": {
+      "commit": "87e94dbd9f930135e0694cd7e7d49f210603cd2c",
+      "tag": "release-6.0.6",
+      "tarballSha256": "4005d863fda174f4e1d720e36fd8786b9a29aa6deef500af62be4d27558d4f29",
+      "treeFiles": 1917,
+      "treeSha256": "12f33b5ff8ab62e7a5ef015f402b8a12e11280b608e9cea562fc5ff1689bf5a9"
+    },
+    "open5e": {
+      "files": {
+        "c-barbarian.json": "cb8b0ba299088fc0bae9fb1aee80382326d58225a257b0bb567a908e486a19a9",
+        "c-bard.json": "74daa9ab4fa7f4295946c9d399c1ff15677f75f61a8289b1bb0f540ae9683ce7",
+        "c-cleric.json": "d3e5f8663228687ccb961e54c7cf4edfb1975b738595eb63d2fa2363e0ef57fb",
+        "c-druid.json": "50e36ef740b161cacbba1429f4dd44a1783860ff2bf3185775c931d455e7e1fd",
+        "c-fighter.json": "d8da5e27233b37f24caaf0c9a9cabc10c310490132d6c91d82db0def2898e3c1",
+        "c-monk.json": "167360218ae03da9884378d343abb5307250917f65a3d1c3844af07cc5951c14",
+        "c-paladin.json": "49e61b5680e3dac5f8dcd13fd34ac800a280209d3eff028c4054a78ae4321915",
+        "c-ranger.json": "fe6de01753e18649e18b583db843000a70f78955c04b14647eb6ea76d00dbf51",
+        "c-rogue.json": "b6765352145f44e7fcf5837d30b3078239a56e64ef22518d7cfc8455dbc95804",
+        "c-sorcerer.json": "5c3c86ff4b66b45cf1b5988a4ec477b5dce8ab7b1e99bf0aa2696ba7235662e8",
+        "c-warlock.json": "f4fc5c30a3b860e7330d8bacdb4ee547afa402470afbbc9b9f8382e6e79769ca",
+        "c-wizard.json": "b41724326e50cdb57e45146b0a1b18bda97e2a576e30ce2b3956d51d72f9de7a"
+      },
+      "repoCommit": "bdcddf2b5f"
+    },
+    "pdf": {
+      "sha256": "8974902d109d6e63672d7c490bde9ccf052410503d9cfa768237154fbc5e3d87",
+      "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf"
+    }
+  },
+  "srdIndexSha256": "4d42e348bf724df59308962c37de993a39ff6429cda5ba68baaef7805a3817d1",
+  "tool": "tools/import-srd"
+}

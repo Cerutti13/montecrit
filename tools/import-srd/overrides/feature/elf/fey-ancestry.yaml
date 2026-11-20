@@ -1,0 +1,6 @@
+# Hand fix from SRD 5.2.1 p.84 (srd-raw.txt:19782-19784): "You have Advantage on saving throws you
+# make to avoid or end the Charmed condition." Foundry's record has no effect for it, and no
+# primitive can name "saves against Charmed" (a save roll key carries no condition bit yet, M3
+# step 4 census), so the trait stays narrative; this line says what's missing.
+unimplemented:
+  - advantage on saves against the charmed condition not modeled

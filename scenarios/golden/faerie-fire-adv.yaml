@@ -1,0 +1,22 @@
+# Coverage step 7.3 golden (docs/design/step7-plan.md section 6, X2): Faerie Fire, SRD 5.2.1 p.129
+# (srd-raw.txt:26697-26702). "Each creature in the Cube is also outlined if it fails a Dexterity
+# saving throw", and "Attack rolls against an affected creature or object have Advantage".
+# Static initiative. Every seat is scripted (journal); the seed gives the rolls.
+#   Round 1: pc1 casts Faerie Fire over both goblins. gob1 saves, gob2 fails and is outlined. ally1's
+#   Spear at gob2 shows adv (+srd:faerie-fire/outlined); ally2's at gob1 has none.
+#   Round 2: a goblin's shot hits pc1 and its concentration save fails: the spell, the Cube and the
+#   outline end together. ally1's Spear at gob2 now has no Advantage.
+kind: scenario
+id: faerie-fire-adv
+name: Faerie Fire outlines one of two
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid: { w: 14, h: 7 }
+flags: { initiativeMode: static }
+knobs: { maxRounds: 2 }
+units:
+  - { seat: pc1, team: party, use: 'test:sample-grove', at: A4, decider: greedy }
+  - { seat: ally1, team: party, use: 'srd:guard', at: F3, decider: greedy }
+  - { seat: ally2, team: party, use: 'srd:guard', at: F2, decider: greedy }
+  - { seat: gob1, team: enemies, use: 'srd:goblin-warrior', at: G3, decider: greedy }
+  - { seat: gob2, team: enemies, use: 'srd:goblin-warrior', at: G4, decider: greedy }

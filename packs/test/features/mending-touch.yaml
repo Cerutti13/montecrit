@@ -1,0 +1,15 @@
+# A synthetic once-per-Long-Rest healing touch (session S, the repo half): the Magic action (cost:
+# action), spending the character's "mending-touch" pool, on a creature within touch range (5 ft;
+# itself allowed), which regains (PB)d4 Hit Points.
+kind: feature
+id: test:mending-touch
+name: Mending Touch
+source: synthetic test fixture (generic once-per-Long-Rest touch heal)
+activate:
+  id: mend
+  name: Mending Touch
+  cost: action
+  pool: mending-touch
+  do:
+    - target: { range: touch, who: any, self: yes }
+    - heal: { roll: '(@pb)d4' }

@@ -1,0 +1,85 @@
+replay   engine 0.8.0 | content a7322f1cc647048c | scenario faerie-fire-adv b046108c52d0ab65 | seed 46 run 0 | journal 17
+policy   ally1 journal>greedy | ally2 journal>greedy | gob1 journal>greedy | gob2 journal>greedy | pc1 journal>greedy
+knobs    maxRounds=2 attackDowned=ifNoOtherTarget lossCounts=pcs downEnds=true
+flags read:
+  diagonalCost=uniform [verified: SRD 5.2.1 p.13 "Playing on a Grid": any adjacent square costs 1; alternating 5/10 is a 2024 DMG option (its use for range is unverified)]
+  initiativeMode=static [verified: SRD 5.2.1 p.184 "Initiative" and p.254: static initiative is a GM option]
+  initiativeTies=rollOff [UNVERIFIED: SRD 5.2.1 p.13: the GM orders tied monsters and mixed ties, players order tied PCs; no procedure given (policy)]
+  groupInitiative=shared [verified: SRD 5.2.1 p.13: a group of identical creatures gets one roll]
+  monsterHp=listed [verified: SRD 5.2.1 p.255: use the number or the dice, the GM's choice]
+  areaOriginOnGrid=squareCenter [UNVERIFIED: Shane's table ruling 2026-11-01 (areas land on a square); SRD 5.2.1 has no grid-area rule; the 2024 DMG intersection rule is known only secondhand]
+  areaGridCoverage=atLeastHalfSquare [UNVERIFIED: SRD 5.2.1 has no grid-area rule (p.13 covers movement and range); the 2024 DMG half-square rule is known only secondhand; 2024 SAC-Spells-CloudofDaggers1]
+  losMethod=corners [UNVERIFIED: SRD 5.2.1 "Cover" (srd-raw.txt:1995-2032) and its glossary entry (33044-33050) give the three degrees and say a target benefits only when the effect "originates on the opposite side of the cover", but give no grid procedure. corners = the DMG's corner-to-corner lines (the attacker's best corner to the 4 corners of the target's square: 1-2 blocked Half, 3 Three-Quarters, 4 Total; known only secondhand, the DMG is not SRD); centers = one line between square centers; stubbed = no cover and everyone sees everyone (the engine before M3 step 8, a what-if)]
+  creatureCover=on [verified: SRD 5.2.1 Cover table (srd-raw.txt:2006-2017): Half Cover is offered by "Another creature or an object that covers at least half of the target"; off is a what-if]
+notes    LOS: grid (losMethod=corners, creatureCover=on)
+notes    ending concentration or dismissing an effect: offered only on your own turn
+notes    srd:goblin-warrior partial: unimplemented Nimble Escape: the Hide option
+notes    srd:faerie-fire partial: unimplemented Dim Light in a 10-foot radius from outlined creatures and objects; an outlined creature can't benefit from the Invisible condition; the Advantage needs the attacker to see the target (sight is stubbed outside walls); objects in the Cube are outlined
+
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4   initiative ally1 11 (static)
+   #5   initiative ally2 11 (static)
+   #6 == round 1 ==
+   #7 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #8   pc1 chooses cast:faerie-fire@1  [journal @0]
+   #9     pc1 casts Faerie Fire with a level 1 slot (3 left)
+  #10       pc1 is concentrating on Faerie Fire
+  #11       pc1 chooses place:H4  [journal @1]
+  #12       Faerie Fire appears at H4: 16 squares (seen by ally1, ally2, gob1, gob2, pc1)
+  #13         gob1 DEX save vs Faerie Fire: d20 12 +2 +2(Half Cover) = 16 vs DC 13, success  [gob1 save r1 p5.0]
+  #14         gob2 DEX save vs Faerie Fire: d20 5 +2 = 7 vs DC 13, fail  [gob2 save r1 p5.0]
+  #15         Outlined (attacks against it have Advantage) on gob2
+  #16   pc1 chooses pass  [journal @2]
+  #17   pc1's turn ends
+  #18 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #19   gob1 chooses pass  [journal @3]
+  #20   gob1's turn ends
+  #21 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses pass  [journal @4]
+  #23   gob2's turn ends
+  #24 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #25   ally1 chooses attack:spear>gob2  [journal @5]
+  #26     ally1: Attack
+  #27     ally1 Spear -> gob2: d20 2/2 adv -> 2 (+srd:faerie-fire/outlined) +3 = 5 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #28   ally1 chooses pass  [journal @6]
+  #29   ally1's turn ends
+  #30 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #31   ally2 chooses attack:spear>gob1  [journal @7]
+  #32     ally2: Attack
+  #33     ally2 Spear -> gob1: d20 8 +3 = 11 vs AC 15, miss  [ally2 attack r1 p0.0]
+  #34   ally2 chooses pass  [journal @8]
+  #35   ally2's turn ends
+  #36 == round 2 ==
+  #37 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #38   pc1 chooses pass  [journal @9]
+  #39   pc1's turn ends
+  #40 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #41   gob1 chooses attack:shortbow>pc1  [journal @10]
+  #42     gob1: Attack
+  #43     gob1 Shortbow -> pc1: d20 18/4 dis -> 4 (-ranged-adjacent) +4 = 8 vs AC 15 (Half Cover +2), miss  [gob1 attack r2 p0.0]
+  #44   gob1 chooses pass  [journal @11]
+  #45   gob1's turn ends
+  #46 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #47   gob2 chooses attack:shortbow>pc1  [journal @12]
+  #48     gob2: Attack
+  #49     gob2 Shortbow -> pc1: d20 9/11 dis -> 9 (-ranged-adjacent) +4 = 13 vs AC 13, hit  [gob2 attack r2 p0.0]
+  #50       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r2 p0.0]
+  #51         pc1 concentration save (Faerie Fire): d20 3 +2 = 5 vs DC 10, breaks  [pc1 conc r2 p4.0]
+  #52           Faerie Fire (pc1) ends (concentration broken)
+  #53             Faerie Fire ends (its source ended)
+  #54               Outlined (attacks against it have Advantage) on gob2 ends (its source ended)
+  #55   gob2 chooses pass  [journal @13]
+  #56   gob2's turn ends
+  #57 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #58   ally1 chooses attack:spear>gob2  [journal @14]
+  #59     ally1: Attack
+  #60     ally1 Spear -> gob2: d20 1 +3 = 4 vs AC 15, miss  [ally1 attack r2 p0.0]
+  #61   ally1 chooses pass  [journal @15]
+  #62   ally1's turn ends
+  #63 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #64   ally2 chooses pass  [journal @16]
+  #65   ally2's turn ends
+  #66 fight ends: stalemate in round 2
+logHash 5ac7f3122d18305b

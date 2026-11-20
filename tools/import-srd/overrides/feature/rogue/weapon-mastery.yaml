@@ -1,0 +1,12 @@
+# Reviewed against SRD 5.2.1 p.62 (srd-raw.txt:13755-13759), Rogue level 1: the mastery properties
+# of two kinds of weapons with which you have proficiency.
+# Coverage C0 (T relabel, X1): this record carries no program because nothing in it needs one; it is
+# mechanized by the character expansion's mastery picks (content/character.ts WEAPON_MASTERY) and
+# the 8 masteries (content/weapons.ts).
+# Nothing in the text is left unmodeled in a fight, so full (mechanizedBy, never compiled).
+fidelity: full
+mechanizedBy: weaponMastery
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 62

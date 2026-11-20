@@ -1,0 +1,40 @@
+# Reviewed against SRD 5.2.1 p.62 (srd-raw.txt:13788-13794), Rogue level 3, Steady Aim (coverage W1,
+# docs/design/w1-plan.md section 3, P11): "As a Bonus Action, you give yourself Advantage on your
+# next attack roll on the current turn. You can use this feature only if you haven't moved during
+# this turn, and after you use it, your Speed is 0 until the end of the current turn."
+#   - A bonus activation gated hasntMoved, acting on its user only (target: self).
+#   - Two effects, each until the end of the current turn (until endOfThisTurn of the bearer), so
+#     the Advantage being used doesn't end the Speed 0: `steady-aim` (Advantage on the bearer's next
+#     attack roll, consumed by it) and `steady-aim-anchored` (Speed 0; the reading in
+#     tools/import-srd/pdf-gates.ts, no gate).
+# Partial, for one reading on its path (C7: full only with no unverified reading on the path): the
+# Advantage is a consume-nextRoll rider, so when the roll already has another Advantage source or any
+# Disadvantage, whether it's spent is the RuleFlag nextRollRiderConsumedWhenRedundant (sim/effects.ts
+# consumeRiders; verified: false). That decides whether a second attack roll this turn (a Nick
+# attack) still has it.
+fidelity: partial
+activate:
+  id: steady-aim
+  name: Steady Aim
+  cost: bonus
+  when: [hasntMoved]
+  target: self
+  do:
+    - apply: { effect: steady-aim, to: self }
+    - apply: { effect: steady-aim-anchored, to: self }
+effects:
+  - id: steady-aim
+    name: Steady Aim (Advantage on the next attack roll)
+    duration: { until: endOfThisTurn, of: bearer }
+    mods:
+      - { on: [d20.attack], op: adv, consume: nextRoll }
+  - id: steady-aim-anchored
+    name: Steady Aim (Speed 0)
+    duration: { until: endOfThisTurn, of: bearer }
+    stats:
+      - speed: zero
+unimplemented:
+  - part next-roll-rider-consumed-when-redundant not modeled
+provenance:
+  review: reviewed
+  pdfPage: 62

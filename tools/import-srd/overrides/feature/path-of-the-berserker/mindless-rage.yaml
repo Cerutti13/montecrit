@@ -1,0 +1,24 @@
+# Reviewed against SRD 5.2.1 p.30 (srd-raw.txt:5180-5184), Path of the Berserker level 6, Mindless
+# Rage (coverage W1, docs/design/w1-plan.md section 3, P10, P11): "You have Immunity to the Charmed
+# and Frightened conditions while your Rage is active. If you're Charmed or Frightened when you
+# enter your Rage, the condition ends on you."
+#   - An augment on Rage's activation (srd:barbarian/rage): it applies `mindless` to the bearer, a
+#     child of the Rage's root (duration parent, so it ends with the Rage), with immunity to Charmed
+#     and Frightened (the reading in tools/import-srd/pdf-gates.ts, no gate);
+#   - then endConditions charmed and frightened on the bearer: the condition ends, not the whole
+#     effect that imposed it.
+# Nothing else in the text, so full.
+fidelity: full
+augments:
+  feature: srd:barbarian/rage
+  steps:
+    - apply: { effect: mindless, to: self }
+    - endConditions: [charmed, frightened]
+effects:
+  - id: mindless
+    name: Mindless Rage
+    immune: [charmed, frightened]
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 30

@@ -1,0 +1,10 @@
+# A synthetic background (session S, the repo half): three abilities for the +2/+1 (or +1/+1/+1)
+# increases, two skills, and the SRD origin feat Magic Initiate (its spells aren't wired to a
+# character yet: the feat is narrative in the SRD pack).
+kind: background
+id: test:sample-wanderer
+name: Sample Wanderer
+source: synthetic test fixture (generic background with an origin feat)
+abilities: [con, wis, cha]
+skills: [survival, insight]
+feat: srd:magic-initiate

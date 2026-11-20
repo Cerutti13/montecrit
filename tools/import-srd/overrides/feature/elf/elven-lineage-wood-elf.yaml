@@ -1,0 +1,22 @@
+# Hand fix from the SRD 5.2.1 PDF, p.84 (Elven Lineages table, Wood Elf, srd-raw.txt:19771-19774):
+# "Your Speed increases to 35 feet. You also know the Druidcraft cantrip." Foundry's record carries
+# no movement effect (effects: []), so the mapper sees only the spell grants (review R2: the sheet
+# derived the Elf's base 30). M3 step 4 adds the STAT primitive, so the speed is now a passive
+# speed stat: +5 ft over the Elf's Speed of 30 (p.84, srd-raw.txt:19722-19725), which is "increases
+# to 35" exactly. [U] Read as a +5 bonus, it stacks with other bonuses (a Wood Elf Monk is 30 + 5 +
+# the Unarmored Movement bonus); the text sets no rule for combining "increases to" with bonuses.
+# The cantrip and the level 3 and 5 spells wait for step 6, so the trait stays partial. Raising it
+# from narrative needs the review. A merge patch: the list replaces the mapped one.
+fidelity: partial
+effects:
+  - id: wood-elf-speed
+    name: Wood Elf Speed
+    stats:
+      - speed: 5
+passive:
+  effects: [wood-elf-speed]
+unimplemented:
+  - grants spells (spells are imported at step 6)
+provenance:
+  review: reviewed
+  pdfPage: 84

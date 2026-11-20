@@ -1,0 +1,41 @@
+# SRD 5.2.1 p.129, Faerie Fire (srd-raw.txt:26688-26702), read by hand at coverage step 7.3. A
+# 20-foot Cube within 60 feet; each creature in it makes a DEX save or is outlined for the duration,
+# and attack rolls against it have Advantage. The same pattern as test:conc-ward: a concentration
+# zone whose appear hook puts a child effect on the creature, which ends with the spell.
+replace: true
+foundryPath: packs/_source/spells24/1st-level/faerie-fire.yml
+kind: spell
+id: srd:faerie-fire
+name: Faerie Fire
+source: SRD 5.2.1 p.129
+fidelity: partial
+unimplemented:
+  - Dim Light in a 10-foot radius from outlined creatures and objects
+  - an outlined creature can't benefit from the Invisible condition
+  - the Advantage needs the attacker to see the target (sight is stubbed outside walls)
+  - objects in the Cube are outlined
+level: 1
+castingTime: action
+range: 60
+components: { v: true, s: false, m: none }
+concentration: true
+duration: { minutes: 1 }
+area: lights
+effects:
+  - id: lights
+    name: Faerie Fire
+    zone: { shape: cube, size: 20 }
+    on:
+      - when: [appear]
+        do:
+          - save:
+              ability: dex
+              onFail: [{ apply: { effect: outlined, to: target } }]
+  - id: outlined
+    name: Outlined (attacks against it have Advantage)
+    duration: parent
+    mods: [{ on: [d20.attack], side: incoming, op: adv }]
+do: [{ apply: { effect: lights, to: point } }]
+provenance:
+  review: reviewed
+  pdfPage: 129

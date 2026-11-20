@@ -1,0 +1,994 @@
+# Flag matrix for scenarios/golden/breath-cone.yaml with scenarios/golden/breath-cone.journal.yaml (docs/design/m1b.md, Critique resolutions item 9).
+# Every rule flag the default run read, re-run under each of its other values: same seed, same journal.
+# Matrix mode only: at the journal's first mismatch every journal seat hands over to its fallback (baseline if none).
+# Regenerate: UPDATE_FLAG_MATRIX=1 npx vitest run apps/cli/test/flag-matrix.test.ts
+
+#### seed 60 ####
+default  run 0 | journal of 8 entries: held | logHash 502721f4f823d445
+flags read: diagonalCost, initiativeMode, initiativeTies, groupInitiative, monsterHp, moveBetweenAttacks, timedDurationExpiryPoint, areaGridCoverage, selfAreaOrigin
+
+== diagonalCost=alternate (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative pc2 12 (static)
+   #3   initiative drake 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (J4, 44 HP, 30 ft) [Sample Fighter]
+   #6   pc1 chooses pass  [journal @0]
+   #7   pc1's turn ends
+   #8 pc2's turn (J6, 44 HP, 30 ft) [Sample Fighter]
+   #9   pc2 chooses pass  [journal @1]
+  #10   pc2's turn ends
+  #11 drake's turn (C5, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #12   drake chooses move:H5/p0/d0  [greedy @2]
+  #13     drake steps C5 -> D5 (5 ft, 25 left)
+  #14     drake steps D5 -> E5 (5 ft, 20 left)
+  #15     drake steps E5 -> F5 (5 ft, 15 left)
+  #16     drake steps F5 -> G5 (5 ft, 10 left)
+  #17     drake steps G5 -> H5 (5 ft, 5 left)
+  #18     drake's move ends at H5
+  #19   drake chooses use:cold-breath  [greedy @3]
+  #20     drake: Cold Breath
+  #21       drake spends Cold Breath (0 left)
+  #22       drake chooses aim:E  [greedy @4]
+  #23       Cold Breath appears at H5>E: 5 squares (seen by drake, pc1, pc2)
+  #24         pc1 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc1 save r1 p1.0]
+  #25         pc2 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc2 save r1 p1.0]
+  #26         pc1 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #27         pc2 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #28   drake chooses move:I4/p0/d1  [greedy @5]
+  #29     drake steps H5 -> I4 (5 ft, 0 left)
+  #30     drake's move ends at I4
+  #31   drake's turn ends
+  #32 == round 2 ==
+  #33 pc1's turn (J4, 36 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses pass  [journal @6]
+  #35   pc1's turn ends
+  #36 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #37   pc2 chooses pass  [journal @7]
+  #38   pc2's turn ends
+  #39   Cold Breath ends (expired)
+  #40   drake rolls to recharge Cold Breath: 4 (needs 5-6): not yet
+  #41 drake's turn (I4, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #42   drake chooses attack:rend>pc1  [greedy @8]
+  #43     drake: Multiattack
+  #44     drake Rend -> pc1: d20 14 +4 = 18 vs AC 18, hit  [drake attack r2 p0.0]
+  #45       pc1 takes 6 (3 slashing + 3 cold), HP 36 -> 30  [drake damage r2 p0.0]
+  #46   drake chooses attack:rend>pc1  [greedy @9]
+  #47     drake Rend -> pc1: d20 2 +4 = 6 vs AC 18, miss  [drake attack r2 p0.1]
+  #48   drake chooses pass  [greedy @10]
+  #49   drake's turn ends
+  #50 == round 3 ==
+  #51 pc1's turn (J4, 30 HP, 30 ft) [Sample Fighter]
+  #52   pc1 chooses pass  [journal @11]
+  #53   pc1's turn ends
+  #54 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #55   pc2 chooses pass  [journal @12]
+  #56   pc2's turn ends
+  #57   drake rolls to recharge Cold Breath: 5 (needs 5-6): it comes back
+  #58 drake's turn (I4, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #59   drake chooses move:J3/p0/d1  [greedy @13]
+  #60     drake steps I4 -> J3 (5 ft, 25 left)
+  #61     drake's move ends at J3
+  #62   drake chooses use:cold-breath  [greedy @14]
+  #63     drake: Cold Breath
+  #64       drake spends Cold Breath (0 left)
+  #65       drake chooses aim:S  [greedy @15]
+  #66       Cold Breath appears at J3>S: 5 squares (seen by drake, pc1, pc2)
+  #67         pc1 CON save vs Cold Breath: d20 6 +5 = 11 vs DC 12, fail  [pc1 save r3 p1.0]
+  #68         pc2 CON save vs Cold Breath: d20 3 +5 = 8 vs DC 12, fail  [pc2 save r3 p1.0]
+  #69         pc1 takes 16 (16 cold) from Cold Breath, HP 30 -> 14  [drake zone r3 p0.0]
+  #70         pc2 takes 16 (16 cold) from Cold Breath, HP 36 -> 20  [drake zone r3 p0.0]
+  #71   drake chooses pass  [greedy @16]
+  #72   drake's turn ends
+  #73 == round 4 ==
+  #74 pc1's turn (J4, 14 HP, 30 ft) [Sample Fighter]
+  #75   pc1 chooses pass  [journal @17]
+  #76   pc1's turn ends
+  #77 pc2's turn (J6, 20 HP, 30 ft) [Sample Fighter]
+  #78   pc2 chooses pass  [journal @18]
+  #79   pc2's turn ends
+  #80   Cold Breath ends (expired)
+  #81   drake rolls to recharge Cold Breath: 1 (needs 5-6): not yet
+  #82 drake's turn (J3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #83   drake chooses attack:rend>pc1  [greedy @19]
+  #84     drake: Multiattack
+  #85     drake Rend -> pc1: d20 12 +4 = 16 vs AC 18, miss  [drake attack r4 p0.0]
+  #86   drake chooses attack:rend>pc1  [greedy @20]
+  #87     drake Rend -> pc1: d20 5 +4 = 9 vs AC 18, miss  [drake attack r4 p0.1]
+  #88   drake chooses pass  [greedy @21]
+  #89   drake's turn ends
+  #90 fight ends: stalemate in round 4
+logHash c67cd9f0018e4ee7
+
+== initiativeMode=roll (journal diverged at @0) ==
+flags read vs default: +statBlockAtZeroHp +deadAnchorTurnBoundary +losMethod +creatureCover -initiativeTies -moveBetweenAttacks -timedDurationExpiryPoint
+   #1   initiative pc2 18 (d20 16+2)
+   #2   initiative drake 13 (d20 11+2)
+   #3   initiative pc1 11 (d20 9+2)
+   #4 == round 1 ==
+   #5 pc2's turn (J6, 44 HP, 30 ft) [Sample Fighter]
+   #6   pc2 chooses move:D4/p0  [greedy @0]
+   #7     pc2 steps J6 -> I5 (5 ft, 25 left)
+   #8     pc2 steps I5 -> H4 (5 ft, 20 left)
+   #9     pc2 steps H4 -> G3 (5 ft, 15 left)
+  #10     pc2 steps G3 -> F2 (5 ft, 10 left)
+  #11     pc2 steps F2 -> E3 (5 ft, 5 left)
+  #12     pc2 steps E3 -> D4 (5 ft, 0 left)
+  #13     pc2's move ends at D4
+  #14   pc2 chooses attack:longsword>drake  [greedy @1]
+  #15     pc2: Attack
+  #16     pc2 Longsword -> drake: d20 18 +6 = 24 vs AC 16, hit  [pc2 attack r1 p0.0]
+  #17       drake takes 8 (8 slashing), HP 32 -> 24  [pc2 damage r1 p0.0]
+  #18   pc2 chooses attack:longsword>drake  [greedy @2]
+  #19     pc2 Longsword -> drake: d20 2 +6 = 8 vs AC 16, miss  [pc2 attack r1 p0.1]
+  #20   pc2's turn ends
+  #21 drake's turn (C5, 24 HP, 30 ft) [White Dragon Wyrmling]
+  #22   drake chooses use:cold-breath  [greedy @3]
+  #23     drake: Cold Breath
+  #24       drake spends Cold Breath (0 left)
+  #25       drake chooses aim:NE  [greedy @4]
+  #26       Cold Breath appears at C5>NE: 4 squares (seen by drake, pc1, pc2)
+  #27         pc2 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc2 save r1 p1.0]
+  #28         pc2 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #29   drake chooses pass  [greedy @5]
+  #30   drake's turn ends
+  #31 pc1's turn (J4, 44 HP, 30 ft) [Sample Fighter]
+  #32   pc1 chooses move:D5/p0  [greedy @6]
+  #33     pc1 steps J4 -> I3 (5 ft, 25 left)
+  #34     pc1 steps I3 -> H2 (5 ft, 20 left)
+  #35     pc1 steps H2 -> G2 (5 ft, 15 left)
+  #36     pc1 steps G2 -> F3 (5 ft, 10 left)
+  #37     pc1 steps F3 -> E4 (5 ft, 5 left)
+  #38     pc1 steps E4 -> D5 (5 ft, 0 left)
+  #39     pc1's move ends at D5
+  #40   pc1 chooses attack:longsword>drake  [greedy @7]
+  #41     pc1: Attack
+  #42     pc1 Longsword -> drake: d20 19 +6 = 25 vs AC 16, hit  [pc1 attack r1 p0.0]
+  #43       drake takes 10 (10 slashing), HP 24 -> 14  [pc1 damage r1 p0.0]
+  #44   pc1 chooses attack:longsword>drake  [greedy @8]
+  #45     pc1 Longsword -> drake: d20 18 +6 = 24 vs AC 16, hit  [pc1 attack r1 p0.1]
+  #46       drake takes 6 (6 slashing), HP 14 -> 8  [pc1 damage r1 p0.1]
+  #47   pc1's turn ends
+  #48 == round 2 ==
+  #49 pc2's turn (D4, 36 HP, 30 ft) [Sample Fighter]
+  #50   pc2 chooses attack:longsword>drake  [greedy @9]
+  #51     pc2: Attack
+  #52     pc2 Longsword -> drake: d20 4 +6 = 10 vs AC 16, miss  [pc2 attack r2 p0.0]
+  #53   pc2 chooses attack:longsword>drake  [greedy @10]
+  #54     pc2 Longsword -> drake: d20 20 +6 = 26 vs AC 16, CRITICAL HIT  [pc2 attack r2 p0.1]
+  #55       drake takes 14 (14 slashing, crit), HP 8 -> 0  [pc2 damage r2 p0.1]
+  #56         drake dies (0 HP)
+  #57   pc2's turn ends
+  #58 fight ends: win in round 2
+logHash bde5b6f54d97436c
+
+== initiativeTies=pcsFirst (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative pc2 12 (static)
+   #3   initiative drake 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (J4, 44 HP, 30 ft) [Sample Fighter]
+   #6   pc1 chooses pass  [journal @0]
+   #7   pc1's turn ends
+   #8 pc2's turn (J6, 44 HP, 30 ft) [Sample Fighter]
+   #9   pc2 chooses pass  [journal @1]
+  #10   pc2's turn ends
+  #11 drake's turn (C5, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #12   drake chooses move:H5/p0  [greedy @2]
+  #13     drake steps C5 -> D4 (5 ft, 25 left)
+  #14     drake steps D4 -> E3 (5 ft, 20 left)
+  #15     drake steps E3 -> F3 (5 ft, 15 left)
+  #16     drake steps F3 -> G4 (5 ft, 10 left)
+  #17     drake steps G4 -> H5 (5 ft, 5 left)
+  #18     drake's move ends at H5
+  #19   drake chooses use:cold-breath  [greedy @3]
+  #20     drake: Cold Breath
+  #21       drake spends Cold Breath (0 left)
+  #22       drake chooses aim:E  [greedy @4]
+  #23       Cold Breath appears at H5>E: 5 squares (seen by drake, pc1, pc2)
+  #24         pc1 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc1 save r1 p1.0]
+  #25         pc2 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc2 save r1 p1.0]
+  #26         pc1 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #27         pc2 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #28   drake chooses move:I4/p0  [greedy @5]
+  #29     drake steps H5 -> I4 (5 ft, 0 left)
+  #30     drake's move ends at I4
+  #31   drake's turn ends
+  #32 == round 2 ==
+  #33 pc1's turn (J4, 36 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses pass  [journal @6]
+  #35   pc1's turn ends
+  #36 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #37   pc2 chooses pass  [journal @7]
+  #38   pc2's turn ends
+  #39   Cold Breath ends (expired)
+  #40   drake rolls to recharge Cold Breath: 4 (needs 5-6): not yet
+  #41 drake's turn (I4, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #42   drake chooses attack:rend>pc1  [greedy @8]
+  #43     drake: Multiattack
+  #44     drake Rend -> pc1: d20 14 +4 = 18 vs AC 18, hit  [drake attack r2 p0.0]
+  #45       pc1 takes 6 (3 slashing + 3 cold), HP 36 -> 30  [drake damage r2 p0.0]
+  #46   drake chooses attack:rend>pc1  [greedy @9]
+  #47     drake Rend -> pc1: d20 2 +4 = 6 vs AC 18, miss  [drake attack r2 p0.1]
+  #48   drake chooses pass  [greedy @10]
+  #49   drake's turn ends
+  #50 == round 3 ==
+  #51 pc1's turn (J4, 30 HP, 30 ft) [Sample Fighter]
+  #52   pc1 chooses pass  [journal @11]
+  #53   pc1's turn ends
+  #54 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #55   pc2 chooses pass  [journal @12]
+  #56   pc2's turn ends
+  #57   drake rolls to recharge Cold Breath: 5 (needs 5-6): it comes back
+  #58 drake's turn (I4, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #59   drake chooses move:J3/p0  [greedy @13]
+  #60     drake steps I4 -> J3 (5 ft, 25 left)
+  #61     drake's move ends at J3
+  #62   drake chooses use:cold-breath  [greedy @14]
+  #63     drake: Cold Breath
+  #64       drake spends Cold Breath (0 left)
+  #65       drake chooses aim:S  [greedy @15]
+  #66       Cold Breath appears at J3>S: 5 squares (seen by drake, pc1, pc2)
+  #67         pc1 CON save vs Cold Breath: d20 6 +5 = 11 vs DC 12, fail  [pc1 save r3 p1.0]
+  #68         pc2 CON save vs Cold Breath: d20 3 +5 = 8 vs DC 12, fail  [pc2 save r3 p1.0]
+  #69         pc1 takes 16 (16 cold) from Cold Breath, HP 30 -> 14  [drake zone r3 p0.0]
+  #70         pc2 takes 16 (16 cold) from Cold Breath, HP 36 -> 20  [drake zone r3 p0.0]
+  #71   drake chooses pass  [greedy @16]
+  #72   drake's turn ends
+  #73 == round 4 ==
+  #74 pc1's turn (J4, 14 HP, 30 ft) [Sample Fighter]
+  #75   pc1 chooses pass  [journal @17]
+  #76   pc1's turn ends
+  #77 pc2's turn (J6, 20 HP, 30 ft) [Sample Fighter]
+  #78   pc2 chooses pass  [journal @18]
+  #79   pc2's turn ends
+  #80   Cold Breath ends (expired)
+  #81   drake rolls to recharge Cold Breath: 1 (needs 5-6): not yet
+  #82 drake's turn (J3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #83   drake chooses attack:rend>pc1  [greedy @19]
+  #84     drake: Multiattack
+  #85     drake Rend -> pc1: d20 12 +4 = 16 vs AC 18, miss  [drake attack r4 p0.0]
+  #86   drake chooses attack:rend>pc1  [greedy @20]
+  #87     drake Rend -> pc1: d20 5 +4 = 9 vs AC 18, miss  [drake attack r4 p0.1]
+  #88   drake chooses pass  [greedy @21]
+  #89   drake's turn ends
+  #90 fight ends: stalemate in round 4
+logHash 8d0c9991484c8f59
+
+== initiativeTies=monstersFirst (journal held) ==
+   #1   initiative drake 12 (static)
+   #2   initiative pc1 12 (static)
+   #3   initiative pc2 12 (static)
+   #4 == round 1 ==
+   #5 drake's turn (C5, 32 HP, 30 ft) [White Dragon Wyrmling]
+   #6   drake chooses move:H5/p0  [greedy @0]
+   #7     drake steps C5 -> D4 (5 ft, 25 left)
+   #8     drake steps D4 -> E3 (5 ft, 20 left)
+   #9     drake steps E3 -> F3 (5 ft, 15 left)
+  #10     drake steps F3 -> G4 (5 ft, 10 left)
+  #11     drake steps G4 -> H5 (5 ft, 5 left)
+  #12     drake's move ends at H5
+  #13   drake chooses use:cold-breath  [greedy @1]
+  #14     drake: Cold Breath
+  #15       drake spends Cold Breath (0 left)
+  #16       drake chooses aim:E  [greedy @2]
+  #17       Cold Breath appears at H5>E: 5 squares (seen by drake, pc1, pc2)
+  #18         pc1 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc1 save r1 p1.0]
+  #19         pc2 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc2 save r1 p1.0]
+  #20         pc1 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #21         pc2 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #22   drake chooses move:I4/p0  [greedy @3]
+  #23     drake steps H5 -> I4 (5 ft, 0 left)
+  #24     drake's move ends at I4
+  #25   drake's turn ends
+  #26 pc1's turn (J4, 36 HP, 30 ft) [Sample Fighter]
+  #27   pc1 chooses pass  [journal @4]
+  #28   pc1's turn ends
+  #29 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #30   pc2 chooses pass  [journal @5]
+  #31   pc2's turn ends
+  #32 == round 2 ==
+  #33   Cold Breath ends (expired)
+  #34   drake rolls to recharge Cold Breath: 4 (needs 5-6): not yet
+  #35 drake's turn (I4, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #36   drake chooses attack:rend>pc1  [greedy @6]
+  #37     drake: Multiattack
+  #38     drake Rend -> pc1: d20 14 +4 = 18 vs AC 18, hit  [drake attack r2 p0.0]
+  #39       pc1 takes 6 (3 slashing + 3 cold), HP 36 -> 30  [drake damage r2 p0.0]
+  #40   drake chooses attack:rend>pc1  [greedy @7]
+  #41     drake Rend -> pc1: d20 2 +4 = 6 vs AC 18, miss  [drake attack r2 p0.1]
+  #42   drake chooses pass  [greedy @8]
+  #43   drake's turn ends
+  #44 pc1's turn (J4, 30 HP, 30 ft) [Sample Fighter]
+  #45   pc1 chooses pass  [journal @9]
+  #46   pc1's turn ends
+  #47 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #48   pc2 chooses pass  [journal @10]
+  #49   pc2's turn ends
+  #50 == round 3 ==
+  #51   drake rolls to recharge Cold Breath: 5 (needs 5-6): it comes back
+  #52 drake's turn (I4, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #53   drake chooses move:J3/p0  [greedy @11]
+  #54     drake steps I4 -> J3 (5 ft, 25 left)
+  #55     drake's move ends at J3
+  #56   drake chooses use:cold-breath  [greedy @12]
+  #57     drake: Cold Breath
+  #58       drake spends Cold Breath (0 left)
+  #59       drake chooses aim:S  [greedy @13]
+  #60       Cold Breath appears at J3>S: 5 squares (seen by drake, pc1, pc2)
+  #61         pc1 CON save vs Cold Breath: d20 6 +5 = 11 vs DC 12, fail  [pc1 save r3 p1.0]
+  #62         pc2 CON save vs Cold Breath: d20 3 +5 = 8 vs DC 12, fail  [pc2 save r3 p1.0]
+  #63         pc1 takes 16 (16 cold) from Cold Breath, HP 30 -> 14  [drake zone r3 p0.0]
+  #64         pc2 takes 16 (16 cold) from Cold Breath, HP 36 -> 20  [drake zone r3 p0.0]
+  #65   drake chooses pass  [greedy @14]
+  #66   drake's turn ends
+  #67 pc1's turn (J4, 14 HP, 30 ft) [Sample Fighter]
+  #68   pc1 chooses pass  [journal @15]
+  #69   pc1's turn ends
+  #70 pc2's turn (J6, 20 HP, 30 ft) [Sample Fighter]
+  #71   pc2 chooses pass  [journal @16]
+  #72   pc2's turn ends
+  #73 == round 4 ==
+  #74   Cold Breath ends (expired)
+  #75   drake rolls to recharge Cold Breath: 1 (needs 5-6): not yet
+  #76 drake's turn (J3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #77   drake chooses attack:rend>pc1  [greedy @17]
+  #78     drake: Multiattack
+  #79     drake Rend -> pc1: d20 12 +4 = 16 vs AC 18, miss  [drake attack r4 p0.0]
+  #80   drake chooses attack:rend>pc1  [greedy @18]
+  #81     drake Rend -> pc1: d20 5 +4 = 9 vs AC 18, miss  [drake attack r4 p0.1]
+  #82   drake chooses pass  [greedy @19]
+  #83   drake's turn ends
+  #84 pc1's turn (J4, 14 HP, 30 ft) [Sample Fighter]
+  #85   pc1 chooses pass  [journal @20]
+  #86   pc1's turn ends
+  #87 pc2's turn (J6, 20 HP, 30 ft) [Sample Fighter]
+  #88   pc2 chooses pass  [journal @21]
+  #89   pc2's turn ends
+  #90 fight ends: stalemate in round 4
+logHash df67f51fd70e40c4
+
+== groupInitiative=individual (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative pc2 12 (static)
+   #3   initiative drake 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (J4, 44 HP, 30 ft) [Sample Fighter]
+   #6   pc1 chooses pass  [journal @0]
+   #7   pc1's turn ends
+   #8 pc2's turn (J6, 44 HP, 30 ft) [Sample Fighter]
+   #9   pc2 chooses pass  [journal @1]
+  #10   pc2's turn ends
+  #11 drake's turn (C5, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #12   drake chooses move:H5/p0  [greedy @2]
+  #13     drake steps C5 -> D4 (5 ft, 25 left)
+  #14     drake steps D4 -> E3 (5 ft, 20 left)
+  #15     drake steps E3 -> F3 (5 ft, 15 left)
+  #16     drake steps F3 -> G4 (5 ft, 10 left)
+  #17     drake steps G4 -> H5 (5 ft, 5 left)
+  #18     drake's move ends at H5
+  #19   drake chooses use:cold-breath  [greedy @3]
+  #20     drake: Cold Breath
+  #21       drake spends Cold Breath (0 left)
+  #22       drake chooses aim:E  [greedy @4]
+  #23       Cold Breath appears at H5>E: 5 squares (seen by drake, pc1, pc2)
+  #24         pc1 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc1 save r1 p1.0]
+  #25         pc2 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc2 save r1 p1.0]
+  #26         pc1 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #27         pc2 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #28   drake chooses move:I4/p0  [greedy @5]
+  #29     drake steps H5 -> I4 (5 ft, 0 left)
+  #30     drake's move ends at I4
+  #31   drake's turn ends
+  #32 == round 2 ==
+  #33 pc1's turn (J4, 36 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses pass  [journal @6]
+  #35   pc1's turn ends
+  #36 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #37   pc2 chooses pass  [journal @7]
+  #38   pc2's turn ends
+  #39   Cold Breath ends (expired)
+  #40   drake rolls to recharge Cold Breath: 4 (needs 5-6): not yet
+  #41 drake's turn (I4, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #42   drake chooses attack:rend>pc1  [greedy @8]
+  #43     drake: Multiattack
+  #44     drake Rend -> pc1: d20 14 +4 = 18 vs AC 18, hit  [drake attack r2 p0.0]
+  #45       pc1 takes 6 (3 slashing + 3 cold), HP 36 -> 30  [drake damage r2 p0.0]
+  #46   drake chooses attack:rend>pc1  [greedy @9]
+  #47     drake Rend -> pc1: d20 2 +4 = 6 vs AC 18, miss  [drake attack r2 p0.1]
+  #48   drake chooses pass  [greedy @10]
+  #49   drake's turn ends
+  #50 == round 3 ==
+  #51 pc1's turn (J4, 30 HP, 30 ft) [Sample Fighter]
+  #52   pc1 chooses pass  [journal @11]
+  #53   pc1's turn ends
+  #54 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #55   pc2 chooses pass  [journal @12]
+  #56   pc2's turn ends
+  #57   drake rolls to recharge Cold Breath: 5 (needs 5-6): it comes back
+  #58 drake's turn (I4, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #59   drake chooses move:J3/p0  [greedy @13]
+  #60     drake steps I4 -> J3 (5 ft, 25 left)
+  #61     drake's move ends at J3
+  #62   drake chooses use:cold-breath  [greedy @14]
+  #63     drake: Cold Breath
+  #64       drake spends Cold Breath (0 left)
+  #65       drake chooses aim:S  [greedy @15]
+  #66       Cold Breath appears at J3>S: 5 squares (seen by drake, pc1, pc2)
+  #67         pc1 CON save vs Cold Breath: d20 6 +5 = 11 vs DC 12, fail  [pc1 save r3 p1.0]
+  #68         pc2 CON save vs Cold Breath: d20 3 +5 = 8 vs DC 12, fail  [pc2 save r3 p1.0]
+  #69         pc1 takes 16 (16 cold) from Cold Breath, HP 30 -> 14  [drake zone r3 p0.0]
+  #70         pc2 takes 16 (16 cold) from Cold Breath, HP 36 -> 20  [drake zone r3 p0.0]
+  #71   drake chooses pass  [greedy @16]
+  #72   drake's turn ends
+  #73 == round 4 ==
+  #74 pc1's turn (J4, 14 HP, 30 ft) [Sample Fighter]
+  #75   pc1 chooses pass  [journal @17]
+  #76   pc1's turn ends
+  #77 pc2's turn (J6, 20 HP, 30 ft) [Sample Fighter]
+  #78   pc2 chooses pass  [journal @18]
+  #79   pc2's turn ends
+  #80   Cold Breath ends (expired)
+  #81   drake rolls to recharge Cold Breath: 1 (needs 5-6): not yet
+  #82 drake's turn (J3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #83   drake chooses attack:rend>pc1  [greedy @19]
+  #84     drake: Multiattack
+  #85     drake Rend -> pc1: d20 12 +4 = 16 vs AC 18, miss  [drake attack r4 p0.0]
+  #86   drake chooses attack:rend>pc1  [greedy @20]
+  #87     drake Rend -> pc1: d20 5 +4 = 9 vs AC 18, miss  [drake attack r4 p0.1]
+  #88   drake chooses pass  [greedy @21]
+  #89   drake's turn ends
+  #90 fight ends: stalemate in round 4
+logHash ace480d8891a54a9
+
+== monsterHp=rolled (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative pc2 12 (static)
+   #3   initiative drake 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (J4, 44 HP, 30 ft) [Sample Fighter]
+   #6   pc1 chooses pass  [journal @0]
+   #7   pc1's turn ends
+   #8 pc2's turn (J6, 44 HP, 30 ft) [Sample Fighter]
+   #9   pc2 chooses pass  [journal @1]
+  #10   pc2's turn ends
+  #11 drake's turn (C5, 33 HP, 30 ft) [White Dragon Wyrmling]
+  #12   drake chooses move:H5/p0  [greedy @2]
+  #13     drake steps C5 -> D4 (5 ft, 25 left)
+  #14     drake steps D4 -> E3 (5 ft, 20 left)
+  #15     drake steps E3 -> F3 (5 ft, 15 left)
+  #16     drake steps F3 -> G4 (5 ft, 10 left)
+  #17     drake steps G4 -> H5 (5 ft, 5 left)
+  #18     drake's move ends at H5
+  #19   drake chooses use:cold-breath  [greedy @3]
+  #20     drake: Cold Breath
+  #21       drake spends Cold Breath (0 left)
+  #22       drake chooses aim:E  [greedy @4]
+  #23       Cold Breath appears at H5>E: 5 squares (seen by drake, pc1, pc2)
+  #24         pc1 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc1 save r1 p1.0]
+  #25         pc2 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc2 save r1 p1.0]
+  #26         pc1 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #27         pc2 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #28   drake chooses move:I4/p0  [greedy @5]
+  #29     drake steps H5 -> I4 (5 ft, 0 left)
+  #30     drake's move ends at I4
+  #31   drake's turn ends
+  #32 == round 2 ==
+  #33 pc1's turn (J4, 36 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses pass  [journal @6]
+  #35   pc1's turn ends
+  #36 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #37   pc2 chooses pass  [journal @7]
+  #38   pc2's turn ends
+  #39   Cold Breath ends (expired)
+  #40   drake rolls to recharge Cold Breath: 4 (needs 5-6): not yet
+  #41 drake's turn (I4, 33 HP, 30 ft) [White Dragon Wyrmling]
+  #42   drake chooses attack:rend>pc1  [greedy @8]
+  #43     drake: Multiattack
+  #44     drake Rend -> pc1: d20 14 +4 = 18 vs AC 18, hit  [drake attack r2 p0.0]
+  #45       pc1 takes 6 (3 slashing + 3 cold), HP 36 -> 30  [drake damage r2 p0.0]
+  #46   drake chooses attack:rend>pc1  [greedy @9]
+  #47     drake Rend -> pc1: d20 2 +4 = 6 vs AC 18, miss  [drake attack r2 p0.1]
+  #48   drake chooses pass  [greedy @10]
+  #49   drake's turn ends
+  #50 == round 3 ==
+  #51 pc1's turn (J4, 30 HP, 30 ft) [Sample Fighter]
+  #52   pc1 chooses pass  [journal @11]
+  #53   pc1's turn ends
+  #54 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #55   pc2 chooses pass  [journal @12]
+  #56   pc2's turn ends
+  #57   drake rolls to recharge Cold Breath: 5 (needs 5-6): it comes back
+  #58 drake's turn (I4, 33 HP, 30 ft) [White Dragon Wyrmling]
+  #59   drake chooses move:J3/p0  [greedy @13]
+  #60     drake steps I4 -> J3 (5 ft, 25 left)
+  #61     drake's move ends at J3
+  #62   drake chooses use:cold-breath  [greedy @14]
+  #63     drake: Cold Breath
+  #64       drake spends Cold Breath (0 left)
+  #65       drake chooses aim:S  [greedy @15]
+  #66       Cold Breath appears at J3>S: 5 squares (seen by drake, pc1, pc2)
+  #67         pc1 CON save vs Cold Breath: d20 6 +5 = 11 vs DC 12, fail  [pc1 save r3 p1.0]
+  #68         pc2 CON save vs Cold Breath: d20 3 +5 = 8 vs DC 12, fail  [pc2 save r3 p1.0]
+  #69         pc1 takes 16 (16 cold) from Cold Breath, HP 30 -> 14  [drake zone r3 p0.0]
+  #70         pc2 takes 16 (16 cold) from Cold Breath, HP 36 -> 20  [drake zone r3 p0.0]
+  #71   drake chooses pass  [greedy @16]
+  #72   drake's turn ends
+  #73 == round 4 ==
+  #74 pc1's turn (J4, 14 HP, 30 ft) [Sample Fighter]
+  #75   pc1 chooses pass  [journal @17]
+  #76   pc1's turn ends
+  #77 pc2's turn (J6, 20 HP, 30 ft) [Sample Fighter]
+  #78   pc2 chooses pass  [journal @18]
+  #79   pc2's turn ends
+  #80   Cold Breath ends (expired)
+  #81   drake rolls to recharge Cold Breath: 1 (needs 5-6): not yet
+  #82 drake's turn (J3, 33 HP, 30 ft) [White Dragon Wyrmling]
+  #83   drake chooses attack:rend>pc1  [greedy @19]
+  #84     drake: Multiattack
+  #85     drake Rend -> pc1: d20 12 +4 = 16 vs AC 18, miss  [drake attack r4 p0.0]
+  #86   drake chooses attack:rend>pc1  [greedy @20]
+  #87     drake Rend -> pc1: d20 5 +4 = 9 vs AC 18, miss  [drake attack r4 p0.1]
+  #88   drake chooses pass  [greedy @21]
+  #89   drake's turn ends
+  #90 fight ends: stalemate in round 4
+logHash a9a43191e15024ba
+
+== moveBetweenAttacks=extraAttackOnly (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative pc2 12 (static)
+   #3   initiative drake 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (J4, 44 HP, 30 ft) [Sample Fighter]
+   #6   pc1 chooses pass  [journal @0]
+   #7   pc1's turn ends
+   #8 pc2's turn (J6, 44 HP, 30 ft) [Sample Fighter]
+   #9   pc2 chooses pass  [journal @1]
+  #10   pc2's turn ends
+  #11 drake's turn (C5, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #12   drake chooses move:H5/p0  [greedy @2]
+  #13     drake steps C5 -> D4 (5 ft, 25 left)
+  #14     drake steps D4 -> E3 (5 ft, 20 left)
+  #15     drake steps E3 -> F3 (5 ft, 15 left)
+  #16     drake steps F3 -> G4 (5 ft, 10 left)
+  #17     drake steps G4 -> H5 (5 ft, 5 left)
+  #18     drake's move ends at H5
+  #19   drake chooses use:cold-breath  [greedy @3]
+  #20     drake: Cold Breath
+  #21       drake spends Cold Breath (0 left)
+  #22       drake chooses aim:E  [greedy @4]
+  #23       Cold Breath appears at H5>E: 5 squares (seen by drake, pc1, pc2)
+  #24         pc1 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc1 save r1 p1.0]
+  #25         pc2 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc2 save r1 p1.0]
+  #26         pc1 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #27         pc2 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #28   drake chooses move:I4/p0  [greedy @5]
+  #29     drake steps H5 -> I4 (5 ft, 0 left)
+  #30     drake's move ends at I4
+  #31   drake's turn ends
+  #32 == round 2 ==
+  #33 pc1's turn (J4, 36 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses pass  [journal @6]
+  #35   pc1's turn ends
+  #36 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #37   pc2 chooses pass  [journal @7]
+  #38   pc2's turn ends
+  #39   Cold Breath ends (expired)
+  #40   drake rolls to recharge Cold Breath: 4 (needs 5-6): not yet
+  #41 drake's turn (I4, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #42   drake chooses attack:rend>pc1  [greedy @8]
+  #43     drake: Multiattack
+  #44     drake Rend -> pc1: d20 14 +4 = 18 vs AC 18, hit  [drake attack r2 p0.0]
+  #45       pc1 takes 6 (3 slashing + 3 cold), HP 36 -> 30  [drake damage r2 p0.0]
+  #46   drake chooses attack:rend>pc1  [greedy @9]
+  #47     drake Rend -> pc1: d20 2 +4 = 6 vs AC 18, miss  [drake attack r2 p0.1]
+  #48   drake chooses pass  [greedy @10]
+  #49   drake's turn ends
+  #50 == round 3 ==
+  #51 pc1's turn (J4, 30 HP, 30 ft) [Sample Fighter]
+  #52   pc1 chooses pass  [journal @11]
+  #53   pc1's turn ends
+  #54 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #55   pc2 chooses pass  [journal @12]
+  #56   pc2's turn ends
+  #57   drake rolls to recharge Cold Breath: 5 (needs 5-6): it comes back
+  #58 drake's turn (I4, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #59   drake chooses move:J3/p0  [greedy @13]
+  #60     drake steps I4 -> J3 (5 ft, 25 left)
+  #61     drake's move ends at J3
+  #62   drake chooses use:cold-breath  [greedy @14]
+  #63     drake: Cold Breath
+  #64       drake spends Cold Breath (0 left)
+  #65       drake chooses aim:S  [greedy @15]
+  #66       Cold Breath appears at J3>S: 5 squares (seen by drake, pc1, pc2)
+  #67         pc1 CON save vs Cold Breath: d20 6 +5 = 11 vs DC 12, fail  [pc1 save r3 p1.0]
+  #68         pc2 CON save vs Cold Breath: d20 3 +5 = 8 vs DC 12, fail  [pc2 save r3 p1.0]
+  #69         pc1 takes 16 (16 cold) from Cold Breath, HP 30 -> 14  [drake zone r3 p0.0]
+  #70         pc2 takes 16 (16 cold) from Cold Breath, HP 36 -> 20  [drake zone r3 p0.0]
+  #71   drake chooses pass  [greedy @16]
+  #72   drake's turn ends
+  #73 == round 4 ==
+  #74 pc1's turn (J4, 14 HP, 30 ft) [Sample Fighter]
+  #75   pc1 chooses pass  [journal @17]
+  #76   pc1's turn ends
+  #77 pc2's turn (J6, 20 HP, 30 ft) [Sample Fighter]
+  #78   pc2 chooses pass  [journal @18]
+  #79   pc2's turn ends
+  #80   Cold Breath ends (expired)
+  #81   drake rolls to recharge Cold Breath: 1 (needs 5-6): not yet
+  #82 drake's turn (J3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #83   drake chooses attack:rend>pc1  [greedy @19]
+  #84     drake: Multiattack
+  #85     drake Rend -> pc1: d20 12 +4 = 16 vs AC 18, miss  [drake attack r4 p0.0]
+  #86   drake chooses attack:rend>pc1  [greedy @20]
+  #87     drake Rend -> pc1: d20 5 +4 = 9 vs AC 18, miss  [drake attack r4 p0.1]
+  #88   drake chooses pass  [greedy @21]
+  #89   drake's turn ends
+  #90 fight ends: stalemate in round 4
+logHash 29015e54d9ad9a6b
+
+== timedDurationExpiryPoint=endOfCreatorTurn (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative pc2 12 (static)
+   #3   initiative drake 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (J4, 44 HP, 30 ft) [Sample Fighter]
+   #6   pc1 chooses pass  [journal @0]
+   #7   pc1's turn ends
+   #8 pc2's turn (J6, 44 HP, 30 ft) [Sample Fighter]
+   #9   pc2 chooses pass  [journal @1]
+  #10   pc2's turn ends
+  #11 drake's turn (C5, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #12   drake chooses move:H5/p0  [greedy @2]
+  #13     drake steps C5 -> D4 (5 ft, 25 left)
+  #14     drake steps D4 -> E3 (5 ft, 20 left)
+  #15     drake steps E3 -> F3 (5 ft, 15 left)
+  #16     drake steps F3 -> G4 (5 ft, 10 left)
+  #17     drake steps G4 -> H5 (5 ft, 5 left)
+  #18     drake's move ends at H5
+  #19   drake chooses use:cold-breath  [greedy @3]
+  #20     drake: Cold Breath
+  #21       drake spends Cold Breath (0 left)
+  #22       drake chooses aim:E  [greedy @4]
+  #23       Cold Breath appears at H5>E: 5 squares (seen by drake, pc1, pc2)
+  #24         pc1 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc1 save r1 p1.0]
+  #25         pc2 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc2 save r1 p1.0]
+  #26         pc1 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #27         pc2 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #28   drake chooses move:I4/p0  [greedy @5]
+  #29     drake steps H5 -> I4 (5 ft, 0 left)
+  #30     drake's move ends at I4
+  #31   drake's turn ends
+  #32 == round 2 ==
+  #33 pc1's turn (J4, 36 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses pass  [journal @6]
+  #35   pc1's turn ends
+  #36 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #37   pc2 chooses pass  [journal @7]
+  #38   pc2's turn ends
+  #39   drake rolls to recharge Cold Breath: 4 (needs 5-6): not yet
+  #40 drake's turn (I4, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #41   drake chooses attack:rend>pc1  [greedy @8]
+  #42     drake: Multiattack
+  #43     drake Rend -> pc1: d20 14 +4 = 18 vs AC 18, hit  [drake attack r2 p0.0]
+  #44       pc1 takes 6 (3 slashing + 3 cold), HP 36 -> 30  [drake damage r2 p0.0]
+  #45   drake chooses attack:rend>pc1  [greedy @9]
+  #46     drake Rend -> pc1: d20 2 +4 = 6 vs AC 18, miss  [drake attack r2 p0.1]
+  #47   drake chooses pass  [greedy @10]
+  #48   Cold Breath ends (expired)
+  #49   drake's turn ends
+  #50 == round 3 ==
+  #51 pc1's turn (J4, 30 HP, 30 ft) [Sample Fighter]
+  #52   pc1 chooses pass  [journal @11]
+  #53   pc1's turn ends
+  #54 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #55   pc2 chooses pass  [journal @12]
+  #56   pc2's turn ends
+  #57   drake rolls to recharge Cold Breath: 5 (needs 5-6): it comes back
+  #58 drake's turn (I4, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #59   drake chooses move:J3/p0  [greedy @13]
+  #60     drake steps I4 -> J3 (5 ft, 25 left)
+  #61     drake's move ends at J3
+  #62   drake chooses use:cold-breath  [greedy @14]
+  #63     drake: Cold Breath
+  #64       drake spends Cold Breath (0 left)
+  #65       drake chooses aim:S  [greedy @15]
+  #66       Cold Breath appears at J3>S: 5 squares (seen by drake, pc1, pc2)
+  #67         pc1 CON save vs Cold Breath: d20 6 +5 = 11 vs DC 12, fail  [pc1 save r3 p1.0]
+  #68         pc2 CON save vs Cold Breath: d20 3 +5 = 8 vs DC 12, fail  [pc2 save r3 p1.0]
+  #69         pc1 takes 16 (16 cold) from Cold Breath, HP 30 -> 14  [drake zone r3 p0.0]
+  #70         pc2 takes 16 (16 cold) from Cold Breath, HP 36 -> 20  [drake zone r3 p0.0]
+  #71   drake chooses pass  [greedy @16]
+  #72   drake's turn ends
+  #73 == round 4 ==
+  #74 pc1's turn (J4, 14 HP, 30 ft) [Sample Fighter]
+  #75   pc1 chooses pass  [journal @17]
+  #76   pc1's turn ends
+  #77 pc2's turn (J6, 20 HP, 30 ft) [Sample Fighter]
+  #78   pc2 chooses pass  [journal @18]
+  #79   pc2's turn ends
+  #80   drake rolls to recharge Cold Breath: 1 (needs 5-6): not yet
+  #81 drake's turn (J3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #82   drake chooses attack:rend>pc1  [greedy @19]
+  #83     drake: Multiattack
+  #84     drake Rend -> pc1: d20 12 +4 = 16 vs AC 18, miss  [drake attack r4 p0.0]
+  #85   drake chooses attack:rend>pc1  [greedy @20]
+  #86     drake Rend -> pc1: d20 5 +4 = 9 vs AC 18, miss  [drake attack r4 p0.1]
+  #87   drake chooses pass  [greedy @21]
+  #88   Cold Breath ends (expired)
+  #89   drake's turn ends
+  #90 fight ends: stalemate in round 4
+logHash 8f50b17b684b2da4
+
+== areaGridCoverage=squareCenterInside (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative pc2 12 (static)
+   #3   initiative drake 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (J4, 44 HP, 30 ft) [Sample Fighter]
+   #6   pc1 chooses pass  [journal @0]
+   #7   pc1's turn ends
+   #8 pc2's turn (J6, 44 HP, 30 ft) [Sample Fighter]
+   #9   pc2 chooses pass  [journal @1]
+  #10   pc2's turn ends
+  #11 drake's turn (C5, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #12   drake chooses move:G5/p0  [greedy @2]
+  #13     drake steps C5 -> D4 (5 ft, 25 left)
+  #14     drake steps D4 -> E3 (5 ft, 20 left)
+  #15     drake steps E3 -> F4 (5 ft, 15 left)
+  #16     drake steps F4 -> G5 (5 ft, 10 left)
+  #17     drake's move ends at G5
+  #18   drake chooses use:cold-breath  [greedy @3]
+  #19     drake: Cold Breath
+  #20       drake spends Cold Breath (0 left)
+  #21       drake chooses aim:E  [greedy @4]
+  #22       Cold Breath appears at G5>E: 7 squares (seen by drake, pc1, pc2)
+  #23         pc1 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc1 save r1 p1.0]
+  #24         pc2 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc2 save r1 p1.0]
+  #25         pc1 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #26         pc2 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #27   drake chooses move:I3/p0  [greedy @5]
+  #28     drake steps G5 -> H4 (5 ft, 5 left)
+  #29     drake steps H4 -> I3 (5 ft, 0 left)
+  #30     drake's move ends at I3
+  #31   drake's turn ends
+  #32 == round 2 ==
+  #33 pc1's turn (J4, 36 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses pass  [journal @6]
+  #35   pc1's turn ends
+  #36 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #37   pc2 chooses pass  [journal @7]
+  #38   pc2's turn ends
+  #39   Cold Breath ends (expired)
+  #40   drake rolls to recharge Cold Breath: 4 (needs 5-6): not yet
+  #41 drake's turn (I3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #42   drake chooses attack:rend>pc1  [greedy @8]
+  #43     drake: Multiattack
+  #44     drake Rend -> pc1: d20 14 +4 = 18 vs AC 18, hit  [drake attack r2 p0.0]
+  #45       pc1 takes 6 (3 slashing + 3 cold), HP 36 -> 30  [drake damage r2 p0.0]
+  #46   drake chooses attack:rend>pc1  [greedy @9]
+  #47     drake Rend -> pc1: d20 2 +4 = 6 vs AC 18, miss  [drake attack r2 p0.1]
+  #48   drake chooses pass  [greedy @10]
+  #49   drake's turn ends
+  #50 == round 3 ==
+  #51 pc1's turn (J4, 30 HP, 30 ft) [Sample Fighter]
+  #52   pc1 chooses pass  [journal @11]
+  #53   pc1's turn ends
+  #54 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #55   pc2 chooses pass  [journal @12]
+  #56   pc2's turn ends
+  #57   drake rolls to recharge Cold Breath: 5 (needs 5-6): it comes back
+  #58 drake's turn (I3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #59   drake chooses use:cold-breath  [greedy @13]
+  #60     drake: Cold Breath
+  #61       drake spends Cold Breath (0 left)
+  #62       drake chooses aim:SE  [greedy @14]
+  #63       Cold Breath appears at I3>SE: 6 squares (seen by drake, pc1, pc2)
+  #64         pc1 CON save vs Cold Breath: d20 6 +5 = 11 vs DC 12, fail  [pc1 save r3 p1.0]
+  #65         pc2 CON save vs Cold Breath: d20 3 +5 = 8 vs DC 12, fail  [pc2 save r3 p1.0]
+  #66         pc1 takes 16 (16 cold) from Cold Breath, HP 30 -> 14  [drake zone r3 p0.0]
+  #67         pc2 takes 16 (16 cold) from Cold Breath, HP 36 -> 20  [drake zone r3 p0.0]
+  #68   drake chooses pass  [greedy @15]
+  #69   drake's turn ends
+  #70 == round 4 ==
+  #71 pc1's turn (J4, 14 HP, 30 ft) [Sample Fighter]
+  #72   pc1 chooses pass  [journal @16]
+  #73   pc1's turn ends
+  #74 pc2's turn (J6, 20 HP, 30 ft) [Sample Fighter]
+  #75   pc2 chooses pass  [journal @17]
+  #76   pc2's turn ends
+  #77   Cold Breath ends (expired)
+  #78   drake rolls to recharge Cold Breath: 1 (needs 5-6): not yet
+  #79 drake's turn (I3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #80   drake chooses attack:rend>pc1  [greedy @18]
+  #81     drake: Multiattack
+  #82     drake Rend -> pc1: d20 12 +4 = 16 vs AC 18, miss  [drake attack r4 p0.0]
+  #83   drake chooses attack:rend>pc1  [greedy @19]
+  #84     drake Rend -> pc1: d20 5 +4 = 9 vs AC 18, miss  [drake attack r4 p0.1]
+  #85   drake chooses pass  [greedy @20]
+  #86   drake's turn ends
+  #87 fight ends: stalemate in round 4
+logHash 4d1e9b315c63ebbf
+
+== areaGridCoverage=anyOverlap (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative pc2 12 (static)
+   #3   initiative drake 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (J4, 44 HP, 30 ft) [Sample Fighter]
+   #6   pc1 chooses pass  [journal @0]
+   #7   pc1's turn ends
+   #8 pc2's turn (J6, 44 HP, 30 ft) [Sample Fighter]
+   #9   pc2 chooses pass  [journal @1]
+  #10   pc2's turn ends
+  #11 drake's turn (C5, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #12   drake chooses move:G5/p0  [greedy @2]
+  #13     drake steps C5 -> D4 (5 ft, 25 left)
+  #14     drake steps D4 -> E3 (5 ft, 20 left)
+  #15     drake steps E3 -> F4 (5 ft, 15 left)
+  #16     drake steps F4 -> G5 (5 ft, 10 left)
+  #17     drake's move ends at G5
+  #18   drake chooses use:cold-breath  [greedy @3]
+  #19     drake: Cold Breath
+  #20       drake spends Cold Breath (0 left)
+  #21       drake chooses aim:E  [greedy @4]
+  #22       Cold Breath appears at G5>E: 9 squares (seen by drake, pc1, pc2)
+  #23         pc1 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc1 save r1 p1.0]
+  #24         pc2 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc2 save r1 p1.0]
+  #25         pc1 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #26         pc2 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #27   drake chooses move:I3/p0  [greedy @5]
+  #28     drake steps G5 -> H4 (5 ft, 5 left)
+  #29     drake steps H4 -> I3 (5 ft, 0 left)
+  #30     drake's move ends at I3
+  #31   drake's turn ends
+  #32 == round 2 ==
+  #33 pc1's turn (J4, 36 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses pass  [journal @6]
+  #35   pc1's turn ends
+  #36 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #37   pc2 chooses pass  [journal @7]
+  #38   pc2's turn ends
+  #39   Cold Breath ends (expired)
+  #40   drake rolls to recharge Cold Breath: 4 (needs 5-6): not yet
+  #41 drake's turn (I3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #42   drake chooses attack:rend>pc1  [greedy @8]
+  #43     drake: Multiattack
+  #44     drake Rend -> pc1: d20 14 +4 = 18 vs AC 18, hit  [drake attack r2 p0.0]
+  #45       pc1 takes 6 (3 slashing + 3 cold), HP 36 -> 30  [drake damage r2 p0.0]
+  #46   drake chooses attack:rend>pc1  [greedy @9]
+  #47     drake Rend -> pc1: d20 2 +4 = 6 vs AC 18, miss  [drake attack r2 p0.1]
+  #48   drake chooses pass  [greedy @10]
+  #49   drake's turn ends
+  #50 == round 3 ==
+  #51 pc1's turn (J4, 30 HP, 30 ft) [Sample Fighter]
+  #52   pc1 chooses pass  [journal @11]
+  #53   pc1's turn ends
+  #54 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #55   pc2 chooses pass  [journal @12]
+  #56   pc2's turn ends
+  #57   drake rolls to recharge Cold Breath: 5 (needs 5-6): it comes back
+  #58 drake's turn (I3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #59   drake chooses use:cold-breath  [greedy @13]
+  #60     drake: Cold Breath
+  #61       drake spends Cold Breath (0 left)
+  #62       drake chooses aim:SE  [greedy @14]
+  #63       Cold Breath appears at I3>SE: 10 squares (seen by drake, pc1, pc2)
+  #64         pc1 CON save vs Cold Breath: d20 6 +5 = 11 vs DC 12, fail  [pc1 save r3 p1.0]
+  #65         pc2 CON save vs Cold Breath: d20 3 +5 = 8 vs DC 12, fail  [pc2 save r3 p1.0]
+  #66         pc1 takes 16 (16 cold) from Cold Breath, HP 30 -> 14  [drake zone r3 p0.0]
+  #67         pc2 takes 16 (16 cold) from Cold Breath, HP 36 -> 20  [drake zone r3 p0.0]
+  #68   drake chooses pass  [greedy @15]
+  #69   drake's turn ends
+  #70 == round 4 ==
+  #71 pc1's turn (J4, 14 HP, 30 ft) [Sample Fighter]
+  #72   pc1 chooses pass  [journal @16]
+  #73   pc1's turn ends
+  #74 pc2's turn (J6, 20 HP, 30 ft) [Sample Fighter]
+  #75   pc2 chooses pass  [journal @17]
+  #76   pc2's turn ends
+  #77   Cold Breath ends (expired)
+  #78   drake rolls to recharge Cold Breath: 1 (needs 5-6): not yet
+  #79 drake's turn (I3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #80   drake chooses attack:rend>pc1  [greedy @18]
+  #81     drake: Multiattack
+  #82     drake Rend -> pc1: d20 12 +4 = 16 vs AC 18, miss  [drake attack r4 p0.0]
+  #83   drake chooses attack:rend>pc1  [greedy @19]
+  #84     drake Rend -> pc1: d20 5 +4 = 9 vs AC 18, miss  [drake attack r4 p0.1]
+  #85   drake chooses pass  [greedy @20]
+  #86   drake's turn ends
+  #87 fight ends: stalemate in round 4
+logHash 43df46d46f951316
+
+== selfAreaOrigin=squareEdge (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative pc2 12 (static)
+   #3   initiative drake 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (J4, 44 HP, 30 ft) [Sample Fighter]
+   #6   pc1 chooses pass  [journal @0]
+   #7   pc1's turn ends
+   #8 pc2's turn (J6, 44 HP, 30 ft) [Sample Fighter]
+   #9   pc2 chooses pass  [journal @1]
+  #10   pc2's turn ends
+  #11 drake's turn (C5, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #12   drake chooses move:G5/p0  [greedy @2]
+  #13     drake steps C5 -> D4 (5 ft, 25 left)
+  #14     drake steps D4 -> E3 (5 ft, 20 left)
+  #15     drake steps E3 -> F4 (5 ft, 15 left)
+  #16     drake steps F4 -> G5 (5 ft, 10 left)
+  #17     drake's move ends at G5
+  #18   drake chooses use:cold-breath  [greedy @3]
+  #19     drake: Cold Breath
+  #20       drake spends Cold Breath (0 left)
+  #21       drake chooses aim:E  [greedy @4]
+  #22       Cold Breath appears at G5>E: 5 squares (seen by drake, pc1, pc2)
+  #23         pc1 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc1 save r1 p1.0]
+  #24         pc2 CON save vs Cold Breath: d20 10 +5 = 15 vs DC 12, success  [pc2 save r1 p1.0]
+  #25         pc1 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #26         pc2 takes 8 (16 cold, half) from Cold Breath, HP 44 -> 36  [drake zone r1 p0.0]
+  #27   drake chooses move:I3/p0  [greedy @5]
+  #28     drake steps G5 -> H4 (5 ft, 5 left)
+  #29     drake steps H4 -> I3 (5 ft, 0 left)
+  #30     drake's move ends at I3
+  #31   drake's turn ends
+  #32 == round 2 ==
+  #33 pc1's turn (J4, 36 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses pass  [journal @6]
+  #35   pc1's turn ends
+  #36 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #37   pc2 chooses pass  [journal @7]
+  #38   pc2's turn ends
+  #39   Cold Breath ends (expired)
+  #40   drake rolls to recharge Cold Breath: 4 (needs 5-6): not yet
+  #41 drake's turn (I3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #42   drake chooses attack:rend>pc1  [greedy @8]
+  #43     drake: Multiattack
+  #44     drake Rend -> pc1: d20 14 +4 = 18 vs AC 18, hit  [drake attack r2 p0.0]
+  #45       pc1 takes 6 (3 slashing + 3 cold), HP 36 -> 30  [drake damage r2 p0.0]
+  #46   drake chooses attack:rend>pc1  [greedy @9]
+  #47     drake Rend -> pc1: d20 2 +4 = 6 vs AC 18, miss  [drake attack r2 p0.1]
+  #48   drake chooses pass  [greedy @10]
+  #49   drake's turn ends
+  #50 == round 3 ==
+  #51 pc1's turn (J4, 30 HP, 30 ft) [Sample Fighter]
+  #52   pc1 chooses pass  [journal @11]
+  #53   pc1's turn ends
+  #54 pc2's turn (J6, 36 HP, 30 ft) [Sample Fighter]
+  #55   pc2 chooses pass  [journal @12]
+  #56   pc2's turn ends
+  #57   drake rolls to recharge Cold Breath: 5 (needs 5-6): it comes back
+  #58 drake's turn (I3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #59   drake chooses move:J3/p0  [greedy @13]
+  #60     drake steps I3 -> J3 (5 ft, 25 left)
+  #61     drake's move ends at J3
+  #62   drake chooses use:cold-breath  [greedy @14]
+  #63     drake: Cold Breath
+  #64       drake spends Cold Breath (0 left)
+  #65       drake chooses aim:S  [greedy @15]
+  #66       Cold Breath appears at J3>S: 5 squares (seen by drake, pc1, pc2)
+  #67         pc1 CON save vs Cold Breath: d20 6 +5 = 11 vs DC 12, fail  [pc1 save r3 p1.0]
+  #68         pc2 CON save vs Cold Breath: d20 3 +5 = 8 vs DC 12, fail  [pc2 save r3 p1.0]
+  #69         pc1 takes 16 (16 cold) from Cold Breath, HP 30 -> 14  [drake zone r3 p0.0]
+  #70         pc2 takes 16 (16 cold) from Cold Breath, HP 36 -> 20  [drake zone r3 p0.0]
+  #71   drake chooses pass  [greedy @16]
+  #72   drake's turn ends
+  #73 == round 4 ==
+  #74 pc1's turn (J4, 14 HP, 30 ft) [Sample Fighter]
+  #75   pc1 chooses pass  [journal @17]
+  #76   pc1's turn ends
+  #77 pc2's turn (J6, 20 HP, 30 ft) [Sample Fighter]
+  #78   pc2 chooses pass  [journal @18]
+  #79   pc2's turn ends
+  #80   Cold Breath ends (expired)
+  #81   drake rolls to recharge Cold Breath: 1 (needs 5-6): not yet
+  #82 drake's turn (J3, 32 HP, 30 ft) [White Dragon Wyrmling]
+  #83   drake chooses attack:rend>pc1  [greedy @19]
+  #84     drake: Multiattack
+  #85     drake Rend -> pc1: d20 12 +4 = 16 vs AC 18, miss  [drake attack r4 p0.0]
+  #86   drake chooses attack:rend>pc1  [greedy @20]
+  #87     drake Rend -> pc1: d20 5 +4 = 9 vs AC 18, miss  [drake attack r4 p0.1]
+  #88   drake chooses pass  [greedy @21]
+  #89   drake's turn ends
+  #90 fight ends: stalemate in round 4
+logHash d6a31f2c6d23a4d3

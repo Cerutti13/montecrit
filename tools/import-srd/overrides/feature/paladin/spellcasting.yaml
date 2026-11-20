@@ -1,0 +1,13 @@
+# Reviewed against SRD 5.2.1 p.54 (srd-raw.txt:11857-11892), Paladin level 1: cantrips, spell slots,
+# prepared spells, spellcasting ability and focus.
+# Coverage C0 (T relabel, X1): this record carries no program because nothing in it needs one; it is
+# mechanized by the class's spellcasting block and its spell-slot, cantrip and prepared columns
+# (classes/paladin.yaml spellcasting, progression half), which the character expansion turns into
+# slots, the casting lists and the CHA spell ability; the focus is a held item (sim/hands.ts).
+# Nothing in the text is left unmodeled in a fight, so full (mechanizedBy, never compiled).
+fidelity: full
+mechanizedBy: spellcasting
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 54

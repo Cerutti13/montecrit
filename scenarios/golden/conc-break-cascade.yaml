@@ -1,0 +1,20 @@
+# M1b golden: breaking concentration ends everything it holds up, in order.
+# pc1 casts a concentration ward over both goblins (it marks each: attacks against them have
+# Advantage). A goblin's arrow hits pc1, pc1 fails the concentration save, and the spell, its
+# zone and both marks end, parent first, children in creation order.
+kind: scenario
+id: conc-break-cascade
+name: Concentration break cascade
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid:
+  w: 10
+  h: 4
+flags:
+  initiativeMode: static
+knobs:
+  maxRounds: 1
+units:
+  - { seat: pc1, team: party, use: 'test:sample-warden', at: B2 }
+  - { seat: gob1, team: enemies, use: 'srd:goblin-warrior', at: E2, surprised: true }
+  - { seat: gob2, team: enemies, use: 'srd:goblin-warrior', at: F3, surprised: true }

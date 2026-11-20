@@ -1,0 +1,27 @@
+# Round 1: pc1 casts Faerie Fire over both goblins; they hold; ally1 stabs the outlined gob2 (Advantage), ally2 the
+# unoutlined gob1 (none). Round 2: the goblins shoot pc1 until its concentration breaks; ally1 stabs gob2 (no Advantage).
+kind: journal
+scenario: "faerie-fire-adv"
+seed: 46
+run: 0
+engine: "0.8.0"
+contentHash: "a7322f1cc647048c"
+scenarioHash: "b046108c52d0ab65"
+entries:
+  - { seat: pc1, key: 'cast:faerie-fire@1' }
+  - { seat: pc1, key: 'place:H4' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: gob1, key: 'pass' }
+  - { seat: gob2, key: 'pass' }
+  - { seat: ally1, key: 'attack:spear>gob2' }
+  - { seat: ally1, key: 'pass' }
+  - { seat: ally2, key: 'attack:spear>gob1' }
+  - { seat: ally2, key: 'pass' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: gob1, key: 'attack:shortbow>pc1' }
+  - { seat: gob1, key: 'pass' }
+  - { seat: gob2, key: 'attack:shortbow>pc1' }
+  - { seat: gob2, key: 'pass' }
+  - { seat: ally1, key: 'attack:spear>gob2' }
+  - { seat: ally1, key: 'pass' }
+  - { seat: ally2, key: 'pass' }

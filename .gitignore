@@ -1,0 +1,15 @@
+node_modules/
+dist/
+coverage/
+.DS_Store
+.env*
+graph.json
+graphify-out/
+# Private (non-SRD) content lives in ~/.montecrit/, never in the repo. Backstop:
+packs/private/
+# Copies of the private pack or character folders, if they ever land here:
+.montecrit/
+characters/
+# ...except the synthetic test: fixtures (M3 step 3; check-private still scans them):
+!packs/test/characters/
+.claude/

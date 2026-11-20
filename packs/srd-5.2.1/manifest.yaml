@@ -1,0 +1,8 @@
+# The committed SRD 5.2.1 pack. Attribution text is verbatim from SRD 5.2.1 p.1 (see ATTRIBUTION.md).
+kind: manifest
+pack: srd-5.2.1
+version: '5.2.1'
+rules: '2024'
+namespace: srd
+license: CC-BY-4.0
+attribution: "This work includes material from the System Reference Document 5.2.1 (“SRD 5.2.1”) by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD 5.2.1 is licensed under the Creative Commons Attribution 4.0 International License, available at https://creativecommons.org/licenses/by/4.0/legalcode."

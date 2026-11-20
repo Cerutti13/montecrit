@@ -1,0 +1,9 @@
+{
+  "//": "Engine source only. No DOM lib and no Node types, so browser or Node APIs fail to typecheck here.",
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["es2024"],
+    "types": []
+  },
+  "include": ["src"]
+}

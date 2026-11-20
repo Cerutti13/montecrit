@@ -1,0 +1,11 @@
+# pc1 passes both turns (it would otherwise recast Spike Growth where everyone sees it); the wolves are greedy.
+kind: journal
+scenario: search-reveals-spikes
+seed: 5
+run: 0
+engine: '0.8.0'
+contentHash: '4faaecb00968325b'
+entries:
+  - { seat: pc1, key: 'pass' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: pc1, key: 'pass' }

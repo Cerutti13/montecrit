@@ -1,0 +1,37 @@
+# SRD 5.2.1 p.354, Giant Wasp (srd-raw.txt:58548-58580), written from the PDF at coverage C0 (X1:
+# no monster at CR 10 or below whose block has an attack roll is inert; it is also in the SRD's
+# example encounters, srd-raw.txt:36080). Foundry's record carries no license (license-missing,
+# quarantined, C21), so this stand-in replaces it; every number is the stat block's, as
+# pdf/monsters.ts reads it into srd-index.json (tools/import-srd/test/c0-coverage.test.ts checks
+# the attack against the index).
+replace: true
+foundryPath: packs/_source/actors24/beast/giant-wasp.yml
+kind: monster
+id: srd:giant-wasp
+name: Giant Wasp
+source: SRD 5.2.1 p.354
+fidelity: partial
+size: medium
+cr: 1/2
+pb: 2
+ac: 13
+hp: { average: 22, formula: 5d8 }
+speed: { walk: 10, fly: 50 }
+initiative: { mod: 2, score: 12 }
+abilities: { str: 10, dex: 14, con: 10, int: 1, wis: 10, cha: 3 }
+senses: { passivePerception: 10 }
+attacks:
+  - id: sting
+    name: Sting
+    kind: melee
+    toHit: 4
+    reach: 5
+    damage:
+      - { roll: 1d6 + 2, type: piercing, avg: 5 }
+      - { roll: 2d4, type: poison, avg: 5 }
+unimplemented:
+  - monster speed fly not modeled
+  - monster trait flyby not modeled
+provenance:
+  review: reviewed
+  pdfPage: 354

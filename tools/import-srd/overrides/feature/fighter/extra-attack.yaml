@@ -1,0 +1,12 @@
+# Reviewed against SRD 5.2.1 p.48 (srd-raw.txt:10654-10657), Fighter level 5: attack twice instead
+# of once with the Attack action on your turn.
+# Coverage C0 (T relabel, X1): this record carries no program because nothing in it needs one; it is
+# mechanized by the class table's extra attacks (classes/fighter.yaml extraAttacks '5': 1; Two and
+# Three Extra Attacks are their own features at 11 and 20).
+# Nothing in the text is left unmodeled in a fight, so full (mechanizedBy, never compiled).
+fidelity: full
+mechanizedBy: extraAttack
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 48

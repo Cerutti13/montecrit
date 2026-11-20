@@ -1,0 +1,13 @@
+# Reviewed against SRD 5.2.1 p.47 (srd-raw.txt:10366-10371), Fighter level 1: a Fighting Style feat
+# of your choice, replaceable on gaining a level.
+# Coverage C0 (T relabel, X1): this record carries no program because nothing in it needs one; it is
+# mechanized by the class's Fighting Style choice (classes/fighter.yaml choices id fighting-style:
+# the Fighting Style feats), which the character expansion takes as a pick; the picked feat or
+# option has its own fidelity.
+# Nothing in the text is left unmodeled in a fight, so full (mechanizedBy, never compiled).
+fidelity: full
+mechanizedBy: fightingStyle
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 47

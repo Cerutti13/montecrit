@@ -1,0 +1,26 @@
+# Coverage step 7.5 golden (docs/design/step7-plan.md section 6): an Emanation moves with its owner
+# (srd-raw.txt:33383-33384). Spirit Guardians (31040-31047), a 15-foot Emanation that spares its caster
+# and allies; Aura of Protection (11994-11998), +CHA to saves for "you and your allies in the aura".
+# Static initiative. Everything's scripted; nobody but the journal decides.
+#   Round 1: pc1 (Cleric 5) casts, then walks: at E2 the Emanation enters gob1's space at H2, one WIS
+#   save. It steps back to D2 and on to E2: the Emanation enters that space again ("caught"), and "only
+#   once per turn" means no second save. Round 2: gob1 stays put and saves again at its own turn's end.
+#   adp1's Sacred Flame hits pc3, 10 ft from the Paladin pc2 (CHA 16): its DEX save reads +5, its own +2
+#   and the aura's +3. adp2's hits pc4, 35 ft from pc2, with the same sheet: +2. The aura has no line of
+#   its own at a save. Off while pc2 is Incapacitated: packages/engine/test/aura-emanation.test.ts.
+kind: scenario
+id: aura-emanation
+name: Spirit Guardians and Aura of Protection
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid: { w: 16, h: 9 }
+flags: { initiativeMode: static }
+knobs: { maxRounds: 2, downEnds: false }
+units:
+  - { seat: pc1, team: party, use: 'test:sample-guardian', at: A2, decider: greedy }
+  - { seat: pc2, team: party, use: 'test:sample-sentinel', at: A7, decider: greedy }
+  - { seat: pc3, team: party, use: 'test:sample-grove', at: C7, decider: greedy }
+  - { seat: pc4, team: party, use: 'test:sample-grove', at: H7, decider: greedy }
+  - { seat: gob1, team: enemies, use: 'srd:goblin-warrior', at: H2, decider: greedy }
+  - { seat: adp1, team: enemies, use: 'test:sample-adept', at: L9, decider: greedy }
+  - { seat: adp2, team: enemies, use: 'test:sample-adept', at: M9, decider: greedy }

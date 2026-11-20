@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`montecrit sheet > srd:goblin-warrior 1`] = `
+"Goblin Warrior  srd:goblin-warrior  (monster, small)
+Source: SRD 5.2.1 p.290
+Fidelity: partial    Placeholder: no
+Not modeled:
+  - Nimble Escape: the Hide option
+
+AC 15    HP 10 (3d6)    Speed 30 ft.    PB +2    Initiative +2 (score 12)
+
+        STR  DEX  CON  INT  WIS  CHA
+Score     8   15   10   10    8    8
+Mod      -1   +2   +0   +0   -1   -1
+Save     -1   +2   +0   +0   -1   -1
+
+Gear: Leather Armor, Scimitar, Shield, Shortbow
+
+Attacks vs AC 15 (straight roll):
+  Scimitar                 melee +4, reach 5 ft.
+      damage: 1d6 + 2 slashing (avg 5); 1d4 slashing (avg 2) if the roll had Advantage
+      P(hit) 50.00%   P(crit) 5.00%   E[damage] 2.925
+  Shortbow                 ranged +4, range 80/320 ft.
+      damage: 1d6 + 2 piercing (avg 5); 1d4 piercing (avg 2) if the roll had Advantage
+      P(hit) 50.00%   P(crit) 5.00%   E[damage] 2.925
+  Unarmed Strike           melee +1, reach 5 ft.
+      damage: 0 bludgeoning (avg 0)
+      P(hit) 35.00%   P(crit) 5.00%   E[damage] 0.000
+
+Attack:
+  1 x [Scimitar | Shortbow | Unarmed Strike]
+
+Options:
+  Dash (action)
+  Disengage (action)
+  Nimble Escape (Disengage) (bonus action; works as Disengage)
+
+E[damage] leaves out riders that need Advantage (a straight roll never has it).
+Rule flags:
+  expandedCritAutoHits=false [UNVERIFIED: SRD 5.2.1 p.7 and p.179 tie the auto-hit to rolling a 20; p.49 Improved Critical only says it "can score a Critical Hit"; no Sage Advice entry]"
+`;

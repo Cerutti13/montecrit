@@ -1,0 +1,21 @@
+# Reviewed against SRD 5.2.1 p.86 (srd-raw.txt:19920-19925), the Orc's Adrenaline Rush (coverage W1,
+# docs/design/w1-plan.md section 3): "You can take the Dash action as a Bonus Action. When you do so,
+# you gain a number of Temporary Hit Points equal to your Proficiency Bonus. You can use this trait a
+# number of times equal to your Proficiency Bonus".
+# A bonus activation acting on its user only (target: self) that spends the species pool
+# adrenaline-rush (overrides/species/orc.yaml): the core Dash, then Temporary Hit Points @pb (the
+# higher of old and new is kept). Nothing else in the text, so full.
+fidelity: full
+activate:
+  id: adrenaline-rush
+  name: Adrenaline Rush
+  cost: bonus
+  uses: { pool: adrenaline-rush }
+  target: self
+  do:
+    - core: dash
+    - tempHp: '@pb'
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 86

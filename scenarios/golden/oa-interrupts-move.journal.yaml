@@ -1,0 +1,9 @@
+# gob1 walks to F3; the route has to leave the Guard's reach once (p1).
+kind: journal
+scenario: oa-interrupts-move
+seed: 1
+run: 0
+engine: '0.8.0'
+contentHash: 'f6bf9acde1eb19a9'
+entries:
+  - { seat: gob1, key: 'move:F3/p1' }

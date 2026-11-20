@@ -1,0 +1,10 @@
+# The golden cover-archer's map and units for the browser, which offers only top-level scenarios
+# (docs/design/coverage.md, 8'b build note): pick it in the Run panel, run a report, and open a
+# replay to see the wall (#) and the low wall (+) drawn and the attacks at +2 and +5 AC. SRD 5.2.1
+# "Cover" (srd-raw.txt:1995-2032). The golden stops after 2 rounds for its journal; this one plays
+# to the end, so a report has wins and losses to replay. `extends` finds its base in scenarios/golden/.
+kind: scenario
+id: cover-archer-replay
+name: Cover against goblin archers (to the end)
+extends: cover-archer
+knobs: { maxRounds: 10 }

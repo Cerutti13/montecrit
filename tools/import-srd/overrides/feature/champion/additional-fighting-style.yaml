@@ -1,0 +1,12 @@
+# Reviewed against SRD 5.2.1 p.49 (srd-raw.txt:10725-10727), Champion level 7: another Fighting
+# Style feat of your choice.
+# Coverage C0 (T relabel, X1): this record carries no program because nothing in it needs one; it is
+# mechanized by the subclass's choice (subclasses/champion.yaml choices id fighting-style at level
+# 7), which the character expansion takes as a pick; the picked feat has its own fidelity.
+# Nothing in the text is left unmodeled in a fight, so full (mechanizedBy, never compiled).
+fidelity: full
+mechanizedBy: fightingStyle
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 49

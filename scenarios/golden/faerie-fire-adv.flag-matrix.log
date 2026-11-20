@@ -1,0 +1,1052 @@
+# Flag matrix for scenarios/golden/faerie-fire-adv.yaml with scenarios/golden/faerie-fire-adv.journal.yaml (docs/design/m1b.md, Critique resolutions item 9).
+# Every rule flag the default run read, re-run under each of its other values: same seed, same journal.
+# Matrix mode only: at the journal's first mismatch every journal seat hands over to its fallback (baseline if none).
+# Regenerate: UPDATE_FLAG_MATRIX=1 npx vitest run apps/cli/test/flag-matrix.test.ts
+
+#### seed 46 ####
+default  run 0 | journal of 17 entries: held | logHash 5ac7f3122d18305b
+flags read: diagonalCost, initiativeMode, initiativeTies, groupInitiative, monsterHp, areaOriginOnGrid, areaGridCoverage, losMethod, creatureCover
+
+== diagonalCost=alternate (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4   initiative ally1 11 (static)
+   #5   initiative ally2 11 (static)
+   #6 == round 1 ==
+   #7 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #8   pc1 chooses cast:faerie-fire@1  [journal @0]
+   #9     pc1 casts Faerie Fire with a level 1 slot (3 left)
+  #10       pc1 is concentrating on Faerie Fire
+  #11       pc1 chooses place:H4  [journal @1]
+  #12       Faerie Fire appears at H4: 16 squares (seen by ally1, ally2, gob1, gob2, pc1)
+  #13         gob1 DEX save vs Faerie Fire: d20 12 +2 +2(Half Cover) = 16 vs DC 13, success  [gob1 save r1 p5.0]
+  #14         gob2 DEX save vs Faerie Fire: d20 5 +2 = 7 vs DC 13, fail  [gob2 save r1 p5.0]
+  #15         Outlined (attacks against it have Advantage) on gob2
+  #16   pc1 chooses pass  [journal @2]
+  #17   pc1's turn ends
+  #18 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #19   gob1 chooses pass  [journal @3]
+  #20   gob1's turn ends
+  #21 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses pass  [journal @4]
+  #23   gob2's turn ends
+  #24 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #25   ally1 chooses attack:spear>gob2  [journal @5]
+  #26     ally1: Attack
+  #27     ally1 Spear -> gob2: d20 2/2 adv -> 2 (+srd:faerie-fire/outlined) +3 = 5 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #28   ally1 chooses pass  [journal @6]
+  #29   ally1's turn ends
+  #30 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #31   ally2 chooses attack:spear>gob1  [journal @7]
+  #32     ally2: Attack
+  #33     ally2 Spear -> gob1: d20 8 +3 = 11 vs AC 15, miss  [ally2 attack r1 p0.0]
+  #34   ally2 chooses pass  [journal @8]
+  #35   ally2's turn ends
+  #36 == round 2 ==
+  #37 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #38   pc1 chooses pass  [journal @9]
+  #39   pc1's turn ends
+  #40 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #41   gob1 chooses attack:shortbow>pc1  [journal @10]
+  #42     gob1: Attack
+  #43     gob1 Shortbow -> pc1: d20 18/4 dis -> 4 (-ranged-adjacent) +4 = 8 vs AC 15 (Half Cover +2), miss  [gob1 attack r2 p0.0]
+  #44   gob1 chooses pass  [journal @11]
+  #45   gob1's turn ends
+  #46 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #47   gob2 chooses attack:shortbow>pc1  [journal @12]
+  #48     gob2: Attack
+  #49     gob2 Shortbow -> pc1: d20 9/11 dis -> 9 (-ranged-adjacent) +4 = 13 vs AC 13, hit  [gob2 attack r2 p0.0]
+  #50       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r2 p0.0]
+  #51         pc1 concentration save (Faerie Fire): d20 3 +2 = 5 vs DC 10, breaks  [pc1 conc r2 p4.0]
+  #52           Faerie Fire (pc1) ends (concentration broken)
+  #53             Faerie Fire ends (its source ended)
+  #54               Outlined (attacks against it have Advantage) on gob2 ends (its source ended)
+  #55   gob2 chooses pass  [journal @13]
+  #56   gob2's turn ends
+  #57 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #58   ally1 chooses attack:spear>gob2  [journal @14]
+  #59     ally1: Attack
+  #60     ally1 Spear -> gob2: d20 1 +3 = 4 vs AC 15, miss  [ally1 attack r2 p0.0]
+  #61   ally1 chooses pass  [journal @15]
+  #62   ally1's turn ends
+  #63 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #64   ally2 chooses pass  [journal @16]
+  #65   ally2's turn ends
+  #66 fight ends: stalemate in round 2
+logHash 2f5f29bfd1df9989
+
+== initiativeMode=roll (journal diverged at @3) ==
+flags read vs default: +statBlockAtZeroHp +corpseSpace +conjuredHandEffectBlocksHand -initiativeTies
+   #1   initiative pc1 21 (d20 19+2)
+   #2   initiative ally1 20 (d20 19+1)
+   #3   initiative ally2 20 (shares ally1's roll)
+   #4   initiative gob1 18 (d20 16+2)
+   #5   initiative gob2 18 (shares gob1's roll)
+   #6 == round 1 ==
+   #7 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #8   pc1 chooses cast:faerie-fire@1  [journal @0]
+   #9     pc1 casts Faerie Fire with a level 1 slot (3 left)
+  #10       pc1 is concentrating on Faerie Fire
+  #11       pc1 chooses place:H4  [journal @1]
+  #12       Faerie Fire appears at H4: 16 squares (seen by ally1, ally2, gob1, gob2, pc1)
+  #13         gob1 DEX save vs Faerie Fire: d20 12 +2 +2(Half Cover) = 16 vs DC 13, success  [gob1 save r1 p5.0]
+  #14         gob2 DEX save vs Faerie Fire: d20 5 +2 = 7 vs DC 13, fail  [gob2 save r1 p5.0]
+  #15         Outlined (attacks against it have Advantage) on gob2
+  #16   pc1 chooses pass  [journal @2]
+  #17   pc1's turn ends
+  #18 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #19   ally1 chooses attack:spear>gob2  [greedy @3]
+  #20     ally1: Attack
+  #21     ally1 Spear -> gob2: d20 2/2 adv -> 2 (+srd:faerie-fire/outlined) +3 = 5 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #22   ally1 chooses pass  [greedy @4]
+  #23   ally1's turn ends
+  #24 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #25   ally2 chooses move:H3/p0  [greedy @5]
+  #26     ally2 steps F2 -> G2 (5 ft, 25 left)
+  #27     ally2 steps G2 -> H3 (5 ft, 20 left)
+  #28     ally2's move ends at H3
+  #29   ally2 chooses attack:spear>gob2  [greedy @6]
+  #30     ally2: Attack
+  #31     ally2 Spear -> gob2: d20 8/16 adv -> 16 (+srd:faerie-fire/outlined) +3 = 19 vs AC 15, hit  [ally2 attack r1 p0.0]
+  #32       gob2 takes 6 (6 piercing), HP 10 -> 4  [ally2 damage r1 p0.0]
+  #33   ally2 chooses pass  [greedy @7]
+  #34   ally2's turn ends
+  #35 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #36   gob1 chooses opt:nimble-escape-disengage  [greedy @8]
+  #37     gob1: Nimble Escape (Disengage)
+  #38       gob1 is Disengaged (srd:goblin-warrior/nimble-escape-disengage)
+  #39   gob1 chooses move:I1/p0  [greedy @9]
+  #40     gob1 steps G3 -> H2 (5 ft, 25 left)
+  #41     gob1 steps H2 -> I1 (5 ft, 20 left)
+  #42     gob1's move ends at I1
+  #43   gob1 chooses attack:shortbow>pc1  [greedy @10]
+  #44     gob1: Attack
+  #45     gob1 Shortbow -> pc1: d20 16 +4 = 20 vs AC 13, hit  [gob1 attack r1 p0.0]
+  #46       pc1 takes 7 (7 piercing), HP 24 -> 17  [gob1 damage r1 p0.0]
+  #47         pc1 concentration save (Faerie Fire): d20 18 +2 = 20 vs DC 10, holds  [pc1 conc r1 p3.0]
+  #48   gob1 chooses pass  [greedy @11]
+  #49   gob1 is no longer Disengaged (turn-end)
+  #50   gob1's turn ends
+  #51 gob2's turn (G4, 4 HP, 30 ft) [Goblin Warrior]
+  #52   gob2 chooses opt:nimble-escape-disengage  [greedy @12]
+  #53     gob2: Nimble Escape (Disengage)
+  #54       gob2 is Disengaged (srd:goblin-warrior/nimble-escape-disengage)
+  #55   gob2 chooses move:I5/p0  [greedy @13]
+  #56     gob2 steps G4 -> H4 (5 ft, 25 left)
+  #57     gob2 steps H4 -> I5 (5 ft, 20 left)
+  #58     gob2's move ends at I5
+  #59   gob2 chooses attack:shortbow>pc1  [greedy @14]
+  #60     gob2: Attack
+  #61     gob2 Shortbow -> pc1: d20 7 +4 = 11 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #62   gob2 chooses pass  [greedy @15]
+  #63   gob2 is no longer Disengaged (turn-end)
+  #64   gob2's turn ends
+  #65 == round 2 ==
+  #66 pc1's turn (A4, 17 HP, 30 ft) [Sample Grove]
+  #67   pc1 chooses move:A5/p0  [greedy @16]
+  #68     pc1 steps A4 -> A5 (5 ft, 25 left)
+  #69     pc1's move ends at A5
+  #70   pc1 chooses cast:produce-flame@0  [greedy @17]
+  #71     pc1 casts Produce Flame (cantrip)
+  #72       Produce Flame on pc1
+  #73   pc1 chooses use:pc1/flame/hurl  [greedy @18]
+  #74     pc1: Hurl Flame
+  #75       pc1 chooses target:gob2  [greedy @19]
+  #76       pc1 Hurl Flame -> gob2: d20 19/9 adv -> 19 (+srd:faerie-fire/outlined) +5 = 24 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #77         gob2 takes 4 (4 fire), HP 4 -> 0  [pc1 damage r2 p0.0]
+  #78           gob2 dies (0 HP)
+  #79   pc1 chooses pass  [greedy @20]
+  #80   pc1's turn ends
+  #81 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #82   ally1 chooses move:H1/p0  [greedy @21]
+  #83     ally1 steps F3 -> G2 (5 ft, 25 left)
+  #84     ally1 steps G2 -> H1 (5 ft, 20 left)
+  #85     ally1's move ends at H1
+  #86   ally1 chooses attack:spear>gob1  [greedy @22]
+  #87     ally1: Attack
+  #88     ally1 Spear -> gob1: d20 1 +3 = 4 vs AC 15, miss  [ally1 attack r2 p0.0]
+  #89   ally1 chooses pass  [greedy @23]
+  #90   ally1's turn ends
+  #91 ally2's turn (H3, 11 HP, 30 ft) [Guard]
+  #92   ally2 chooses move:H2/p0  [greedy @24]
+  #93     ally2 steps H3 -> H2 (5 ft, 25 left)
+  #94     ally2's move ends at H2
+  #95   ally2 chooses attack:spear>gob1  [greedy @25]
+  #96     ally2: Attack
+  #97     ally2 Spear -> gob1: d20 5 +3 = 8 vs AC 15, miss  [ally2 attack r2 p0.0]
+  #98   ally2 chooses pass  [greedy @26]
+  #99   ally2's turn ends
+ #100 gob1's turn (I1, 10 HP, 30 ft) [Goblin Warrior]
+ #101   gob1 chooses opt:nimble-escape-disengage  [greedy @27]
+ #102     gob1: Nimble Escape (Disengage)
+ #103       gob1 is Disengaged (srd:goblin-warrior/nimble-escape-disengage)
+ #104   gob1 chooses move:J2/p0  [greedy @28]
+ #105     gob1 steps I1 -> J2 (5 ft, 25 left)
+ #106     gob1's move ends at J2
+ #107   gob1 chooses attack:shortbow>pc1  [greedy @29]
+ #108     gob1: Attack
+ #109     gob1 Shortbow -> pc1: d20 18 +4 = 22 vs AC 13, hit  [gob1 attack r2 p0.0]
+ #110       pc1 takes 7 (7 piercing), HP 17 -> 10  [gob1 damage r2 p0.0]
+ #111         pc1 concentration save (Faerie Fire): d20 7 +2 = 9 vs DC 10, breaks  [pc1 conc r2 p3.0]
+ #112           Faerie Fire (pc1) ends (concentration broken)
+ #113             Faerie Fire ends (its source ended)
+ #114               Outlined (attacks against it have Advantage) on gob2 ends (its source ended)
+ #115   gob1 chooses pass  [greedy @30]
+ #116   gob1 is no longer Disengaged (turn-end)
+ #117   gob1's turn ends
+ #118 fight ends: stalemate in round 2
+logHash 6729ed111e687169
+
+== initiativeTies=pcsFirst (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4   initiative ally1 11 (static)
+   #5   initiative ally2 11 (static)
+   #6 == round 1 ==
+   #7 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #8   pc1 chooses cast:faerie-fire@1  [journal @0]
+   #9     pc1 casts Faerie Fire with a level 1 slot (3 left)
+  #10       pc1 is concentrating on Faerie Fire
+  #11       pc1 chooses place:H4  [journal @1]
+  #12       Faerie Fire appears at H4: 16 squares (seen by ally1, ally2, gob1, gob2, pc1)
+  #13         gob1 DEX save vs Faerie Fire: d20 12 +2 +2(Half Cover) = 16 vs DC 13, success  [gob1 save r1 p5.0]
+  #14         gob2 DEX save vs Faerie Fire: d20 5 +2 = 7 vs DC 13, fail  [gob2 save r1 p5.0]
+  #15         Outlined (attacks against it have Advantage) on gob2
+  #16   pc1 chooses pass  [journal @2]
+  #17   pc1's turn ends
+  #18 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #19   gob1 chooses pass  [journal @3]
+  #20   gob1's turn ends
+  #21 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses pass  [journal @4]
+  #23   gob2's turn ends
+  #24 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #25   ally1 chooses attack:spear>gob2  [journal @5]
+  #26     ally1: Attack
+  #27     ally1 Spear -> gob2: d20 2/2 adv -> 2 (+srd:faerie-fire/outlined) +3 = 5 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #28   ally1 chooses pass  [journal @6]
+  #29   ally1's turn ends
+  #30 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #31   ally2 chooses attack:spear>gob1  [journal @7]
+  #32     ally2: Attack
+  #33     ally2 Spear -> gob1: d20 8 +3 = 11 vs AC 15, miss  [ally2 attack r1 p0.0]
+  #34   ally2 chooses pass  [journal @8]
+  #35   ally2's turn ends
+  #36 == round 2 ==
+  #37 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #38   pc1 chooses pass  [journal @9]
+  #39   pc1's turn ends
+  #40 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #41   gob1 chooses attack:shortbow>pc1  [journal @10]
+  #42     gob1: Attack
+  #43     gob1 Shortbow -> pc1: d20 18/4 dis -> 4 (-ranged-adjacent) +4 = 8 vs AC 15 (Half Cover +2), miss  [gob1 attack r2 p0.0]
+  #44   gob1 chooses pass  [journal @11]
+  #45   gob1's turn ends
+  #46 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #47   gob2 chooses attack:shortbow>pc1  [journal @12]
+  #48     gob2: Attack
+  #49     gob2 Shortbow -> pc1: d20 9/11 dis -> 9 (-ranged-adjacent) +4 = 13 vs AC 13, hit  [gob2 attack r2 p0.0]
+  #50       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r2 p0.0]
+  #51         pc1 concentration save (Faerie Fire): d20 3 +2 = 5 vs DC 10, breaks  [pc1 conc r2 p4.0]
+  #52           Faerie Fire (pc1) ends (concentration broken)
+  #53             Faerie Fire ends (its source ended)
+  #54               Outlined (attacks against it have Advantage) on gob2 ends (its source ended)
+  #55   gob2 chooses pass  [journal @13]
+  #56   gob2's turn ends
+  #57 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #58   ally1 chooses attack:spear>gob2  [journal @14]
+  #59     ally1: Attack
+  #60     ally1 Spear -> gob2: d20 1 +3 = 4 vs AC 15, miss  [ally1 attack r2 p0.0]
+  #61   ally1 chooses pass  [journal @15]
+  #62   ally1's turn ends
+  #63 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #64   ally2 chooses pass  [journal @16]
+  #65   ally2's turn ends
+  #66 fight ends: stalemate in round 2
+logHash a67945beb6ac80a0
+
+== initiativeTies=monstersFirst (journal diverged at @0) ==
+flags read vs default: +pauseInOccupiedSpace +conjuredHandEffectBlocksHand
+   #1   initiative gob1 12 (static)
+   #2   initiative gob2 12 (static)
+   #3   initiative pc1 12 (static)
+   #4   initiative ally1 11 (static)
+   #5   initiative ally2 11 (static)
+   #6 == round 1 ==
+   #7 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+   #8   gob1 chooses opt:nimble-escape-disengage  [greedy @0]
+   #9     gob1: Nimble Escape (Disengage)
+  #10       gob1 is Disengaged (srd:goblin-warrior/nimble-escape-disengage)
+  #11   gob1 chooses move:I5/p0  [greedy @1]
+  #12     gob1 steps G3 -> H4 (5 ft, 25 left)
+  #13     gob1 steps H4 -> I5 (5 ft, 20 left)
+  #14     gob1's move ends at I5
+  #15   gob1 chooses attack:shortbow>pc1  [greedy @2]
+  #16     gob1: Attack
+  #17     gob1 Shortbow -> pc1: d20 16 +4 = 20 vs AC 13, hit  [gob1 attack r1 p0.0]
+  #18       pc1 takes 7 (7 piercing), HP 24 -> 17  [gob1 damage r1 p0.0]
+  #19   gob1 chooses pass  [greedy @3]
+  #20   gob1 is no longer Disengaged (turn-end)
+  #21   gob1's turn ends
+  #22 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #23   gob2 chooses opt:nimble-escape-disengage  [greedy @4]
+  #24     gob2: Nimble Escape (Disengage)
+  #25       gob2 is Disengaged (srd:goblin-warrior/nimble-escape-disengage)
+  #26   gob2 chooses move:I3/p0  [greedy @5]
+  #27     gob2 steps G4 -> H3 (5 ft, 25 left)
+  #28     gob2 steps H3 -> I3 (5 ft, 20 left)
+  #29     gob2's move ends at I3
+  #30   gob2 chooses attack:shortbow>pc1  [greedy @6]
+  #31     gob2: Attack
+  #32     gob2 Shortbow -> pc1: d20 7 +4 = 11 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #33   gob2 chooses pass  [greedy @7]
+  #34   gob2 is no longer Disengaged (turn-end)
+  #35   gob2's turn ends
+  #36 pc1's turn (A4, 17 HP, 30 ft) [Sample Grove]
+  #37   pc1 chooses move:A1/p0  [greedy @8]
+  #38     pc1 steps A4 -> A3 (5 ft, 25 left)
+  #39     pc1 steps A3 -> A2 (5 ft, 20 left)
+  #40     pc1 steps A2 -> A1 (5 ft, 15 left)
+  #41     pc1's move ends at A1
+  #42   pc1 chooses cast:entangle@1  [greedy @9]
+  #43     pc1 casts Entangle with a level 1 slot (3 left)
+  #44       pc1 is concentrating on Entangle
+  #45       pc1 chooses place:H3  [greedy @10]
+  #46       Entangle appears at H3: 16 squares, Difficult Terrain (seen by ally1, ally2, gob1, gob2, pc1)
+  #47         gob1 STR save vs Entangle: d20 12 -1 = 11 vs DC 13, fail  [gob1 save r1 p5.0]
+  #48         gob2 STR save vs Entangle: d20 5 -1 = 4 vs DC 13, fail  [gob2 save r1 p5.0]
+  #49         Restrained on gob1
+  #50         gob1 is Restrained (srd:entangle/entangle-restrained)
+  #51         Restrained on gob2
+  #52         gob2 is Restrained (srd:entangle/entangle-restrained)
+  #53   pc1 chooses cast:produce-flame@0  [greedy @11]
+  #54     pc1 casts Produce Flame (cantrip)
+  #55       Produce Flame on pc1
+  #56   pc1 chooses move:B1/p0  [greedy @12]
+  #57     pc1 steps A1 -> B1 (5 ft, 10 left)
+  #58     pc1's move ends at B1
+  #59   pc1 chooses pass  [greedy @13]
+  #60   pc1's turn ends
+  #61 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #62   ally1 chooses move:I2/p0  [greedy @14]
+  #63     ally1 steps F3 -> F2 (5 ft, 25 left)
+  #64     ally1 steps F2 -> G1 (5 ft, 20 left)
+  #65     ally1 steps G1 -> H1 (5 ft, 15 left)
+  #66     ally1 steps H1 -> I2 (10 ft, 5 left)
+  #67     ally1's move ends at I2
+  #68   ally1 chooses attack:spear>gob2  [greedy @15]
+  #69     ally1: Attack
+  #70     ally1 Spear -> gob2: d20 2/2 adv -> 2 (+target-restrained) +3 = 5 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #71   ally1 chooses pass  [greedy @16]
+  #72   ally1's turn ends
+  #73 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #74   ally2 chooses move:H2/p0  [greedy @17]
+  #75     ally2 steps F2 -> G1 (5 ft, 25 left)
+  #76     ally2 steps G1 -> H2 (10 ft, 15 left)
+  #77     ally2's move ends at H2
+  #78   ally2 chooses attack:spear>gob2  [greedy @18]
+  #79     ally2: Attack
+  #80     ally2 Spear -> gob2: d20 8/16 adv -> 16 (+target-restrained) +3 = 19 vs AC 15, hit  [ally2 attack r1 p0.0]
+  #81       gob2 takes 6 (6 piercing), HP 10 -> 4  [ally2 damage r1 p0.0]
+  #82   ally2 chooses pass  [greedy @19]
+  #83   ally2's turn ends
+  #84 == round 2 ==
+  #85 gob1's turn (I5, 10 HP, 0 ft) [Goblin Warrior]
+  #86   gob1 chooses use:pc1/entangle-restrained/escape#2  [greedy @20]
+  #87     gob1: Escape (Restrained)
+  #88       gob1 STR (Athletics) check for Restrained: d20 13 -1 = 12 vs DC 13, fail  [gob1 check r2 p0.0]
+  #89   gob1 chooses pass  [greedy @21]
+  #90   gob1's turn ends
+  #91 gob2's turn (I3, 4 HP, 0 ft) [Goblin Warrior]
+  #92   gob2 chooses use:pc1/entangle-restrained/escape#3  [greedy @22]
+  #93     gob2: Escape (Restrained)
+  #94       gob2 STR (Athletics) check for Restrained: d20 15 -1 = 14 vs DC 13, success  [gob2 check r2 p0.0]
+  #95         Restrained on gob2 ends (escaped)
+  #96           gob2 is no longer Restrained (srd:entangle/entangle-restrained)
+  #97   gob2 chooses pass  [greedy @23]
+  #98   gob2's turn ends
+  #99 pc1's turn (B1, 17 HP, 30 ft) [Sample Grove]
+ #100   pc1 chooses use:pc1/flame/hurl  [greedy @24]
+ #101     pc1: Hurl Flame
+ #102       pc1 chooses target:gob1  [greedy @25]
+ #103       pc1 Hurl Flame -> gob1: d20 19/9 adv -> 19 (+target-restrained) +5 = 24 vs AC 15, hit  [pc1 attack r2 p0.0]
+ #104         gob1 takes 4 (4 fire), HP 10 -> 6  [pc1 damage r2 p0.0]
+ #105   pc1 chooses pass  [greedy @26]
+ #106   pc1's turn ends
+ #107 ally1's turn (I2, 11 HP, 30 ft) [Guard]
+ #108   ally1 chooses move:H4/p0  [greedy @27]
+ #109     ally1 steps I2 -> H3 (10 ft, 20 left)
+ #110     ally1 steps H3 -> H4 (10 ft, 10 left)
+ #111     ally1's move ends at H4
+ #112   ally1 chooses attack:spear>gob1  [greedy @28]
+ #113     ally1: Attack
+ #114     ally1 Spear -> gob1: d20 1/2 adv -> 2 (+target-restrained) +3 = 5 vs AC 15, miss  [ally1 attack r2 p0.0]
+ #115   ally1 chooses pass  [greedy @29]
+ #116   ally1's turn ends
+ #117 ally2's turn (H2, 11 HP, 30 ft) [Guard]
+ #118   ally2 chooses move:I4/p0  [greedy @30]
+ #119     ally2 steps H2 -> H3 (10 ft, 20 left)
+ #120     ally2 steps H3 -> I4 (10 ft, 10 left)
+ #121     ally2's move ends at I4
+ #122   ally2 chooses attack:spear>gob1  [greedy @31]
+ #123     ally2: Attack
+ #124     ally2 Spear -> gob1: d20 5/4 adv -> 5 (+target-restrained) +3 = 8 vs AC 15, miss  [ally2 attack r2 p0.0]
+ #125   ally2 chooses pass  [greedy @32]
+ #126   ally2's turn ends
+ #127 fight ends: stalemate in round 2
+logHash 126dfcc64311ef05
+
+== groupInitiative=individual (journal diverged at @0) ==
+flags read vs default: +statBlockAtZeroHp +corpseSpace +monsterThrownWeapons +conjuredHandEffectBlocksHand +thrownWeaponLands
+   #1   initiative gob2 12 (static)
+   #2   initiative pc1 12 (static)
+   #3   initiative gob1 12 (static)
+   #4   initiative ally1 11 (static)
+   #5   initiative ally2 11 (static)
+   #6 == round 1 ==
+   #7 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+   #8   gob2 chooses opt:nimble-escape-disengage  [greedy @0]
+   #9     gob2: Nimble Escape (Disengage)
+  #10       gob2 is Disengaged (srd:goblin-warrior/nimble-escape-disengage)
+  #11   gob2 chooses move:I3/p0  [greedy @1]
+  #12     gob2 steps G4 -> H3 (5 ft, 25 left)
+  #13     gob2 steps H3 -> I3 (5 ft, 20 left)
+  #14     gob2's move ends at I3
+  #15   gob2 chooses attack:shortbow>pc1  [greedy @2]
+  #16     gob2: Attack
+  #17     gob2 Shortbow -> pc1: d20 7 +4 = 11 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #18   gob2 chooses pass  [greedy @3]
+  #19   gob2 is no longer Disengaged (turn-end)
+  #20   gob2's turn ends
+  #21 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #22   pc1 chooses move:A3/p0  [greedy @4]
+  #23     pc1 steps A4 -> A3 (5 ft, 25 left)
+  #24     pc1's move ends at A3
+  #25   pc1 chooses cast:entangle@1  [greedy @5]
+  #26     pc1 casts Entangle with a level 1 slot (3 left)
+  #27       pc1 is concentrating on Entangle
+  #28       pc1 chooses place:H1  [greedy @6]
+  #29       Entangle appears at H1: 12 squares, Difficult Terrain (seen by ally1, ally2, gob1, gob2, pc1)
+  #30         gob1 STR save vs Entangle: d20 12 -1 = 11 vs DC 13, fail  [gob1 save r1 p5.0]
+  #31         gob2 STR save vs Entangle: d20 5 -1 = 4 vs DC 13, fail  [gob2 save r1 p5.0]
+  #32         Restrained on gob1
+  #33         gob1 is Restrained (srd:entangle/entangle-restrained)
+  #34         Restrained on gob2
+  #35         gob2 is Restrained (srd:entangle/entangle-restrained)
+  #36   pc1 chooses cast:produce-flame@0  [greedy @7]
+  #37     pc1 casts Produce Flame (cantrip)
+  #38       Produce Flame on pc1
+  #39   pc1 chooses pass  [greedy @8]
+  #40   pc1's turn ends
+  #41 gob1's turn (G3, 10 HP, 0 ft) [Goblin Warrior]
+  #42   gob1 chooses use:pc1/entangle-restrained/escape#2  [greedy @9]
+  #43     gob1: Escape (Restrained)
+  #44       gob1 STR (Athletics) check for Restrained: d20 2 -1 = 1 vs DC 13, fail  [gob1 check r1 p0.0]
+  #45   gob1 chooses pass  [greedy @10]
+  #46   gob1's turn ends
+  #47 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #48   ally1 chooses attack:spear>gob1  [greedy @11]
+  #49     ally1: Attack
+  #50     ally1 Spear -> gob1: d20 2/2 adv -> 2 (+target-restrained) +3 = 5 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #51   ally1 chooses pass  [greedy @12]
+  #52   ally1's turn ends
+  #53 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #54   ally2 chooses attack:spear>gob1  [greedy @13]
+  #55     ally2: Attack
+  #56     ally2 Spear -> gob1: d20 8/16 adv -> 16 (+target-restrained) +3 = 19 vs AC 15, hit  [ally2 attack r1 p0.0]
+  #57       gob1 takes 6 (6 piercing), HP 10 -> 4  [ally2 damage r1 p0.0]
+  #58   ally2 chooses pass  [greedy @14]
+  #59   ally2's turn ends
+  #60 == round 2 ==
+  #61 gob2's turn (I3, 10 HP, 0 ft) [Goblin Warrior]
+  #62   gob2 chooses use:pc1/entangle-restrained/escape#3  [greedy @15]
+  #63     gob2: Escape (Restrained)
+  #64       gob2 STR (Athletics) check for Restrained: d20 15 -1 = 14 vs DC 13, success  [gob2 check r2 p0.0]
+  #65         Restrained on gob2 ends (escaped)
+  #66           gob2 is no longer Restrained (srd:entangle/entangle-restrained)
+  #67   gob2 chooses move:N1/p0  [greedy @16]
+  #68     gob2 steps I3 -> J4 (5 ft, 25 left)
+  #69     gob2 steps J4 -> K3 (5 ft, 20 left)
+  #70     gob2 steps K3 -> L2 (5 ft, 15 left)
+  #71     gob2 steps L2 -> M1 (5 ft, 10 left)
+  #72     gob2 steps M1 -> N1 (5 ft, 5 left)
+  #73     gob2's move ends at N1
+  #74   gob2 chooses pass  [greedy @17]
+  #75   gob2's turn ends
+  #76 pc1's turn (A3, 24 HP, 30 ft) [Sample Grove]
+  #77   pc1 chooses use:pc1/flame/hurl  [greedy @18]
+  #78     pc1: Hurl Flame
+  #79       pc1 chooses target:gob1  [greedy @19]
+  #80       pc1 Hurl Flame -> gob1: d20 19/9 adv -> 19 (+target-restrained) +5 = 24 vs AC 17 (Half Cover +2), hit  [pc1 attack r2 p0.0]
+  #81         gob1 takes 4 (4 fire), HP 4 -> 0  [pc1 damage r2 p0.0]
+  #82           gob1 dies (0 HP)
+  #83   pc1 chooses pass  [greedy @20]
+  #84   pc1's turn ends
+  #85 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #86   ally1 chooses move:J4/p0  [greedy @21]
+  #87     ally1 steps F3 -> G4 (5 ft, 25 left)
+  #88     ally1 steps G4 -> H4 (5 ft, 20 left)
+  #89     ally1 steps H4 -> I4 (5 ft, 15 left)
+  #90     ally1 steps I4 -> J4 (5 ft, 10 left)
+  #91     ally1's move ends at J4
+  #92   ally1 chooses attack:spear-thrown>gob2  [greedy @22]
+  #93     ally1: Attack
+  #94     ally1 Spear (thrown) -> gob2: d20 1 +3 = 4 vs AC 15, miss  [ally1 attack r2 p0.0]
+  #95       ally1 throws Spear (0 left)
+  #96   ally1 chooses move:L2/p0  [greedy @23]
+  #97     ally1 steps J4 -> K3 (5 ft, 5 left)
+  #98     ally1 steps K3 -> L2 (5 ft, 0 left)
+  #99     ally1's move ends at L2
+ #100   ally1's turn ends
+ #101 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+ #102   ally2 chooses move:K4/p0  [greedy @24]
+ #103     ally2 steps F2 -> G3 (10 ft, 20 left)
+ #104     ally2 steps G3 -> H4 (5 ft, 15 left)
+ #105     ally2 steps H4 -> I4 (5 ft, 10 left)
+ #106     ally2 steps I4 -> J4 (5 ft, 5 left)
+ #107     ally2 steps J4 -> K4 (5 ft, 0 left)
+ #108     ally2's move ends at K4
+ #109   ally2 chooses attack:spear-thrown>gob2  [greedy @25]
+ #110     ally2: Attack
+ #111     ally2 Spear (thrown) -> gob2: d20 5 +3 = 8 vs AC 15, miss  [ally2 attack r2 p0.0]
+ #112       ally2 throws Spear (0 left)
+ #113   ally2's turn ends
+ #114 fight ends: stalemate in round 2
+logHash 9631472ce8f836e7
+
+== monsterHp=rolled (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4   initiative ally1 11 (static)
+   #5   initiative ally2 11 (static)
+   #6 == round 1 ==
+   #7 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #8   pc1 chooses cast:faerie-fire@1  [journal @0]
+   #9     pc1 casts Faerie Fire with a level 1 slot (3 left)
+  #10       pc1 is concentrating on Faerie Fire
+  #11       pc1 chooses place:H4  [journal @1]
+  #12       Faerie Fire appears at H4: 16 squares (seen by ally1, ally2, gob1, gob2, pc1)
+  #13         gob1 DEX save vs Faerie Fire: d20 12 +2 +2(Half Cover) = 16 vs DC 13, success  [gob1 save r1 p5.0]
+  #14         gob2 DEX save vs Faerie Fire: d20 5 +2 = 7 vs DC 13, fail  [gob2 save r1 p5.0]
+  #15         Outlined (attacks against it have Advantage) on gob2
+  #16   pc1 chooses pass  [journal @2]
+  #17   pc1's turn ends
+  #18 gob1's turn (G3, 8 HP, 30 ft) [Goblin Warrior]
+  #19   gob1 chooses pass  [journal @3]
+  #20   gob1's turn ends
+  #21 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses pass  [journal @4]
+  #23   gob2's turn ends
+  #24 ally1's turn (F3, 12 HP, 30 ft) [Guard]
+  #25   ally1 chooses attack:spear>gob2  [journal @5]
+  #26     ally1: Attack
+  #27     ally1 Spear -> gob2: d20 2/2 adv -> 2 (+srd:faerie-fire/outlined) +3 = 5 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #28   ally1 chooses pass  [journal @6]
+  #29   ally1's turn ends
+  #30 ally2's turn (F2, 10 HP, 30 ft) [Guard]
+  #31   ally2 chooses attack:spear>gob1  [journal @7]
+  #32     ally2: Attack
+  #33     ally2 Spear -> gob1: d20 8 +3 = 11 vs AC 15, miss  [ally2 attack r1 p0.0]
+  #34   ally2 chooses pass  [journal @8]
+  #35   ally2's turn ends
+  #36 == round 2 ==
+  #37 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #38   pc1 chooses pass  [journal @9]
+  #39   pc1's turn ends
+  #40 gob1's turn (G3, 8 HP, 30 ft) [Goblin Warrior]
+  #41   gob1 chooses attack:shortbow>pc1  [journal @10]
+  #42     gob1: Attack
+  #43     gob1 Shortbow -> pc1: d20 18/4 dis -> 4 (-ranged-adjacent) +4 = 8 vs AC 15 (Half Cover +2), miss  [gob1 attack r2 p0.0]
+  #44   gob1 chooses pass  [journal @11]
+  #45   gob1's turn ends
+  #46 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #47   gob2 chooses attack:shortbow>pc1  [journal @12]
+  #48     gob2: Attack
+  #49     gob2 Shortbow -> pc1: d20 9/11 dis -> 9 (-ranged-adjacent) +4 = 13 vs AC 13, hit  [gob2 attack r2 p0.0]
+  #50       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r2 p0.0]
+  #51         pc1 concentration save (Faerie Fire): d20 3 +2 = 5 vs DC 10, breaks  [pc1 conc r2 p4.0]
+  #52           Faerie Fire (pc1) ends (concentration broken)
+  #53             Faerie Fire ends (its source ended)
+  #54               Outlined (attacks against it have Advantage) on gob2 ends (its source ended)
+  #55   gob2 chooses pass  [journal @13]
+  #56   gob2's turn ends
+  #57 ally1's turn (F3, 12 HP, 30 ft) [Guard]
+  #58   ally1 chooses attack:spear>gob2  [journal @14]
+  #59     ally1: Attack
+  #60     ally1 Spear -> gob2: d20 1 +3 = 4 vs AC 15, miss  [ally1 attack r2 p0.0]
+  #61   ally1 chooses pass  [journal @15]
+  #62   ally1's turn ends
+  #63 ally2's turn (F2, 10 HP, 30 ft) [Guard]
+  #64   ally2 chooses pass  [journal @16]
+  #65   ally2's turn ends
+  #66 fight ends: stalemate in round 2
+logHash abbb1d92099863e9
+
+== areaOriginOnGrid=gridIntersection (journal diverged at @1) ==
+flags read vs default: +statBlockAtZeroHp +corpseSpace +conjuredHandEffectBlocksHand
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4   initiative ally1 11 (static)
+   #5   initiative ally2 11 (static)
+   #6 == round 1 ==
+   #7 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #8   pc1 chooses cast:faerie-fire@1  [journal @0]
+   #9     pc1 casts Faerie Fire with a level 1 slot (3 left)
+  #10       pc1 is concentrating on Faerie Fire
+  #11       pc1 chooses place:^G1  [greedy @1]
+  #12       Faerie Fire appears at ^G1: 16 squares (seen by ally1, ally2, gob1, gob2, pc1)
+  #13         gob1 DEX save vs Faerie Fire: d20 12 +2 = 14 vs DC 13, success  [gob1 save r1 p5.0]
+  #14         gob2 DEX save vs Faerie Fire: d20 5 +2 +2(Half Cover) = 9 vs DC 13, fail  [gob2 save r1 p5.0]
+  #15         Outlined (attacks against it have Advantage) on gob2
+  #16   pc1 chooses cast:produce-flame@0  [greedy @2]
+  #17     pc1 casts Produce Flame (cantrip)
+  #18       Produce Flame on pc1
+  #19   pc1 chooses pass  [greedy @3]
+  #20   pc1's turn ends
+  #21 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob1 chooses opt:nimble-escape-disengage  [greedy @4]
+  #23     gob1: Nimble Escape (Disengage)
+  #24       gob1 is Disengaged (srd:goblin-warrior/nimble-escape-disengage)
+  #25   gob1 chooses move:I5/p0  [greedy @5]
+  #26     gob1 steps G3 -> H4 (5 ft, 25 left)
+  #27     gob1 steps H4 -> I5 (5 ft, 20 left)
+  #28     gob1's move ends at I5
+  #29   gob1 chooses attack:shortbow>pc1  [greedy @6]
+  #30     gob1: Attack
+  #31     gob1 Shortbow -> pc1: d20 16 +4 = 20 vs AC 13, hit  [gob1 attack r1 p0.0]
+  #32       pc1 takes 7 (7 piercing), HP 24 -> 17  [gob1 damage r1 p0.0]
+  #33         pc1 concentration save (Faerie Fire): d20 18 +2 = 20 vs DC 10, holds  [pc1 conc r1 p3.0]
+  #34   gob1 chooses pass  [greedy @7]
+  #35   gob1 is no longer Disengaged (turn-end)
+  #36   gob1's turn ends
+  #37 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #38   gob2 chooses opt:nimble-escape-disengage  [greedy @8]
+  #39     gob2: Nimble Escape (Disengage)
+  #40       gob2 is Disengaged (srd:goblin-warrior/nimble-escape-disengage)
+  #41   gob2 chooses move:I3/p0  [greedy @9]
+  #42     gob2 steps G4 -> H3 (5 ft, 25 left)
+  #43     gob2 steps H3 -> I3 (5 ft, 20 left)
+  #44     gob2's move ends at I3
+  #45   gob2 chooses attack:shortbow>pc1  [greedy @10]
+  #46     gob2: Attack
+  #47     gob2 Shortbow -> pc1: d20 7 +4 = 11 vs AC 13, miss  [gob2 attack r1 p0.0]
+  #48   gob2 chooses pass  [greedy @11]
+  #49   gob2 is no longer Disengaged (turn-end)
+  #50   gob2's turn ends
+  #51 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #52   ally1 chooses move:H2/p0  [greedy @12]
+  #53     ally1 steps F3 -> G2 (5 ft, 25 left)
+  #54     ally1 steps G2 -> H2 (5 ft, 20 left)
+  #55     ally1's move ends at H2
+  #56   ally1 chooses attack:spear>gob2  [greedy @13]
+  #57     ally1: Attack
+  #58     ally1 Spear -> gob2: d20 2/2 adv -> 2 (+srd:faerie-fire/outlined) +3 = 5 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #59   ally1 chooses pass  [greedy @14]
+  #60   ally1's turn ends
+  #61 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #62   ally2 chooses move:H3/p0  [greedy @15]
+  #63     ally2 steps F2 -> G2 (5 ft, 25 left)
+  #64     ally2 steps G2 -> H3 (5 ft, 20 left)
+  #65     ally2's move ends at H3
+  #66   ally2 chooses attack:spear>gob2  [greedy @16]
+  #67     ally2: Attack
+  #68     ally2 Spear -> gob2: d20 8/16 adv -> 16 (+srd:faerie-fire/outlined) +3 = 19 vs AC 15, hit  [ally2 attack r1 p0.0]
+  #69       gob2 takes 6 (6 piercing), HP 10 -> 4  [ally2 damage r1 p0.0]
+  #70   ally2 chooses pass  [greedy @17]
+  #71   ally2's turn ends
+  #72 == round 2 ==
+  #73 pc1's turn (A4, 17 HP, 30 ft) [Sample Grove]
+  #74   pc1 chooses move:A3/p0  [greedy @18]
+  #75     pc1 steps A4 -> A3 (5 ft, 25 left)
+  #76     pc1's move ends at A3
+  #77   pc1 chooses use:pc1/flame/hurl  [greedy @19]
+  #78     pc1: Hurl Flame
+  #79       pc1 chooses target:gob2  [greedy @20]
+  #80       pc1 Hurl Flame -> gob2: d20 19/9 adv -> 19 (+srd:faerie-fire/outlined) +5 = 24 vs AC 17 (Half Cover +2), hit  [pc1 attack r2 p0.0]
+  #81         gob2 takes 4 (4 fire), HP 4 -> 0  [pc1 damage r2 p0.0]
+  #82           gob2 dies (0 HP)
+  #83   pc1 chooses pass  [greedy @21]
+  #84   pc1's turn ends
+  #85 gob1's turn (I5, 10 HP, 30 ft) [Goblin Warrior]
+  #86   gob1 chooses attack:shortbow>pc1  [greedy @22]
+  #87     gob1: Attack
+  #88     gob1 Shortbow -> pc1: d20 18 +4 = 22 vs AC 13, hit  [gob1 attack r2 p0.0]
+  #89       pc1 takes 7 (7 piercing), HP 17 -> 10  [gob1 damage r2 p0.0]
+  #90         pc1 concentration save (Faerie Fire): d20 7 +2 = 9 vs DC 10, breaks  [pc1 conc r2 p3.0]
+  #91           Faerie Fire (pc1) ends (concentration broken)
+  #92             Faerie Fire ends (its source ended)
+  #93               Outlined (attacks against it have Advantage) on gob2 ends (its source ended)
+  #94   gob1 chooses pass  [greedy @23]
+  #95   gob1's turn ends
+  #96 ally1's turn (H2, 11 HP, 30 ft) [Guard]
+  #97   ally1 chooses move:H4/p0  [greedy @24]
+  #98     ally1 steps H2 -> G3 (5 ft, 25 left)
+  #99     ally1 steps G3 -> H4 (5 ft, 20 left)
+ #100     ally1's move ends at H4
+ #101   ally1 chooses attack:spear>gob1  [greedy @25]
+ #102     ally1: Attack
+ #103     ally1 Spear -> gob1: d20 1 +3 = 4 vs AC 15, miss  [ally1 attack r2 p0.0]
+ #104   ally1 chooses pass  [greedy @26]
+ #105   ally1's turn ends
+ #106 ally2's turn (H3, 11 HP, 30 ft) [Guard]
+ #107   ally2 chooses move:I4/p0  [greedy @27]
+ #108     ally2 steps H3 -> I4 (5 ft, 25 left)
+ #109     ally2's move ends at I4
+ #110   ally2 chooses attack:spear>gob1  [greedy @28]
+ #111     ally2: Attack
+ #112     ally2 Spear -> gob1: d20 5 +3 = 8 vs AC 15, miss  [ally2 attack r2 p0.0]
+ #113   ally2 chooses pass  [greedy @29]
+ #114   ally2's turn ends
+ #115 fight ends: stalemate in round 2
+logHash 6e1fad568b59047a
+
+== areaGridCoverage=squareCenterInside (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4   initiative ally1 11 (static)
+   #5   initiative ally2 11 (static)
+   #6 == round 1 ==
+   #7 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #8   pc1 chooses cast:faerie-fire@1  [journal @0]
+   #9     pc1 casts Faerie Fire with a level 1 slot (3 left)
+  #10       pc1 is concentrating on Faerie Fire
+  #11       pc1 chooses place:H4  [journal @1]
+  #12       Faerie Fire appears at H4: 16 squares (seen by ally1, ally2, gob1, gob2, pc1)
+  #13         gob1 DEX save vs Faerie Fire: d20 12 +2 +2(Half Cover) = 16 vs DC 13, success  [gob1 save r1 p5.0]
+  #14         gob2 DEX save vs Faerie Fire: d20 5 +2 = 7 vs DC 13, fail  [gob2 save r1 p5.0]
+  #15         Outlined (attacks against it have Advantage) on gob2
+  #16   pc1 chooses pass  [journal @2]
+  #17   pc1's turn ends
+  #18 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #19   gob1 chooses pass  [journal @3]
+  #20   gob1's turn ends
+  #21 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses pass  [journal @4]
+  #23   gob2's turn ends
+  #24 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #25   ally1 chooses attack:spear>gob2  [journal @5]
+  #26     ally1: Attack
+  #27     ally1 Spear -> gob2: d20 2/2 adv -> 2 (+srd:faerie-fire/outlined) +3 = 5 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #28   ally1 chooses pass  [journal @6]
+  #29   ally1's turn ends
+  #30 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #31   ally2 chooses attack:spear>gob1  [journal @7]
+  #32     ally2: Attack
+  #33     ally2 Spear -> gob1: d20 8 +3 = 11 vs AC 15, miss  [ally2 attack r1 p0.0]
+  #34   ally2 chooses pass  [journal @8]
+  #35   ally2's turn ends
+  #36 == round 2 ==
+  #37 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #38   pc1 chooses pass  [journal @9]
+  #39   pc1's turn ends
+  #40 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #41   gob1 chooses attack:shortbow>pc1  [journal @10]
+  #42     gob1: Attack
+  #43     gob1 Shortbow -> pc1: d20 18/4 dis -> 4 (-ranged-adjacent) +4 = 8 vs AC 15 (Half Cover +2), miss  [gob1 attack r2 p0.0]
+  #44   gob1 chooses pass  [journal @11]
+  #45   gob1's turn ends
+  #46 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #47   gob2 chooses attack:shortbow>pc1  [journal @12]
+  #48     gob2: Attack
+  #49     gob2 Shortbow -> pc1: d20 9/11 dis -> 9 (-ranged-adjacent) +4 = 13 vs AC 13, hit  [gob2 attack r2 p0.0]
+  #50       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r2 p0.0]
+  #51         pc1 concentration save (Faerie Fire): d20 3 +2 = 5 vs DC 10, breaks  [pc1 conc r2 p4.0]
+  #52           Faerie Fire (pc1) ends (concentration broken)
+  #53             Faerie Fire ends (its source ended)
+  #54               Outlined (attacks against it have Advantage) on gob2 ends (its source ended)
+  #55   gob2 chooses pass  [journal @13]
+  #56   gob2's turn ends
+  #57 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #58   ally1 chooses attack:spear>gob2  [journal @14]
+  #59     ally1: Attack
+  #60     ally1 Spear -> gob2: d20 1 +3 = 4 vs AC 15, miss  [ally1 attack r2 p0.0]
+  #61   ally1 chooses pass  [journal @15]
+  #62   ally1's turn ends
+  #63 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #64   ally2 chooses pass  [journal @16]
+  #65   ally2's turn ends
+  #66 fight ends: stalemate in round 2
+logHash 97a292ec41a5d650
+
+== areaGridCoverage=anyOverlap (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4   initiative ally1 11 (static)
+   #5   initiative ally2 11 (static)
+   #6 == round 1 ==
+   #7 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #8   pc1 chooses cast:faerie-fire@1  [journal @0]
+   #9     pc1 casts Faerie Fire with a level 1 slot (3 left)
+  #10       pc1 is concentrating on Faerie Fire
+  #11       pc1 chooses place:H4  [journal @1]
+  #12       Faerie Fire appears at H4: 16 squares (seen by ally1, ally2, gob1, gob2, pc1)
+  #13         gob1 DEX save vs Faerie Fire: d20 12 +2 +2(Half Cover) = 16 vs DC 13, success  [gob1 save r1 p5.0]
+  #14         gob2 DEX save vs Faerie Fire: d20 5 +2 = 7 vs DC 13, fail  [gob2 save r1 p5.0]
+  #15         Outlined (attacks against it have Advantage) on gob2
+  #16   pc1 chooses pass  [journal @2]
+  #17   pc1's turn ends
+  #18 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #19   gob1 chooses pass  [journal @3]
+  #20   gob1's turn ends
+  #21 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses pass  [journal @4]
+  #23   gob2's turn ends
+  #24 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #25   ally1 chooses attack:spear>gob2  [journal @5]
+  #26     ally1: Attack
+  #27     ally1 Spear -> gob2: d20 2/2 adv -> 2 (+srd:faerie-fire/outlined) +3 = 5 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #28   ally1 chooses pass  [journal @6]
+  #29   ally1's turn ends
+  #30 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #31   ally2 chooses attack:spear>gob1  [journal @7]
+  #32     ally2: Attack
+  #33     ally2 Spear -> gob1: d20 8 +3 = 11 vs AC 15, miss  [ally2 attack r1 p0.0]
+  #34   ally2 chooses pass  [journal @8]
+  #35   ally2's turn ends
+  #36 == round 2 ==
+  #37 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #38   pc1 chooses pass  [journal @9]
+  #39   pc1's turn ends
+  #40 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #41   gob1 chooses attack:shortbow>pc1  [journal @10]
+  #42     gob1: Attack
+  #43     gob1 Shortbow -> pc1: d20 18/4 dis -> 4 (-ranged-adjacent) +4 = 8 vs AC 15 (Half Cover +2), miss  [gob1 attack r2 p0.0]
+  #44   gob1 chooses pass  [journal @11]
+  #45   gob1's turn ends
+  #46 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #47   gob2 chooses attack:shortbow>pc1  [journal @12]
+  #48     gob2: Attack
+  #49     gob2 Shortbow -> pc1: d20 9/11 dis -> 9 (-ranged-adjacent) +4 = 13 vs AC 13, hit  [gob2 attack r2 p0.0]
+  #50       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r2 p0.0]
+  #51         pc1 concentration save (Faerie Fire): d20 3 +2 = 5 vs DC 10, breaks  [pc1 conc r2 p4.0]
+  #52           Faerie Fire (pc1) ends (concentration broken)
+  #53             Faerie Fire ends (its source ended)
+  #54               Outlined (attacks against it have Advantage) on gob2 ends (its source ended)
+  #55   gob2 chooses pass  [journal @13]
+  #56   gob2's turn ends
+  #57 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #58   ally1 chooses attack:spear>gob2  [journal @14]
+  #59     ally1: Attack
+  #60     ally1 Spear -> gob2: d20 1 +3 = 4 vs AC 15, miss  [ally1 attack r2 p0.0]
+  #61   ally1 chooses pass  [journal @15]
+  #62   ally1's turn ends
+  #63 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #64   ally2 chooses pass  [journal @16]
+  #65   ally2's turn ends
+  #66 fight ends: stalemate in round 2
+logHash 8abcc08b6f999048
+
+== losMethod=centers (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4   initiative ally1 11 (static)
+   #5   initiative ally2 11 (static)
+   #6 == round 1 ==
+   #7 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #8   pc1 chooses cast:faerie-fire@1  [journal @0]
+   #9     pc1 casts Faerie Fire with a level 1 slot (3 left)
+  #10       pc1 is concentrating on Faerie Fire
+  #11       pc1 chooses place:H4  [journal @1]
+  #12       Faerie Fire appears at H4: 16 squares (seen by ally1, ally2, gob1, gob2, pc1)
+  #13         gob1 DEX save vs Faerie Fire: d20 12 +2 = 14 vs DC 13, success  [gob1 save r1 p5.0]
+  #14         gob2 DEX save vs Faerie Fire: d20 5 +2 = 7 vs DC 13, fail  [gob2 save r1 p5.0]
+  #15         Outlined (attacks against it have Advantage) on gob2
+  #16   pc1 chooses pass  [journal @2]
+  #17   pc1's turn ends
+  #18 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #19   gob1 chooses pass  [journal @3]
+  #20   gob1's turn ends
+  #21 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses pass  [journal @4]
+  #23   gob2's turn ends
+  #24 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #25   ally1 chooses attack:spear>gob2  [journal @5]
+  #26     ally1: Attack
+  #27     ally1 Spear -> gob2: d20 2/2 adv -> 2 (+srd:faerie-fire/outlined) +3 = 5 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #28   ally1 chooses pass  [journal @6]
+  #29   ally1's turn ends
+  #30 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #31   ally2 chooses attack:spear>gob1  [journal @7]
+  #32     ally2: Attack
+  #33     ally2 Spear -> gob1: d20 8 +3 = 11 vs AC 15, miss  [ally2 attack r1 p0.0]
+  #34   ally2 chooses pass  [journal @8]
+  #35   ally2's turn ends
+  #36 == round 2 ==
+  #37 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #38   pc1 chooses pass  [journal @9]
+  #39   pc1's turn ends
+  #40 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #41   gob1 chooses attack:shortbow>pc1  [journal @10]
+  #42     gob1: Attack
+  #43     gob1 Shortbow -> pc1: d20 18/4 dis -> 4 (-ranged-adjacent) +4 = 8 vs AC 15 (Half Cover +2), miss  [gob1 attack r2 p0.0]
+  #44   gob1 chooses pass  [journal @11]
+  #45   gob1's turn ends
+  #46 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #47   gob2 chooses attack:shortbow>pc1  [journal @12]
+  #48     gob2: Attack
+  #49     gob2 Shortbow -> pc1: d20 9/11 dis -> 9 (-ranged-adjacent) +4 = 13 vs AC 13, hit  [gob2 attack r2 p0.0]
+  #50       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r2 p0.0]
+  #51         pc1 concentration save (Faerie Fire): d20 3 +2 = 5 vs DC 10, breaks  [pc1 conc r2 p4.0]
+  #52           Faerie Fire (pc1) ends (concentration broken)
+  #53             Faerie Fire ends (its source ended)
+  #54               Outlined (attacks against it have Advantage) on gob2 ends (its source ended)
+  #55   gob2 chooses pass  [journal @13]
+  #56   gob2's turn ends
+  #57 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #58   ally1 chooses attack:spear>gob2  [journal @14]
+  #59     ally1: Attack
+  #60     ally1 Spear -> gob2: d20 1 +3 = 4 vs AC 15, miss  [ally1 attack r2 p0.0]
+  #61   ally1 chooses pass  [journal @15]
+  #62   ally1's turn ends
+  #63 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #64   ally2 chooses pass  [journal @16]
+  #65   ally2's turn ends
+  #66 fight ends: stalemate in round 2
+logHash a543b11a888c5603
+
+== losMethod=stubbed (journal held) ==
+flags read vs default: -losMethod -creatureCover
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4   initiative ally1 11 (static)
+   #5   initiative ally2 11 (static)
+   #6 == round 1 ==
+   #7 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #8   pc1 chooses cast:faerie-fire@1  [journal @0]
+   #9     pc1 casts Faerie Fire with a level 1 slot (3 left)
+  #10       pc1 is concentrating on Faerie Fire
+  #11       pc1 chooses place:H4  [journal @1]
+  #12       Faerie Fire appears at H4: 16 squares (seen by ally1, ally2, gob1, gob2, pc1)
+  #13         gob1 DEX save vs Faerie Fire: d20 12 +2 = 14 vs DC 13, success  [gob1 save r1 p5.0]
+  #14         gob2 DEX save vs Faerie Fire: d20 5 +2 = 7 vs DC 13, fail  [gob2 save r1 p5.0]
+  #15         Outlined (attacks against it have Advantage) on gob2
+  #16   pc1 chooses pass  [journal @2]
+  #17   pc1's turn ends
+  #18 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #19   gob1 chooses pass  [journal @3]
+  #20   gob1's turn ends
+  #21 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses pass  [journal @4]
+  #23   gob2's turn ends
+  #24 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #25   ally1 chooses attack:spear>gob2  [journal @5]
+  #26     ally1: Attack
+  #27     ally1 Spear -> gob2: d20 2/2 adv -> 2 (+srd:faerie-fire/outlined) +3 = 5 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #28   ally1 chooses pass  [journal @6]
+  #29   ally1's turn ends
+  #30 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #31   ally2 chooses attack:spear>gob1  [journal @7]
+  #32     ally2: Attack
+  #33     ally2 Spear -> gob1: d20 8 +3 = 11 vs AC 15, miss  [ally2 attack r1 p0.0]
+  #34   ally2 chooses pass  [journal @8]
+  #35   ally2's turn ends
+  #36 == round 2 ==
+  #37 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #38   pc1 chooses pass  [journal @9]
+  #39   pc1's turn ends
+  #40 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #41   gob1 chooses attack:shortbow>pc1  [journal @10]
+  #42     gob1: Attack
+  #43     gob1 Shortbow -> pc1: d20 18/4 dis -> 4 (-ranged-adjacent) +4 = 8 vs AC 13, miss  [gob1 attack r2 p0.0]
+  #44   gob1 chooses pass  [journal @11]
+  #45   gob1's turn ends
+  #46 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #47   gob2 chooses attack:shortbow>pc1  [journal @12]
+  #48     gob2: Attack
+  #49     gob2 Shortbow -> pc1: d20 9/11 dis -> 9 (-ranged-adjacent) +4 = 13 vs AC 13, hit  [gob2 attack r2 p0.0]
+  #50       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r2 p0.0]
+  #51         pc1 concentration save (Faerie Fire): d20 3 +2 = 5 vs DC 10, breaks  [pc1 conc r2 p4.0]
+  #52           Faerie Fire (pc1) ends (concentration broken)
+  #53             Faerie Fire ends (its source ended)
+  #54               Outlined (attacks against it have Advantage) on gob2 ends (its source ended)
+  #55   gob2 chooses pass  [journal @13]
+  #56   gob2's turn ends
+  #57 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #58   ally1 chooses attack:spear>gob2  [journal @14]
+  #59     ally1: Attack
+  #60     ally1 Spear -> gob2: d20 1 +3 = 4 vs AC 15, miss  [ally1 attack r2 p0.0]
+  #61   ally1 chooses pass  [journal @15]
+  #62   ally1's turn ends
+  #63 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #64   ally2 chooses pass  [journal @16]
+  #65   ally2's turn ends
+  #66 fight ends: stalemate in round 2
+logHash ab683190ac66b7c7
+
+== creatureCover=off (journal held) ==
+flags read vs default: -losMethod
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 12 (static)
+   #3   initiative gob2 12 (static)
+   #4   initiative ally1 11 (static)
+   #5   initiative ally2 11 (static)
+   #6 == round 1 ==
+   #7 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+   #8   pc1 chooses cast:faerie-fire@1  [journal @0]
+   #9     pc1 casts Faerie Fire with a level 1 slot (3 left)
+  #10       pc1 is concentrating on Faerie Fire
+  #11       pc1 chooses place:H4  [journal @1]
+  #12       Faerie Fire appears at H4: 16 squares (seen by ally1, ally2, gob1, gob2, pc1)
+  #13         gob1 DEX save vs Faerie Fire: d20 12 +2 = 14 vs DC 13, success  [gob1 save r1 p5.0]
+  #14         gob2 DEX save vs Faerie Fire: d20 5 +2 = 7 vs DC 13, fail  [gob2 save r1 p5.0]
+  #15         Outlined (attacks against it have Advantage) on gob2
+  #16   pc1 chooses pass  [journal @2]
+  #17   pc1's turn ends
+  #18 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #19   gob1 chooses pass  [journal @3]
+  #20   gob1's turn ends
+  #21 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses pass  [journal @4]
+  #23   gob2's turn ends
+  #24 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #25   ally1 chooses attack:spear>gob2  [journal @5]
+  #26     ally1: Attack
+  #27     ally1 Spear -> gob2: d20 2/2 adv -> 2 (+srd:faerie-fire/outlined) +3 = 5 vs AC 15, miss  [ally1 attack r1 p0.0]
+  #28   ally1 chooses pass  [journal @6]
+  #29   ally1's turn ends
+  #30 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #31   ally2 chooses attack:spear>gob1  [journal @7]
+  #32     ally2: Attack
+  #33     ally2 Spear -> gob1: d20 8 +3 = 11 vs AC 15, miss  [ally2 attack r1 p0.0]
+  #34   ally2 chooses pass  [journal @8]
+  #35   ally2's turn ends
+  #36 == round 2 ==
+  #37 pc1's turn (A4, 24 HP, 30 ft) [Sample Grove]
+  #38   pc1 chooses pass  [journal @9]
+  #39   pc1's turn ends
+  #40 gob1's turn (G3, 10 HP, 30 ft) [Goblin Warrior]
+  #41   gob1 chooses attack:shortbow>pc1  [journal @10]
+  #42     gob1: Attack
+  #43     gob1 Shortbow -> pc1: d20 18/4 dis -> 4 (-ranged-adjacent) +4 = 8 vs AC 13, miss  [gob1 attack r2 p0.0]
+  #44   gob1 chooses pass  [journal @11]
+  #45   gob1's turn ends
+  #46 gob2's turn (G4, 10 HP, 30 ft) [Goblin Warrior]
+  #47   gob2 chooses attack:shortbow>pc1  [journal @12]
+  #48     gob2: Attack
+  #49     gob2 Shortbow -> pc1: d20 9/11 dis -> 9 (-ranged-adjacent) +4 = 13 vs AC 13, hit  [gob2 attack r2 p0.0]
+  #50       pc1 takes 6 (6 piercing), HP 24 -> 18  [gob2 damage r2 p0.0]
+  #51         pc1 concentration save (Faerie Fire): d20 3 +2 = 5 vs DC 10, breaks  [pc1 conc r2 p4.0]
+  #52           Faerie Fire (pc1) ends (concentration broken)
+  #53             Faerie Fire ends (its source ended)
+  #54               Outlined (attacks against it have Advantage) on gob2 ends (its source ended)
+  #55   gob2 chooses pass  [journal @13]
+  #56   gob2's turn ends
+  #57 ally1's turn (F3, 11 HP, 30 ft) [Guard]
+  #58   ally1 chooses attack:spear>gob2  [journal @14]
+  #59     ally1: Attack
+  #60     ally1 Spear -> gob2: d20 1 +3 = 4 vs AC 15, miss  [ally1 attack r2 p0.0]
+  #61   ally1 chooses pass  [journal @15]
+  #62   ally1's turn ends
+  #63 ally2's turn (F2, 11 HP, 30 ft) [Guard]
+  #64   ally2 chooses pass  [journal @16]
+  #65   ally2's turn ends
+  #66 fight ends: stalemate in round 2
+logHash 4fa383ae3f29ecfa

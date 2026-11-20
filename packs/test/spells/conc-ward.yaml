@@ -1,0 +1,22 @@
+# A synthetic concentration zone whose appearance puts a child rider on every creature it covers:
+# attack rolls against them have Advantage. Breaking concentration ends the instance, the zone and the riders.
+kind: spell
+id: test:conc-ward
+name: Concentration Ward
+source: synthetic test fixture (concentration zone with child riders)
+level: 1
+castingTime: action
+range: 60
+components: { v: true, s: true, m: focus }
+concentration: true
+duration: { minutes: 1 }
+area: ward
+effects:
+  - id: ward
+    name: Ward
+    zone: { shape: sphere, radius: 10 }
+    on: [{ when: [appear], do: [{ apply: { effect: marked, to: target } }] }]
+  - id: marked
+    name: Ward (attacks against it have Advantage)
+    mods: [{ on: [d20.attack], side: incoming, op: adv }]
+do: [{ apply: { effect: ward, to: point } }]

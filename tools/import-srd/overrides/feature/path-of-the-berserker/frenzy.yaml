@@ -1,0 +1,39 @@
+# Reviewed against SRD 5.2.1 p.30 (srd-raw.txt:5171-5178), Path of the Berserker level 3, Frenzy
+# (coverage W1, docs/design/w1-plan.md section 3, P3, P4, P10): "If you use Reckless Attack while
+# your Rage is active, you deal extra damage to the first target you hit on your turn with a
+# Strength-based attack. To determine the extra damage, roll a number of d6s equal to your Rage
+# Damage bonus, and add them together. The damage has the same type as the weapon or Unarmed Strike
+# used for the attack."
+#   - An augment on Reckless Attack's firstAttack program: when Reckless Attack is used, if the Rage
+#     (srd:barbarian/rage's `raging`) is up, apply `armed` to the bearer until the end of this turn.
+#     Whether Rage is checked at the declaration or at the hit is the frenzyRageCheck flag
+#     (declaration by default, Shane 2026-11-12; `hit` not implemented), unverified, so partial.
+#   - A rider: on a hit with a weapon or an Unarmed Strike using Strength, once and only on the
+#     bearer's turn (oncePerTurn ownTurn: "the first target you hit on your turn"), automatic ("you
+#     deal"), while `armed`: (@scale.barbarian.rage-damage)d6 of the attack's damage type. Armed at
+#     the first attack roll, the first Strength hit after it is the first one on the turn.
+fidelity: partial
+augments:
+  feature: srd:barbarian/reckless-attack
+  firstAttack: true
+  steps:
+    - apply: { effect: armed, to: self, when: [{ selfHas: 'srd:barbarian/rage#raging' }] }
+effects:
+  - id: armed
+    name: Frenzy (Reckless Attack while raging)
+    duration: { until: endOfThisTurn, of: bearer }
+riders:
+  - id: frenzy
+    name: Frenzy
+    on: hit
+    filter: { attack: [weapon, unarmed], ability: str }
+    oncePerTurn: ownTurn
+    auto: true
+    when: [{ selfHas: armed }]
+    do:
+      - damage: [{ roll: '(@scale.barbarian.rage-damage)d6', type: weapon }]
+unimplemented:
+  - part frenzy-rage-check-unverified not modeled
+provenance:
+  review: reviewed
+  pdfPage: 30

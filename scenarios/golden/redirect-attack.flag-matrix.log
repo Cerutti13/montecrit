@@ -1,0 +1,421 @@
+# Flag matrix for scenarios/golden/redirect-attack.yaml with scenarios/golden/redirect-attack.journal.yaml (docs/design/m1b.md, Critique resolutions item 9).
+# Every rule flag the default run read, re-run under each of its other values: same seed, same journal.
+# Matrix mode only: at the journal's first mismatch every journal seat hands over to its fallback (baseline if none).
+# Regenerate: UPDATE_FLAG_MATRIX=1 npx vitest run apps/cli/test/flag-matrix.test.ts
+
+#### seed 2 ####
+default  run 0 | journal of 0 entries: held | logHash aaa9bd2649748bcc
+flags read: diagonalCost, initiativeMode, initiativeTies, groupInitiative, monsterHp, statBlockAtZeroHp, moveBetweenAttacks
+
+== diagonalCost=alternate (journal held; log identical to default) ==
+   #1   initiative ally1 13 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative gob1 12 (static)
+   #4 == round 1 ==
+   #5 ally1's turn (C3, 65 HP, 30 ft) [Warrior Veteran]
+   #6   ally1 chooses attack:greatsword>boss1  [greedy @0]
+   #7     ally1: Multiattack
+   #8     boss1 chooses react:redirect-attack>gob1  [greedy @1]
+   #9       boss1: Redirect Attack
+  #10         boss1 swaps places with gob1 (Redirect Attack): boss1 D3 -> D4, gob1 D4 -> D3
+  #11     ally1 Greatsword -> gob1: d20 19 +5 = 24 vs AC 15, hit  [ally1 attack r1 p0.0]
+  #12       gob1 takes 13 (13 slashing), HP 10 -> 0  [ally1 damage r1 p0.0]
+  #13         gob1 dies (0 HP)
+  #14   ally1 chooses attack:greatsword>boss1  [greedy @2]
+  #15     ally1 Greatsword -> boss1: d20 7 +5 = 12 vs AC 17, miss  [ally1 attack r1 p0.1]
+  #16   ally1 chooses pass  [greedy @3]
+  #17   ally1's turn ends
+  #18 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>ally1  [greedy @4]
+  #20     boss1: Multiattack
+  #21     ally1 chooses pass  [greedy @5]
+  #22     boss1 Scimitar -> ally1: d20 18 +4 = 22 vs AC 17, hit  [boss1 attack r1 p0.0]
+  #23       ally1 takes 6 (6 slashing), HP 65 -> 59  [boss1 damage r1 p0.0]
+  #24   boss1 chooses attack:scimitar>ally1  [greedy @6]
+  #25     boss1 Scimitar -> ally1: d20 10 +4 = 14 vs AC 17, miss  [boss1 attack r1 p0.1]
+  #26   boss1 chooses pass  [greedy @7]
+  #27   boss1's turn ends
+  #28 == round 2 ==
+  #29 ally1's turn (C3, 59 HP, 30 ft) [Warrior Veteran]
+  #30   ally1 chooses attack:greatsword>boss1  [greedy @8]
+  #31     ally1: Multiattack
+  #32     ally1 Greatsword -> boss1: d20 5 +5 = 10 vs AC 17, miss  [ally1 attack r2 p0.0]
+  #33   ally1 chooses attack:greatsword>boss1  [greedy @9]
+  #34     ally1 Greatsword -> boss1: d20 11 +5 = 16 vs AC 17, miss  [ally1 attack r2 p0.1]
+  #35   ally1 chooses pass  [greedy @10]
+  #36   ally1's turn ends
+  #37 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #38   boss1 chooses attack:scimitar>ally1  [greedy @11]
+  #39     boss1: Multiattack
+  #40     boss1 Scimitar -> ally1: d20 1 +4 = 5 vs AC 17, miss  [boss1 attack r2 p0.0]
+  #41   boss1 chooses attack:scimitar>ally1  [greedy @12]
+  #42     ally1 chooses react:parry  [greedy @13]
+  #43       ally1: Parry
+  #44     boss1 Scimitar -> ally1: d20 13 +4 = 17 vs AC 19 (+2 after the hit), miss  [boss1 attack r2 p0.1]
+  #45   boss1 chooses pass  [greedy @14]
+  #46   boss1's turn ends
+  #47 fight ends: stalemate in round 2
+logHash 5222d76d7381b45e
+
+== initiativeMode=roll (journal held) ==
+flags read vs default: -initiativeTies
+   #1   initiative ally1 21 (d20 18+3)
+   #2   initiative boss1 14 (d20 12+2)
+   #3   initiative gob1 7 (d20 5+2)
+   #4 == round 1 ==
+   #5 ally1's turn (C3, 65 HP, 30 ft) [Warrior Veteran]
+   #6   ally1 chooses attack:greatsword>boss1  [greedy @0]
+   #7     ally1: Multiattack
+   #8     boss1 chooses react:redirect-attack>gob1  [greedy @1]
+   #9       boss1: Redirect Attack
+  #10         boss1 swaps places with gob1 (Redirect Attack): boss1 D3 -> D4, gob1 D4 -> D3
+  #11     ally1 Greatsword -> gob1: d20 19 +5 = 24 vs AC 15, hit  [ally1 attack r1 p0.0]
+  #12       gob1 takes 13 (13 slashing), HP 10 -> 0  [ally1 damage r1 p0.0]
+  #13         gob1 dies (0 HP)
+  #14   ally1 chooses attack:greatsword>boss1  [greedy @2]
+  #15     ally1 Greatsword -> boss1: d20 7 +5 = 12 vs AC 17, miss  [ally1 attack r1 p0.1]
+  #16   ally1 chooses pass  [greedy @3]
+  #17   ally1's turn ends
+  #18 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>ally1  [greedy @4]
+  #20     boss1: Multiattack
+  #21     ally1 chooses pass  [greedy @5]
+  #22     boss1 Scimitar -> ally1: d20 18 +4 = 22 vs AC 17, hit  [boss1 attack r1 p0.0]
+  #23       ally1 takes 6 (6 slashing), HP 65 -> 59  [boss1 damage r1 p0.0]
+  #24   boss1 chooses attack:scimitar>ally1  [greedy @6]
+  #25     boss1 Scimitar -> ally1: d20 10 +4 = 14 vs AC 17, miss  [boss1 attack r1 p0.1]
+  #26   boss1 chooses pass  [greedy @7]
+  #27   boss1's turn ends
+  #28 == round 2 ==
+  #29 ally1's turn (C3, 59 HP, 30 ft) [Warrior Veteran]
+  #30   ally1 chooses attack:greatsword>boss1  [greedy @8]
+  #31     ally1: Multiattack
+  #32     ally1 Greatsword -> boss1: d20 5 +5 = 10 vs AC 17, miss  [ally1 attack r2 p0.0]
+  #33   ally1 chooses attack:greatsword>boss1  [greedy @9]
+  #34     ally1 Greatsword -> boss1: d20 11 +5 = 16 vs AC 17, miss  [ally1 attack r2 p0.1]
+  #35   ally1 chooses pass  [greedy @10]
+  #36   ally1's turn ends
+  #37 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #38   boss1 chooses attack:scimitar>ally1  [greedy @11]
+  #39     boss1: Multiattack
+  #40     boss1 Scimitar -> ally1: d20 1 +4 = 5 vs AC 17, miss  [boss1 attack r2 p0.0]
+  #41   boss1 chooses attack:scimitar>ally1  [greedy @12]
+  #42     ally1 chooses react:parry  [greedy @13]
+  #43       ally1: Parry
+  #44     boss1 Scimitar -> ally1: d20 13 +4 = 17 vs AC 19 (+2 after the hit), miss  [boss1 attack r2 p0.1]
+  #45   boss1 chooses pass  [greedy @14]
+  #46   boss1's turn ends
+  #47 fight ends: stalemate in round 2
+logHash c8837d68b80c2a8c
+
+== initiativeTies=rollOff (journal held; log identical to default) ==
+   #1   initiative ally1 13 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative gob1 12 (static)
+   #4 == round 1 ==
+   #5 ally1's turn (C3, 65 HP, 30 ft) [Warrior Veteran]
+   #6   ally1 chooses attack:greatsword>boss1  [greedy @0]
+   #7     ally1: Multiattack
+   #8     boss1 chooses react:redirect-attack>gob1  [greedy @1]
+   #9       boss1: Redirect Attack
+  #10         boss1 swaps places with gob1 (Redirect Attack): boss1 D3 -> D4, gob1 D4 -> D3
+  #11     ally1 Greatsword -> gob1: d20 19 +5 = 24 vs AC 15, hit  [ally1 attack r1 p0.0]
+  #12       gob1 takes 13 (13 slashing), HP 10 -> 0  [ally1 damage r1 p0.0]
+  #13         gob1 dies (0 HP)
+  #14   ally1 chooses attack:greatsword>boss1  [greedy @2]
+  #15     ally1 Greatsword -> boss1: d20 7 +5 = 12 vs AC 17, miss  [ally1 attack r1 p0.1]
+  #16   ally1 chooses pass  [greedy @3]
+  #17   ally1's turn ends
+  #18 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>ally1  [greedy @4]
+  #20     boss1: Multiattack
+  #21     ally1 chooses pass  [greedy @5]
+  #22     boss1 Scimitar -> ally1: d20 18 +4 = 22 vs AC 17, hit  [boss1 attack r1 p0.0]
+  #23       ally1 takes 6 (6 slashing), HP 65 -> 59  [boss1 damage r1 p0.0]
+  #24   boss1 chooses attack:scimitar>ally1  [greedy @6]
+  #25     boss1 Scimitar -> ally1: d20 10 +4 = 14 vs AC 17, miss  [boss1 attack r1 p0.1]
+  #26   boss1 chooses pass  [greedy @7]
+  #27   boss1's turn ends
+  #28 == round 2 ==
+  #29 ally1's turn (C3, 59 HP, 30 ft) [Warrior Veteran]
+  #30   ally1 chooses attack:greatsword>boss1  [greedy @8]
+  #31     ally1: Multiattack
+  #32     ally1 Greatsword -> boss1: d20 5 +5 = 10 vs AC 17, miss  [ally1 attack r2 p0.0]
+  #33   ally1 chooses attack:greatsword>boss1  [greedy @9]
+  #34     ally1 Greatsword -> boss1: d20 11 +5 = 16 vs AC 17, miss  [ally1 attack r2 p0.1]
+  #35   ally1 chooses pass  [greedy @10]
+  #36   ally1's turn ends
+  #37 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #38   boss1 chooses attack:scimitar>ally1  [greedy @11]
+  #39     boss1: Multiattack
+  #40     boss1 Scimitar -> ally1: d20 1 +4 = 5 vs AC 17, miss  [boss1 attack r2 p0.0]
+  #41   boss1 chooses attack:scimitar>ally1  [greedy @12]
+  #42     ally1 chooses react:parry  [greedy @13]
+  #43       ally1: Parry
+  #44     boss1 Scimitar -> ally1: d20 13 +4 = 17 vs AC 19 (+2 after the hit), miss  [boss1 attack r2 p0.1]
+  #45   boss1 chooses pass  [greedy @14]
+  #46   boss1's turn ends
+  #47 fight ends: stalemate in round 2
+logHash 7b0c2941a668317a
+
+== initiativeTies=monstersFirst (journal held; log identical to default) ==
+   #1   initiative ally1 13 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative gob1 12 (static)
+   #4 == round 1 ==
+   #5 ally1's turn (C3, 65 HP, 30 ft) [Warrior Veteran]
+   #6   ally1 chooses attack:greatsword>boss1  [greedy @0]
+   #7     ally1: Multiattack
+   #8     boss1 chooses react:redirect-attack>gob1  [greedy @1]
+   #9       boss1: Redirect Attack
+  #10         boss1 swaps places with gob1 (Redirect Attack): boss1 D3 -> D4, gob1 D4 -> D3
+  #11     ally1 Greatsword -> gob1: d20 19 +5 = 24 vs AC 15, hit  [ally1 attack r1 p0.0]
+  #12       gob1 takes 13 (13 slashing), HP 10 -> 0  [ally1 damage r1 p0.0]
+  #13         gob1 dies (0 HP)
+  #14   ally1 chooses attack:greatsword>boss1  [greedy @2]
+  #15     ally1 Greatsword -> boss1: d20 7 +5 = 12 vs AC 17, miss  [ally1 attack r1 p0.1]
+  #16   ally1 chooses pass  [greedy @3]
+  #17   ally1's turn ends
+  #18 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>ally1  [greedy @4]
+  #20     boss1: Multiattack
+  #21     ally1 chooses pass  [greedy @5]
+  #22     boss1 Scimitar -> ally1: d20 18 +4 = 22 vs AC 17, hit  [boss1 attack r1 p0.0]
+  #23       ally1 takes 6 (6 slashing), HP 65 -> 59  [boss1 damage r1 p0.0]
+  #24   boss1 chooses attack:scimitar>ally1  [greedy @6]
+  #25     boss1 Scimitar -> ally1: d20 10 +4 = 14 vs AC 17, miss  [boss1 attack r1 p0.1]
+  #26   boss1 chooses pass  [greedy @7]
+  #27   boss1's turn ends
+  #28 == round 2 ==
+  #29 ally1's turn (C3, 59 HP, 30 ft) [Warrior Veteran]
+  #30   ally1 chooses attack:greatsword>boss1  [greedy @8]
+  #31     ally1: Multiattack
+  #32     ally1 Greatsword -> boss1: d20 5 +5 = 10 vs AC 17, miss  [ally1 attack r2 p0.0]
+  #33   ally1 chooses attack:greatsword>boss1  [greedy @9]
+  #34     ally1 Greatsword -> boss1: d20 11 +5 = 16 vs AC 17, miss  [ally1 attack r2 p0.1]
+  #35   ally1 chooses pass  [greedy @10]
+  #36   ally1's turn ends
+  #37 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #38   boss1 chooses attack:scimitar>ally1  [greedy @11]
+  #39     boss1: Multiattack
+  #40     boss1 Scimitar -> ally1: d20 1 +4 = 5 vs AC 17, miss  [boss1 attack r2 p0.0]
+  #41   boss1 chooses attack:scimitar>ally1  [greedy @12]
+  #42     ally1 chooses react:parry  [greedy @13]
+  #43       ally1: Parry
+  #44     boss1 Scimitar -> ally1: d20 13 +4 = 17 vs AC 19 (+2 after the hit), miss  [boss1 attack r2 p0.1]
+  #45   boss1 chooses pass  [greedy @14]
+  #46   boss1's turn ends
+  #47 fight ends: stalemate in round 2
+logHash 882d4bd6d1577f1c
+
+== groupInitiative=individual (journal held; log identical to default) ==
+   #1   initiative ally1 13 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative gob1 12 (static)
+   #4 == round 1 ==
+   #5 ally1's turn (C3, 65 HP, 30 ft) [Warrior Veteran]
+   #6   ally1 chooses attack:greatsword>boss1  [greedy @0]
+   #7     ally1: Multiattack
+   #8     boss1 chooses react:redirect-attack>gob1  [greedy @1]
+   #9       boss1: Redirect Attack
+  #10         boss1 swaps places with gob1 (Redirect Attack): boss1 D3 -> D4, gob1 D4 -> D3
+  #11     ally1 Greatsword -> gob1: d20 19 +5 = 24 vs AC 15, hit  [ally1 attack r1 p0.0]
+  #12       gob1 takes 13 (13 slashing), HP 10 -> 0  [ally1 damage r1 p0.0]
+  #13         gob1 dies (0 HP)
+  #14   ally1 chooses attack:greatsword>boss1  [greedy @2]
+  #15     ally1 Greatsword -> boss1: d20 7 +5 = 12 vs AC 17, miss  [ally1 attack r1 p0.1]
+  #16   ally1 chooses pass  [greedy @3]
+  #17   ally1's turn ends
+  #18 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>ally1  [greedy @4]
+  #20     boss1: Multiattack
+  #21     ally1 chooses pass  [greedy @5]
+  #22     boss1 Scimitar -> ally1: d20 18 +4 = 22 vs AC 17, hit  [boss1 attack r1 p0.0]
+  #23       ally1 takes 6 (6 slashing), HP 65 -> 59  [boss1 damage r1 p0.0]
+  #24   boss1 chooses attack:scimitar>ally1  [greedy @6]
+  #25     boss1 Scimitar -> ally1: d20 10 +4 = 14 vs AC 17, miss  [boss1 attack r1 p0.1]
+  #26   boss1 chooses pass  [greedy @7]
+  #27   boss1's turn ends
+  #28 == round 2 ==
+  #29 ally1's turn (C3, 59 HP, 30 ft) [Warrior Veteran]
+  #30   ally1 chooses attack:greatsword>boss1  [greedy @8]
+  #31     ally1: Multiattack
+  #32     ally1 Greatsword -> boss1: d20 5 +5 = 10 vs AC 17, miss  [ally1 attack r2 p0.0]
+  #33   ally1 chooses attack:greatsword>boss1  [greedy @9]
+  #34     ally1 Greatsword -> boss1: d20 11 +5 = 16 vs AC 17, miss  [ally1 attack r2 p0.1]
+  #35   ally1 chooses pass  [greedy @10]
+  #36   ally1's turn ends
+  #37 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #38   boss1 chooses attack:scimitar>ally1  [greedy @11]
+  #39     boss1: Multiattack
+  #40     boss1 Scimitar -> ally1: d20 1 +4 = 5 vs AC 17, miss  [boss1 attack r2 p0.0]
+  #41   boss1 chooses attack:scimitar>ally1  [greedy @12]
+  #42     ally1 chooses react:parry  [greedy @13]
+  #43       ally1: Parry
+  #44     boss1 Scimitar -> ally1: d20 13 +4 = 17 vs AC 19 (+2 after the hit), miss  [boss1 attack r2 p0.1]
+  #45   boss1 chooses pass  [greedy @14]
+  #46   boss1's turn ends
+  #47 fight ends: stalemate in round 2
+logHash a36d753ba0415f46
+
+== monsterHp=rolled (journal held) ==
+   #1   initiative ally1 13 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative gob1 12 (static)
+   #4 == round 1 ==
+   #5 ally1's turn (C3, 76 HP, 30 ft) [Warrior Veteran]
+   #6   ally1 chooses attack:greatsword>boss1  [greedy @0]
+   #7     ally1: Multiattack
+   #8     boss1 chooses react:redirect-attack>gob1  [greedy @1]
+   #9       boss1: Redirect Attack
+  #10         boss1 swaps places with gob1 (Redirect Attack): boss1 D3 -> D4, gob1 D4 -> D3
+  #11     ally1 Greatsword -> gob1: d20 19 +5 = 24 vs AC 15, hit  [ally1 attack r1 p0.0]
+  #12       gob1 takes 13 (13 slashing), HP 9 -> 0  [ally1 damage r1 p0.0]
+  #13         gob1 dies (0 HP)
+  #14   ally1 chooses attack:greatsword>boss1  [greedy @2]
+  #15     ally1 Greatsword -> boss1: d20 7 +5 = 12 vs AC 17, miss  [ally1 attack r1 p0.1]
+  #16   ally1 chooses pass  [greedy @3]
+  #17   ally1's turn ends
+  #18 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>ally1  [greedy @4]
+  #20     boss1: Multiattack
+  #21     ally1 chooses pass  [greedy @5]
+  #22     boss1 Scimitar -> ally1: d20 18 +4 = 22 vs AC 17, hit  [boss1 attack r1 p0.0]
+  #23       ally1 takes 6 (6 slashing), HP 76 -> 70  [boss1 damage r1 p0.0]
+  #24   boss1 chooses attack:scimitar>ally1  [greedy @6]
+  #25     boss1 Scimitar -> ally1: d20 10 +4 = 14 vs AC 17, miss  [boss1 attack r1 p0.1]
+  #26   boss1 chooses pass  [greedy @7]
+  #27   boss1's turn ends
+  #28 == round 2 ==
+  #29 ally1's turn (C3, 70 HP, 30 ft) [Warrior Veteran]
+  #30   ally1 chooses attack:greatsword>boss1  [greedy @8]
+  #31     ally1: Multiattack
+  #32     ally1 Greatsword -> boss1: d20 5 +5 = 10 vs AC 17, miss  [ally1 attack r2 p0.0]
+  #33   ally1 chooses attack:greatsword>boss1  [greedy @9]
+  #34     ally1 Greatsword -> boss1: d20 11 +5 = 16 vs AC 17, miss  [ally1 attack r2 p0.1]
+  #35   ally1 chooses pass  [greedy @10]
+  #36   ally1's turn ends
+  #37 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #38   boss1 chooses attack:scimitar>ally1  [greedy @11]
+  #39     boss1: Multiattack
+  #40     boss1 Scimitar -> ally1: d20 1 +4 = 5 vs AC 17, miss  [boss1 attack r2 p0.0]
+  #41   boss1 chooses attack:scimitar>ally1  [greedy @12]
+  #42     ally1 chooses react:parry  [greedy @13]
+  #43       ally1: Parry
+  #44     boss1 Scimitar -> ally1: d20 13 +4 = 17 vs AC 19 (+2 after the hit), miss  [boss1 attack r2 p0.1]
+  #45   boss1 chooses pass  [greedy @14]
+  #46   boss1's turn ends
+  #47 fight ends: stalemate in round 2
+logHash d130271f351efa36
+
+== statBlockAtZeroHp=deathSaves (journal held) ==
+flags read vs default: +losMethod +creatureCover
+   #1   initiative ally1 13 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative gob1 12 (static)
+   #4 == round 1 ==
+   #5 ally1's turn (C3, 65 HP, 30 ft) [Warrior Veteran]
+   #6   ally1 chooses attack:greatsword>boss1  [greedy @0]
+   #7     ally1: Multiattack
+   #8     boss1 chooses react:redirect-attack>gob1  [greedy @1]
+   #9       boss1: Redirect Attack
+  #10         boss1 swaps places with gob1 (Redirect Attack): boss1 D3 -> D4, gob1 D4 -> D3
+  #11     ally1 Greatsword -> gob1: d20 19 +5 = 24 vs AC 15, hit  [ally1 attack r1 p0.0]
+  #12       gob1 takes 13 (13 slashing), HP 10 -> 0  [ally1 damage r1 p0.0]
+  #13         gob1 drops to 0 HP and falls Unconscious
+  #14           gob1 is Unconscious (downed)
+  #15           gob1 is Incapacitated (downed)
+  #16           gob1 is Prone (fell-prone)
+  #17   ally1 chooses attack:greatsword>boss1  [greedy @2]
+  #18     ally1 Greatsword -> boss1: d20 7 +5 = 12 vs AC 17, miss  [ally1 attack r1 p0.1]
+  #19   ally1 chooses pass  [greedy @3]
+  #20   ally1's turn ends
+  #21 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #22   boss1 chooses attack:scimitar>ally1  [greedy @4]
+  #23     boss1: Multiattack
+  #24     ally1 chooses pass  [greedy @5]
+  #25     boss1 Scimitar -> ally1: d20 18 +4 = 22 vs AC 17, hit  [boss1 attack r1 p0.0]
+  #26       ally1 takes 6 (6 slashing), HP 65 -> 59  [boss1 damage r1 p0.0]
+  #27   boss1 chooses attack:scimitar>ally1  [greedy @6]
+  #28     boss1 Scimitar -> ally1: d20 10 +4 = 14 vs AC 17, miss  [boss1 attack r1 p0.1]
+  #29   boss1 chooses pass  [greedy @7]
+  #30   boss1's turn ends
+  #31 gob1's turn (D3, 0 HP, 0 ft) [Goblin Warrior]
+  #32   gob1 death save: d20 19 (successes 1, failures 0)  [gob1 death r1 p0.0]
+  #33   gob1's turn ends
+  #34 == round 2 ==
+  #35 ally1's turn (C3, 59 HP, 30 ft) [Warrior Veteran]
+  #36   ally1 chooses attack:greatsword>boss1  [greedy @8]
+  #37     ally1: Multiattack
+  #38     boss1 chooses pass  [greedy @9]
+  #39     ally1 Greatsword -> boss1: d20 5 +5 = 10 vs AC 17, miss  [ally1 attack r2 p0.0]
+  #40   ally1 chooses attack:greatsword>boss1  [greedy @10]
+  #41     boss1 chooses pass  [greedy @11]
+  #42     ally1 Greatsword -> boss1: d20 11 +5 = 16 vs AC 17, miss  [ally1 attack r2 p0.1]
+  #43   ally1 chooses pass  [greedy @12]
+  #44   ally1's turn ends
+  #45 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #46   boss1 chooses attack:scimitar>ally1  [greedy @13]
+  #47     boss1: Multiattack
+  #48     boss1 Scimitar -> ally1: d20 1 +4 = 5 vs AC 17, miss  [boss1 attack r2 p0.0]
+  #49   boss1 chooses attack:scimitar>ally1  [greedy @14]
+  #50     ally1 chooses react:parry  [greedy @15]
+  #51       ally1: Parry
+  #52     boss1 Scimitar -> ally1: d20 13 +4 = 17 vs AC 19 (+2 after the hit), miss  [boss1 attack r2 p0.1]
+  #53   boss1 chooses pass  [greedy @16]
+  #54   boss1's turn ends
+  #55 gob1's turn (D3, 0 HP, 0 ft) [Goblin Warrior]
+  #56   gob1 death save: d20 18 (successes 2, failures 0)  [gob1 death r2 p0.0]
+  #57   gob1's turn ends
+  #58 fight ends: stalemate in round 2
+logHash 3fa28edd1730fb52
+
+== moveBetweenAttacks=extraAttackOnly (journal held; log identical to default) ==
+   #1   initiative ally1 13 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative gob1 12 (static)
+   #4 == round 1 ==
+   #5 ally1's turn (C3, 65 HP, 30 ft) [Warrior Veteran]
+   #6   ally1 chooses attack:greatsword>boss1  [greedy @0]
+   #7     ally1: Multiattack
+   #8     boss1 chooses react:redirect-attack>gob1  [greedy @1]
+   #9       boss1: Redirect Attack
+  #10         boss1 swaps places with gob1 (Redirect Attack): boss1 D3 -> D4, gob1 D4 -> D3
+  #11     ally1 Greatsword -> gob1: d20 19 +5 = 24 vs AC 15, hit  [ally1 attack r1 p0.0]
+  #12       gob1 takes 13 (13 slashing), HP 10 -> 0  [ally1 damage r1 p0.0]
+  #13         gob1 dies (0 HP)
+  #14   ally1 chooses attack:greatsword>boss1  [greedy @2]
+  #15     ally1 Greatsword -> boss1: d20 7 +5 = 12 vs AC 17, miss  [ally1 attack r1 p0.1]
+  #16   ally1 chooses pass  [greedy @3]
+  #17   ally1's turn ends
+  #18 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>ally1  [greedy @4]
+  #20     boss1: Multiattack
+  #21     ally1 chooses pass  [greedy @5]
+  #22     boss1 Scimitar -> ally1: d20 18 +4 = 22 vs AC 17, hit  [boss1 attack r1 p0.0]
+  #23       ally1 takes 6 (6 slashing), HP 65 -> 59  [boss1 damage r1 p0.0]
+  #24   boss1 chooses attack:scimitar>ally1  [greedy @6]
+  #25     boss1 Scimitar -> ally1: d20 10 +4 = 14 vs AC 17, miss  [boss1 attack r1 p0.1]
+  #26   boss1 chooses pass  [greedy @7]
+  #27   boss1's turn ends
+  #28 == round 2 ==
+  #29 ally1's turn (C3, 59 HP, 30 ft) [Warrior Veteran]
+  #30   ally1 chooses attack:greatsword>boss1  [greedy @8]
+  #31     ally1: Multiattack
+  #32     ally1 Greatsword -> boss1: d20 5 +5 = 10 vs AC 17, miss  [ally1 attack r2 p0.0]
+  #33   ally1 chooses attack:greatsword>boss1  [greedy @9]
+  #34     ally1 Greatsword -> boss1: d20 11 +5 = 16 vs AC 17, miss  [ally1 attack r2 p0.1]
+  #35   ally1 chooses pass  [greedy @10]
+  #36   ally1's turn ends
+  #37 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #38   boss1 chooses attack:scimitar>ally1  [greedy @11]
+  #39     boss1: Multiattack
+  #40     boss1 Scimitar -> ally1: d20 1 +4 = 5 vs AC 17, miss  [boss1 attack r2 p0.0]
+  #41   boss1 chooses attack:scimitar>ally1  [greedy @12]
+  #42     ally1 chooses react:parry  [greedy @13]
+  #43       ally1: Parry
+  #44     boss1 Scimitar -> ally1: d20 13 +4 = 17 vs AC 19 (+2 after the hit), miss  [boss1 attack r2 p0.1]
+  #45   boss1 chooses pass  [greedy @14]
+  #46   boss1's turn ends
+  #47 fight ends: stalemate in round 2
+logHash d601ec678b6dca98

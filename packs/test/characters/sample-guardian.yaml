@@ -1,0 +1,29 @@
+# The Cleric of the aura-emanation golden (coverage step 7.5): character-built, level 5, for Spirit
+# Guardians. Synthetic test fixture built only from SRD 5.2.1 data. The pack has too few Cleric spells to fill
+# the table's counts, so a few off-list ones fill them; the golden's journal never casts those.
+kind: character
+id: test:sample-guardian
+name: Sample Guardian
+source: synthetic test fixture
+rules: '2024'
+classes: [{ class: srd:cleric, level: 5, subclass: srd:life-domain }]
+species: srd:dwarf
+background: srd:acolyte
+abilities: { str: 12, dex: 10, con: 14, int: 10, wis: 18, cha: 10 }
+hp: average
+picks:
+  srd:cleric#divine-order: [srd:cleric/divine-order-protector]
+  srd:cleric#skills: [history, medicine]
+  srd:cleric#asi-4: { asi: { wis: 2 } }
+  srd:acolyte#abilities: { asi: { wis: 2, int: 1 } }
+equipment:
+  armor: srd:chain-shirt
+  shield: false
+  weapons: [srd:mace]
+  items: [{ id: holy-symbol, name: Holy Symbol, kind: focus, focusFor: [cleric] }]
+  hands: [holy-symbol, null]
+casting:
+  - { source: srd:cleric, cantrips: [srd:sacred-flame, srd:guidance, srd:acid-splash, srd:poison-spray], prepared: [srd:spirit-guardians, srd:guiding-bolt, srd:healing-word, srd:cure-wounds, srd:shield-of-faith, srd:inflict-wounds, srd:hold-person, srd:longstrider, srd:faerie-fire] }
+features: []
+overrides: {}
+flags: {}

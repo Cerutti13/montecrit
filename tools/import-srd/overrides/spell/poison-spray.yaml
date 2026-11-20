@@ -1,0 +1,7 @@
+# Poison Spray, SRD 5.2.1 p.153, read against the mapped item (M3 step 6): ranged spell attack, 1d12 Poison on a hit, Cantrip Upgrade 2d12/3d12/4d12 at 5/11/17.
+# Nothing in the text is left out, so the importer's C7 review lines are cleared and the spell is full.
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 153

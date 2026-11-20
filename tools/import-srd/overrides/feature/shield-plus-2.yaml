@@ -1,0 +1,13 @@
+# Reviewed against SRD 5.2.1 p.243 (srd-raw.txt:41978-41983), "Shield, +1, +2, or +3": "Armor
+# (Shield), Uncommon (+1), Rare (+2), or Very Rare (+3)" / "While holding this Shield, you have a
+# bonus to Armor Class determined by the Shield's rarity, in addition to the Shield's normal bonus
+# to AC."
+# The mapped item (map/magic-item.ts MAGIC_READINGS) is that whole text for the +2 variant: a
+# passive ac +2 stat gated on itemHeld, which holds exactly while the item whose magic names this
+# feature (this Shield) is in a hand (M3 step 5b; a character file binds it to its equipped
+# shield, content/character.ts). The Shield's own +2 is the shield item's. No attunement. So full.
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 243

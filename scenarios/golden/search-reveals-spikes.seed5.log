@@ -1,0 +1,111 @@
+replay   engine 0.8.0 | content 4faaecb00968325b | scenario search-reveals-spikes 894b617339602fe1 | seed 5 run 0 | journal 3
+policy   pc1 journal>greedy | wolf1 greedy | wolf2 greedy
+knobs    maxRounds=3 attackDowned=ifNoOtherTarget lossCounts=pcs downEnds=true
+flags read:
+  diagonalCost=uniform [verified: SRD 5.2.1 p.13 "Playing on a Grid": any adjacent square costs 1; alternating 5/10 is a 2024 DMG option (its use for range is unverified)]
+  initiativeMode=static [verified: SRD 5.2.1 p.184 "Initiative" and p.254: static initiative is a GM option]
+  initiativeTies=monstersFirst [UNVERIFIED: SRD 5.2.1 p.13: the GM orders tied monsters and mixed ties, players order tied PCs; no procedure given (policy)]
+  groupInitiative=shared [verified: SRD 5.2.1 p.13: a group of identical creatures gets one roll]
+  monsterHp=listed [verified: SRD 5.2.1 p.255: use the number or the dice, the GM's choice]
+  focusHandSomatic=strict [verified: 2024 Sage Advice SAC-SpellComponents3 and SRD 5.2.1 p.105-106: the focus hand does Somatic only for spells with a Material component; lenient is a common table ruling]
+  conjuredHandEffectBlocksHand=false [UNVERIFIED: SRD 5.2.1 p.156 Produce Flame: the flame is "in your hand"; unlike Flame Blade (p.132) it never says it needs or occupies a free hand]
+  areaOriginOnGrid=squareCenter [UNVERIFIED: Shane's table ruling 2026-11-01 (areas land on a square); SRD 5.2.1 has no grid-area rule; the 2024 DMG intersection rule is known only secondhand]
+  areaGridCoverage=atLeastHalfSquare [UNVERIFIED: SRD 5.2.1 has no grid-area rule (p.13 covers movement and range); the 2024 DMG half-square rule is known only secondhand; 2024 SAC-Spells-CloudofDaggers1]
+  zoneKnowledge=sawCast [UNVERIFIED: Not a rule: which zones a creature avoids when it plans a move. sawCast (coverage step 9) = a hidden zone (SRD 5.2.1 p.164 Spike Growth, srd-raw.txt:31015-31021: camouflaged; a creature that can't see the area when the spell is cast must take a Search action to recognize it) only once it saw it appear or recognized it, every other zone once it has line of sight to one of its squares (or saw it appear); all = every zone; none = only zones it created. Movement cost through Difficult Terrain is physical and applies either way]
+  losMethod=corners [UNVERIFIED: SRD 5.2.1 "Cover" (srd-raw.txt:1995-2032) and its glossary entry (33044-33050) give the three degrees and say a target benefits only when the effect "originates on the opposite side of the cover", but give no grid procedure. corners = the DMG's corner-to-corner lines (the attacker's best corner to the 4 corners of the target's square: 1-2 blocked Half, 3 Three-Quarters, 4 Total; known only secondhand, the DMG is not SRD); centers = one line between square centers; stubbed = no cover and everyone sees everyone (the engine before M3 step 8, a what-if)]
+  creatureCover=on [verified: SRD 5.2.1 Cover table (srd-raw.txt:2006-2017): Half Cover is offered by "Another creature or an object that covers at least half of the target"; off is a what-if]
+notes    LOS: grid (losMethod=corners, creatureCover=on)
+notes    ending concentration or dismissing an effect: offered only on your own turn
+notes    srd:wolf partial: unimplemented monster attack bite: text after the damage not modeled; monster trait pack-tactics not modeled
+
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses search  [greedy @0]
+  #10     wolf1: Search
+  #11       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #12         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #13   wolf1 chooses move:L4/p0  [greedy @1]
+  #14     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #15     wolf1 steps S8 -> R7 (5 ft, 30 left)
+  #16     wolf1 steps R7 -> Q6 (5 ft, 25 left)
+  #17     wolf1 steps Q6 -> P5 (5 ft, 20 left)
+  #18     wolf1 steps P5 -> O4 (5 ft, 15 left)
+  #19     wolf1 steps O4 -> N3 (5 ft, 10 left)
+  #20     wolf1 steps N3 -> M3 (5 ft, 5 left)
+  #21     wolf1 steps M3 -> L4 (5 ft, 0 left)
+  #22     wolf1's move ends at L4
+  #23   wolf1's turn ends
+  #24 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #25   wolf2 chooses opt:dash  [greedy @2]
+  #26     wolf2: Dash
+  #27   wolf2 chooses move:F8/p0  [greedy @3]
+  #28     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #29     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #30     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #31     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #32     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #33     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #34     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #35     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #36     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #37     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #38     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #39     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #40     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #41     wolf2 steps G7 -> F8 (5 ft, 10 left)
+  #42     wolf2's move ends at F8
+  #43   wolf2 chooses pass  [greedy @4]
+  #44   wolf2's turn ends
+  #45 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #46   pc1 chooses pass  [journal @5]
+  #47   pc1's turn ends
+  #48 == round 2 ==
+  #49 wolf1's turn (L4, 11 HP, 40 ft) [Wolf]
+  #50   wolf1 chooses move:G8/p0  [greedy @6]
+  #51     wolf1 steps L4 -> K3 (5 ft, 35 left)
+  #52     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #53     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #54     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #55     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #56     wolf1 steps G7 -> G8 (5 ft, 10 left)
+  #57     wolf1's move ends at G8
+  #58   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #59     wolf1: Attack
+  #60     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #61   wolf1 chooses pass  [greedy @8]
+  #62   wolf1's turn ends
+  #63 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #64   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #65     wolf2: Attack
+  #66     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #67   wolf2 chooses pass  [greedy @10]
+  #68   wolf2's turn ends
+  #69 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #70   pc1 chooses pass  [journal @11]
+  #71   pc1's turn ends
+  #72 == round 3 ==
+  #73 wolf1's turn (G8, 11 HP, 40 ft) [Wolf]
+  #74   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #75     wolf1: Attack
+  #76     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #77       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #78         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #79   wolf1 chooses pass  [greedy @13]
+  #80   wolf1's turn ends
+  #81 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #82   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #83     wolf2: Attack
+  #84     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #85   wolf2 chooses pass  [greedy @15]
+  #86   wolf2's turn ends
+  #87 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #88   pc1 chooses pass  [journal @16]
+  #89   pc1's turn ends
+  #90 fight ends: stalemate in round 3
+logHash 62f6686ec71e6ee6

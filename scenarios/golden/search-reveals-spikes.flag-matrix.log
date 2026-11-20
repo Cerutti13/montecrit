@@ -1,0 +1,1406 @@
+# Flag matrix for scenarios/golden/search-reveals-spikes.yaml with scenarios/golden/search-reveals-spikes.journal.yaml (docs/design/m1b.md, Critique resolutions item 9).
+# Every rule flag the default run read, re-run under each of its other values: same seed, same journal.
+# Matrix mode only: at the journal's first mismatch every journal seat hands over to its fallback (baseline if none).
+# Regenerate: UPDATE_FLAG_MATRIX=1 npx vitest run apps/cli/test/flag-matrix.test.ts
+
+#### seed 5 ####
+default  run 0 | journal of 3 entries: held | logHash 62f6686ec71e6ee6
+flags read: diagonalCost, initiativeMode, initiativeTies, groupInitiative, monsterHp, focusHandSomatic, conjuredHandEffectBlocksHand, areaOriginOnGrid, areaGridCoverage, zoneKnowledge, losMethod, creatureCover
+
+== diagonalCost=alternate (journal held) ==
+flags read vs default: -losMethod -creatureCover
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses search  [greedy @0]
+  #10     wolf1: Search
+  #11       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #12         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #13   wolf1 chooses move:O8/p0/d1  [greedy @1]
+  #14     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #15     wolf1 steps S8 -> R8 (5 ft, 30 left)
+  #16     wolf1 steps R8 -> Q8 (5 ft, 25 left)
+  #17     wolf1 steps Q8 -> P8 (5 ft, 20 left)
+  #18     wolf1 steps P8 -> O8 (5 ft, 15 left)
+  #19     wolf1's move ends at O8
+  #20   wolf1 chooses pass  [greedy @2]
+  #21   wolf1's turn ends
+  #22 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #23   wolf2 chooses opt:dash  [greedy @3]
+  #24     wolf2: Dash
+  #25   wolf2 chooses move:F10/p0/d1  [greedy @4]
+  #26     wolf2 steps T11 -> S11 (5 ft, 75 left)
+  #27     wolf2 steps S11 -> R11 (5 ft, 70 left)
+  #28     wolf2 steps R11 -> Q11 (5 ft, 65 left)
+  #29     wolf2 steps Q11 -> P11 (5 ft, 60 left)
+  #30     wolf2 steps P11 -> O11 (5 ft, 55 left)
+  #31     wolf2 steps O11 -> N12 (5 ft, 50 left)
+  #32     wolf2 steps N12 -> M13 (10 ft, 40 left)
+  #33     wolf2 steps M13 -> L13 (5 ft, 35 left)
+  #34     wolf2 steps L13 -> K13 (5 ft, 30 left)
+  #35     wolf2 steps K13 -> J13 (5 ft, 25 left)
+  #36     wolf2 steps J13 -> I13 (5 ft, 20 left)
+  #37     wolf2 steps I13 -> H12 (5 ft, 15 left)
+  #38     wolf2 steps H12 -> G11 (10 ft, 5 left)
+  #39     wolf2 steps G11 -> F10 (5 ft, 0 left)
+  #40     wolf2's move ends at F10
+  #41   wolf2's turn ends
+  #42 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #43   pc1 chooses pass  [journal @5]
+  #44   pc1's turn ends
+  #45 == round 2 ==
+  #46 wolf1's turn (O8, 11 HP, 40 ft) [Wolf]
+  #47   wolf1 chooses opt:dash  [greedy @6]
+  #48     wolf1: Dash
+  #49   wolf1 chooses move:F8/p0/d1  [greedy @7]
+  #50     wolf1 steps O8 -> O7 (5 ft, 75 left)
+  #51     wolf1 steps O7 -> N6 (5 ft, 70 left)
+  #52     wolf1 steps N6 -> M5 (10 ft, 60 left)
+  #53     wolf1 steps M5 -> L5 (5 ft, 55 left)
+  #54     wolf1 steps L5 -> K5 (5 ft, 50 left)
+  #55     wolf1 steps K5 -> J5 (5 ft, 45 left)
+  #56     wolf1 steps J5 -> I5 (5 ft, 40 left)
+  #57     wolf1 steps I5 -> H6 (5 ft, 35 left)
+  #58     wolf1 steps H6 -> G7 (10 ft, 25 left)
+  #59     wolf1 steps G7 -> F8 (5 ft, 20 left)
+  #60     wolf1's move ends at F8
+  #61   wolf1 chooses pass  [greedy @8]
+  #62   wolf1's turn ends
+  #63 wolf2's turn (F10, 11 HP, 40 ft) [Wolf]
+  #64   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #65     wolf2: Attack
+  #66     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #67   wolf2 chooses pass  [greedy @10]
+  #68   wolf2's turn ends
+  #69 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #70   pc1 chooses pass  [journal @11]
+  #71   pc1's turn ends
+  #72 == round 3 ==
+  #73 wolf1's turn (F8, 11 HP, 40 ft) [Wolf]
+  #74   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #75     wolf1: Attack
+  #76     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #77       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #78         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #79   wolf1 chooses pass  [greedy @13]
+  #80   wolf1's turn ends
+  #81 wolf2's turn (F10, 11 HP, 40 ft) [Wolf]
+  #82   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #83     wolf2: Attack
+  #84     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #85   wolf2 chooses pass  [greedy @15]
+  #86   wolf2's turn ends
+  #87 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #88   pc1 chooses pass  [journal @16]
+  #89   pc1's turn ends
+  #90 fight ends: stalemate in round 3
+logHash afa83d525257e56f
+
+== initiativeMode=roll (journal held) ==
+flags read vs default: -initiativeTies
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 17 (d20 15+2)
+   #5   initiative wolf2 17 (shares wolf1's roll)
+   #6   initiative pc1 14 (d20 12+2)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses search  [greedy @0]
+  #10     wolf1: Search
+  #11       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #12         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #13   wolf1 chooses move:L4/p0  [greedy @1]
+  #14     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #15     wolf1 steps S8 -> R7 (5 ft, 30 left)
+  #16     wolf1 steps R7 -> Q6 (5 ft, 25 left)
+  #17     wolf1 steps Q6 -> P5 (5 ft, 20 left)
+  #18     wolf1 steps P5 -> O4 (5 ft, 15 left)
+  #19     wolf1 steps O4 -> N3 (5 ft, 10 left)
+  #20     wolf1 steps N3 -> M3 (5 ft, 5 left)
+  #21     wolf1 steps M3 -> L4 (5 ft, 0 left)
+  #22     wolf1's move ends at L4
+  #23   wolf1's turn ends
+  #24 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #25   wolf2 chooses opt:dash  [greedy @2]
+  #26     wolf2: Dash
+  #27   wolf2 chooses move:F8/p0  [greedy @3]
+  #28     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #29     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #30     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #31     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #32     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #33     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #34     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #35     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #36     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #37     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #38     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #39     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #40     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #41     wolf2 steps G7 -> F8 (5 ft, 10 left)
+  #42     wolf2's move ends at F8
+  #43   wolf2 chooses pass  [greedy @4]
+  #44   wolf2's turn ends
+  #45 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #46   pc1 chooses pass  [journal @5]
+  #47   pc1's turn ends
+  #48 == round 2 ==
+  #49 wolf1's turn (L4, 11 HP, 40 ft) [Wolf]
+  #50   wolf1 chooses move:G8/p0  [greedy @6]
+  #51     wolf1 steps L4 -> K3 (5 ft, 35 left)
+  #52     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #53     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #54     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #55     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #56     wolf1 steps G7 -> G8 (5 ft, 10 left)
+  #57     wolf1's move ends at G8
+  #58   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #59     wolf1: Attack
+  #60     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #61   wolf1 chooses pass  [greedy @8]
+  #62   wolf1's turn ends
+  #63 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #64   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #65     wolf2: Attack
+  #66     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #67   wolf2 chooses pass  [greedy @10]
+  #68   wolf2's turn ends
+  #69 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #70   pc1 chooses pass  [journal @11]
+  #71   pc1's turn ends
+  #72 == round 3 ==
+  #73 wolf1's turn (G8, 11 HP, 40 ft) [Wolf]
+  #74   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #75     wolf1: Attack
+  #76     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #77       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #78         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #79   wolf1 chooses pass  [greedy @13]
+  #80   wolf1's turn ends
+  #81 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #82   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #83     wolf2: Attack
+  #84     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #85   wolf2 chooses pass  [greedy @15]
+  #86   wolf2's turn ends
+  #87 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #88   pc1 chooses pass  [journal @16]
+  #89   pc1's turn ends
+  #90 fight ends: stalemate in round 3
+logHash d5d57fc8857396b2
+
+== initiativeTies=rollOff (journal held; log identical to default) ==
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses search  [greedy @0]
+  #10     wolf1: Search
+  #11       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #12         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #13   wolf1 chooses move:L4/p0  [greedy @1]
+  #14     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #15     wolf1 steps S8 -> R7 (5 ft, 30 left)
+  #16     wolf1 steps R7 -> Q6 (5 ft, 25 left)
+  #17     wolf1 steps Q6 -> P5 (5 ft, 20 left)
+  #18     wolf1 steps P5 -> O4 (5 ft, 15 left)
+  #19     wolf1 steps O4 -> N3 (5 ft, 10 left)
+  #20     wolf1 steps N3 -> M3 (5 ft, 5 left)
+  #21     wolf1 steps M3 -> L4 (5 ft, 0 left)
+  #22     wolf1's move ends at L4
+  #23   wolf1's turn ends
+  #24 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #25   wolf2 chooses opt:dash  [greedy @2]
+  #26     wolf2: Dash
+  #27   wolf2 chooses move:F8/p0  [greedy @3]
+  #28     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #29     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #30     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #31     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #32     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #33     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #34     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #35     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #36     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #37     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #38     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #39     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #40     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #41     wolf2 steps G7 -> F8 (5 ft, 10 left)
+  #42     wolf2's move ends at F8
+  #43   wolf2 chooses pass  [greedy @4]
+  #44   wolf2's turn ends
+  #45 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #46   pc1 chooses pass  [journal @5]
+  #47   pc1's turn ends
+  #48 == round 2 ==
+  #49 wolf1's turn (L4, 11 HP, 40 ft) [Wolf]
+  #50   wolf1 chooses move:G8/p0  [greedy @6]
+  #51     wolf1 steps L4 -> K3 (5 ft, 35 left)
+  #52     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #53     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #54     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #55     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #56     wolf1 steps G7 -> G8 (5 ft, 10 left)
+  #57     wolf1's move ends at G8
+  #58   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #59     wolf1: Attack
+  #60     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #61   wolf1 chooses pass  [greedy @8]
+  #62   wolf1's turn ends
+  #63 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #64   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #65     wolf2: Attack
+  #66     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #67   wolf2 chooses pass  [greedy @10]
+  #68   wolf2's turn ends
+  #69 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #70   pc1 chooses pass  [journal @11]
+  #71   pc1's turn ends
+  #72 == round 3 ==
+  #73 wolf1's turn (G8, 11 HP, 40 ft) [Wolf]
+  #74   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #75     wolf1: Attack
+  #76     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #77       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #78         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #79   wolf1 chooses pass  [greedy @13]
+  #80   wolf1's turn ends
+  #81 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #82   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #83     wolf2: Attack
+  #84     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #85   wolf2 chooses pass  [greedy @15]
+  #86   wolf2's turn ends
+  #87 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #88   pc1 chooses pass  [journal @16]
+  #89   pc1's turn ends
+  #90 fight ends: stalemate in round 3
+logHash 47929ba6bbfc275e
+
+== initiativeTies=pcsFirst (journal held) ==
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative pc1 12 (static)
+   #5   initiative wolf1 12 (static)
+   #6   initiative wolf2 12 (static)
+   #7 == round 1 ==
+   #8 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+   #9   pc1 chooses pass  [journal @0]
+  #10   pc1's turn ends
+  #11 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+  #12   wolf1 chooses search  [greedy @1]
+  #13     wolf1: Search
+  #14       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #15         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #16   wolf1 chooses move:L4/p0  [greedy @2]
+  #17     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #18     wolf1 steps S8 -> R7 (5 ft, 30 left)
+  #19     wolf1 steps R7 -> Q6 (5 ft, 25 left)
+  #20     wolf1 steps Q6 -> P5 (5 ft, 20 left)
+  #21     wolf1 steps P5 -> O4 (5 ft, 15 left)
+  #22     wolf1 steps O4 -> N3 (5 ft, 10 left)
+  #23     wolf1 steps N3 -> M3 (5 ft, 5 left)
+  #24     wolf1 steps M3 -> L4 (5 ft, 0 left)
+  #25     wolf1's move ends at L4
+  #26   wolf1's turn ends
+  #27 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #28   wolf2 chooses opt:dash  [greedy @3]
+  #29     wolf2: Dash
+  #30   wolf2 chooses move:F8/p0  [greedy @4]
+  #31     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #32     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #33     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #34     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #35     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #36     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #37     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #38     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #39     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #40     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #41     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #42     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #43     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #44     wolf2 steps G7 -> F8 (5 ft, 10 left)
+  #45     wolf2's move ends at F8
+  #46   wolf2 chooses pass  [greedy @5]
+  #47   wolf2's turn ends
+  #48 == round 2 ==
+  #49 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #50   pc1 chooses pass  [journal @6]
+  #51   pc1's turn ends
+  #52 wolf1's turn (L4, 11 HP, 40 ft) [Wolf]
+  #53   wolf1 chooses move:G8/p0  [greedy @7]
+  #54     wolf1 steps L4 -> K3 (5 ft, 35 left)
+  #55     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #56     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #57     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #58     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #59     wolf1 steps G7 -> G8 (5 ft, 10 left)
+  #60     wolf1's move ends at G8
+  #61   wolf1 chooses attack:bite>pc1  [greedy @8]
+  #62     wolf1: Attack
+  #63     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #64   wolf1 chooses pass  [greedy @9]
+  #65   wolf1's turn ends
+  #66 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #67   wolf2 chooses attack:bite>pc1  [greedy @10]
+  #68     wolf2: Attack
+  #69     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #70   wolf2 chooses pass  [greedy @11]
+  #71   wolf2's turn ends
+  #72 == round 3 ==
+  #73 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #74   pc1 chooses pass  [journal @12]
+  #75   pc1's turn ends
+  #76 wolf1's turn (G8, 11 HP, 40 ft) [Wolf]
+  #77   wolf1 chooses attack:bite>pc1  [greedy @13]
+  #78     wolf1: Attack
+  #79     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #80       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #81         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #82   wolf1 chooses pass  [greedy @14]
+  #83   wolf1's turn ends
+  #84 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #85   wolf2 chooses attack:bite>pc1  [greedy @15]
+  #86     wolf2: Attack
+  #87     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #88   wolf2 chooses pass  [greedy @16]
+  #89   wolf2's turn ends
+  #90 fight ends: stalemate in round 3
+logHash 39cb3979096b3c7a
+
+== groupInitiative=individual (journal held; log identical to default) ==
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses search  [greedy @0]
+  #10     wolf1: Search
+  #11       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #12         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #13   wolf1 chooses move:L4/p0  [greedy @1]
+  #14     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #15     wolf1 steps S8 -> R7 (5 ft, 30 left)
+  #16     wolf1 steps R7 -> Q6 (5 ft, 25 left)
+  #17     wolf1 steps Q6 -> P5 (5 ft, 20 left)
+  #18     wolf1 steps P5 -> O4 (5 ft, 15 left)
+  #19     wolf1 steps O4 -> N3 (5 ft, 10 left)
+  #20     wolf1 steps N3 -> M3 (5 ft, 5 left)
+  #21     wolf1 steps M3 -> L4 (5 ft, 0 left)
+  #22     wolf1's move ends at L4
+  #23   wolf1's turn ends
+  #24 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #25   wolf2 chooses opt:dash  [greedy @2]
+  #26     wolf2: Dash
+  #27   wolf2 chooses move:F8/p0  [greedy @3]
+  #28     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #29     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #30     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #31     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #32     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #33     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #34     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #35     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #36     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #37     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #38     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #39     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #40     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #41     wolf2 steps G7 -> F8 (5 ft, 10 left)
+  #42     wolf2's move ends at F8
+  #43   wolf2 chooses pass  [greedy @4]
+  #44   wolf2's turn ends
+  #45 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #46   pc1 chooses pass  [journal @5]
+  #47   pc1's turn ends
+  #48 == round 2 ==
+  #49 wolf1's turn (L4, 11 HP, 40 ft) [Wolf]
+  #50   wolf1 chooses move:G8/p0  [greedy @6]
+  #51     wolf1 steps L4 -> K3 (5 ft, 35 left)
+  #52     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #53     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #54     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #55     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #56     wolf1 steps G7 -> G8 (5 ft, 10 left)
+  #57     wolf1's move ends at G8
+  #58   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #59     wolf1: Attack
+  #60     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #61   wolf1 chooses pass  [greedy @8]
+  #62   wolf1's turn ends
+  #63 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #64   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #65     wolf2: Attack
+  #66     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #67   wolf2 chooses pass  [greedy @10]
+  #68   wolf2's turn ends
+  #69 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #70   pc1 chooses pass  [journal @11]
+  #71   pc1's turn ends
+  #72 == round 3 ==
+  #73 wolf1's turn (G8, 11 HP, 40 ft) [Wolf]
+  #74   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #75     wolf1: Attack
+  #76     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #77       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #78         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #79   wolf1 chooses pass  [greedy @13]
+  #80   wolf1's turn ends
+  #81 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #82   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #83     wolf2: Attack
+  #84     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #85   wolf2 chooses pass  [greedy @15]
+  #86   wolf2's turn ends
+  #87 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #88   pc1 chooses pass  [journal @16]
+  #89   pc1's turn ends
+  #90 fight ends: stalemate in round 3
+logHash 5c4ab8542f7c9bce
+
+== monsterHp=rolled (journal held) ==
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 6 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses search  [greedy @0]
+  #10     wolf1: Search
+  #11       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #12         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #13   wolf1 chooses move:L4/p0  [greedy @1]
+  #14     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #15     wolf1 steps S8 -> R7 (5 ft, 30 left)
+  #16     wolf1 steps R7 -> Q6 (5 ft, 25 left)
+  #17     wolf1 steps Q6 -> P5 (5 ft, 20 left)
+  #18     wolf1 steps P5 -> O4 (5 ft, 15 left)
+  #19     wolf1 steps O4 -> N3 (5 ft, 10 left)
+  #20     wolf1 steps N3 -> M3 (5 ft, 5 left)
+  #21     wolf1 steps M3 -> L4 (5 ft, 0 left)
+  #22     wolf1's move ends at L4
+  #23   wolf1's turn ends
+  #24 wolf2's turn (T11, 12 HP, 40 ft) [Wolf]
+  #25   wolf2 chooses opt:dash  [greedy @2]
+  #26     wolf2: Dash
+  #27   wolf2 chooses move:F8/p0  [greedy @3]
+  #28     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #29     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #30     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #31     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #32     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #33     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #34     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #35     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #36     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #37     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #38     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #39     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #40     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #41     wolf2 steps G7 -> F8 (5 ft, 10 left)
+  #42     wolf2's move ends at F8
+  #43   wolf2 chooses pass  [greedy @4]
+  #44   wolf2's turn ends
+  #45 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #46   pc1 chooses pass  [journal @5]
+  #47   pc1's turn ends
+  #48 == round 2 ==
+  #49 wolf1's turn (L4, 6 HP, 40 ft) [Wolf]
+  #50   wolf1 chooses move:G8/p0  [greedy @6]
+  #51     wolf1 steps L4 -> K3 (5 ft, 35 left)
+  #52     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #53     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #54     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #55     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #56     wolf1 steps G7 -> G8 (5 ft, 10 left)
+  #57     wolf1's move ends at G8
+  #58   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #59     wolf1: Attack
+  #60     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #61   wolf1 chooses pass  [greedy @8]
+  #62   wolf1's turn ends
+  #63 wolf2's turn (F8, 12 HP, 40 ft) [Wolf]
+  #64   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #65     wolf2: Attack
+  #66     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #67   wolf2 chooses pass  [greedy @10]
+  #68   wolf2's turn ends
+  #69 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #70   pc1 chooses pass  [journal @11]
+  #71   pc1's turn ends
+  #72 == round 3 ==
+  #73 wolf1's turn (G8, 6 HP, 40 ft) [Wolf]
+  #74   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #75     wolf1: Attack
+  #76     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #77       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #78         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #79   wolf1 chooses pass  [greedy @13]
+  #80   wolf1's turn ends
+  #81 wolf2's turn (F8, 12 HP, 40 ft) [Wolf]
+  #82   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #83     wolf2: Attack
+  #84     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #85   wolf2 chooses pass  [greedy @15]
+  #86   wolf2's turn ends
+  #87 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #88   pc1 chooses pass  [journal @16]
+  #89   pc1's turn ends
+  #90 fight ends: stalemate in round 3
+logHash b4552f5c6ef24686
+
+== focusHandSomatic=lenient (journal held; log identical to default) ==
+flags read vs default: +selfTargetWhenTextSilent
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses search  [greedy @0]
+  #10     wolf1: Search
+  #11       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #12         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #13   wolf1 chooses move:L4/p0  [greedy @1]
+  #14     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #15     wolf1 steps S8 -> R7 (5 ft, 30 left)
+  #16     wolf1 steps R7 -> Q6 (5 ft, 25 left)
+  #17     wolf1 steps Q6 -> P5 (5 ft, 20 left)
+  #18     wolf1 steps P5 -> O4 (5 ft, 15 left)
+  #19     wolf1 steps O4 -> N3 (5 ft, 10 left)
+  #20     wolf1 steps N3 -> M3 (5 ft, 5 left)
+  #21     wolf1 steps M3 -> L4 (5 ft, 0 left)
+  #22     wolf1's move ends at L4
+  #23   wolf1's turn ends
+  #24 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #25   wolf2 chooses opt:dash  [greedy @2]
+  #26     wolf2: Dash
+  #27   wolf2 chooses move:F8/p0  [greedy @3]
+  #28     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #29     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #30     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #31     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #32     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #33     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #34     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #35     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #36     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #37     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #38     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #39     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #40     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #41     wolf2 steps G7 -> F8 (5 ft, 10 left)
+  #42     wolf2's move ends at F8
+  #43   wolf2 chooses pass  [greedy @4]
+  #44   wolf2's turn ends
+  #45 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #46   pc1 chooses pass  [journal @5]
+  #47   pc1's turn ends
+  #48 == round 2 ==
+  #49 wolf1's turn (L4, 11 HP, 40 ft) [Wolf]
+  #50   wolf1 chooses move:G8/p0  [greedy @6]
+  #51     wolf1 steps L4 -> K3 (5 ft, 35 left)
+  #52     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #53     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #54     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #55     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #56     wolf1 steps G7 -> G8 (5 ft, 10 left)
+  #57     wolf1's move ends at G8
+  #58   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #59     wolf1: Attack
+  #60     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #61   wolf1 chooses pass  [greedy @8]
+  #62   wolf1's turn ends
+  #63 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #64   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #65     wolf2: Attack
+  #66     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #67   wolf2 chooses pass  [greedy @10]
+  #68   wolf2's turn ends
+  #69 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #70   pc1 chooses pass  [journal @11]
+  #71   pc1's turn ends
+  #72 == round 3 ==
+  #73 wolf1's turn (G8, 11 HP, 40 ft) [Wolf]
+  #74   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #75     wolf1: Attack
+  #76     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #77       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #78         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #79   wolf1 chooses pass  [greedy @13]
+  #80   wolf1's turn ends
+  #81 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #82   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #83     wolf2: Attack
+  #84     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #85   wolf2 chooses pass  [greedy @15]
+  #86   wolf2's turn ends
+  #87 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #88   pc1 chooses pass  [journal @16]
+  #89   pc1's turn ends
+  #90 fight ends: stalemate in round 3
+logHash 232b8563e57c69bd
+
+== conjuredHandEffectBlocksHand=true (journal held; log identical to default) ==
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses search  [greedy @0]
+  #10     wolf1: Search
+  #11       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #12         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #13   wolf1 chooses move:L4/p0  [greedy @1]
+  #14     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #15     wolf1 steps S8 -> R7 (5 ft, 30 left)
+  #16     wolf1 steps R7 -> Q6 (5 ft, 25 left)
+  #17     wolf1 steps Q6 -> P5 (5 ft, 20 left)
+  #18     wolf1 steps P5 -> O4 (5 ft, 15 left)
+  #19     wolf1 steps O4 -> N3 (5 ft, 10 left)
+  #20     wolf1 steps N3 -> M3 (5 ft, 5 left)
+  #21     wolf1 steps M3 -> L4 (5 ft, 0 left)
+  #22     wolf1's move ends at L4
+  #23   wolf1's turn ends
+  #24 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #25   wolf2 chooses opt:dash  [greedy @2]
+  #26     wolf2: Dash
+  #27   wolf2 chooses move:F8/p0  [greedy @3]
+  #28     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #29     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #30     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #31     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #32     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #33     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #34     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #35     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #36     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #37     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #38     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #39     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #40     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #41     wolf2 steps G7 -> F8 (5 ft, 10 left)
+  #42     wolf2's move ends at F8
+  #43   wolf2 chooses pass  [greedy @4]
+  #44   wolf2's turn ends
+  #45 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #46   pc1 chooses pass  [journal @5]
+  #47   pc1's turn ends
+  #48 == round 2 ==
+  #49 wolf1's turn (L4, 11 HP, 40 ft) [Wolf]
+  #50   wolf1 chooses move:G8/p0  [greedy @6]
+  #51     wolf1 steps L4 -> K3 (5 ft, 35 left)
+  #52     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #53     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #54     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #55     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #56     wolf1 steps G7 -> G8 (5 ft, 10 left)
+  #57     wolf1's move ends at G8
+  #58   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #59     wolf1: Attack
+  #60     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #61   wolf1 chooses pass  [greedy @8]
+  #62   wolf1's turn ends
+  #63 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #64   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #65     wolf2: Attack
+  #66     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #67   wolf2 chooses pass  [greedy @10]
+  #68   wolf2's turn ends
+  #69 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #70   pc1 chooses pass  [journal @11]
+  #71   pc1's turn ends
+  #72 == round 3 ==
+  #73 wolf1's turn (G8, 11 HP, 40 ft) [Wolf]
+  #74   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #75     wolf1: Attack
+  #76     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #77       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #78         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #79   wolf1 chooses pass  [greedy @13]
+  #80   wolf1's turn ends
+  #81 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #82   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #83     wolf2: Attack
+  #84     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #85   wolf2 chooses pass  [greedy @15]
+  #86   wolf2's turn ends
+  #87 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #88   pc1 chooses pass  [journal @16]
+  #89   pc1's turn ends
+  #90 fight ends: stalemate in round 3
+logHash 48b3cb5bc2b2a154
+
+== areaOriginOnGrid=gridIntersection (skipped: scenario resolution rejects it: scenarios/golden/search-reveals-spikes.yaml:49:92: units[0].precast[0]: pc1's precast srd:spike-growth: K9 isn't a place it can be centered) ==
+
+== areaGridCoverage=squareCenterInside (journal held) ==
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 49 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses search  [greedy @0]
+  #10     wolf1: Search
+  #11       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #12         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #13   wolf1 chooses move:L4/p0  [greedy @1]
+  #14     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #15     wolf1 steps S8 -> R7 (5 ft, 30 left)
+  #16     wolf1 steps R7 -> Q6 (5 ft, 25 left)
+  #17     wolf1 steps Q6 -> P5 (5 ft, 20 left)
+  #18     wolf1 steps P5 -> O4 (5 ft, 15 left)
+  #19     wolf1 steps O4 -> N3 (5 ft, 10 left)
+  #20     wolf1 steps N3 -> M3 (5 ft, 5 left)
+  #21     wolf1 steps M3 -> L4 (5 ft, 0 left)
+  #22     wolf1's move ends at L4
+  #23   wolf1's turn ends
+  #24 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #25   wolf2 chooses opt:dash  [greedy @2]
+  #26     wolf2: Dash
+  #27   wolf2 chooses move:F8/p0  [greedy @3]
+  #28     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #29     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #30     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #31     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #32     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #33     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #34     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #35     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #36     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #37     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #38     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #39     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #40     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #41     wolf2 steps G7 -> F8 (5 ft, 10 left)
+  #42     wolf2's move ends at F8
+  #43   wolf2 chooses pass  [greedy @4]
+  #44   wolf2's turn ends
+  #45 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #46   pc1 chooses pass  [journal @5]
+  #47   pc1's turn ends
+  #48 == round 2 ==
+  #49 wolf1's turn (L4, 11 HP, 40 ft) [Wolf]
+  #50   wolf1 chooses move:G8/p0  [greedy @6]
+  #51     wolf1 steps L4 -> K3 (5 ft, 35 left)
+  #52     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #53     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #54     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #55     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #56     wolf1 steps G7 -> G8 (5 ft, 10 left)
+  #57     wolf1's move ends at G8
+  #58   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #59     wolf1: Attack
+  #60     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #61   wolf1 chooses pass  [greedy @8]
+  #62   wolf1's turn ends
+  #63 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #64   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #65     wolf2: Attack
+  #66     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #67   wolf2 chooses pass  [greedy @10]
+  #68   wolf2's turn ends
+  #69 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #70   pc1 chooses pass  [journal @11]
+  #71   pc1's turn ends
+  #72 == round 3 ==
+  #73 wolf1's turn (G8, 11 HP, 40 ft) [Wolf]
+  #74   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #75     wolf1: Attack
+  #76     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #77       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #78         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #79   wolf1 chooses pass  [greedy @13]
+  #80   wolf1's turn ends
+  #81 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #82   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #83     wolf2: Attack
+  #84     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #85   wolf2 chooses pass  [greedy @15]
+  #86   wolf2's turn ends
+  #87 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #88   pc1 chooses pass  [journal @16]
+  #89   pc1's turn ends
+  #90 fight ends: stalemate in round 3
+logHash 39735cfb48179761
+
+== areaGridCoverage=anyOverlap (journal held) ==
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 69 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses search  [greedy @0]
+  #10     wolf1: Search
+  #11       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #12         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #13   wolf1 chooses move:L4/p0  [greedy @1]
+  #14     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #15     wolf1 steps S8 -> R7 (5 ft, 30 left)
+  #16     wolf1 steps R7 -> Q6 (5 ft, 25 left)
+  #17     wolf1 steps Q6 -> P5 (5 ft, 20 left)
+  #18     wolf1 steps P5 -> O4 (5 ft, 15 left)
+  #19     wolf1 steps O4 -> N3 (5 ft, 10 left)
+  #20     wolf1 steps N3 -> M3 (5 ft, 5 left)
+  #21     wolf1 steps M3 -> L4 (5 ft, 0 left)
+  #22     wolf1's move ends at L4
+  #23   wolf1's turn ends
+  #24 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #25   wolf2 chooses opt:dash  [greedy @2]
+  #26     wolf2: Dash
+  #27   wolf2 chooses move:F8/p0  [greedy @3]
+  #28     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #29     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #30     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #31     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #32     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #33     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #34     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #35     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #36     wolf2 steps L3 -> K2 (5 ft, 35 left)
+  #37     wolf2 steps K2 -> J3 (5 ft, 30 left)
+  #38     wolf2 steps J3 -> I4 (5 ft, 25 left)
+  #39     wolf2 steps I4 -> H5 (5 ft, 20 left)
+  #40     wolf2 steps H5 -> G6 (5 ft, 15 left)
+  #41     wolf2 steps G6 -> F7 (5 ft, 10 left)
+  #42     wolf2 steps F7 -> F8 (5 ft, 5 left)
+  #43     wolf2's move ends at F8
+  #44   wolf2 chooses pass  [greedy @4]
+  #45   wolf2's turn ends
+  #46 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #47   pc1 chooses pass  [journal @5]
+  #48   pc1's turn ends
+  #49 == round 2 ==
+  #50 wolf1's turn (L4, 11 HP, 40 ft) [Wolf]
+  #51   wolf1 chooses move:F9/p0  [greedy @6]
+  #52     wolf1 steps L4 -> K3 (5 ft, 35 left)
+  #53     wolf1 steps K3 -> J3 (5 ft, 30 left)
+  #54     wolf1 steps J3 -> I4 (5 ft, 25 left)
+  #55     wolf1 steps I4 -> H5 (5 ft, 20 left)
+  #56     wolf1 steps H5 -> G6 (5 ft, 15 left)
+  #57     wolf1 steps G6 -> F7 (5 ft, 10 left)
+  #58     wolf1 steps F7 -> E8 (5 ft, 5 left)
+  #59     wolf1 steps E8 -> F9 (5 ft, 0 left)
+  #60     wolf1's move ends at F9
+  #61   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #62     wolf1: Attack
+  #63     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #64   wolf1's turn ends
+  #65 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #66   wolf2 chooses attack:bite>pc1  [greedy @8]
+  #67     wolf2: Attack
+  #68     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #69   wolf2 chooses pass  [greedy @9]
+  #70   wolf2's turn ends
+  #71 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #72   pc1 chooses pass  [journal @10]
+  #73   pc1's turn ends
+  #74 == round 3 ==
+  #75 wolf1's turn (F9, 11 HP, 40 ft) [Wolf]
+  #76   wolf1 chooses attack:bite>pc1  [greedy @11]
+  #77     wolf1: Attack
+  #78     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #79       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #80         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #81   wolf1 chooses pass  [greedy @12]
+  #82   wolf1's turn ends
+  #83 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #84   wolf2 chooses attack:bite>pc1  [greedy @13]
+  #85     wolf2: Attack
+  #86     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #87   wolf2 chooses pass  [greedy @14]
+  #88   wolf2's turn ends
+  #89 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #90   pc1 chooses pass  [journal @15]
+  #91   pc1's turn ends
+  #92 fight ends: stalemate in round 3
+logHash 608b11b26b140612
+
+== zoneKnowledge=all (journal held) ==
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses opt:dash  [greedy @0]
+  #10     wolf1: Dash
+  #11   wolf1 chooses move:F8/p0  [greedy @1]
+  #12     wolf1 steps T9 -> S8 (5 ft, 75 left)
+  #13     wolf1 steps S8 -> R7 (5 ft, 70 left)
+  #14     wolf1 steps R7 -> Q6 (5 ft, 65 left)
+  #15     wolf1 steps Q6 -> P5 (5 ft, 60 left)
+  #16     wolf1 steps P5 -> O4 (5 ft, 55 left)
+  #17     wolf1 steps O4 -> N3 (5 ft, 50 left)
+  #18     wolf1 steps N3 -> M2 (5 ft, 45 left)
+  #19     wolf1 steps M2 -> L2 (5 ft, 40 left)
+  #20     wolf1 steps L2 -> K3 (5 ft, 35 left)
+  #21     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #22     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #23     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #24     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #25     wolf1 steps G7 -> F8 (5 ft, 10 left)
+  #26     wolf1's move ends at F8
+  #27   wolf1 chooses pass  [greedy @2]
+  #28   wolf1's turn ends
+  #29 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #30   wolf2 chooses opt:dash  [greedy @3]
+  #31     wolf2: Dash
+  #32   wolf2 chooses move:G8/p0  [greedy @4]
+  #33     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #34     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #35     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #36     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #37     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #38     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #39     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #40     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #41     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #42     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #43     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #44     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #45     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #46     wolf2 steps G7 -> G8 (5 ft, 10 left)
+  #47     wolf2's move ends at G8
+  #48   wolf2 chooses pass  [greedy @5]
+  #49   wolf2's turn ends
+  #50 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #51   pc1 chooses pass  [journal @6]
+  #52   pc1's turn ends
+  #53 == round 2 ==
+  #54 wolf1's turn (F8, 11 HP, 40 ft) [Wolf]
+  #55   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #56     wolf1: Attack
+  #57     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #58   wolf1 chooses pass  [greedy @8]
+  #59   wolf1's turn ends
+  #60 wolf2's turn (G8, 11 HP, 40 ft) [Wolf]
+  #61   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #62     wolf2: Attack
+  #63     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #64   wolf2 chooses pass  [greedy @10]
+  #65   wolf2's turn ends
+  #66 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #67   pc1 chooses pass  [journal @11]
+  #68   pc1's turn ends
+  #69 == round 3 ==
+  #70 wolf1's turn (F8, 11 HP, 40 ft) [Wolf]
+  #71   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #72     wolf1: Attack
+  #73     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #74       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #75         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #76   wolf1 chooses pass  [greedy @13]
+  #77   wolf1's turn ends
+  #78 wolf2's turn (G8, 11 HP, 40 ft) [Wolf]
+  #79   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #80     wolf2: Attack
+  #81     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #82   wolf2 chooses pass  [greedy @15]
+  #83   wolf2's turn ends
+  #84 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #85   pc1 chooses pass  [journal @16]
+  #86   pc1's turn ends
+  #87 fight ends: stalemate in round 3
+logHash b99918b55b19602c
+
+== zoneKnowledge=none (journal held) ==
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses opt:dash  [greedy @0]
+  #10     wolf1: Dash
+  #11   wolf1 chooses move:F8/p0  [greedy @1]
+  #12     wolf1 steps T9 -> S8 (5 ft, 75 left)
+  #13     wolf1 steps S8 -> R7 (5 ft, 70 left)
+  #14     wolf1 steps R7 -> Q6 (5 ft, 65 left)
+  #15     wolf1 steps Q6 -> P5 (5 ft, 60 left)
+  #16     wolf1 steps P5 -> O4 (5 ft, 55 left)
+  #17     wolf1 steps O4 -> N3 (5 ft, 50 left)
+  #18     wolf1 steps N3 -> M2 (5 ft, 45 left)
+  #19     wolf1 steps M2 -> L2 (5 ft, 40 left)
+  #20     wolf1 steps L2 -> K3 (5 ft, 35 left)
+  #21     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #22     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #23     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #24     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #25     wolf1 steps G7 -> F8 (5 ft, 10 left)
+  #26     wolf1's move ends at F8
+  #27   wolf1 chooses pass  [greedy @2]
+  #28   wolf1's turn ends
+  #29 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #30   wolf2 chooses opt:dash  [greedy @3]
+  #31     wolf2: Dash
+  #32   wolf2 chooses move:G8/p0  [greedy @4]
+  #33     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #34     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #35     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #36     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #37     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #38     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #39     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #40     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #41     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #42     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #43     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #44     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #45     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #46     wolf2 steps G7 -> G8 (5 ft, 10 left)
+  #47     wolf2's move ends at G8
+  #48   wolf2 chooses pass  [greedy @5]
+  #49   wolf2's turn ends
+  #50 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #51   pc1 chooses pass  [journal @6]
+  #52   pc1's turn ends
+  #53 == round 2 ==
+  #54 wolf1's turn (F8, 11 HP, 40 ft) [Wolf]
+  #55   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #56     wolf1: Attack
+  #57     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #58   wolf1 chooses pass  [greedy @8]
+  #59   wolf1's turn ends
+  #60 wolf2's turn (G8, 11 HP, 40 ft) [Wolf]
+  #61   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #62     wolf2: Attack
+  #63     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #64   wolf2 chooses pass  [greedy @10]
+  #65   wolf2's turn ends
+  #66 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #67   pc1 chooses pass  [journal @11]
+  #68   pc1's turn ends
+  #69 == round 3 ==
+  #70 wolf1's turn (F8, 11 HP, 40 ft) [Wolf]
+  #71   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #72     wolf1: Attack
+  #73     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #74       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #75         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #76   wolf1 chooses pass  [greedy @13]
+  #77   wolf1's turn ends
+  #78 wolf2's turn (G8, 11 HP, 40 ft) [Wolf]
+  #79   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #80     wolf2: Attack
+  #81     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #82   wolf2 chooses pass  [greedy @15]
+  #83   wolf2's turn ends
+  #84 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #85   pc1 chooses pass  [journal @16]
+  #86   pc1's turn ends
+  #87 fight ends: stalemate in round 3
+logHash bc0719a09e3e8738
+
+== losMethod=centers (journal held; log identical to default) ==
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses search  [greedy @0]
+  #10     wolf1: Search
+  #11       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #12         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #13   wolf1 chooses move:L4/p0  [greedy @1]
+  #14     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #15     wolf1 steps S8 -> R7 (5 ft, 30 left)
+  #16     wolf1 steps R7 -> Q6 (5 ft, 25 left)
+  #17     wolf1 steps Q6 -> P5 (5 ft, 20 left)
+  #18     wolf1 steps P5 -> O4 (5 ft, 15 left)
+  #19     wolf1 steps O4 -> N3 (5 ft, 10 left)
+  #20     wolf1 steps N3 -> M3 (5 ft, 5 left)
+  #21     wolf1 steps M3 -> L4 (5 ft, 0 left)
+  #22     wolf1's move ends at L4
+  #23   wolf1's turn ends
+  #24 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #25   wolf2 chooses opt:dash  [greedy @2]
+  #26     wolf2: Dash
+  #27   wolf2 chooses move:F8/p0  [greedy @3]
+  #28     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #29     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #30     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #31     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #32     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #33     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #34     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #35     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #36     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #37     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #38     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #39     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #40     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #41     wolf2 steps G7 -> F8 (5 ft, 10 left)
+  #42     wolf2's move ends at F8
+  #43   wolf2 chooses pass  [greedy @4]
+  #44   wolf2's turn ends
+  #45 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #46   pc1 chooses pass  [journal @5]
+  #47   pc1's turn ends
+  #48 == round 2 ==
+  #49 wolf1's turn (L4, 11 HP, 40 ft) [Wolf]
+  #50   wolf1 chooses move:G8/p0  [greedy @6]
+  #51     wolf1 steps L4 -> K3 (5 ft, 35 left)
+  #52     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #53     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #54     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #55     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #56     wolf1 steps G7 -> G8 (5 ft, 10 left)
+  #57     wolf1's move ends at G8
+  #58   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #59     wolf1: Attack
+  #60     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #61   wolf1 chooses pass  [greedy @8]
+  #62   wolf1's turn ends
+  #63 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #64   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #65     wolf2: Attack
+  #66     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #67   wolf2 chooses pass  [greedy @10]
+  #68   wolf2's turn ends
+  #69 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #70   pc1 chooses pass  [journal @11]
+  #71   pc1's turn ends
+  #72 == round 3 ==
+  #73 wolf1's turn (G8, 11 HP, 40 ft) [Wolf]
+  #74   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #75     wolf1: Attack
+  #76     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #77       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #78         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #79   wolf1 chooses pass  [greedy @13]
+  #80   wolf1's turn ends
+  #81 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #82   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #83     wolf2: Attack
+  #84     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #85   wolf2 chooses pass  [greedy @15]
+  #86   wolf2's turn ends
+  #87 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #88   pc1 chooses pass  [journal @16]
+  #89   pc1's turn ends
+  #90 fight ends: stalemate in round 3
+logHash 61e86de472de7f23
+
+== losMethod=stubbed (journal held; log identical to default) ==
+flags read vs default: -losMethod -creatureCover
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses search  [greedy @0]
+  #10     wolf1: Search
+  #11       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #12         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #13   wolf1 chooses move:L4/p0  [greedy @1]
+  #14     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #15     wolf1 steps S8 -> R7 (5 ft, 30 left)
+  #16     wolf1 steps R7 -> Q6 (5 ft, 25 left)
+  #17     wolf1 steps Q6 -> P5 (5 ft, 20 left)
+  #18     wolf1 steps P5 -> O4 (5 ft, 15 left)
+  #19     wolf1 steps O4 -> N3 (5 ft, 10 left)
+  #20     wolf1 steps N3 -> M3 (5 ft, 5 left)
+  #21     wolf1 steps M3 -> L4 (5 ft, 0 left)
+  #22     wolf1's move ends at L4
+  #23   wolf1's turn ends
+  #24 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #25   wolf2 chooses opt:dash  [greedy @2]
+  #26     wolf2: Dash
+  #27   wolf2 chooses move:F8/p0  [greedy @3]
+  #28     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #29     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #30     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #31     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #32     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #33     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #34     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #35     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #36     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #37     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #38     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #39     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #40     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #41     wolf2 steps G7 -> F8 (5 ft, 10 left)
+  #42     wolf2's move ends at F8
+  #43   wolf2 chooses pass  [greedy @4]
+  #44   wolf2's turn ends
+  #45 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #46   pc1 chooses pass  [journal @5]
+  #47   pc1's turn ends
+  #48 == round 2 ==
+  #49 wolf1's turn (L4, 11 HP, 40 ft) [Wolf]
+  #50   wolf1 chooses move:G8/p0  [greedy @6]
+  #51     wolf1 steps L4 -> K3 (5 ft, 35 left)
+  #52     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #53     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #54     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #55     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #56     wolf1 steps G7 -> G8 (5 ft, 10 left)
+  #57     wolf1's move ends at G8
+  #58   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #59     wolf1: Attack
+  #60     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #61   wolf1 chooses pass  [greedy @8]
+  #62   wolf1's turn ends
+  #63 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #64   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #65     wolf2: Attack
+  #66     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #67   wolf2 chooses pass  [greedy @10]
+  #68   wolf2's turn ends
+  #69 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #70   pc1 chooses pass  [journal @11]
+  #71   pc1's turn ends
+  #72 == round 3 ==
+  #73 wolf1's turn (G8, 11 HP, 40 ft) [Wolf]
+  #74   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #75     wolf1: Attack
+  #76     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #77       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #78         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #79   wolf1 chooses pass  [greedy @13]
+  #80   wolf1's turn ends
+  #81 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #82   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #83     wolf2: Attack
+  #84     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #85   wolf2 chooses pass  [greedy @15]
+  #86   wolf2's turn ends
+  #87 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #88   pc1 chooses pass  [journal @16]
+  #89   pc1's turn ends
+  #90 fight ends: stalemate in round 3
+logHash c0e2e9e88ad54bca
+
+== creatureCover=off (journal held; log identical to default) ==
+flags read vs default: -losMethod
+   #1   pc1 cast Spike Growth before the fight with a level 2 slot (2 left)
+   #2   pc1 is concentrating on Spike Growth
+   #3   Spike Growth appears at K9: 45 squares, Difficult Terrain (seen by pc1, wolf2)
+   #4   initiative wolf1 12 (static)
+   #5   initiative wolf2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7 == round 1 ==
+   #8 wolf1's turn (T9, 11 HP, 40 ft) [Wolf]
+   #9   wolf1 chooses search  [greedy @0]
+  #10     wolf1: Search
+  #11       wolf1 WIS check for Search: d20 15 +1 = 16 vs DC 15, success  [wolf1 check r1 p0.0]
+  #12         wolf1 recognizes Spike Growth as hazardous (its Search)
+  #13   wolf1 chooses move:L4/p0  [greedy @1]
+  #14     wolf1 steps T9 -> S8 (5 ft, 35 left)
+  #15     wolf1 steps S8 -> R7 (5 ft, 30 left)
+  #16     wolf1 steps R7 -> Q6 (5 ft, 25 left)
+  #17     wolf1 steps Q6 -> P5 (5 ft, 20 left)
+  #18     wolf1 steps P5 -> O4 (5 ft, 15 left)
+  #19     wolf1 steps O4 -> N3 (5 ft, 10 left)
+  #20     wolf1 steps N3 -> M3 (5 ft, 5 left)
+  #21     wolf1 steps M3 -> L4 (5 ft, 0 left)
+  #22     wolf1's move ends at L4
+  #23   wolf1's turn ends
+  #24 wolf2's turn (T11, 11 HP, 40 ft) [Wolf]
+  #25   wolf2 chooses opt:dash  [greedy @2]
+  #26     wolf2: Dash
+  #27   wolf2 chooses move:F8/p0  [greedy @3]
+  #28     wolf2 steps T11 -> S10 (5 ft, 75 left)
+  #29     wolf2 steps S10 -> R9 (5 ft, 70 left)
+  #30     wolf2 steps R9 -> Q8 (5 ft, 65 left)
+  #31     wolf2 steps Q8 -> P7 (5 ft, 60 left)
+  #32     wolf2 steps P7 -> O6 (5 ft, 55 left)
+  #33     wolf2 steps O6 -> N5 (5 ft, 50 left)
+  #34     wolf2 steps N5 -> M4 (5 ft, 45 left)
+  #35     wolf2 steps M4 -> L3 (5 ft, 40 left)
+  #36     wolf2 steps L3 -> K3 (5 ft, 35 left)
+  #37     wolf2 steps K3 -> J4 (5 ft, 30 left)
+  #38     wolf2 steps J4 -> I5 (5 ft, 25 left)
+  #39     wolf2 steps I5 -> H6 (5 ft, 20 left)
+  #40     wolf2 steps H6 -> G7 (5 ft, 15 left)
+  #41     wolf2 steps G7 -> F8 (5 ft, 10 left)
+  #42     wolf2's move ends at F8
+  #43   wolf2 chooses pass  [greedy @4]
+  #44   wolf2's turn ends
+  #45 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #46   pc1 chooses pass  [journal @5]
+  #47   pc1's turn ends
+  #48 == round 2 ==
+  #49 wolf1's turn (L4, 11 HP, 40 ft) [Wolf]
+  #50   wolf1 chooses move:G8/p0  [greedy @6]
+  #51     wolf1 steps L4 -> K3 (5 ft, 35 left)
+  #52     wolf1 steps K3 -> J4 (5 ft, 30 left)
+  #53     wolf1 steps J4 -> I5 (5 ft, 25 left)
+  #54     wolf1 steps I5 -> H6 (5 ft, 20 left)
+  #55     wolf1 steps H6 -> G7 (5 ft, 15 left)
+  #56     wolf1 steps G7 -> G8 (5 ft, 10 left)
+  #57     wolf1's move ends at G8
+  #58   wolf1 chooses attack:bite>pc1  [greedy @7]
+  #59     wolf1: Attack
+  #60     wolf1 Bite -> pc1: d20 9 +4 = 13 vs AC 15, miss  [wolf1 attack r2 p0.0]
+  #61   wolf1 chooses pass  [greedy @8]
+  #62   wolf1's turn ends
+  #63 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #64   wolf2 chooses attack:bite>pc1  [greedy @9]
+  #65     wolf2: Attack
+  #66     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r2 p0.0]
+  #67   wolf2 chooses pass  [greedy @10]
+  #68   wolf2's turn ends
+  #69 pc1's turn (G9, 45 HP, 30 ft) [Sample Druid]
+  #70   pc1 chooses pass  [journal @11]
+  #71   pc1's turn ends
+  #72 == round 3 ==
+  #73 wolf1's turn (G8, 11 HP, 40 ft) [Wolf]
+  #74   wolf1 chooses attack:bite>pc1  [greedy @12]
+  #75     wolf1: Attack
+  #76     wolf1 Bite -> pc1: d20 14 +4 = 18 vs AC 15, hit  [wolf1 attack r3 p0.0]
+  #77       pc1 takes 5 (5 piercing), HP 45 -> 40  [wolf1 damage r3 p0.0]
+  #78         pc1 concentration save (Spike Growth): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r3 p2.0]
+  #79   wolf1 chooses pass  [greedy @13]
+  #80   wolf1's turn ends
+  #81 wolf2's turn (F8, 11 HP, 40 ft) [Wolf]
+  #82   wolf2 chooses attack:bite>pc1  [greedy @14]
+  #83     wolf2: Attack
+  #84     wolf2 Bite -> pc1: d20 2 +4 = 6 vs AC 15, miss  [wolf2 attack r3 p0.0]
+  #85   wolf2 chooses pass  [greedy @15]
+  #86   wolf2's turn ends
+  #87 pc1's turn (G9, 40 HP, 30 ft) [Sample Druid]
+  #88   pc1 chooses pass  [journal @16]
+  #89   pc1's turn ends
+  #90 fight ends: stalemate in round 3
+logHash c4368d59c2dbe9e4

@@ -1,0 +1,14 @@
+# Reviewed against SRD 5.2.1 p.86 (srd-raw.txt:19928-19931), the Orc's Relentless Endurance (coverage
+# W1, docs/design/w1-plan.md section 3, P8): "When you are reduced to 0 Hit Points but not killed
+# outright, you can drop to 1 Hit Point instead. Once you use this trait, you can't do so again
+# until you finish a Long Rest."
+# dropToOne, spending the species pool relentless-endurance (max 1, overrides/species/orc.yaml).
+# "Killed outright" for a character is Massive Damage (srd-raw.txt:2310, 2320-2322). It's always
+# taken: within one fight with no rests, 1 HP is never worse than 0 (an AI choice, sim/damage.ts).
+# Nothing else in the text, so full.
+fidelity: full
+dropToOne: { pool: relentless-endurance }
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 86

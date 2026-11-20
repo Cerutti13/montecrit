@@ -1,0 +1,25 @@
+# A synthetic class-built Druid 5 (session S, the repo half) on a synthetic species, background and
+# subclass: the shape a private character file takes when its species, background and subclass come
+# from a private pack. The species' traits spend the species' own pools; the background's +2/+1 is a
+# recorded pick (the scores below are final); its origin feat (SRD Magic Initiate) is narrative.
+kind: character
+id: test:sample-kin-druid
+name: Sample Kin Druid
+source: synthetic test fixture
+rules: '2024'
+classes: [{ class: srd:druid, level: 5, subclass: test:sample-path }]
+species: test:sample-kin
+size: medium
+background: test:sample-wanderer
+abilities: { str: 8, dex: 14, con: 14, int: 10, wis: 17, cha: 13 }   # final scores
+hp: average
+picks:
+  srd:druid#primal-order: [srd:druid/primal-order-warden]
+  srd:druid#skills: [nature, perception]
+  srd:druid#asi-4: { asi: { wis: 1, dex: 1 } }
+  test:sample-wanderer#abilities: { asi: { wis: 2, cha: 1 } }
+equipment: { armor: srd:leather-armor, shield: true, weapons: [srd:quarterstaff] }
+casting:
+  - source: srd:druid
+    cantrips: [srd:produce-flame, srd:guidance, srd:poison-spray]
+    prepared: [srd:healing-word, srd:cure-wounds, srd:entangle, srd:faerie-fire, srd:thunderwave, srd:moonbeam, srd:spike-growth, srd:hold-person, srd:longstrider]

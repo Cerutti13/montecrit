@@ -1,0 +1,113 @@
+replay   engine 0.8.0 | content 3d3082d01dbb7376 | scenario aura-emanation 60828e1f84cb2cd4 | seed 2 run 0 | journal 22
+policy   adp1 journal>greedy | adp2 journal>greedy | gob1 journal>greedy | pc1 journal>greedy | pc2 journal>greedy | pc3 journal>greedy | pc4 journal>greedy
+knobs    maxRounds=2 attackDowned=ifNoOtherTarget lossCounts=pcs downEnds=false
+flags read:
+  diagonalCost=uniform [verified: SRD 5.2.1 p.13 "Playing on a Grid": any adjacent square costs 1; alternating 5/10 is a 2024 DMG option (its use for range is unverified)]
+  initiativeMode=static [verified: SRD 5.2.1 p.184 "Initiative" and p.254: static initiative is a GM option]
+  initiativeTies=rollOff [UNVERIFIED: SRD 5.2.1 p.13: the GM orders tied monsters and mixed ties, players order tied PCs; no procedure given (policy)]
+  groupInitiative=shared [verified: SRD 5.2.1 p.13: a group of identical creatures gets one roll]
+  monsterHp=listed [verified: SRD 5.2.1 p.255: use the number or the dice, the GM's choice]
+  selfTargetWhenTextSilent=allowed [UNVERIFIED: SRD 5.2.1 p.106 "Targeting Yourself" covers "a creature of your choice" only; no 2024 SAC entry]
+  zoneKnowledge=sawCast [UNVERIFIED: Not a rule: which zones a creature avoids when it plans a move. sawCast (coverage step 9) = a hidden zone (SRD 5.2.1 p.164 Spike Growth, srd-raw.txt:31015-31021: camouflaged; a creature that can't see the area when the spell is cast must take a Search action to recognize it) only once it saw it appear or recognized it, every other zone once it has line of sight to one of its squares (or saw it appear); all = every zone; none = only zones it created. Movement cost through Difficult Terrain is physical and applies either way]
+  losMethod=corners [UNVERIFIED: SRD 5.2.1 "Cover" (srd-raw.txt:1995-2032) and its glossary entry (33044-33050) give the three degrees and say a target benefits only when the effect "originates on the opposite side of the cover", but give no grid procedure. corners = the DMG's corner-to-corner lines (the attacker's best corner to the 4 corners of the target's square: 1-2 blocked Half, 3 Three-Quarters, 4 Total; known only secondhand, the DMG is not SRD); centers = one line between square centers; stubbed = no cover and everyone sees everyone (the engine before M3 step 8, a what-if)]
+  creatureCover=on [verified: SRD 5.2.1 Cover table (srd-raw.txt:2006-2017): Half Cover is offered by "Another creature or an object that covers at least half of the target"; off is a what-if]
+  emanationReach=gridDistance [UNVERIFIED: SRD 5.2.1 "Emanation" (srd-raw.txt:33380-33386) says only that it extends in straight lines in all directions for a distance; no grid-area rule. gridDistance counts squares as p.13 "Playing on a Grid" does (a 10-ft Emanation is the 5x5 block under uniform diagonals); radial takes a Sphere's squares of that radius around the center of the creature's square]
+  emanationCastTrigger=none [UNVERIFIED: SRD 5.2.1 Spirit Guardians (srd-raw.txt:31040-31047) lists the Emanation entering a creature's space, a creature entering it, and ending a turn there; it doesn't address the cast itself. none = casting triggers nothing; onCast = the cast counts as the Emanation entering the space of each creature in the first area]
+notes    LOS: grid (losMethod=corners, creatureCover=on)
+notes    ending concentration or dismissing an effect: offered only on your own turn
+notes    srd:goblin-warrior partial: unimplemented Nimble Escape: the Hide option
+notes    test:sample-guardian partial: unimplemented Divine Order: narrative, not modeled; Darkvision: narrative, not modeled; Life Domain Spells: narrative, not modeled; Life Domain: grants spells (spells are imported at step 6); Dwarf: species trait darkvision not mapped; Acolyte: choice feat-spell-list not mapped; Magic Initiate: grants spells (spells are imported at step 6); Channel Divinity: activity type heal; Channel Divinity: activity type save; Channel Divinity: effect status frightened; Channel Divinity: effect status incapacitated; Channel Divinity: trigger: "each time" (repeating trigger); Divine Order: Protector: effect key system.traits.armorProf.value (add); Divine Order: Protector: effect key system.traits.weaponProf.value (add); Sear Undead: activity type save; Sear Undead: effect status frightened; Sear Undead: effect status incapacitated; Dwarven Resilience: advantage on saves against the poisoned condition not modeled; Dwarven Resilience: not a bucket-A shape (needs a reviewed override to be full); Dwarven Toughness: not a bucket-A shape (needs a reviewed override to be full); Stonecunning: activity type utility; Disciple of Life: activity type heal; Preserve Life: activity type heal
+notes    test:sample-sentinel partial: unimplemented Darkvision: narrative, not modeled; Oath of Devotion Spells: narrative, not modeled; Faithful Steed: narrative, not modeled; Paladin's Smite: narrative, not modeled; Paladin: grants spells (spells are imported at step 6); Oath of Devotion: grants spells (spells are imported at step 6); Dwarf: species trait darkvision not mapped; Savage Attacker: narrative, not modeled; Longsword: Versatile two-handed damage with a Shield equipped (doffing the Shield, the Utilize action) not modeled; Dwarven Resilience: advantage on saves against the poisoned condition not modeled; Dwarven Resilience: not a bucket-A shape (needs a reviewed override to be full); Dwarven Toughness: not a bucket-A shape (needs a reviewed override to be full); Stonecunning: activity type utility; Sacred Weapon: activity type enchant; Sacred Weapon: effect key activities[attack].attack.bonus (add); Sacred Weapon: effect key system.damage.base.types (add); Sacred Weapon: trigger: "each time" (repeating trigger); Channel Divinity: activity type utility; Channel Divinity: effect with no changes (rules in prose only); Channel Divinity: trigger: "each time" (repeating trigger); Lay on Hands: activity type heal; Lay on Hands: activity type utility
+notes    srd:sacred-flame partial: unimplemented bucket-A by the importer's reading only (needs a reviewed override to be full)
+notes    srd:spirit-guardians partial: unimplemented Speed is halved in the Emanation for a creature it affects; Necrotic instead of Radiant for an evil caster
+
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 15 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc4 12 (static)
+   #4   initiative adp2 12 (static)
+   #5   initiative pc3 12 (static)
+   #6   initiative gob1 12 (static)
+   #7   initiative adp1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc4 chooses pass  [journal @0]
+  #13   pc4's turn ends
+  #14 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #15   adp2 chooses cast:sacred-flame@0  [journal @1]
+  #16     adp2 casts Sacred Flame (cantrip)
+  #17       adp2 chooses target:pc4  [journal @2]
+  #18       pc4 DEX save vs Sacred Flame: d20 3 +2 = 5 vs DC 13, fail  [pc4 save r1 p2.0]
+  #19       pc4 takes 1 (1 radiant) from Sacred Flame, HP 24 -> 23  [adp2 effect r1 p0.0]
+  #20   adp2 chooses pass  [journal @3]
+  #21   adp2's turn ends
+  #22 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #23   pc3 chooses pass  [journal @4]
+  #24   pc3's turn ends
+  #25 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #29   adp1 chooses cast:sacred-flame@0  [journal @6]
+  #30     adp1 casts Sacred Flame (cantrip)
+  #31       adp1 chooses target:pc3  [journal @7]
+  #32       pc3 DEX save vs Sacred Flame: d20 18 +5 = 23 vs DC 13, success  [pc3 save r1 p1.0]
+  #33   adp1 chooses pass  [journal @8]
+  #34   adp1's turn ends
+  #35 pc1's turn (A2, 43 HP, 30 ft) [Sample Guardian]
+  #36   pc1 chooses cast:spirit-guardians@3  [journal @9]
+  #37     pc1 casts Spirit Guardians with a level 3 slot (1 left)
+  #38       pc1 is concentrating on Spirit Guardians
+  #39       Spirit Guardians appears at A2: 19 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+  #40   pc1 chooses move:E2/p0  [journal @10]
+  #41     pc1 steps A2 -> B1 (5 ft, 25 left)
+  #42       Spirit Guardians moves A2 -> B1
+  #43     pc1 steps B1 -> C1 (5 ft, 20 left)
+  #44       Spirit Guardians moves B1 -> C1
+  #45     pc1 steps C1 -> D1 (5 ft, 15 left)
+  #46       Spirit Guardians moves C1 -> D1
+  #47     pc1 steps D1 -> E2 (5 ft, 10 left)
+  #48       Spirit Guardians moves D1 -> E2; caught gob1
+  #49         gob1 WIS save vs Spirit Guardians: d20 18 -1 = 17 vs DC 15, success  [gob1 save r1 p4.0]
+  #50         gob1 takes 3 (7 radiant, half) from Spirit Guardians, HP 10 -> 7  [pc1 zone r1 p0.0]
+  #51     pc1's move ends at E2
+  #52   pc1 chooses move:D2/p0  [journal @11]
+  #53     pc1 steps E2 -> D2 (5 ft, 5 left)
+  #54       Spirit Guardians moves E2 -> D2
+  #55     pc1's move ends at D2
+  #56   pc1 chooses move:E2/p0  [journal @12]
+  #57     pc1 steps D2 -> E2 (5 ft, 0 left)
+  #58       Spirit Guardians moves D2 -> E2; caught gob1
+  #59     pc1's move ends at E2
+  #60   pc1 chooses pass  [journal @13]
+  #61   pc1's turn ends
+  #62 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #63   pc2 chooses pass  [journal @14]
+  #64   pc2's turn ends
+  #65 == round 2 ==
+  #66 pc4's turn (H7, 23 HP, 30 ft) [Sample Grove]
+  #67   pc4 chooses pass  [journal @15]
+  #68   pc4's turn ends
+  #69 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #70   adp2 chooses pass  [journal @16]
+  #71   adp2's turn ends
+  #72 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #73   pc3 chooses pass  [journal @17]
+  #74   pc3's turn ends
+  #75 gob1's turn (H2, 7 HP, 30 ft) [Goblin Warrior]
+  #76   gob1 chooses pass  [journal @18]
+  #77   gob1 WIS save vs Spirit Guardians: d20 1 -1 = 0 vs DC 15, fail  [gob1 save r2 p0.0]
+  #78   gob1 takes 4 (4 radiant) from Spirit Guardians, HP 7 -> 3  [pc1 zone r2 p3.0]
+  #79   gob1's turn ends
+  #80 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #81   adp1 chooses pass  [journal @19]
+  #82   adp1's turn ends
+  #83 pc1's turn (E2, 43 HP, 30 ft) [Sample Guardian]
+  #84   pc1 chooses pass  [journal @20]
+  #85   pc1's turn ends
+  #86 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #87   pc2 chooses pass  [journal @21]
+  #88   pc2's turn ends
+  #89 fight ends: stalemate in round 2
+logHash 23f001201c4b637a

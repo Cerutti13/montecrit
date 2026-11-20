@@ -1,0 +1,19 @@
+# A synthetic concentration buff in Bless's shape (coverage 8'b G6's stand-in; no SRD content uses
+# it until W2): the target adds 1d4 to its attack rolls for a minute.
+kind: spell
+id: test:bless-like
+name: Blessing-like Boon
+source: synthetic test fixture (concentration buff on attack rolls)
+level: 1
+castingTime: action
+range: 30
+components: { v: true, s: true, m: focus }
+concentration: true
+duration: { minutes: 1 }
+effects:
+  - id: boon
+    name: Boon (attack rolls add 1d4)
+    mods: [{ on: [d20.attack], op: preDice, dice: 1d4 }]
+do:
+  - target: { range: 30, who: ally, self: yes }
+  - apply: { effect: boon, to: target }

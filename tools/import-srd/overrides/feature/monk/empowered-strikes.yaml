@@ -1,0 +1,17 @@
+# Reviewed against SRD 5.2.1 p.51 (srd-raw.txt:11212-11216), Monk level 6: "Whenever you deal
+# damage with your Unarmed Strike, it can deal your choice of Force damage or its normal damage
+# type." Mapped whole (C13): a passive unarmed damageType force stat, which the engine resolves to
+# the type the target defends against least, the normal type on a tie (sim/stats.ts). Foundry's
+# attack activity is replaced by it. Nothing else, so full.
+fidelity: full
+effects:
+  - id: empowered-strikes
+    name: Empowered Strikes
+    stats:
+      - { damageType: force, on: unarmed }
+passive:
+  effects: [empowered-strikes]
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 51

@@ -1,0 +1,13 @@
+# Test stand-in (test pack only): activate the sample druid's stance with its "steady" option on
+# the first turn it can, then play greedy. Mirrors the private form-first policies.
+kind: policy
+id: test-steady-first
+name: Stance (steady) first
+seats: pcs
+base: greedy
+script:
+  - id: form
+    when: { myTurn: 1 }
+    do: { use: 'test:stance' }
+    pick: steady
+    retry: 2

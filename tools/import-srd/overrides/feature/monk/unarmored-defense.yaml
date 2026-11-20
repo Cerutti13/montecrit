@@ -1,0 +1,12 @@
+# Reviewed against SRD 5.2.1 p.50 (srd-raw.txt:11073, 11078-11080), Monk level 1: without armor or a
+# Shield, base AC 10 + DEX + WIS.
+# Coverage C0 (T relabel, X1): this record carries no program because nothing in it needs one; it is
+# mechanized by the class's AC formula (classes/monk.yaml acFormulas: 10 + @mod.dex + @mod.wis while
+# unarmored and noShield), chosen by the character expansion's AC derivation.
+# Nothing in the text is left unmodeled in a fight, so full (mechanizedBy, never compiled).
+fidelity: full
+mechanizedBy: unarmoredDefense
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 50

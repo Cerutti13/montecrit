@@ -1,0 +1,13 @@
+{
+  "//": "The browser app: DOM, JSX, bundler resolution. Worker entry files (src/worker) have their own project.",
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["es2024", "dom", "dom.iterable"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "types": ["vite/client"]
+  },
+  "include": ["src"],
+  "exclude": ["src/worker"]
+}

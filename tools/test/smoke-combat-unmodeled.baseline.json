@@ -1,0 +1,526 @@
+{
+ "test:smoke-barbarian-1": [
+  "srd:goliath/giant-ancestry",
+  "srd:goliath/stones-endurance",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-barbarian-10": [
+  "srd:barbarian/brutal-strike",
+  "srd:barbarian/feral-instinct",
+  "srd:barbarian/instinctive-pounce",
+  "srd:goliath/giant-ancestry",
+  "srd:goliath/large-form",
+  "srd:goliath/stones-endurance",
+  "srd:path-of-the-berserker/frenzy",
+  "srd:path-of-the-berserker/retaliation",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-barbarian-3": [
+  "srd:goliath/giant-ancestry",
+  "srd:goliath/stones-endurance",
+  "srd:path-of-the-berserker/frenzy",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-barbarian-5": [
+  "srd:goliath/giant-ancestry",
+  "srd:goliath/large-form",
+  "srd:goliath/stones-endurance",
+  "srd:path-of-the-berserker/frenzy",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-barbarian-6": [
+  "srd:goliath/giant-ancestry",
+  "srd:goliath/large-form",
+  "srd:goliath/stones-endurance",
+  "srd:path-of-the-berserker/frenzy",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-bard-1": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:bard/bardic-inspiration",
+  "srd:human/resourceful",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-bard-10": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:bard/bardic-inspiration",
+  "srd:bard/countercharm",
+  "srd:bard/magical-secrets",
+  "srd:college-of-lore/cutting-words",
+  "srd:college-of-lore/magical-discoveries",
+  "srd:human/resourceful",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-bard-3": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:bard/bardic-inspiration",
+  "srd:college-of-lore/cutting-words",
+  "srd:human/resourceful",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-bard-5": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:bard/bardic-inspiration",
+  "srd:college-of-lore/cutting-words",
+  "srd:human/resourceful",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-bard-6": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:bard/bardic-inspiration",
+  "srd:college-of-lore/cutting-words",
+  "srd:college-of-lore/magical-discoveries",
+  "srd:human/resourceful",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-cleric-1": [
+  "srd:dwarf/dwarven-resilience",
+  "srd:dwarf/dwarven-toughness",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-cleric-10": [
+  "srd:cleric/blessed-strikes-potent-spellcasting",
+  "srd:cleric/channel-divinity-cleric",
+  "srd:cleric/divine-intervention",
+  "srd:cleric/sear-undead",
+  "srd:dwarf/dwarven-resilience",
+  "srd:dwarf/dwarven-toughness",
+  "srd:life-domain/blessed-healer",
+  "srd:life-domain/disciple-of-life",
+  "srd:life-domain/life-domain-spells",
+  "srd:life-domain/preserve-life",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-cleric-3": [
+  "srd:cleric/channel-divinity-cleric",
+  "srd:dwarf/dwarven-resilience",
+  "srd:dwarf/dwarven-toughness",
+  "srd:life-domain/disciple-of-life",
+  "srd:life-domain/life-domain-spells",
+  "srd:life-domain/preserve-life",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-cleric-5": [
+  "srd:cleric/channel-divinity-cleric",
+  "srd:cleric/sear-undead",
+  "srd:dwarf/dwarven-resilience",
+  "srd:dwarf/dwarven-toughness",
+  "srd:life-domain/disciple-of-life",
+  "srd:life-domain/life-domain-spells",
+  "srd:life-domain/preserve-life",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-cleric-6": [
+  "srd:cleric/channel-divinity-cleric",
+  "srd:cleric/sear-undead",
+  "srd:dwarf/dwarven-resilience",
+  "srd:dwarf/dwarven-toughness",
+  "srd:life-domain/blessed-healer",
+  "srd:life-domain/disciple-of-life",
+  "srd:life-domain/life-domain-spells",
+  "srd:life-domain/preserve-life",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-druid-1": [
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-druid-10": [
+  "srd:circle-of-the-land/circle-of-the-land-spells",
+  "srd:circle-of-the-land/lands-aid",
+  "srd:circle-of-the-land/natures-ward",
+  "srd:druid/elemental-fury-potent-spellcasting",
+  "srd:druid/wild-shape",
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-druid-3": [
+  "srd:circle-of-the-land/circle-of-the-land-spells",
+  "srd:circle-of-the-land/lands-aid",
+  "srd:druid/wild-shape",
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-druid-5": [
+  "srd:circle-of-the-land/circle-of-the-land-spells",
+  "srd:circle-of-the-land/lands-aid",
+  "srd:druid/wild-shape",
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-druid-6": [
+  "srd:circle-of-the-land/circle-of-the-land-spells",
+  "srd:circle-of-the-land/lands-aid",
+  "srd:druid/wild-shape",
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:magic-initiate"
+ ],
+ "test:smoke-fighter-1": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:human/resourceful",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-fighter-10": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:champion/heroic-warrior",
+  "srd:champion/remarkable-athlete",
+  "srd:fighter/action-surge",
+  "srd:fighter/indomitable",
+  "srd:fighter/tactical-master",
+  "srd:fighter/tactical-shift",
+  "srd:human/resourceful",
+  "srd:savage-attacker",
+  "srd:two-weapon-fighting"
+ ],
+ "test:smoke-fighter-3": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:champion/remarkable-athlete",
+  "srd:fighter/action-surge",
+  "srd:human/resourceful",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-fighter-5": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:champion/remarkable-athlete",
+  "srd:fighter/action-surge",
+  "srd:fighter/tactical-shift",
+  "srd:human/resourceful",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-fighter-6": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:champion/remarkable-athlete",
+  "srd:fighter/action-surge",
+  "srd:fighter/tactical-shift",
+  "srd:human/resourceful",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-monk-1": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:monk/martial-arts"
+ ],
+ "test:smoke-monk-10": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:monk/acrobatic-movement",
+  "srd:monk/deflect-attacks",
+  "srd:monk/evasion",
+  "srd:monk/heightened-focus",
+  "srd:monk/martial-arts",
+  "srd:monk/monks-focus",
+  "srd:monk/self-restoration",
+  "srd:monk/slow-fall"
+ ],
+ "test:smoke-monk-3": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:monk/deflect-attacks",
+  "srd:monk/martial-arts",
+  "srd:monk/monks-focus"
+ ],
+ "test:smoke-monk-5": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:monk/deflect-attacks",
+  "srd:monk/martial-arts",
+  "srd:monk/monks-focus",
+  "srd:monk/slow-fall"
+ ],
+ "test:smoke-monk-6": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:monk/deflect-attacks",
+  "srd:monk/martial-arts",
+  "srd:monk/monks-focus",
+  "srd:monk/slow-fall"
+ ],
+ "test:smoke-paladin-1": [
+  "srd:dragonborn/breath-weapon",
+  "srd:dragonborn/draconic-ancestry",
+  "srd:paladin/lay-on-hands",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-paladin-10": [
+  "srd:dragonborn/breath-weapon",
+  "srd:dragonborn/draconic-ancestry",
+  "srd:dragonborn/draconic-flight",
+  "srd:oath-of-devotion/aura-of-devotion",
+  "srd:oath-of-devotion/oath-of-devotion-spells",
+  "srd:oath-of-devotion/sacred-weapon",
+  "srd:paladin/abjure-foes",
+  "srd:paladin/aura-of-courage",
+  "srd:paladin/channel-divinity-paladin",
+  "srd:paladin/faithful-steed",
+  "srd:paladin/lay-on-hands",
+  "srd:paladin/paladins-smite",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-paladin-3": [
+  "srd:dragonborn/breath-weapon",
+  "srd:dragonborn/draconic-ancestry",
+  "srd:oath-of-devotion/oath-of-devotion-spells",
+  "srd:oath-of-devotion/sacred-weapon",
+  "srd:paladin/channel-divinity-paladin",
+  "srd:paladin/lay-on-hands",
+  "srd:paladin/paladins-smite",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-paladin-5": [
+  "srd:dragonborn/breath-weapon",
+  "srd:dragonborn/draconic-ancestry",
+  "srd:dragonborn/draconic-flight",
+  "srd:oath-of-devotion/oath-of-devotion-spells",
+  "srd:oath-of-devotion/sacred-weapon",
+  "srd:paladin/channel-divinity-paladin",
+  "srd:paladin/faithful-steed",
+  "srd:paladin/lay-on-hands",
+  "srd:paladin/paladins-smite",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-paladin-6": [
+  "srd:dragonborn/breath-weapon",
+  "srd:dragonborn/draconic-ancestry",
+  "srd:dragonborn/draconic-flight",
+  "srd:oath-of-devotion/oath-of-devotion-spells",
+  "srd:oath-of-devotion/sacred-weapon",
+  "srd:paladin/channel-divinity-paladin",
+  "srd:paladin/faithful-steed",
+  "srd:paladin/lay-on-hands",
+  "srd:paladin/paladins-smite",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-ranger-1": [
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:ranger/favored-enemy",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-ranger-10": [
+  "srd:archery",
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:hunter/defensive-tactics",
+  "srd:hunter/hunters-prey",
+  "srd:ranger/favored-enemy",
+  "srd:ranger/roving",
+  "srd:ranger/tireless",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-ranger-3": [
+  "srd:archery",
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:hunter/hunters-prey",
+  "srd:ranger/favored-enemy",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-ranger-5": [
+  "srd:archery",
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:hunter/hunters-prey",
+  "srd:ranger/favored-enemy",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-ranger-6": [
+  "srd:archery",
+  "srd:elf/elven-lineage-wood-elf",
+  "srd:elf/fey-ancestry",
+  "srd:hunter/hunters-prey",
+  "srd:ranger/favored-enemy",
+  "srd:ranger/roving",
+  "srd:savage-attacker"
+ ],
+ "test:smoke-rogue-1": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:halfling/brave",
+  "srd:halfling/halfling-nimbleness",
+  "srd:halfling/luck"
+ ],
+ "test:smoke-rogue-10": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:halfling/brave",
+  "srd:halfling/halfling-nimbleness",
+  "srd:halfling/luck",
+  "srd:rogue/cunning-action",
+  "srd:rogue/cunning-strike",
+  "srd:rogue/evasion",
+  "srd:rogue/steady-aim",
+  "srd:rogue/uncanny-dodge"
+ ],
+ "test:smoke-rogue-3": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:halfling/brave",
+  "srd:halfling/halfling-nimbleness",
+  "srd:halfling/luck",
+  "srd:rogue/cunning-action",
+  "srd:rogue/steady-aim"
+ ],
+ "test:smoke-rogue-5": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:halfling/brave",
+  "srd:halfling/halfling-nimbleness",
+  "srd:halfling/luck",
+  "srd:rogue/cunning-action",
+  "srd:rogue/cunning-strike",
+  "srd:rogue/steady-aim",
+  "srd:rogue/uncanny-dodge"
+ ],
+ "test:smoke-rogue-6": [
+  "srd:alert",
+  "srd:alert/alert",
+  "srd:halfling/brave",
+  "srd:halfling/halfling-nimbleness",
+  "srd:halfling/luck",
+  "srd:rogue/cunning-action",
+  "srd:rogue/cunning-strike",
+  "srd:rogue/steady-aim",
+  "srd:rogue/uncanny-dodge"
+ ],
+ "test:smoke-sorcerer-1": [
+  "srd:magic-initiate",
+  "srd:sorcerer/innate-sorcery",
+  "srd:tiefling/fiendish-legacy-infernal"
+ ],
+ "test:smoke-sorcerer-10": [
+  "srd:draconic-sorcery/draconic-resilience",
+  "srd:draconic-sorcery/draconic-spells",
+  "srd:draconic-sorcery/elemental-affinity",
+  "srd:magic-initiate",
+  "srd:sorcerer/empowered-spell",
+  "srd:sorcerer/font-of-magic",
+  "srd:sorcerer/heightened-spell",
+  "srd:sorcerer/innate-sorcery",
+  "srd:sorcerer/quickened-spell",
+  "srd:sorcerer/sorcery-incarnate",
+  "srd:sorcerer/twinned-spell",
+  "srd:tiefling/fiendish-legacy-infernal"
+ ],
+ "test:smoke-sorcerer-3": [
+  "srd:draconic-sorcery/draconic-resilience",
+  "srd:draconic-sorcery/draconic-spells",
+  "srd:magic-initiate",
+  "srd:sorcerer/font-of-magic",
+  "srd:sorcerer/innate-sorcery",
+  "srd:sorcerer/quickened-spell",
+  "srd:sorcerer/twinned-spell",
+  "srd:tiefling/fiendish-legacy-infernal"
+ ],
+ "test:smoke-sorcerer-5": [
+  "srd:draconic-sorcery/draconic-resilience",
+  "srd:draconic-sorcery/draconic-spells",
+  "srd:magic-initiate",
+  "srd:sorcerer/font-of-magic",
+  "srd:sorcerer/innate-sorcery",
+  "srd:sorcerer/quickened-spell",
+  "srd:sorcerer/twinned-spell",
+  "srd:tiefling/fiendish-legacy-infernal"
+ ],
+ "test:smoke-sorcerer-6": [
+  "srd:draconic-sorcery/draconic-resilience",
+  "srd:draconic-sorcery/draconic-spells",
+  "srd:draconic-sorcery/elemental-affinity",
+  "srd:magic-initiate",
+  "srd:sorcerer/font-of-magic",
+  "srd:sorcerer/innate-sorcery",
+  "srd:sorcerer/quickened-spell",
+  "srd:sorcerer/twinned-spell",
+  "srd:tiefling/fiendish-legacy-infernal"
+ ],
+ "test:smoke-warlock-1": [
+  "srd:magic-initiate",
+  "srd:tiefling/fiendish-legacy-infernal",
+  "srd:warlock/eldritch-mind"
+ ],
+ "test:smoke-warlock-10": [
+  "srd:fiend-patron/dark-ones-blessing",
+  "srd:fiend-patron/dark-ones-own-luck",
+  "srd:fiend-patron/fiend-spells",
+  "srd:fiend-patron/fiendish-resilience",
+  "srd:magic-initiate",
+  "srd:tiefling/fiendish-legacy-infernal",
+  "srd:warlock/eldritch-mind",
+  "srd:warlock/fiendish-vigor"
+ ],
+ "test:smoke-warlock-3": [
+  "srd:fiend-patron/dark-ones-blessing",
+  "srd:fiend-patron/fiend-spells",
+  "srd:magic-initiate",
+  "srd:tiefling/fiendish-legacy-infernal",
+  "srd:warlock/eldritch-mind"
+ ],
+ "test:smoke-warlock-5": [
+  "srd:fiend-patron/dark-ones-blessing",
+  "srd:fiend-patron/fiend-spells",
+  "srd:magic-initiate",
+  "srd:tiefling/fiendish-legacy-infernal",
+  "srd:warlock/eldritch-mind",
+  "srd:warlock/fiendish-vigor"
+ ],
+ "test:smoke-warlock-6": [
+  "srd:fiend-patron/dark-ones-blessing",
+  "srd:fiend-patron/dark-ones-own-luck",
+  "srd:fiend-patron/fiend-spells",
+  "srd:magic-initiate",
+  "srd:tiefling/fiendish-legacy-infernal",
+  "srd:warlock/eldritch-mind",
+  "srd:warlock/fiendish-vigor"
+ ],
+ "test:smoke-wizard-1": [
+  "srd:magic-initiate",
+  "srd:wizard/spellcasting"
+ ],
+ "test:smoke-wizard-10": [
+  "srd:evoker/empowered-evocation",
+  "srd:evoker/potent-cantrip",
+  "srd:evoker/sculpt-spells",
+  "srd:magic-initiate",
+  "srd:wizard/spellcasting"
+ ],
+ "test:smoke-wizard-3": [
+  "srd:evoker/potent-cantrip",
+  "srd:magic-initiate",
+  "srd:wizard/spellcasting"
+ ],
+ "test:smoke-wizard-5": [
+  "srd:evoker/potent-cantrip",
+  "srd:magic-initiate",
+  "srd:wizard/spellcasting"
+ ],
+ "test:smoke-wizard-6": [
+  "srd:evoker/potent-cantrip",
+  "srd:evoker/sculpt-spells",
+  "srd:magic-initiate",
+  "srd:wizard/spellcasting"
+ ]
+}

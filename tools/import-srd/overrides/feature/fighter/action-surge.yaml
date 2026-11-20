@@ -1,0 +1,21 @@
+# Reviewed against SRD 5.2.1 p.48 (srd-raw.txt:10625-10632), Fighter level 2: "On your turn, you
+# can take one additional action, except the Magic action. Once you use this feature, you can't
+# do so again until you finish a Short or Long Rest. Starting at level 17, you can use it twice
+# before a rest but only once on a turn."
+# Mapped: a free activation (only ever offered on your turn) spending the class pool action-surge
+# (@scale.fighter.action-surge) that gains one action (ECON gainAction). Left out: "except the
+# Magic action" (the gained action may cast a spell), and level 17's once-on-a-turn limit is
+# above M3's level 10 (C24). So partial.
+fidelity: partial
+activate:
+  id: action-surge
+  name: Action Surge
+  cost: free
+  uses: { pool: action-surge }
+  do:
+    - gainAction: action
+unimplemented:
+  - part magic-action-exception not modeled
+provenance:
+  review: reviewed
+  pdfPage: 48

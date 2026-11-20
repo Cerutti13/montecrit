@@ -1,0 +1,55 @@
+# SRD 5.2.1 p.332, Tough ("Medium or Small"; modeled Medium). Numbers checked against the PDF text.
+# Heavy Crossbow Loading isn't applied: a stat block's attacks are self-contained and may
+# ignore the Equipment rules for an item (p.255).
+# Moved here unchanged at M3 step 6 (docs/design/m3.md 4.6): the hand-written stat block stands in
+# for the Foundry record as replace: true, so its compiled template, every closure hash and every
+# golden stay byte-identical (tools/import-srd/test/step6-monsters.test.ts).
+# Coverage step 9+: Pack Tactics ("The tough has Advantage on an attack roll against a creature if at
+# least one of the tough's allies is within 5 feet of the creature and the ally doesn't have the
+# Incapacitated condition", srd-raw.txt:54928-54931) as a passive Advantage gated by
+# allyWithin5ftOfTarget; nothing on the block is unmodeled now, so fidelity is full.
+replace: true
+foundryPath: packs/_source/actors24/humanoid/tough.yml
+kind: monster
+id: srd:tough
+name: Tough
+source: SRD 5.2.1 p.332
+fidelity: full
+size: medium
+cr: 1/2
+pb: 2
+ac: 12
+hp: { average: 32, formula: 5d8 + 10 }
+speed: { walk: 30 }
+initiative: { mod: 1, score: 11 }
+abilities: { str: 15, dex: 12, con: 14, int: 10, wis: 10, cha: 11 }
+gear:
+  - { name: Heavy Crossbow }
+  - { name: Leather Armor }
+  - { name: Mace }
+attacks:
+  - id: mace
+    name: Mace
+    kind: melee
+    toHit: 4
+    reach: 5
+    damage:
+      - { roll: 1d6 + 2, type: bludgeoning, avg: 5 }
+  - id: heavy-crossbow
+    name: Heavy Crossbow
+    kind: ranged
+    toHit: 3
+    range: [100, 400]
+    damage:
+      - { roll: 1d10 + 1, type: piercing, avg: 6 }
+traits:
+  - id: pack-tactics
+    name: Pack Tactics
+    effects:
+      - id: pack-tactics
+        name: Pack Tactics
+        mods:
+          - { on: [d20.attack], op: adv, when: [allyWithin5ftOfTarget] }
+provenance:
+  review: reviewed
+  pdfPage: 332

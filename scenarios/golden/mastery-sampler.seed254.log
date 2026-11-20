@@ -1,0 +1,173 @@
+replay   engine 0.8.0 | content 79d7ed3c3c8ebc89 | scenario mastery-sampler 165e8701a221d5d8 | seed 254 run 0 | journal 39
+policy   ogre1 journal>greedy | ogre2 journal>greedy | ogre3 journal>greedy | ogre4 journal>greedy | pc1 journal>greedy | pc2 journal>greedy
+knobs    maxRounds=2 attackDowned=ifNoOtherTarget lossCounts=pcs downEnds=false
+flags read:
+  expandedCritAutoHits=false [UNVERIFIED: SRD 5.2.1 p.7 and p.179 tie the auto-hit to rolling a 20; p.49 Improved Critical only says it "can score a Critical Hit"; no Sage Advice entry]
+  diagonalCost=uniform [verified: SRD 5.2.1 p.13 "Playing on a Grid": any adjacent square costs 1; alternating 5/10 is a 2024 DMG option (its use for range is unverified)]
+  initiativeMode=static [verified: SRD 5.2.1 p.184 "Initiative" and p.254: static initiative is a GM option]
+  initiativeTies=rollOff [UNVERIFIED: SRD 5.2.1 p.13: the GM orders tied monsters and mixed ties, players order tied PCs; no procedure given (policy)]
+  groupInitiative=shared [verified: SRD 5.2.1 p.13: a group of identical creatures gets one roll]
+  monsterHp=listed [verified: SRD 5.2.1 p.255: use the number or the dice, the GM's choice]
+  nextRollRiderConsumedWhenRedundant=consumed [UNVERIFIED: SRD 5.2.1 p.138 "the next attack roll made against it" reads as spent on any roll; silent on rolls already at Advantage or also at Disadvantage]
+  losMethod=corners [UNVERIFIED: SRD 5.2.1 "Cover" (srd-raw.txt:1995-2032) and its glossary entry (33044-33050) give the three degrees and say a target benefits only when the effect "originates on the opposite side of the cover", but give no grid procedure. corners = the DMG's corner-to-corner lines (the attacker's best corner to the 4 corners of the target's square: 1-2 blocked Half, 3 Three-Quarters, 4 Total; known only secondhand, the DMG is not SRD); centers = one line between square centers; stubbed = no cover and everyone sees everyone (the engine before M3 step 8, a what-if)]
+  creatureCover=on [verified: SRD 5.2.1 Cover table (srd-raw.txt:2006-2017): Half Cover is offered by "Another creature or an object that covers at least half of the target"; off is a what-if]
+notes    LOS: grid (losMethod=corners, creatureCover=on)
+notes    ending concentration or dismissing an effect: offered only on your own turn
+notes    srd:ogre partial: unimplemented footprint not modeled
+notes    test:sample-fighter-masteries partial: unimplemented Resourceful: narrative, not modeled; Skillful: narrative, not modeled; Versatile: narrative, not modeled; Savage Attacker: narrative, not modeled; Skilled: choice tools not mapped; Remarkable Athlete: effect key flags.dnd5e.remarkableAthlete (override); Action Surge: part magic-action-exception not modeled; Tactical Mind: activity type utility; Tactical Shift: part free-move-budget-unverified not modeled
+notes    test:sample-fighter-heavy partial: unimplemented Resourceful: narrative, not modeled; Skillful: narrative, not modeled; Versatile: narrative, not modeled; Savage Attacker: narrative, not modeled; Skilled: choice tools not mapped; Remarkable Athlete: effect key flags.dnd5e.remarkableAthlete (override); Action Surge: part magic-action-exception not modeled; Tactical Mind: activity type utility; Tactical Shift: part free-move-budget-unverified not modeled
+
+   #1   Improved Critical on pc1
+   #2   Defense on pc1
+   #3   Improved Critical on pc2
+   #4   Defense on pc2
+   #5   initiative pc2 12 (static)
+   #6   initiative pc1 12 (static)
+   #7   initiative ogre1 9 (static)
+   #8   initiative ogre2 9 (static)
+   #9   initiative ogre3 9 (static)
+  #10   initiative ogre4 9 (static)
+  #11 == round 1 ==
+  #12 pc2's turn (F5, 44 HP, 30 ft) [Sample Fighter (heavy weapons)]
+  #13   pc2 chooses attack:mace>ogre2  [journal @0]
+  #14     pc2: Attack
+  #15     pc2 Mace -> ogre2: d20 16 +6 = 22 vs AC 11, hit  [pc2 attack r1 p0.0]
+  #16       pc2: Sap (Mace)
+  #17       ogre2 takes 6 (6 bludgeoning), HP 68 -> 62  [pc2 damage r1 p0.0]
+  #18         Sapped on ogre2
+  #19   pc2 chooses item:stow/mace  [journal @1]
+  #20     pc2 stows Mace
+  #21   pc2 chooses attack:warhammer>ogre2  [journal @2]
+  #22     pc2 Warhammer -> ogre2: d20 8 +6 = 14 vs AC 11, hit  [pc2 attack r1 p0.1]
+  #23       pc2 chooses rider:push-warhammer  [journal @3]
+  #24         pc2: Push (Warhammer)
+  #25       ogre2 takes 9 (9 bludgeoning), HP 62 -> 53  [pc2 damage r1 p0.1]
+  #26           pc2 chooses pull:H5  [journal @4]
+  #27           pc2 chooses pull:I5  [journal @5]
+  #28             ogre2 is pushed G5 -> H5 (5 ft, forced)
+  #29             ogre2 is pushed H5 -> I5 (5 ft, forced)
+  #30             ogre2's forced move ends at I5
+  #31   pc2 chooses item:stow/warhammer  [journal @6]
+  #32     pc2 stows Warhammer
+  #33   pc2 chooses use:fighter/action-surge  [journal @7]
+  #34     pc2: Action Surge
+  #35       pc2 spends Action Surge (0 left)
+  #36   pc2 chooses attack:greataxe>ogre3  [journal @8]
+  #37     pc2: Attack
+  #38     pc2 draws Greataxe
+  #39     pc2 Greataxe -> ogre3: d20 17 +6 = 23 vs AC 11, hit  [pc2 attack r1 p0.2]
+  #40       pc2 chooses rider:cleave-greataxe  [journal @9]
+  #41         pc2: Cleave (Greataxe)
+  #42       ogre3 takes 10 (10 slashing), HP 68 -> 58  [pc2 damage r1 p0.2]
+  #43           pc2 Greataxe -> ogre4: d20 20 +6 = 26 vs AC 11, CRITICAL HIT  [pc2 attack r1 p0.3]
+  #44             ogre4 takes 13 (13 slashing, crit), HP 68 -> 55  [pc2 damage r1 p0.3]
+  #45   pc2 chooses item:stow/greataxe  [journal @10]
+  #46     pc2 stows Greataxe
+  #47   pc2 chooses attack:greatsword>ogre3  [journal @11]
+  #48     pc2 draws Greatsword
+  #49     pc2 Greatsword -> ogre3: d20 1 +6 = 7 vs AC 11, miss  [pc2 attack r1 p0.4]
+  #50       pc2: Graze (Greatsword)
+  #51         ogre3 takes 3 (3 slashing) from Graze (Greatsword), HP 58 -> 55  [pc2 rider r1 p0.0]
+  #52   pc2 chooses pass  [journal @12]
+  #53   pc2's turn ends
+  #54 pc1's turn (B2, 44 HP, 30 ft) [Sample Fighter (masteries)]
+  #55   pc1 chooses attack:shortsword>ogre1  [journal @13]
+  #56     pc1: Attack
+  #57     pc1 Shortsword -> ogre1: d20 8 +6 = 14 vs AC 11, hit  [pc1 attack r1 p0.0]
+  #58       ogre1 takes 9 (9 piercing), HP 68 -> 59  [pc1 damage r1 p0.0]
+  #59       pc1: Vex (Shortsword)
+  #60         Vexed on ogre1
+  #61   pc1 chooses use:light-weapons/nick-scimitar  [journal @14]
+  #62     pc1: Nick (Scimitar)
+  #63       Vexed on ogre1 ends (used)
+  #64       pc1 Scimitar -> ogre1: d20 10/13 adv -> 13 (+mastery-shortsword/vexed) +6 = 19 vs AC 11, hit  [pc1 attack r1 p0.1]
+  #65         ogre1 takes 3 (3 slashing), HP 59 -> 56  [pc1 damage r1 p0.1]
+  #66   pc1 chooses item:stow/scimitar  [journal @15]
+  #67     pc1 stows Scimitar
+  #68   pc1 chooses attack:javelin-thrown>ogre1  [journal @16]
+  #69     pc1 draws Javelin
+  #70     pc1 Javelin (thrown) -> ogre1: d20 20/9 dis -> 9 (-ranged-adjacent) +6 = 15 vs AC 11, hit  [pc1 attack r1 p0.2]
+  #71       pc1 throws Javelin (3 left)
+  #72       pc1's hand is empty: Javelin was thrown
+  #73       ogre1 takes 7 (7 piercing), HP 56 -> 49  [pc1 damage r1 p0.2]
+  #74       pc1: Slow (Javelin)
+  #75         Slowed on ogre1
+  #76   pc1 chooses item:stow/shortsword  [journal @17]
+  #77     pc1 stows Shortsword
+  #78   pc1 chooses use:fighter/action-surge  [journal @18]
+  #79     pc1: Action Surge
+  #80       pc1 spends Action Surge (0 left)
+  #81   pc1 chooses attack:maul>ogre1  [journal @19]
+  #82     pc1: Attack
+  #83     pc1 draws Maul
+  #84     pc1 Maul -> ogre1: d20 17 +6 = 23 vs AC 11, hit  [pc1 attack r1 p0.3]
+  #85       pc1 chooses rider:topple-maul  [journal @20]
+  #86         pc1: Topple (Maul)
+  #87       ogre1 takes 10 (10 bludgeoning), HP 49 -> 39  [pc1 damage r1 p0.3]
+  #88           ogre1 CON save vs Topple (Maul): d20 4 +3 = 7 vs DC 14, fail  [ogre1 rider r1 p5.0]
+  #89           ogre1 is Prone (mastery-maul)
+  #90   pc1 chooses pass  [journal @21]
+  #91   pc1's turn ends
+  #92 ogre1's turn (C2, 39 HP, 30 ft) [Ogre]
+  #93   ogre1 chooses pass  [journal @22]
+  #94   ogre1's turn ends
+  #95 ogre2's turn (I5, 53 HP, 40 ft) [Ogre]
+  #96   ogre2 chooses move:G5/p0  [journal @23]
+  #97     ogre2 steps I5 -> H4 (5 ft, 35 left)
+  #98     ogre2 steps H4 -> G5 (5 ft, 30 left)
+  #99     ogre2's move ends at G5
+ #100   ogre2 chooses attack:greatclub>pc2  [journal @24]
+ #101     ogre2: Attack
+ #102     Sapped on ogre2 ends (used)
+ #103     ogre2 Greatclub -> pc2: d20 18/7 dis -> 7 (-mastery-mace/sapped) +6 = 13 vs AC 17, miss  [ogre2 attack r1 p0.0]
+ #104   ogre2 chooses pass  [journal @25]
+ #105   ogre2's turn ends
+ #106 ogre3's turn (F6, 55 HP, 40 ft) [Ogre]
+ #107   ogre3 chooses pass  [journal @26]
+ #108   ogre3's turn ends
+ #109 ogre4's turn (E6, 55 HP, 40 ft) [Ogre]
+ #110   ogre4 chooses pass  [journal @27]
+ #111   ogre4's turn ends
+ #112 == round 2 ==
+ #113 pc2's turn (F5, 44 HP, 30 ft) [Sample Fighter (heavy weapons)]
+ #114   pc2 chooses pass  [journal @28]
+ #115   pc2's turn ends
+ #116   Slowed on ogre1 ends (expired)
+ #117 pc1's turn (B2, 44 HP, 30 ft) [Sample Fighter (masteries)]
+ #118   pc1 chooses item:stow/maul  [journal @29]
+ #119     pc1 stows Maul
+ #120   pc1 chooses attack:shortsword>ogre1  [journal @30]
+ #121     pc1: Attack
+ #122     pc1 draws Shortsword
+ #123     pc1 Shortsword -> ogre1: d20 9/3 adv -> 9 (+target-prone) +6 = 15 vs AC 11, hit  [pc1 attack r2 p0.0]
+ #124       ogre1 takes 5 (5 piercing), HP 39 -> 34  [pc1 damage r2 p0.0]
+ #125       pc1: Vex (Shortsword)
+ #126         Vexed on ogre1
+ #127   pc1 chooses attack:scimitar>ogre1  [journal @31]
+ #128     pc1 draws Scimitar
+ #129     Vexed on ogre1 ends (used)
+ #130     pc1 Scimitar -> ogre1: d20 17/18 adv -> 18 (+target-prone +mastery-shortsword/vexed) +6 = 24 vs AC 11, hit  [pc1 attack r2 p0.1]
+ #131       ogre1 takes 5 (5 slashing), HP 34 -> 29  [pc1 damage r2 p0.1]
+ #132   pc1 chooses use:light-weapons/extra-attack  [journal @32]
+ #133     pc1: Light extra attack
+ #134       pc1 chooses attack:shortsword>ogre1  [journal @33]
+ #135         pc1 Shortsword -> ogre1: d20 17/8 adv -> 17 (+target-prone) +6 = 23 vs AC 11, hit  [pc1 attack r2 p0.2]
+ #136           ogre1 takes 5 (5 piercing), HP 29 -> 24  [pc1 damage r2 p0.2]
+ #137           pc1: Vex (Shortsword)
+ #138             Vexed on ogre1
+ #139   pc1 chooses pass  [journal @34]
+ #140   pc1's turn ends
+ #141 ogre1's turn (C2, 24 HP, 40 ft) [Ogre]
+ #142   ogre1 chooses pass  [journal @35]
+ #143   ogre1's turn ends
+ #144 ogre2's turn (G5, 53 HP, 40 ft) [Ogre]
+ #145   ogre2 chooses pass  [journal @36]
+ #146   ogre2's turn ends
+ #147 ogre3's turn (F6, 55 HP, 40 ft) [Ogre]
+ #148   ogre3 chooses pass  [journal @37]
+ #149   ogre3's turn ends
+ #150 ogre4's turn (E6, 55 HP, 40 ft) [Ogre]
+ #151   ogre4 chooses pass  [journal @38]
+ #152   ogre4's turn ends
+ #153 fight ends: stalemate in round 2
+logHash c0e1c06f58e8635a

@@ -1,0 +1,12 @@
+# Reviewed against SRD 5.2.1 p.29 (srd-raw.txt:4996-4999), Barbarian level 1: without armor, base AC
+# 10 + DEX + CON; a Shield still allowed.
+# Coverage C0 (T relabel, X1): this record carries no program because nothing in it needs one; it is
+# mechanized by the class's AC formula (classes/barbarian.yaml acFormulas: 10 + @mod.dex + @mod.con
+# while unarmored), chosen by the character expansion's AC derivation.
+# Nothing in the text is left unmodeled in a fight, so full (mechanizedBy, never compiled).
+fidelity: full
+mechanizedBy: unarmoredDefense
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 29

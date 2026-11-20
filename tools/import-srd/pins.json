@@ -1,0 +1,59 @@
+{
+  "bits": {
+    "base": "https://raw.githubusercontent.com/5e-bits/5e-srd-api/f4eac5a08e/packages/5e-database/src/2024/en/",
+    "commit": "f4eac5a08e",
+    "files": {
+      "Classes.json": { "remote": "5e-SRD-Classes.json", "sha256": "ad5c12cbccfbe85df310040ee7164bb20224e563d11b6df939b3897cf7c3d16b" },
+      "Feats.json": { "remote": "5e-SRD-Feats.json", "sha256": "f80bf64d46b4addb5d991c6b4b1e05e8c0f9209ffbae297222c5439022abcbc3" },
+      "Features.json": { "remote": "5e-SRD-Features.json", "sha256": "6390b3a1ad2ae68ad21516c38309799f610f893cb008cd3ad920d0eed89f8249" },
+      "Levels.json": { "remote": "5e-SRD-Levels.json", "sha256": "963a7b1c597e51f2d6e22068940344193fbb78bf2f0a81274777dec06b3a3fb1" },
+      "Monsters.json": { "remote": "5e-SRD-Monsters.json", "sha256": "eb7e79e0b6903e2ac90463f027de817dd6888b8a72325509a1e5331e7fddb132" },
+      "Spells.json": { "remote": "5e-SRD-Spells.json", "sha256": "16aa8e47a84c6b21ccc101c1ee7ab5b8a026da940985bc826b6b58aa1fe0b6bc" },
+      "Subclasses.json": { "remote": "5e-SRD-Subclasses.json", "sha256": "eac4c9f975490f0953e389eeae28bc655527f6ed277146eff6757a9fe1953178" }
+    },
+    "note": "Third vote on class counters only (m3.md 4.1). The remote file names under the 2024/en folder are unverified; the local copies are pinned by sha256."
+  },
+  "foundry": {
+    "commit": "87e94dbd9f930135e0694cd7e7d49f210603cd2c",
+    "extract": [
+      "packs/_source/actors24/",
+      "packs/_source/classes24/",
+      "packs/_source/content24/chapter-7/spells.yml",
+      "packs/_source/equipment24/",
+      "packs/_source/feats24/",
+      "packs/_source/origins24/",
+      "packs/_source/spells24/"
+    ],
+    "repo": "https://github.com/foundryvtt/dnd5e",
+    "root": "dnd5e-87e94dbd9f930135e0694cd7e7d49f210603cd2c",
+    "tag": "release-6.0.6",
+    "tarballSha256": "4005d863fda174f4e1d720e36fd8786b9a29aa6deef500af62be4d27558d4f29",
+    "tarballUrl": "https://github.com/foundryvtt/dnd5e/archive/87e94dbd9f930135e0694cd7e7d49f210603cd2c.tar.gz",
+    "treeFiles": 1917,
+    "treeSha256": "12f33b5ff8ab62e7a5ef015f402b8a12e11280b608e9cea562fc5ff1689bf5a9"
+  },
+  "open5e": {
+    "base": "https://api.open5e.com/v2/classes/",
+    "files": {
+      "c-barbarian.json": { "remote": "srd-2024_barbarian/", "sha256": "cb8b0ba299088fc0bae9fb1aee80382326d58225a257b0bb567a908e486a19a9" },
+      "c-bard.json": { "remote": "srd-2024_bard/", "sha256": "74daa9ab4fa7f4295946c9d399c1ff15677f75f61a8289b1bb0f540ae9683ce7" },
+      "c-cleric.json": { "remote": "srd-2024_cleric/", "sha256": "d3e5f8663228687ccb961e54c7cf4edfb1975b738595eb63d2fa2363e0ef57fb" },
+      "c-druid.json": { "remote": "srd-2024_druid/", "sha256": "50e36ef740b161cacbba1429f4dd44a1783860ff2bf3185775c931d455e7e1fd" },
+      "c-fighter.json": { "remote": "srd-2024_fighter/", "sha256": "d8da5e27233b37f24caaf0c9a9cabc10c310490132d6c91d82db0def2898e3c1" },
+      "c-monk.json": { "remote": "srd-2024_monk/", "sha256": "167360218ae03da9884378d343abb5307250917f65a3d1c3844af07cc5951c14" },
+      "c-paladin.json": { "remote": "srd-2024_paladin/", "sha256": "49e61b5680e3dac5f8dcd13fd34ac800a280209d3eff028c4054a78ae4321915" },
+      "c-ranger.json": { "remote": "srd-2024_ranger/", "sha256": "fe6de01753e18649e18b583db843000a70f78955c04b14647eb6ea76d00dbf51" },
+      "c-rogue.json": { "remote": "srd-2024_rogue/", "sha256": "b6765352145f44e7fcf5837d30b3078239a56e64ef22518d7cfc8455dbc95804" },
+      "c-sorcerer.json": { "remote": "srd-2024_sorcerer/", "sha256": "5c3c86ff4b66b45cf1b5988a4ec477b5dce8ab7b1e99bf0aa2696ba7235662e8" },
+      "c-warlock.json": { "remote": "srd-2024_warlock/", "sha256": "f4fc5c30a3b860e7330d8bacdb4ee547afa402470afbbc9b9f8382e6e79769ca" },
+      "c-wizard.json": { "remote": "srd-2024_wizard/", "sha256": "b41724326e50cdb57e45146b0a1b18bda97e2a576e30ce2b3956d51d72f9de7a" }
+    },
+    "note": "Cross-check only. The API is live, not pinned to a commit, so a re-download that differs from these hashes fails; the research snapshot was taken at open5e-api bdcddf2b5f (2026-11-02).",
+    "repoCommit": "bdcddf2b5f"
+  },
+  "pdf": {
+    "pages": 364,
+    "sha256": "8974902d109d6e63672d7c490bde9ccf052410503d9cfa768237154fbc5e3d87",
+    "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf"
+  }
+}

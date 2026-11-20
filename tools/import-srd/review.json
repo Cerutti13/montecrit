@@ -1,0 +1,1405 @@
+{
+  "classTables": {
+    "byPattern": {
+      "bits": 9
+    },
+    "cells": 1980,
+    "classes": 12,
+    "disagreements": [
+      {
+        "against": "bits",
+        "bits": 4,
+        "class": "druid",
+        "column": "cantrips",
+        "level": 7,
+        "open5e": 3,
+        "ours": 3,
+        "pdf": 3
+      },
+      {
+        "against": "bits",
+        "bits": 5,
+        "class": "druid",
+        "column": "cantrips",
+        "level": 16,
+        "open5e": 4,
+        "ours": 4,
+        "pdf": 4
+      },
+      {
+        "against": "bits",
+        "bits": 17,
+        "class": "wizard",
+        "column": "prepared-spells",
+        "level": 14,
+        "open5e": 18,
+        "ours": 18,
+        "pdf": 18
+      },
+      {
+        "against": "bits",
+        "bits": 18,
+        "class": "wizard",
+        "column": "prepared-spells",
+        "level": 15,
+        "open5e": 19,
+        "ours": 19,
+        "pdf": 19
+      },
+      {
+        "against": "bits",
+        "bits": 18,
+        "class": "wizard",
+        "column": "prepared-spells",
+        "level": 16,
+        "open5e": 21,
+        "ours": 21,
+        "pdf": 21
+      },
+      {
+        "against": "bits",
+        "bits": 19,
+        "class": "wizard",
+        "column": "prepared-spells",
+        "level": 17,
+        "open5e": 22,
+        "ours": 22,
+        "pdf": 22
+      },
+      {
+        "against": "bits",
+        "bits": 20,
+        "class": "wizard",
+        "column": "prepared-spells",
+        "level": 18,
+        "open5e": 23,
+        "ours": 23,
+        "pdf": 23
+      },
+      {
+        "against": "bits",
+        "bits": 21,
+        "class": "wizard",
+        "column": "prepared-spells",
+        "level": 19,
+        "open5e": 24,
+        "ours": 24,
+        "pdf": 24
+      },
+      {
+        "against": "bits",
+        "bits": 22,
+        "class": "wizard",
+        "column": "prepared-spells",
+        "level": 20,
+        "open5e": 25,
+        "ours": 25,
+        "pdf": 25
+      }
+    ],
+    "oursVsPdf": {
+      "agree": 1980,
+      "mismatches": 0
+    },
+    "votes": {
+      "bits": {
+        "absent": 0,
+        "agree": 1971,
+        "compared": 1980,
+        "disagree": 9
+      },
+      "open5e": {
+        "absent": 0,
+        "agree": 1980,
+        "compared": 1980,
+        "disagree": 0
+      }
+    }
+  },
+  "inputs": {
+    "packOutputSha256": "ea28cde976c73713a609d2aadaa0969ee6d515e18e983ca1fa82517a1eaa4a06",
+    "srdIndexSha256": "4d42e348bf724df59308962c37de993a39ff6429cda5ba68baaef7805a3817d1",
+    "votes": {
+      "bits/Levels.json": "963a7b1c597e51f2d6e22068940344193fbb78bf2f0a81274777dec06b3a3fb1",
+      "bits/Monsters.json": "eb7e79e0b6903e2ac90463f027de817dd6888b8a72325509a1e5331e7fddb132",
+      "bits/Spells.json": "16aa8e47a84c6b21ccc101c1ee7ab5b8a026da940985bc826b6b58aa1fe0b6bc",
+      "open5e/c-barbarian.json": "cb8b0ba299088fc0bae9fb1aee80382326d58225a257b0bb567a908e486a19a9",
+      "open5e/c-bard.json": "74daa9ab4fa7f4295946c9d399c1ff15677f75f61a8289b1bb0f540ae9683ce7",
+      "open5e/c-cleric.json": "d3e5f8663228687ccb961e54c7cf4edfb1975b738595eb63d2fa2363e0ef57fb",
+      "open5e/c-druid.json": "50e36ef740b161cacbba1429f4dd44a1783860ff2bf3185775c931d455e7e1fd",
+      "open5e/c-fighter.json": "d8da5e27233b37f24caaf0c9a9cabc10c310490132d6c91d82db0def2898e3c1",
+      "open5e/c-monk.json": "167360218ae03da9884378d343abb5307250917f65a3d1c3844af07cc5951c14",
+      "open5e/c-paladin.json": "49e61b5680e3dac5f8dcd13fd34ac800a280209d3eff028c4054a78ae4321915",
+      "open5e/c-ranger.json": "fe6de01753e18649e18b583db843000a70f78955c04b14647eb6ea76d00dbf51",
+      "open5e/c-rogue.json": "b6765352145f44e7fcf5837d30b3078239a56e64ef22518d7cfc8455dbc95804",
+      "open5e/c-sorcerer.json": "5c3c86ff4b66b45cf1b5988a4ec477b5dce8ab7b1e99bf0aa2696ba7235662e8",
+      "open5e/c-warlock.json": "f4fc5c30a3b860e7330d8bacdb4ee547afa402470afbbc9b9f8382e6e79769ca",
+      "open5e/c-wizard.json": "b41724326e50cdb57e45146b0a1b18bda97e2a576e30ce2b3956d51d72f9de7a"
+    }
+  },
+  "monsters": {
+    "areaActions": [
+      {
+        "action": "acid-breath",
+        "dc": 18,
+        "dice": "12d8",
+        "monster": "srd:adult-black-dragon",
+        "shape": "line",
+        "size": 60,
+        "type": "acid",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "lightning-breath",
+        "dc": 19,
+        "dice": "11d10",
+        "monster": "srd:adult-blue-dragon",
+        "shape": "line",
+        "size": 90,
+        "type": "lightning",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 18,
+        "dice": "10d8",
+        "monster": "srd:adult-brass-dragon",
+        "shape": "line",
+        "size": 60,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "lightning-breath",
+        "dc": 19,
+        "dice": "10d10",
+        "monster": "srd:adult-bronze-dragon",
+        "shape": "line",
+        "size": 90,
+        "type": "lightning",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "acid-breath",
+        "dc": 18,
+        "dice": "12d8",
+        "monster": "srd:adult-copper-dragon",
+        "shape": "line",
+        "size": 60,
+        "type": "acid",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 21,
+        "dice": "12d10",
+        "monster": "srd:adult-gold-dragon",
+        "shape": "cone",
+        "size": 60,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "poison-breath",
+        "dc": 18,
+        "dice": "16d6",
+        "monster": "srd:adult-green-dragon",
+        "shape": "cone",
+        "size": 60,
+        "type": "poison",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 21,
+        "dice": "17d6",
+        "monster": "srd:adult-red-dragon",
+        "shape": "cone",
+        "size": 60,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "cold-breath",
+        "dc": 20,
+        "dice": "12d8",
+        "monster": "srd:adult-silver-dragon",
+        "shape": "cone",
+        "size": 60,
+        "type": "cold",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "cold-breath",
+        "dc": 19,
+        "dice": "12d8",
+        "monster": "srd:adult-white-dragon",
+        "shape": "cone",
+        "size": 60,
+        "type": "cold",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "acid-breath",
+        "dc": 22,
+        "dice": "15d8",
+        "monster": "srd:ancient-black-dragon",
+        "shape": "line",
+        "size": 90,
+        "type": "acid",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "lightning-breath",
+        "dc": 23,
+        "dice": "16d10",
+        "monster": "srd:ancient-blue-dragon",
+        "shape": "line",
+        "size": 120,
+        "type": "lightning",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 21,
+        "dice": "13d8",
+        "monster": "srd:ancient-brass-dragon",
+        "shape": "line",
+        "size": 90,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "lightning-breath",
+        "dc": 23,
+        "dice": "15d10",
+        "monster": "srd:ancient-bronze-dragon",
+        "shape": "line",
+        "size": 120,
+        "type": "lightning",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "acid-breath",
+        "dc": 22,
+        "dice": "14d8",
+        "monster": "srd:ancient-copper-dragon",
+        "shape": "line",
+        "size": 90,
+        "type": "acid",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 24,
+        "dice": "13d10",
+        "monster": "srd:ancient-gold-dragon",
+        "shape": "cone",
+        "size": 90,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "poison-breath",
+        "dc": 22,
+        "dice": "22d6",
+        "monster": "srd:ancient-green-dragon",
+        "shape": "cone",
+        "size": 90,
+        "type": "poison",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 24,
+        "dice": "26d6",
+        "monster": "srd:ancient-red-dragon",
+        "shape": "cone",
+        "size": 90,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "cold-breath",
+        "dc": 24,
+        "dice": "15d8",
+        "monster": "srd:ancient-silver-dragon",
+        "shape": "cone",
+        "size": 90,
+        "type": "cold",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "cold-breath",
+        "dc": 22,
+        "dice": "14d8",
+        "monster": "srd:ancient-white-dragon",
+        "shape": "cone",
+        "size": 90,
+        "type": "cold",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "acid-spray",
+        "dc": 12,
+        "dice": "4d6",
+        "monster": "srd:ankheg",
+        "shape": "line",
+        "size": 30,
+        "type": "acid",
+        "usage": "recharge-6"
+      },
+      {
+        "action": "lightning-breath",
+        "dc": 16,
+        "dice": "12d10",
+        "monster": "srd:behir",
+        "shape": "line",
+        "size": 90,
+        "type": "lightning",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "acid-breath",
+        "dc": 11,
+        "dice": "5d8",
+        "monster": "srd:black-dragon-wyrmling",
+        "shape": "line",
+        "size": 15,
+        "type": "acid",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "lightning-breath",
+        "dc": 12,
+        "dice": "6d6",
+        "monster": "srd:blue-dragon-wyrmling",
+        "shape": "line",
+        "size": 30,
+        "type": "lightning",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 11,
+        "dice": "4d6",
+        "monster": "srd:brass-dragon-wyrmling",
+        "shape": "line",
+        "size": 20,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "lightning-breath",
+        "dc": 12,
+        "dice": "3d10",
+        "monster": "srd:bronze-dragon-wyrmling",
+        "shape": "line",
+        "size": 40,
+        "type": "lightning",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 15,
+        "dice": "7d8",
+        "monster": "srd:chimera",
+        "shape": "cone",
+        "size": 15,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "acid-breath",
+        "dc": 11,
+        "dice": "4d8",
+        "monster": "srd:copper-dragon-wyrmling",
+        "shape": "line",
+        "size": 20,
+        "type": "acid",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 13,
+        "dice": "4d10",
+        "monster": "srd:gold-dragon-wyrmling",
+        "shape": "cone",
+        "size": 15,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "poison-breath",
+        "dc": 11,
+        "dice": "6d6",
+        "monster": "srd:green-dragon-wyrmling",
+        "shape": "cone",
+        "size": 15,
+        "type": "poison",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 12,
+        "dice": "5d6",
+        "monster": "srd:hell-hound",
+        "shape": "cone",
+        "size": 15,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "frost-breath",
+        "dc": 10,
+        "dice": "3d4",
+        "monster": "srd:ice-mephit",
+        "shape": "cone",
+        "size": 15,
+        "type": "cold",
+        "usage": "recharge-6"
+      },
+      {
+        "action": "poison-breath",
+        "dc": 18,
+        "dice": "10d10",
+        "monster": "srd:iron-golem",
+        "shape": "cone",
+        "size": 60,
+        "type": "poison",
+        "usage": "recharge-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 11,
+        "dice": "2d6",
+        "monster": "srd:magma-mephit",
+        "shape": "cone",
+        "size": 15,
+        "type": "fire",
+        "usage": "recharge-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 13,
+        "dice": "7d6",
+        "monster": "srd:red-dragon-wyrmling",
+        "shape": "cone",
+        "size": 15,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "cold-breath",
+        "dc": 13,
+        "dice": "4d8",
+        "monster": "srd:silver-dragon-wyrmling",
+        "shape": "cone",
+        "size": 15,
+        "type": "cold",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "cold-breath",
+        "dc": 12,
+        "dice": "5d8",
+        "monster": "srd:white-dragon-wyrmling",
+        "shape": "cone",
+        "size": 15,
+        "type": "cold",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "cold-breath",
+        "dc": 12,
+        "dice": "4d8",
+        "monster": "srd:winter-wolf",
+        "shape": "cone",
+        "size": 15,
+        "type": "cold",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "acid-breath",
+        "dc": 14,
+        "dice": "14d6",
+        "monster": "srd:young-black-dragon",
+        "shape": "line",
+        "size": 30,
+        "type": "acid",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "lightning-breath",
+        "dc": 16,
+        "dice": "10d10",
+        "monster": "srd:young-blue-dragon",
+        "shape": "line",
+        "size": 60,
+        "type": "lightning",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 14,
+        "dice": "11d6",
+        "monster": "srd:young-brass-dragon",
+        "shape": "line",
+        "size": 40,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "lightning-breath",
+        "dc": 15,
+        "dice": "9d10",
+        "monster": "srd:young-bronze-dragon",
+        "shape": "line",
+        "size": 60,
+        "type": "lightning",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "acid-breath",
+        "dc": 14,
+        "dice": "9d8",
+        "monster": "srd:young-copper-dragon",
+        "shape": "line",
+        "size": 40,
+        "type": "acid",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 17,
+        "dice": "10d10",
+        "monster": "srd:young-gold-dragon",
+        "shape": "cone",
+        "size": 30,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "poison-breath",
+        "dc": 14,
+        "dice": "12d6",
+        "monster": "srd:young-green-dragon",
+        "shape": "cone",
+        "size": 30,
+        "type": "poison",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "fire-breath",
+        "dc": 17,
+        "dice": "16d6",
+        "monster": "srd:young-red-dragon",
+        "shape": "cone",
+        "size": 30,
+        "type": "fire",
+        "usage": "recharge-5-6"
+      },
+      {
+        "action": "cold-breath",
+        "dc": 17,
+        "dice": "11d8",
+        "monster": "srd:young-silver-dragon",
+        "shape": "cone",
+        "size": 30,
+        "type": "cold",
+        "usage": "recharge-5-6"
+      }
+    ],
+    "bits": {
+      "agree": 4437,
+      "compared": 4441,
+      "monsters": 323
+    },
+    "byPattern": {
+      "ac (foundry)": 1,
+      "attack.dice (bits)": 4,
+      "attacks (foundry)": 6,
+      "conditionImmune (foundry)": 15,
+      "resist (foundry)": 9,
+      "save.dex (foundry)": 1,
+      "save.int (foundry)": 2,
+      "save.wis (foundry)": 1,
+      "skill.stealth (foundry)": 2,
+      "speed.fly (foundry)": 1
+    },
+    "disagreements": [
+      {
+        "against": "foundry",
+        "field": "save.dex",
+        "foundry": "mod",
+        "monster": "srd:ancient-gold-dragon",
+        "pdf": "proficient"
+      },
+      {
+        "against": "foundry",
+        "field": "save.wis",
+        "foundry": "mod",
+        "monster": "srd:ancient-gold-dragon",
+        "pdf": "proficient"
+      },
+      {
+        "against": "foundry",
+        "field": "resist",
+        "foundry": "none",
+        "monster": "srd:badger",
+        "pdf": "poison"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:cloaker",
+        "pdf": "frightened"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:cockatrice",
+        "pdf": "petrified"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:death-dog",
+        "pdf": "blinded,charmed,deafened,frightened,stunned,unconscious"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:deva",
+        "pdf": "charmed,exhaustion,frightened"
+      },
+      {
+        "against": "foundry",
+        "field": "ac",
+        "foundry": "11",
+        "monster": "srd:elk",
+        "pdf": "10"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:ettin",
+        "pdf": "blinded,charmed,deafened,frightened,stunned,unconscious"
+      },
+      {
+        "against": "bits",
+        "bits": "2d4",
+        "field": "attack.bite.dice",
+        "monster": "srd:flying-snake",
+        "pdf": "1"
+      },
+      {
+        "against": "foundry",
+        "field": "resist",
+        "foundry": "none",
+        "monster": "srd:giant-badger",
+        "pdf": "poison"
+      },
+      {
+        "against": "foundry",
+        "field": "resist",
+        "foundry": "none",
+        "monster": "srd:giant-eagle",
+        "pdf": "necrotic,radiant"
+      },
+      {
+        "against": "foundry",
+        "field": "resist",
+        "foundry": "none",
+        "monster": "srd:giant-elk",
+        "pdf": "necrotic,radiant"
+      },
+      {
+        "against": "foundry",
+        "field": "resist",
+        "foundry": "none",
+        "monster": "srd:giant-fire-beetle",
+        "pdf": "fire"
+      },
+      {
+        "against": "foundry",
+        "field": "skill.stealth",
+        "foundry": "0",
+        "monster": "srd:giant-frog",
+        "pdf": "bonus:4"
+      },
+      {
+        "against": "foundry",
+        "field": "resist",
+        "foundry": "none",
+        "monster": "srd:giant-owl",
+        "pdf": "necrotic,radiant"
+      },
+      {
+        "against": "foundry",
+        "field": "resist",
+        "foundry": "none",
+        "monster": "srd:giant-vulture",
+        "pdf": "necrotic"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:gibbering-mouther",
+        "pdf": "prone"
+      },
+      {
+        "against": "bits",
+        "bits": "1d4",
+        "field": "attack.ram.dice",
+        "monster": "srd:goat",
+        "pdf": "1"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:gorgon",
+        "pdf": "exhaustion,petrified"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:gray-ooze",
+        "pdf": "blinded,charmed,deafened,exhaustion,frightened,grappled,prone,restrained"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:knight",
+        "pdf": "frightened"
+      },
+      {
+        "against": "foundry",
+        "field": "save.int",
+        "foundry": "proficient",
+        "monster": "srd:ogre-zombie",
+        "pdf": "mod"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:planetar",
+        "pdf": "charmed,exhaustion,frightened"
+      },
+      {
+        "against": "foundry",
+        "field": "resist",
+        "foundry": "none",
+        "monster": "srd:polar-bear",
+        "pdf": "cold"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:rakshasa",
+        "pdf": "charmed,frightened"
+      },
+      {
+        "against": "bits",
+        "bits": "1d6",
+        "field": "attack.sting.dice",
+        "monster": "srd:scorpion",
+        "pdf": "1"
+      },
+      {
+        "against": "foundry",
+        "field": "skill.stealth",
+        "foundry": "0",
+        "monster": "srd:shambling-mound",
+        "pdf": "bonus:3"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:shrieker-fungus",
+        "pdf": "blinded,charmed,deafened,frightened"
+      },
+      {
+        "against": "bits",
+        "bits": "1d4",
+        "field": "attack.bite.dice",
+        "monster": "srd:spider",
+        "pdf": "1"
+      },
+      {
+        "against": "foundry",
+        "field": "speed.fly",
+        "foundry": "20",
+        "monster": "srd:swarm-of-insects",
+        "pdf": "0"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:swarm-of-venomous-snakes",
+        "pdf": "charmed,frightened,grappled,paralyzed,petrified,prone,restrained,stunned"
+      },
+      {
+        "against": "foundry",
+        "field": "resist",
+        "foundry": "none",
+        "monster": "srd:swarm-of-venomous-snakes",
+        "pdf": "bludgeoning,piercing,slashing"
+      },
+      {
+        "against": "foundry",
+        "field": "attacks",
+        "foundry": "missing",
+        "monster": "srd:vampire",
+        "pdf": "1 not in the record"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "charmed",
+        "monster": "srd:vampire-familiar",
+        "pdf": "none"
+      },
+      {
+        "against": "foundry",
+        "field": "conditionImmune",
+        "foundry": "none",
+        "monster": "srd:violet-fungus",
+        "pdf": "blinded,charmed,deafened,frightened"
+      },
+      {
+        "against": "foundry",
+        "field": "attacks",
+        "foundry": "missing",
+        "monster": "srd:werebear",
+        "pdf": "3 not in the record"
+      },
+      {
+        "against": "foundry",
+        "field": "attacks",
+        "foundry": "missing",
+        "monster": "srd:wereboar",
+        "pdf": "3 not in the record"
+      },
+      {
+        "against": "foundry",
+        "field": "attacks",
+        "foundry": "missing",
+        "monster": "srd:wererat",
+        "pdf": "2 not in the record"
+      },
+      {
+        "against": "foundry",
+        "field": "attacks",
+        "foundry": "missing",
+        "monster": "srd:weretiger",
+        "pdf": "2 not in the record"
+      },
+      {
+        "against": "foundry",
+        "field": "attacks",
+        "foundry": "missing",
+        "monster": "srd:werewolf",
+        "pdf": "1 not in the record"
+      },
+      {
+        "against": "foundry",
+        "field": "save.int",
+        "foundry": "mod",
+        "monster": "srd:young-white-dragon",
+        "pdf": "proficient"
+      }
+    ],
+    "foundry": {
+      "agree": 16281,
+      "compared": 16319,
+      "monsters": 329
+    },
+    "monsters": 331,
+    "open5e": {
+      "available": false
+    }
+  },
+  "spellListTableGaps": [
+    {
+      "class": "bard",
+      "level": 2,
+      "spell": "srd:phantasmal-force"
+    },
+    {
+      "class": "sorcerer",
+      "level": 2,
+      "spell": "srd:mind-spike"
+    },
+    {
+      "class": "sorcerer",
+      "level": 2,
+      "spell": "srd:phantasmal-force"
+    },
+    {
+      "class": "wizard",
+      "level": 2,
+      "spell": "srd:phantasmal-force"
+    }
+  ],
+  "spellLists": {
+    "bard": {
+      "agree": 129,
+      "foundry": 129,
+      "foundryNotInPdf": 0,
+      "foundryOnly": [],
+      "pdf": 130,
+      "pdfOnly": [
+        "srd:freedom-of-movement"
+      ]
+    },
+    "cleric": {
+      "agree": 109,
+      "foundry": 109,
+      "foundryNotInPdf": 0,
+      "foundryOnly": [],
+      "pdf": 109,
+      "pdfOnly": []
+    },
+    "druid": {
+      "agree": 124,
+      "foundry": 124,
+      "foundryNotInPdf": 0,
+      "foundryOnly": [],
+      "pdf": 124,
+      "pdfOnly": []
+    },
+    "paladin": {
+      "agree": 38,
+      "foundry": 38,
+      "foundryNotInPdf": 0,
+      "foundryOnly": [],
+      "pdf": 38,
+      "pdfOnly": []
+    },
+    "ranger": {
+      "agree": 48,
+      "foundry": 48,
+      "foundryNotInPdf": 0,
+      "foundryOnly": [],
+      "pdf": 48,
+      "pdfOnly": []
+    },
+    "sorcerer": {
+      "agree": 140,
+      "foundry": 141,
+      "foundryNotInPdf": 1,
+      "foundryOnly": [],
+      "pdf": 140,
+      "pdfOnly": []
+    },
+    "warlock": {
+      "agree": 72,
+      "foundry": 72,
+      "foundryNotInPdf": 0,
+      "foundryOnly": [],
+      "pdf": 72,
+      "pdfOnly": []
+    },
+    "wizard": {
+      "agree": 218,
+      "foundry": 219,
+      "foundryNotInPdf": 1,
+      "foundryOnly": [],
+      "pdf": 218,
+      "pdfOnly": []
+    }
+  },
+  "spells": {
+    "bits": {
+      "agree": 3028,
+      "compared": 3051,
+      "spells": 339
+    },
+    "byPattern": {
+      "bits": 23,
+      "foundry": 24
+    },
+    "disagreements": [
+      {
+        "against": "foundry",
+        "bits": "hour:24",
+        "field": "duration",
+        "foundry": "formula",
+        "pdf": "hour:24",
+        "spell": "srd:animal-messenger"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "none",
+        "pdf": "str",
+        "spell": "srd:arcane-hand"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "none",
+        "pdf": "wis",
+        "spell": "srd:beacon-of-hope"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "dex",
+        "pdf": "str",
+        "spell": "srd:conjure-animals"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "none",
+        "pdf": "dex",
+        "spell": "srd:conjure-elemental"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "components",
+        "foundry": "VS-",
+        "pdf": "VS-",
+        "spell": "srd:contagion"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "range",
+        "foundry": "touch",
+        "pdf": "touch",
+        "spell": "srd:contagion"
+      },
+      {
+        "against": "bits",
+        "bits": "none",
+        "field": "damage",
+        "pdf": "10d6+40 force",
+        "spell": "srd:disintegrate"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "components",
+        "foundry": "V--",
+        "pdf": "V--",
+        "spell": "srd:divine-smite"
+      },
+      {
+        "against": "foundry",
+        "bits": "hour:1",
+        "field": "duration",
+        "foundry": "formula",
+        "pdf": "hour:1",
+        "spell": "srd:dominate-monster"
+      },
+      {
+        "against": "foundry",
+        "bits": "self",
+        "field": "range",
+        "foundry": "feet:60",
+        "pdf": "self",
+        "spell": "srd:eyebite"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "none",
+        "pdf": "dex",
+        "spell": "srd:faithful-hound"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "components",
+        "foundry": "VS-",
+        "pdf": "VS-",
+        "spell": "srd:find-steed"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "range",
+        "foundry": "feet:30",
+        "pdf": "feet:30",
+        "spell": "srd:find-steed"
+      },
+      {
+        "against": "bits",
+        "bits": "none",
+        "field": "damage",
+        "pdf": "7d8+30 necrotic",
+        "spell": "srd:finger-of-death"
+      },
+      {
+        "against": "foundry",
+        "bits": "true",
+        "field": "ritual",
+        "foundry": "false",
+        "pdf": "true",
+        "spell": "srd:forbiddance"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "none",
+        "pdf": "cha",
+        "spell": "srd:forcecage"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "none",
+        "pdf": "con",
+        "spell": "srd:gaseous-form"
+      },
+      {
+        "against": "bits",
+        "bits": "none",
+        "field": "damage",
+        "pdf": "1d4 poison",
+        "spell": "srd:giant-insect"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "components",
+        "foundry": "VS-",
+        "pdf": "VS-",
+        "spell": "srd:guidance"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "range",
+        "foundry": "touch",
+        "pdf": "touch",
+        "spell": "srd:guidance"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "none",
+        "pdf": "dex",
+        "spell": "srd:haste"
+      },
+      {
+        "against": "foundry",
+        "bits": "hour:1",
+        "field": "duration",
+        "foundry": "formula",
+        "pdf": "hour:1",
+        "spell": "srd:magic-circle"
+      },
+      {
+        "against": "bits",
+        "bits": "none",
+        "field": "damage",
+        "pdf": "1d4+1 force",
+        "spell": "srd:magic-missile"
+      },
+      {
+        "against": "foundry",
+        "bits": "sight",
+        "field": "range",
+        "foundry": "any",
+        "pdf": "sight",
+        "spell": "srd:mirage-arcane"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "none",
+        "pdf": "wis",
+        "spell": "srd:phantasmal-killer"
+      },
+      {
+        "against": "foundry",
+        "bits": "action",
+        "field": "castingTime",
+        "foundry": "special:1",
+        "pdf": "action",
+        "spell": "srd:plant-growth"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "components",
+        "foundry": "V--",
+        "pdf": "V--",
+        "spell": "srd:power-word-heal"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "range",
+        "foundry": "feet:60",
+        "pdf": "feet:60",
+        "spell": "srd:power-word-heal"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "components",
+        "foundry": "V--",
+        "pdf": "V--",
+        "spell": "srd:power-word-kill"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "range",
+        "foundry": "feet:60",
+        "pdf": "feet:60",
+        "spell": "srd:power-word-kill"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "none",
+        "pdf": "con",
+        "spell": "srd:power-word-stun"
+      },
+      {
+        "against": "bits",
+        "bits": "12d6 acid",
+        "field": "damage",
+        "pdf": "12d6 fire",
+        "spell": "srd:prismatic-spray"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "wis",
+        "pdf": "dex",
+        "spell": "srd:prismatic-spray"
+      },
+      {
+        "against": "bits",
+        "bits": "12d6 acid",
+        "field": "damage",
+        "pdf": "12d6 fire",
+        "spell": "srd:prismatic-wall"
+      },
+      {
+        "against": "bits",
+        "bits": "false",
+        "field": "concentration",
+        "foundry": "true",
+        "pdf": "true",
+        "spell": "srd:protection-from-evil-and-good"
+      },
+      {
+        "against": "foundry",
+        "bits": "touch",
+        "field": "range",
+        "foundry": "self",
+        "pdf": "touch",
+        "spell": "srd:raise-dead"
+      },
+      {
+        "against": "foundry",
+        "bits": "true",
+        "field": "concentration",
+        "foundry": "false",
+        "pdf": "true",
+        "spell": "srd:resilient-sphere"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "components",
+        "foundry": "VS-",
+        "pdf": "VS-",
+        "spell": "srd:resistance"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "range",
+        "foundry": "touch",
+        "pdf": "touch",
+        "spell": "srd:resistance"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "components",
+        "foundry": "V--",
+        "pdf": "V--",
+        "spell": "srd:searing-smite"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "components",
+        "foundry": "VS-",
+        "pdf": "VS-",
+        "spell": "srd:sorcerous-burst"
+      },
+      {
+        "against": "bits",
+        "bits": "unparsed",
+        "field": "range",
+        "foundry": "feet:120",
+        "pdf": "feet:120",
+        "spell": "srd:sorcerous-burst"
+      },
+      {
+        "against": "foundry",
+        "bits": "feet:15",
+        "field": "range",
+        "foundry": "formula",
+        "pdf": "feet:15",
+        "spell": "srd:spare-the-dying"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "wis",
+        "pdf": "con",
+        "spell": "srd:symbol"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "con",
+        "pdf": "dex",
+        "spell": "srd:wall-of-ice"
+      },
+      {
+        "against": "foundry",
+        "field": "save",
+        "foundry": "none",
+        "pdf": "dex",
+        "spell": "srd:wall-of-stone"
+      }
+    ],
+    "foundry": {
+      "agree": 3018,
+      "compared": 3042,
+      "spells": 338
+    },
+    "open5e": {
+      "available": false
+    },
+    "spells": 339
+  },
+  "tool": "tools/import-srd"
+}

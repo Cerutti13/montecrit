@@ -1,0 +1,412 @@
+replay   engine 0.8.0 | content 8a796bce0f88ecfb | scenario stars-ambush-greedy 67b4fb94455b342a | seed 42 run 0 | journal 0
+policy   ally1 greedy | boss1 greedy | boss2 greedy | boss3 greedy | boss4 greedy | gob1 greedy | gob2 greedy | gob3 greedy | gob4 greedy | pc1 greedy
+knobs    maxRounds=3 attackDowned=ifNoOtherTarget lossCounts=pcs downEnds=false
+flags read:
+  diagonalCost=uniform [verified: SRD 5.2.1 p.13 "Playing on a Grid": any adjacent square costs 1; alternating 5/10 is a 2024 DMG option (its use for range is unverified)]
+  initiativeMode=roll [verified: SRD 5.2.1 p.184 "Initiative" and p.254: static initiative is a GM option]
+  groupInitiative=shared [verified: SRD 5.2.1 p.13: a group of identical creatures gets one roll]
+  monsterHp=listed [verified: SRD 5.2.1 p.255: use the number or the dice, the GM's choice]
+  statBlockAtZeroHp=dies [verified: SRD 5.2.1 p.17 "Monster Death": dies at 0 HP unless the GM treats it like a character]
+  corpseSpace=clear [UNVERIFIED: SRD 5.2.1 p.14 and glossary "Dead" (p.180) are silent on bodies; Sage Advice silent]
+  moveBetweenAttacks=all [UNVERIFIED: SRD 5.2.1 p.177 "Moving between Attacks" plus p.257 (Multiattack is part of the Attack action): an inference for Multiattack]
+  pauseInOccupiedSpace=false [UNVERIFIED: SRD 5.2.1 p.14: you can't willingly end a move in an occupied space; silent on pausing mid-turn]
+  focusHandSomatic=strict [verified: 2024 Sage Advice SAC-SpellComponents3 and SRD 5.2.1 p.105-106: the focus hand does Somatic only for spells with a Material component; lenient is a common table ruling]
+  conjuredHandEffectBlocksHand=false [UNVERIFIED: SRD 5.2.1 p.156 Produce Flame: the flame is "in your hand"; unlike Flame Blade (p.132) it never says it needs or occupies a free hand]
+  areaOriginOnGrid=squareCenter [UNVERIFIED: Shane's table ruling 2026-11-01 (areas land on a square); SRD 5.2.1 has no grid-area rule; the 2024 DMG intersection rule is known only secondhand]
+  areaGridCoverage=atLeastHalfSquare [UNVERIFIED: SRD 5.2.1 has no grid-area rule (p.13 covers movement and range); the 2024 DMG half-square rule is known only secondhand; 2024 SAC-Spells-CloudofDaggers1]
+  areaSaveGroupingPerEvent=groupByEvent [UNVERIFIED: SRD 5.2.1 p.16: one damage roll for targets that save at the same time; silent on creatures caught by one moved area]
+  movedAreaTriggersAlongPath=sweepPath [UNVERIFIED: SRD 5.2.1 p.150-151 "moves into its space" has no path rule; 2024 parallels (p.132, p.201) count spaces along the way]
+  zoneKnowledge=sawCast [UNVERIFIED: Not a rule: which zones a creature avoids when it plans a move. sawCast (coverage step 9) = a hidden zone (SRD 5.2.1 p.164 Spike Growth, srd-raw.txt:31015-31021: camouflaged; a creature that can't see the area when the spell is cast must take a Search action to recognize it) only once it saw it appear or recognized it, every other zone once it has line of sight to one of its squares (or saw it appear); all = every zone; none = only zones it created. Movement cost through Difficult Terrain is physical and applies either way]
+  losMethod=corners [UNVERIFIED: SRD 5.2.1 "Cover" (srd-raw.txt:1995-2032) and its glossary entry (33044-33050) give the three degrees and say a target benefits only when the effect "originates on the opposite side of the cover", but give no grid procedure. corners = the DMG's corner-to-corner lines (the attacker's best corner to the 4 corners of the target's square: 1-2 blocked Half, 3 Three-Quarters, 4 Total; known only secondhand, the DMG is not SRD); centers = one line between square centers; stubbed = no cover and everyone sees everyone (the engine before M3 step 8, a what-if)]
+  creatureCover=on [verified: SRD 5.2.1 Cover table (srd-raw.txt:2006-2017): Half Cover is offered by "Another creature or an object that covers at least half of the target"; off is a what-if]
+notes    LOS: grid (losMethod=corners, creatureCover=on)
+notes    scenario file: scenarios/golden/stars-ambush-greedy.yaml (extends scenarios/stars-ambush.yaml)
+notes    ending concentration or dismissing an effect: offered only on your own turn
+notes    srd:warrior-veteran partial: unimplemented Multiattack reading: two of the same attack (the text does not say "in any combination")
+notes    srd:goblin-boss partial: unimplemented Nimble Escape: the Hide option
+notes    srd:goblin-warrior partial: unimplemented Nimble Escape: the Hide option
+notes    srd:moonbeam partial: unimplemented Dim Light in the Cylinder; a failed save reverts a shape-shifted creature
+
+   #1   initiative ally1 12 (d20 9+3)
+   #2   initiative boss1 11 (d20 9+2)
+   #3   initiative boss2 11 (shares boss1's roll)
+   #4   initiative boss3 11 (shares boss1's roll)
+   #5   initiative boss4 11 (shares boss1's roll)
+   #6   initiative gob1 9 (d20 7+2)
+   #7   initiative gob2 9 (shares gob1's roll)
+   #8   initiative gob3 9 (shares gob1's roll)
+   #9   initiative gob4 9 (shares gob1's roll)
+  #10   initiative pc1 4 (d20 2+2)
+  #11 == round 1 ==
+  #12 ally1's turn (G9, 65 HP, 30 ft) [Warrior Veteran]
+  #13   ally1 chooses move:B3/p1  [greedy @0]
+  #14     ally1 steps G9 -> F8 (5 ft, 25 left)
+  #15     ally1 steps F8 -> E7 (5 ft, 20 left)
+  #16     ally1 steps E7 -> D6 (5 ft, 15 left)
+  #17     ally1 steps D6 -> C5 (5 ft, 10 left)
+  #18     ally1 leaves boss1's reach C5 -> B4
+  #19       boss1 chooses oa:scimitar  [greedy @1]
+  #20         ally1 chooses react:parry  [greedy @2]
+  #21           ally1: Parry
+  #22         boss1 Scimitar -> ally1: d20 14 +4 = 18 vs AC 19 (+2 after the hit), miss [opportunity attack]  [boss1 attack r1 p1.0]
+  #23     ally1 steps C5 -> B4 (5 ft, 5 left)
+  #24     ally1 steps B4 -> B3 (5 ft, 0 left)
+  #25     ally1's move ends at B3
+  #26   ally1 chooses attack:greatsword>gob1  [greedy @3]
+  #27     ally1: Multiattack
+  #28     ally1 Greatsword -> gob1: d20 16 +5 = 21 vs AC 15, hit  [ally1 attack r1 p0.0]
+  #29       gob1 takes 8 (8 slashing), HP 10 -> 2  [ally1 damage r1 p0.0]
+  #30   ally1 chooses attack:greatsword>gob1  [greedy @4]
+  #31     ally1 Greatsword -> gob1: d20 3 +5 = 8 vs AC 15, miss  [ally1 attack r1 p0.1]
+  #32   ally1's turn ends
+  #33 boss1's turn (D4, 21 HP, 30 ft) [Goblin Boss]
+  #34   boss1 chooses attack:shortbow>pc1  [greedy @5]
+  #35     boss1: Multiattack
+  #36     boss1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss1 attack r1 p0.0]
+  #37   boss1 chooses attack:shortbow>pc1  [greedy @6]
+  #38     boss1 Shortbow -> pc1: d20 11 +4 = 15 vs AC 15, hit  [boss1 attack r1 p0.1]
+  #39       pc1 takes 3 (3 piercing), HP 45 -> 42  [boss1 damage r1 p0.1]
+  #40   boss1 chooses pass  [greedy @7]
+  #41   boss1's turn ends
+  #42 boss2's turn (I4, 21 HP, 30 ft) [Goblin Boss]
+  #43   boss2 chooses move:J5/p0  [greedy @8]
+  #44     boss2 steps I4 -> J5 (5 ft, 25 left)
+  #45     boss2's move ends at J5
+  #46   boss2 chooses attack:shortbow>pc1  [greedy @9]
+  #47     boss2: Multiattack
+  #48     boss2 Shortbow -> pc1: d20 10 +4 = 14 vs AC 15, miss  [boss2 attack r1 p0.0]
+  #49   boss2 chooses attack:shortbow>pc1  [greedy @10]
+  #50     boss2 Shortbow -> pc1: d20 8 +4 = 12 vs AC 15, miss  [boss2 attack r1 p0.1]
+  #51   boss2 chooses pass  [greedy @11]
+  #52   boss2's turn ends
+  #53 boss3's turn (B7, 21 HP, 30 ft) [Goblin Boss]
+  #54   boss3 chooses attack:shortbow>pc1  [greedy @12]
+  #55     boss3: Multiattack
+  #56     boss3 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss3 attack r1 p0.0]
+  #57   boss3 chooses attack:shortbow>pc1  [greedy @13]
+  #58     boss3 Shortbow -> pc1: d20 12 +4 = 16 vs AC 15, hit  [boss3 attack r1 p0.1]
+  #59       pc1 takes 4 (4 piercing), HP 42 -> 38  [boss3 damage r1 p0.1]
+  #60   boss3 chooses pass  [greedy @14]
+  #61   boss3's turn ends
+  #62 boss4's turn (K7, 21 HP, 30 ft) [Goblin Boss]
+  #63   boss4 chooses attack:shortbow>pc1  [greedy @15]
+  #64     boss4: Multiattack
+  #65     boss4 Shortbow -> pc1: d20 18 +4 = 22 vs AC 15, hit  [boss4 attack r1 p0.0]
+  #66       pc1 takes 4 (4 piercing), HP 38 -> 34  [boss4 damage r1 p0.0]
+  #67   boss4 chooses attack:shortbow>pc1  [greedy @16]
+  #68     boss4 Shortbow -> pc1: d20 16 +4 = 20 vs AC 15, hit  [boss4 attack r1 p0.1]
+  #69       pc1 takes 3 (3 piercing), HP 34 -> 31  [boss4 damage r1 p0.1]
+  #70   boss4 chooses pass  [greedy @17]
+  #71   boss4's turn ends
+  #72 gob1's turn (C2, 2 HP, 30 ft) [Goblin Warrior]
+  #73   gob1 chooses move:E4/p0  [greedy @18]
+  #74     gob1 steps C2 -> D3 (5 ft, 25 left)
+  #75     gob1 steps D3 -> E4 (5 ft, 20 left)
+  #76     gob1's move ends at E4
+  #77   gob1 chooses attack:shortbow>pc1  [greedy @19]
+  #78     gob1: Attack
+  #79     gob1 Shortbow -> pc1: d20 2 +4 = 6 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #80   gob1 chooses pass  [greedy @20]
+  #81   gob1's turn ends
+  #82 gob2's turn (J2, 10 HP, 30 ft) [Goblin Warrior]
+  #83   gob2 chooses move:H4/p0  [greedy @21]
+  #84     gob2 steps J2 -> I3 (5 ft, 25 left)
+  #85     gob2 steps I3 -> H4 (5 ft, 20 left)
+  #86     gob2's move ends at H4
+  #87   gob2 chooses attack:shortbow>pc1  [greedy @22]
+  #88     gob2: Attack
+  #89     gob2 Shortbow -> pc1: d20 11 +4 = 15 vs AC 15, hit  [gob2 attack r1 p0.0]
+  #90       pc1 takes 5 (5 piercing), HP 31 -> 26  [gob2 damage r1 p0.0]
+  #91   gob2 chooses pass  [greedy @23]
+  #92   gob2's turn ends
+  #93 gob3's turn (F5, 10 HP, 30 ft) [Goblin Warrior]
+  #94   gob3 chooses attack:shortbow>pc1  [greedy @24]
+  #95     gob3: Attack
+  #96     gob3 Shortbow -> pc1: d20 14 +4 = 18 vs AC 15, hit  [gob3 attack r1 p0.0]
+  #97       pc1 takes 7 (7 piercing), HP 26 -> 19  [gob3 damage r1 p0.0]
+  #98   gob3 chooses pass  [greedy @25]
+  #99   gob3's turn ends
+ #100 gob4's turn (H5, 10 HP, 30 ft) [Goblin Warrior]
+ #101   gob4 chooses attack:shortbow>pc1  [greedy @26]
+ #102     gob4: Attack
+ #103     gob4 Shortbow -> pc1: d20 10 +4 = 14 vs AC 15, miss  [gob4 attack r1 p0.0]
+ #104   gob4 chooses pass  [greedy @27]
+ #105   gob4's turn ends
+ #106 pc1's turn (F10, 19 HP, 30 ft) [Sample Druid]
+ #107   pc1 chooses move:A7/p0  [greedy @28]
+ #108     pc1 steps F10 -> E9 (5 ft, 25 left)
+ #109     pc1 steps E9 -> D8 (5 ft, 20 left)
+ #110     pc1 steps D8 -> C7 (5 ft, 15 left)
+ #111     pc1 steps C7 -> B6 (5 ft, 10 left)
+ #112     pc1 steps B6 -> A7 (5 ft, 5 left)
+ #113     pc1's move ends at A7
+ #114   pc1 chooses cast:moonbeam@3  [greedy @29]
+ #115     pc1 casts Moonbeam with a level 3 slot (2 left)
+ #116       pc1 is concentrating on Moonbeam
+ #117       pc1 chooses place:D4  [greedy @30]
+ #118       Moonbeam appears at D4: 1 square (seen by ally1, boss1, boss2, boss3, boss4, gob1, gob2, gob3, gob4, pc1)
+ #119         boss1 CON save vs Moonbeam: d20 2 +0 = 2 vs DC 15, fail  [boss1 save r1 p10.0]
+ #120         boss1 takes 20 (20 radiant) from Moonbeam, HP 21 -> 1  [pc1 zone r1 p0.0]
+ #121   pc1 chooses use:stance  [greedy @31]
+ #122     pc1: Assume Stance
+ #123       pc1 spends Forms (2 left)
+ #124       Stance on pc1
+ #125       pc1 chooses pick:steady  [greedy @32]
+ #126       Stance (Steady) on pc1
+ #127   pc1 chooses pass  [greedy @33]
+ #128   pc1's turn ends
+ #129 == round 2 ==
+ #130 ally1's turn (B3, 65 HP, 30 ft) [Warrior Veteran]
+ #131   ally1 chooses move:E5/p0  [greedy @34]
+ #132     ally1 steps B3 -> C4 (5 ft, 25 left)
+ #133     ally1 steps C4 -> D5 (5 ft, 20 left)
+ #134     ally1 steps D5 -> E5 (5 ft, 15 left)
+ #135     ally1's move ends at E5
+ #136   ally1 chooses attack:greatsword>gob3  [greedy @35]
+ #137     ally1: Multiattack
+ #138     ally1 Greatsword -> gob3: d20 4 +5 = 9 vs AC 15, miss  [ally1 attack r2 p0.0]
+ #139   ally1 chooses attack:greatsword>gob3  [greedy @36]
+ #140     ally1 Greatsword -> gob3: d20 18 +5 = 23 vs AC 15, hit  [ally1 attack r2 p0.1]
+ #141       gob3 takes 7 (7 slashing), HP 10 -> 3  [ally1 damage r2 p0.1]
+ #142   ally1 chooses pass  [greedy @37]
+ #143   ally1's turn ends
+ #144 boss1's turn (D4, 1 HP, 30 ft) [Goblin Boss]
+ #145   boss1 chooses opt:nimble-escape-disengage  [greedy @38]
+ #146     boss1: Nimble Escape (Disengage)
+ #147       boss1 is Disengaged (srd:goblin-boss/nimble-escape-disengage)
+ #148   boss1 chooses move:B2/p0  [greedy @39]
+ #149     boss1 steps D4 -> C3 (5 ft, 25 left)
+ #150     boss1 steps C3 -> B2 (5 ft, 20 left)
+ #151     boss1's move ends at B2
+ #152   boss1 chooses attack:shortbow>pc1  [greedy @40]
+ #153     boss1: Multiattack
+ #154     boss1 Shortbow -> pc1: d20 13 +4 = 17 vs AC 15, hit  [boss1 attack r2 p0.0]
+ #155       pc1 takes 5 (5 piercing), HP 19 -> 14  [boss1 damage r2 p0.0]
+ #156         pc1 concentration save (Moonbeam): d20 8 floor 10 +2 = 12 vs DC 10, holds  [pc1 conc r2 p2.0]
+ #157   boss1 chooses attack:shortbow>pc1  [greedy @41]
+ #158     boss1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 15, hit  [boss1 attack r2 p0.1]
+ #159       pc1 takes 4 (4 piercing), HP 14 -> 10  [boss1 damage r2 p0.1]
+ #160         pc1 concentration save (Moonbeam): d20 14 +2 = 16 vs DC 10, holds  [pc1 conc r2 p2.1]
+ #161   boss1 chooses pass  [greedy @42]
+ #162   boss1 is no longer Disengaged (turn-end)
+ #163   boss1's turn ends
+ #164 boss2's turn (J5, 21 HP, 30 ft) [Goblin Boss]
+ #165   boss2 chooses attack:shortbow>pc1  [greedy @43]
+ #166     boss2: Multiattack
+ #167     boss2 Shortbow -> pc1: d20 4 +4 = 8 vs AC 17 (Half Cover +2), miss  [boss2 attack r2 p0.0]
+ #168   boss2 chooses attack:shortbow>pc1  [greedy @44]
+ #169     boss2 Shortbow -> pc1: d20 10 +4 = 14 vs AC 17 (Half Cover +2), miss  [boss2 attack r2 p0.1]
+ #170   boss2 chooses pass  [greedy @45]
+ #171   boss2's turn ends
+ #172 boss3's turn (B7, 21 HP, 30 ft) [Goblin Boss]
+ #173   boss3 chooses attack:scimitar>pc1  [greedy @46]
+ #174     boss3: Multiattack
+ #175     boss3 Scimitar -> pc1: d20 19 +4 = 23 vs AC 15, hit  [boss3 attack r2 p0.0]
+ #176       pc1 takes 8 (8 slashing), HP 10 -> 2  [boss3 damage r2 p0.0]
+ #177         pc1 concentration save (Moonbeam): d20 20 +2 = 22 vs DC 10, holds  [pc1 conc r2 p4.0]
+ #178   boss3 chooses opt:nimble-escape-disengage  [greedy @47]
+ #179     boss3: Nimble Escape (Disengage)
+ #180       boss3 is Disengaged (srd:goblin-boss/nimble-escape-disengage)
+ #181   boss3 chooses move:C6/p0  [greedy @48]
+ #182     boss3 steps B7 -> C6 (5 ft, 25 left)
+ #183     boss3's move ends at C6
+ #184   boss3 chooses attack:shortbow>ally1  [greedy @49]
+ #185     boss3 Shortbow -> ally1: d20 11 +4 = 15 vs AC 17, miss  [boss3 attack r2 p0.1]
+ #186   boss3 chooses pass  [greedy @50]
+ #187   boss3 is no longer Disengaged (turn-end)
+ #188   boss3's turn ends
+ #189 boss4's turn (K7, 21 HP, 30 ft) [Goblin Boss]
+ #190   boss4 chooses move:F6/p0  [greedy @51]
+ #191     boss4 steps K7 -> J6 (5 ft, 25 left)
+ #192     boss4 steps J6 -> I5 (5 ft, 20 left)
+ #193     boss4 steps I5 -> H4 (5 ft, 15 left)
+ #194     boss4 steps H4 -> G5 (5 ft, 10 left)
+ #195     boss4 steps G5 -> F6 (5 ft, 5 left)
+ #196     boss4's move ends at F6
+ #197   boss4 chooses attack:scimitar>ally1  [greedy @52]
+ #198     boss4: Multiattack
+ #199     ally1 chooses pass  [greedy @53]
+ #200     boss4 Scimitar -> ally1: d20 15 +4 = 19 vs AC 17, hit  [boss4 attack r2 p0.0]
+ #201       ally1 takes 4 (4 slashing), HP 65 -> 61  [boss4 damage r2 p0.0]
+ #202   boss4 chooses attack:scimitar>ally1  [greedy @54]
+ #203     boss4 Scimitar -> ally1: d20 12 +4 = 16 vs AC 17, miss  [boss4 attack r2 p0.1]
+ #204   boss4 chooses pass  [greedy @55]
+ #205   boss4's turn ends
+ #206 gob1's turn (E4, 2 HP, 30 ft) [Goblin Warrior]
+ #207   gob1 chooses attack:scimitar>ally1  [greedy @56]
+ #208     gob1: Attack
+ #209     gob1 Scimitar -> ally1: d20 4 +4 = 8 vs AC 17, miss  [gob1 attack r2 p0.0]
+ #210   gob1 chooses opt:nimble-escape-disengage  [greedy @57]
+ #211     gob1: Nimble Escape (Disengage)
+ #212       gob1 is Disengaged (srd:goblin-warrior/nimble-escape-disengage)
+ #213   gob1 chooses pass  [greedy @58]
+ #214   gob1 is no longer Disengaged (turn-end)
+ #215   gob1's turn ends
+ #216 gob2's turn (H4, 10 HP, 30 ft) [Goblin Warrior]
+ #217   gob2 chooses move:F7/p0  [greedy @59]
+ #218     gob2 steps H4 -> G5 (5 ft, 25 left)
+ #219     gob2 steps G5 -> G6 (5 ft, 20 left)
+ #220     gob2 steps G6 -> F7 (5 ft, 15 left)
+ #221     gob2's move ends at F7
+ #222   gob2 chooses attack:shortbow>ally1  [greedy @60]
+ #223     gob2: Attack
+ #224     gob2 Shortbow -> ally1: d20 18 +4 = 22 vs AC 17, hit  [gob2 attack r2 p0.0]
+ #225       ally1 takes 8 (8 piercing), HP 61 -> 53  [gob2 damage r2 p0.0]
+ #226   gob2 chooses pass  [greedy @61]
+ #227   gob2's turn ends
+ #228 gob3's turn (F5, 3 HP, 30 ft) [Goblin Warrior]
+ #229   gob3 chooses opt:nimble-escape-disengage  [greedy @62]
+ #230     gob3: Nimble Escape (Disengage)
+ #231       gob3 is Disengaged (srd:goblin-warrior/nimble-escape-disengage)
+ #232   gob3 chooses move:G6/p0  [greedy @63]
+ #233     gob3 steps F5 -> G6 (5 ft, 25 left)
+ #234     gob3's move ends at G6
+ #235   gob3 chooses attack:shortbow>ally1  [greedy @64]
+ #236     gob3: Attack
+ #237     gob3 Shortbow -> ally1: d20 20 +4 = 24 vs AC 17, CRITICAL HIT  [gob3 attack r2 p0.0]
+ #238       ally1 takes 14 (14 piercing, crit), HP 53 -> 39  [gob3 damage r2 p0.0]
+ #239   gob3 chooses pass  [greedy @65]
+ #240   gob3 is no longer Disengaged (turn-end)
+ #241   gob3's turn ends
+ #242 gob4's turn (H5, 10 HP, 30 ft) [Goblin Warrior]
+ #243   gob4 chooses move:H6/p0  [greedy @66]
+ #244     gob4 steps H5 -> H6 (5 ft, 25 left)
+ #245     gob4's move ends at H6
+ #246   gob4 chooses attack:shortbow>ally1  [greedy @67]
+ #247     gob4: Attack
+ #248     gob4 Shortbow -> ally1: d20 9 +4 = 13 vs AC 17, miss  [gob4 attack r2 p0.0]
+ #249   gob4 chooses pass  [greedy @68]
+ #250   gob4's turn ends
+ #251 pc1's turn (A7, 2 HP, 30 ft) [Sample Druid]
+ #252   pc1 chooses move:E12/p0  [greedy @69]
+ #253     pc1 steps A7 -> A8 (5 ft, 25 left)
+ #254     pc1 steps A8 -> B9 (5 ft, 20 left)
+ #255     pc1 steps B9 -> C10 (5 ft, 15 left)
+ #256     pc1 steps C10 -> D11 (5 ft, 10 left)
+ #257     pc1 steps D11 -> E12 (5 ft, 5 left)
+ #258     pc1's move ends at E12
+ #259   pc1 chooses use:pc1/beam/move  [greedy @70]
+ #260     pc1: Move Moonbeam
+ #261       pc1 chooses place:J5  [greedy @71]
+ #262       Moonbeam moves D4 -> J5; caught gob1, boss2
+ #263         gob1 CON save vs Moonbeam: d20 5 +0 = 5 vs DC 15, fail  [gob1 save r2 p10.0]
+ #264         boss2 CON save vs Moonbeam: d20 7 +0 = 7 vs DC 15, fail  [boss2 save r2 p10.0]
+ #265         gob1 takes 16 (16 radiant) from Moonbeam, HP 2 -> 0  [pc1 zone r2 p0.0]
+ #266           gob1 dies (0 HP)
+ #267         boss2 takes 16 (16 radiant) from Moonbeam, HP 21 -> 5  [pc1 zone r2 p0.0]
+ #268   pc1 chooses cast:healing-word@3  [greedy @72]
+ #269     pc1 casts Healing Word with a level 3 slot (1 left)
+ #270       pc1 chooses target:pc1  [greedy @73]
+ #271       pc1 regains 21 (21 rolled) from Healing Word, HP 2 -> 23  [pc1 heal r2 p0.0]
+ #272   pc1 chooses pass  [greedy @74]
+ #273   pc1's turn ends
+ #274 == round 3 ==
+ #275 ally1's turn (E5, 39 HP, 30 ft) [Warrior Veteran]
+ #276   ally1 chooses move:E6/p0  [greedy @75]
+ #277     ally1 steps E5 -> E6 (5 ft, 25 left)
+ #278     ally1's move ends at E6
+ #279   ally1 chooses attack:greatsword>gob2  [greedy @76]
+ #280     ally1: Multiattack
+ #281     ally1 Greatsword -> gob2: d20 15 +5 = 20 vs AC 15, hit  [ally1 attack r3 p0.0]
+ #282       gob2 takes 9 (9 slashing), HP 10 -> 1  [ally1 damage r3 p0.0]
+ #283   ally1 chooses attack:greatsword>boss4  [greedy @77]
+ #284     boss4 chooses pass  [greedy @78]
+ #285     ally1 Greatsword -> boss4: d20 7 +5 = 12 vs AC 17, miss  [ally1 attack r3 p0.1]
+ #286   ally1 chooses pass  [greedy @79]
+ #287   ally1's turn ends
+ #288 boss1's turn (B2, 1 HP, 30 ft) [Goblin Boss]
+ #289   boss1 chooses move:C1/p0  [greedy @80]
+ #290     boss1 steps B2 -> C1 (5 ft, 25 left)
+ #291     boss1's move ends at C1
+ #292   boss1 chooses attack:shortbow>pc1  [greedy @81]
+ #293     boss1: Multiattack
+ #294     boss1 Shortbow -> pc1: d20 16 +4 = 20 vs AC 15, hit  [boss1 attack r3 p0.0]
+ #295       pc1 takes 5 (5 piercing), HP 23 -> 18  [boss1 damage r3 p0.0]
+ #296         pc1 concentration save (Moonbeam): d20 4 floor 10 +2 = 12 vs DC 10, holds  [pc1 conc r3 p2.0]
+ #297   boss1 chooses attack:shortbow>pc1  [greedy @82]
+ #298     boss1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss1 attack r3 p0.1]
+ #299   boss1 chooses pass  [greedy @83]
+ #300   boss1's turn ends
+ #301 boss2's turn (J5, 5 HP, 30 ft) [Goblin Boss]
+ #302   boss2 chooses attack:shortbow>pc1  [greedy @84]
+ #303     boss2: Multiattack
+ #304     boss2 Shortbow -> pc1: d20 11 +4 = 15 vs AC 15, hit  [boss2 attack r3 p0.0]
+ #305       pc1 takes 7 (7 piercing), HP 18 -> 11  [boss2 damage r3 p0.0]
+ #306         pc1 concentration save (Moonbeam): d20 16 +2 = 18 vs DC 10, holds  [pc1 conc r3 p3.0]
+ #307   boss2 chooses attack:shortbow>pc1  [greedy @85]
+ #308     boss2 Shortbow -> pc1: d20 7 +4 = 11 vs AC 15, miss  [boss2 attack r3 p0.1]
+ #309   boss2 chooses pass  [greedy @86]
+ #310   boss2 CON save vs Moonbeam: d20 5 +0 = 5 vs DC 15, fail  [boss2 save r3 p0.0]
+ #311   boss2 takes 26 (26 radiant) from Moonbeam, HP 5 -> 0  [pc1 zone r3 p3.0]
+ #312     boss2 dies (0 HP)
+ #313   boss2's turn ends
+ #314 boss3's turn (C6, 21 HP, 30 ft) [Goblin Boss]
+ #315   boss3 chooses attack:shortbow>pc1  [greedy @87]
+ #316     boss3: Multiattack
+ #317     boss3 Shortbow -> pc1: d20 15 +4 = 19 vs AC 15, hit  [boss3 attack r3 p0.0]
+ #318       pc1 takes 7 (7 piercing), HP 11 -> 4  [boss3 damage r3 p0.0]
+ #319         pc1 concentration save (Moonbeam): d20 17 +2 = 19 vs DC 10, holds  [pc1 conc r3 p4.0]
+ #320   boss3 chooses attack:shortbow>ally1  [greedy @88]
+ #321     boss3 Shortbow -> ally1: d20 13 +4 = 17 vs AC 17, hit  [boss3 attack r3 p0.1]
+ #322       ally1 takes 8 (8 piercing), HP 39 -> 31  [boss3 damage r3 p0.1]
+ #323   boss3 chooses pass  [greedy @89]
+ #324   boss3's turn ends
+ #325 boss4's turn (F6, 21 HP, 30 ft) [Goblin Boss]
+ #326   boss4 chooses attack:scimitar>ally1  [greedy @90]
+ #327     boss4: Multiattack
+ #328     boss4 Scimitar -> ally1: d20 12 +4 = 16 vs AC 17, miss  [boss4 attack r3 p0.0]
+ #329   boss4 chooses attack:scimitar>ally1  [greedy @91]
+ #330     boss4 Scimitar -> ally1: d20 9 +4 = 13 vs AC 17, miss  [boss4 attack r3 p0.1]
+ #331   boss4 chooses pass  [greedy @92]
+ #332   boss4's turn ends
+ #333 gob2's turn (F7, 1 HP, 30 ft) [Goblin Warrior]
+ #334   gob2 chooses attack:scimitar>ally1  [greedy @93]
+ #335     gob2: Attack
+ #336     gob2 Scimitar -> ally1: d20 9 +4 = 13 vs AC 17, miss  [gob2 attack r3 p0.0]
+ #337   gob2 chooses pass  [greedy @94]
+ #338   gob2's turn ends
+ #339 gob3's turn (G6, 3 HP, 30 ft) [Goblin Warrior]
+ #340   gob3 chooses move:F8/p0  [greedy @95]
+ #341     gob3 steps G6 -> G7 (5 ft, 25 left)
+ #342     gob3 steps G7 -> F8 (5 ft, 20 left)
+ #343     gob3's move ends at F8
+ #344   gob3 chooses attack:shortbow>ally1  [greedy @96]
+ #345     gob3: Attack
+ #346     gob3 Shortbow -> ally1: d20 7 +4 = 11 vs AC 17, miss  [gob3 attack r3 p0.0]
+ #347   gob3 chooses pass  [greedy @97]
+ #348   gob3's turn ends
+ #349 gob4's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+ #350   gob4 chooses move:F9/p0  [greedy @98]
+ #351     gob4 steps H6 -> G7 (5 ft, 25 left)
+ #352     gob4 steps G7 -> F8 (5 ft, 20 left)
+ #353     gob4 steps F8 -> F9 (5 ft, 15 left)
+ #354     gob4's move ends at F9
+ #355   gob4 chooses attack:shortbow>ally1  [greedy @99]
+ #356     gob4: Attack
+ #357     gob4 Shortbow -> ally1: d20 13 +4 = 17 vs AC 17, hit  [gob4 attack r3 p0.0]
+ #358       ally1 takes 5 (5 piercing), HP 31 -> 26  [gob4 damage r3 p0.0]
+ #359   gob4 chooses pass  [greedy @100]
+ #360   gob4's turn ends
+ #361 pc1's turn (E12, 4 HP, 30 ft) [Sample Druid]
+ #362   pc1 chooses move:K12/p0  [greedy @101]
+ #363     pc1 steps E12 -> F11 (5 ft, 25 left)
+ #364     pc1 steps F11 -> G11 (5 ft, 20 left)
+ #365     pc1 steps G11 -> H10 (5 ft, 15 left)
+ #366     pc1 steps H10 -> I10 (5 ft, 10 left)
+ #367     pc1 steps I10 -> J11 (5 ft, 5 left)
+ #368     pc1 steps J11 -> K12 (5 ft, 0 left)
+ #369     pc1's move ends at K12
+ #370   pc1 chooses cast:healing-word@3  [greedy @102]
+ #371     pc1 casts Healing Word with a level 3 slot (0 left)
+ #372       pc1 chooses target:pc1  [greedy @103]
+ #373       pc1 regains 24 (24 rolled) from Healing Word, HP 4 -> 28  [pc1 heal r3 p0.0]
+ #374   pc1 chooses use:pc1/beam/move  [greedy @104]
+ #375     pc1: Move Moonbeam
+ #376       pc1 chooses place:F6  [greedy @105]
+ #377       Moonbeam moves J5 -> F6; caught boss4
+ #378         boss4 CON save vs Moonbeam: d20 3 +0 = 3 vs DC 15, fail  [boss4 save r3 p10.0]
+ #379         boss4 takes 11 (11 radiant) from Moonbeam, HP 21 -> 10  [pc1 zone r3 p0.0]
+ #380   pc1 chooses pass  [greedy @106]
+ #381   pc1's turn ends
+ #382 fight ends: stalemate in round 3
+logHash 66847ca0b9ee6c59

@@ -1,0 +1,27 @@
+# Reviewed against SRD 5.2.1 p.29 (srd-raw.txt:5018-5029), Barbarian level 2, Reckless Attack
+# (coverage W1, docs/design/w1-plan.md section 3, P7): "When you make your first attack roll on your
+# turn, you can decide to attack recklessly. Doing so gives you Advantage on attack rolls using
+# Strength until the start of your next turn, but attack rolls against you have Advantage during
+# that time."
+#   - firstAttack: offered before the first attack roll on the bearer's turn (a firstAttack
+#     decision: pass, or use it); its program applies `reckless` to the bearer, so the roll being
+#     made already sees it.
+#   - `reckless`: until the start of the bearer's next turn, Advantage on its attack rolls using
+#     Strength (d20.attack.str, the attack key's ability bit, P7) and Advantage on attack rolls
+#     against it (an incoming mod on d20.attack).
+# Nothing else in the text, so full.
+fidelity: full
+firstAttack:
+  do:
+    - apply: { effect: reckless, to: self }
+effects:
+  - id: reckless
+    name: Reckless Attack
+    duration: { until: startOfNextTurn, of: bearer }
+    mods:
+      - { on: [d20.attack.str], op: adv }
+      - { on: [d20.attack], side: incoming, op: adv }
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 29

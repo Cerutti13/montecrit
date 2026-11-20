@@ -1,0 +1,13 @@
+# Reviewed against SRD 5.2.1 p.54 (srd-raw.txt:11908-11917), Paladin level 2: a Fighting Style feat
+# of your choice, or the Blessed Warrior option.
+# Coverage C0 (T relabel, X1): this record carries no program because nothing in it needs one; it is
+# mechanized by the class's Fighting Style choice (classes/paladin.yaml choices id fighting-style:
+# the Fighting Style feats and srd:paladin/blessed-warrior), which the character expansion takes as
+# a pick; the picked feat or option has its own fidelity.
+# Nothing in the text is left unmodeled in a fight, so full (mechanizedBy, never compiled).
+fidelity: full
+mechanizedBy: fightingStyle
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 54

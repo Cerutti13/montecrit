@@ -1,0 +1,272 @@
+/* montecrit's own look (docs/design/m2.md 6; Shane 2026-11-02): plain and dense, light and dark.
+   Team and zone colors are Okabe-Ito hues; light mode darkens the zone outlines that would
+   fall under 3:1 on white, and the foes' orange so white seat labels on it pass 4.5:1.
+   apps/web/test/theme.test.ts checks every pair. */
+:root {
+  --bg: #ffffff;
+  --surface: #f6f7f8;
+  --fg: #16181b;
+  --muted: #5d6470;
+  --rule: #d9dce1;
+  --team0: #0072b2;
+  --team1: #b85100;
+  --zone-1: #007a5a;
+  --zone-2: #b0507f;
+  --zone-3: #a86a00;
+  --zone-4: #2a7fb8;
+  --zone-alpha: 0.22;
+  --grid: #e3e6ea;
+  --wall: #3b4048;
+  --difficult: #9aa1ad;
+  --warn: #8a5a00;
+  --bad: #b3261e;
+  --ci: #3b4048;
+  --zero: #9aa1ad;
+  --accent: #0072b2;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #111315;
+    --surface: #1a1d21;
+    --fg: #e7e9ec;
+    --muted: #9aa1ad;
+    --rule: #2c3138;
+    --team0: #56b4e9;
+    --team1: #e69f00;
+    --zone-1: #009e73;
+    --zone-2: #cc79a7;
+    --zone-3: #e69f00;
+    --zone-4: #56b4e9;
+    --zone-alpha: 0.3;
+    --grid: #262a30;
+    --wall: #8a919c;
+    --difficult: #5d6470;
+    --warn: #e6b800;
+    --bad: #ff6b61;
+    --ci: #c4c9d1;
+    --zero: #5d6470;
+    --accent: #56b4e9;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #111315;
+  --surface: #1a1d21;
+  --fg: #e7e9ec;
+  --muted: #9aa1ad;
+  --rule: #2c3138;
+  --team0: #56b4e9;
+  --team1: #e69f00;
+  --zone-1: #009e73;
+  --zone-2: #cc79a7;
+  --zone-3: #e69f00;
+  --zone-4: #56b4e9;
+  --zone-alpha: 0.3;
+  --grid: #262a30;
+  --wall: #8a919c;
+  --difficult: #5d6470;
+  --warn: #e6b800;
+  --bad: #ff6b61;
+  --ci: #c4c9d1;
+  --zero: #5d6470;
+  --accent: #56b4e9;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 13px/1.45 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+.mono, pre, code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; }
+.num, td.num { font-variant-numeric: tabular-nums; text-align: right; }
+.muted { color: var(--muted); }
+
+header.top {
+  display: flex; align-items: center; gap: 16px;
+  padding: 8px 16px; border-bottom: 1px solid var(--rule); background: var(--surface);
+}
+header.top .brand { font-weight: 600; }
+nav.tabs { display: flex; gap: 2px; flex-wrap: wrap; }
+nav.tabs button {
+  border: 1px solid transparent; background: none; color: var(--fg);
+  padding: 4px 10px; border-radius: 2px; font: inherit; cursor: pointer;
+}
+nav.tabs button[aria-current='page'] { border-color: var(--rule); background: var(--bg); font-weight: 600; }
+nav.tabs button:disabled { color: var(--muted); cursor: default; }
+header.top .spacer { flex: 1; }
+select, button, input { font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--rule); border-radius: 2px; padding: 3px 6px; }
+button { cursor: pointer; }
+
+.chipbar { padding: 4px 16px; border-bottom: 1px solid var(--rule); color: var(--muted); }
+.chipbar.private { background: var(--warn); color: var(--bg); font-weight: 600; }
+
+main { padding: 12px 16px 32px; }
+h2 { font-size: 14px; margin: 16px 0 6px; }
+h2:first-child { margin-top: 0; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border-bottom: 1px solid var(--rule); padding: 3px 8px; text-align: left; vertical-align: top; }
+th { color: var(--muted); font-weight: 500; }
+.banner { border: 1px solid var(--bad); color: var(--bad); padding: 6px 10px; margin: 8px 0; }
+.note { color: var(--muted); max-width: 72em; }
+pre.attr { white-space: pre-wrap; max-width: 72em; }
+
+.form { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+.known { margin: 4px 0 0; }
+.progress { margin: 8px 0; }
+.progress progress { width: 240px; vertical-align: middle; }
+.strip { background: var(--surface); border: 1px solid var(--rule); padding: 6px 10px; margin: 6px 0; overflow-x: auto; }
+.actions { margin: 6px 0; }
+details { margin: 8px 0; }
+summary { cursor: pointer; color: var(--muted); }
+
+.replaygrid { display: grid; grid-template-columns: auto minmax(320px, 1fr); gap: 16px; align-items: start; }
+.whygrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 1100px) { .replaygrid, .whygrid { grid-template-columns: 1fr; } }
+.map { display: block; background: var(--bg); }
+.map .maplabel { font-size: 10px; fill: var(--muted); }
+.map .zonelabel { font-size: 10px; font-weight: 600; }
+.map .seat { font-size: 10px; font-weight: 600; fill: var(--bg); pointer-events: none; }
+.map .seat.hollow { fill: var(--fg); }
+.map .badge { font-size: 8px; font-weight: 700; fill: var(--fg); }
+.map .tag { font-size: 10px; font-weight: 700; fill: var(--bad); }
+.map .delta { font-size: 12px; font-weight: 700; }
+.scrubber { margin: 6px 0; }
+.scrubber .buttons { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+.scrubber .ticks { display: block; margin-top: 4px; }
+.log { position: relative; height: 620px; overflow-y: auto; border: 1px solid var(--rule); background: var(--surface); padding: 4px 0; white-space: pre; }
+.logline { padding: 0 8px; cursor: pointer; }
+.logline:hover { background: var(--bg); }
+.logline.current { background: var(--accent); color: var(--bg); }
+.side { margin-top: 8px; }
+.side .activerow td { font-weight: 600; }
+.chain { padding-left: 20px; margin: 0; }
+.linkish { border: none; background: none; padding: 0; color: var(--fg); text-align: left; font: inherit; cursor: pointer; white-space: pre-wrap; }
+.linkish:hover { text-decoration: underline; }
+.keymoments { white-space: pre-wrap; }
+svg .axis { font-size: 9px; fill: var(--muted); }
+.linechart { display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+.legend { list-style: none; margin: 0; padding: 0; }
+.legend li { white-space: nowrap; }
+
+/* The Character screen (docs/design/m3.md 10, "Web"). */
+.chargrid { display: grid; grid-template-columns: minmax(320px, 1fr) minmax(360px, 1.4fr); gap: 16px; align-items: start; margin-top: 8px; }
+@media (max-width: 1100px) { .chargrid { grid-template-columns: 1fr; } }
+.chargrid h3 { font-size: 13px; margin: 0 0 4px; }
+.character h3 { font-size: 13px; margin: 12px 0 4px; }
+textarea.yaml { width: 100%; min-height: 480px; resize: vertical; color: var(--fg); background: var(--surface); border: 1px solid var(--rule); border-radius: 2px; padding: 6px 8px; tab-size: 2; white-space: pre; }
+textarea.yaml[aria-invalid='true'] { border-color: var(--bad); }
+fieldset { border: 1px solid var(--rule); margin: 6px 0; padding: 4px 10px 8px; }
+legend { color: var(--muted); padding: 0 4px; }
+fieldset.pick select { margin: 2px 6px 2px 0; max-width: 100%; }
+fieldset.scores input { width: 4.5em; }
+.issues ul, ul.tight { margin: 2px 0 8px; padding-left: 20px; }
+.bad { color: var(--bad); }
+.warn { color: var(--warn); }
+.fid { font-weight: 600; }
+.fid-full { color: var(--zone-1); }
+.fid-partial { color: var(--warn); }
+.fid-narrative, .fid-missing { color: var(--muted); }
+.character .chipbar.private { margin: 6px 0; padding: 4px 10px; }
+pre.sheettext { white-space: pre; overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); padding: 6px 8px; }
+
+/* The Odds screen (PLAN.md M4). */
+.odds h3 { font-size: 13px; margin: 14px 0 4px; }
+.odds input.short { width: 5em; }
+.odds .form { margin: 4px 0; }
+.chips { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.chips button[aria-pressed='true'] { border-color: var(--accent); background: var(--accent); color: var(--bg); }
+.chips button[aria-pressed='true'] .muted { color: var(--bg); }
+.oddshead .big { font-size: 26px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.oddshead .big .muted { font-size: 13px; font-weight: 400; }
+.oddsgrid { display: grid; grid-template-columns: minmax(340px, 1.2fr) minmax(320px, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 1000px) { .oddsgrid { grid-template-columns: 1fr; } }
+.oddstable { margin-bottom: 12px; }
+.oddstable th:nth-child(2), .oddstable td:nth-child(2) { width: 4em; }
+.oddstable th:nth-child(3), .oddstable td:nth-child(3) { width: 48%; }
+.oddstable tr.activerow td { background: var(--surface); font-weight: 600; }
+.oddstable .rank { color: var(--zone-1); font-weight: 500; }
+.chancecell { white-space: nowrap; }
+.chancecell .num { display: inline-block; width: 4.5em; }
+.oddsbar { display: inline-block; width: calc(100% - 5em); height: 9px; background: var(--surface); border: 1px solid var(--rule); vertical-align: middle; }
+.oddsbar > span { display: block; height: 100%; background: var(--accent); }
+.ladder { display: block; max-width: 100%; }
+.ladder rect { fill: var(--zero); }
+.ladder rect.now { fill: var(--accent); }
+.dctable { width: auto; min-width: 60%; }
+.dctable tr.activerow td { font-weight: 600; }
+.grouptable input:not([type]) { width: 11em; }
+.groupresult { font-size: 14px; }
+
+/* The Practice screen (PLAN.md M5). */
+.practice h3 { font-size: 14px; margin: 0 0 6px; }
+.practice .form { margin: 4px 0; }
+.practice input.short { width: 4.5em; }
+.practicegrid { display: grid; grid-template-columns: auto minmax(340px, 1fr); gap: 16px; align-items: start; margin-top: 10px; }
+@media (max-width: 1100px) { .practicegrid { grid-template-columns: 1fr; } }
+.turnpanel p { margin: 6px 0; }
+.turnpanel .big { font-size: 16px; font-weight: 600; }
+.choices { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; margin: 6px 0; }
+.choices .muted { min-width: 3.5em; }
+.choices button { padding: 4px 9px; }
+.choices button.suggested { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.practicelog { height: 360px; margin-top: 8px; }
+.practicelog .logline { cursor: default; }
+.map .pickcell { fill: var(--accent); fill-opacity: 0.16; stroke: var(--accent); stroke-width: 1; stroke-opacity: 0.55; cursor: pointer; }
+.map .pickcell.risky { fill: var(--zone-3); stroke: var(--zone-3); fill-opacity: 0.2; }
+.map .pickcell.hint { stroke-width: 3; stroke-opacity: 1; fill-opacity: 0.32; }
+.map .pickcell:hover { fill-opacity: 0.5; }
+.map .areapreview { fill: var(--zone-3); fill-opacity: 0.28; stroke: var(--zone-3); stroke-width: 1; stroke-opacity: 0.7; pointer-events: none; }
+.encounter .form { margin: 4px 0; }
+@media (max-width: 1100px) { .practicegrid > div:nth-child(2) { order: -1; } .practicelog { height: 150px; } }
+.choices .spell { display: inline-flex; align-items: center; gap: 3px; border: 1px solid var(--rule); border-radius: 2px; padding: 1px 3px 1px 8px; }
+.choices .spell button { padding: 2px 6px; }
+
+/* Practice: the options panel (status chips, the AI's hint, choices grouped by what they spend). */
+.statusstrip { display: flex; flex-wrap: wrap; gap: 4px 6px; margin: 8px 0; }
+.chip { border: 1px solid var(--rule); border-radius: 10px; padding: 1px 9px; font-size: 12px; white-space: nowrap; }
+.chip.off { opacity: 0.45; text-decoration: line-through; }
+.hintcard { display: flex; gap: 10px; align-items: center; justify-content: space-between; border: 1px solid var(--accent); border-radius: 3px; padding: 6px 10px; margin: 8px 0; }
+.optsec { margin: 10px 0 4px; }
+.optsec h4 { margin: 0 0 4px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid var(--rule); padding-bottom: 2px; }
+.opt { padding: 4px 6px; border-left: 2px solid transparent; }
+.opt.hinted { border-left-color: var(--accent); }
+.optmain { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; }
+.optmain button { padding: 3px 9px; }
+.optmain button.suggested, button.endturn.suggested { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.optdetail { font-size: 12px; opacity: 0.75; margin: 2px 0 0; line-height: 1.35; }
+button.endturn { padding: 5px 14px; }
+
+/* Encounter check: party and foes side by side, then the verdict. */
+.checkgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin: 8px 0; }
+.checkgrid select { max-width: 100%; }
+.verdict .big { font-size: 18px; font-weight: 600; margin: 4px 0 8px; }
+.verdict { border-left: 4px solid var(--rule); }
+.verdict.easy, .verdict.moderate { border-left-color: var(--good, #3a8f5a); }
+.verdict.hard { border-left-color: var(--warn, #c98a1b); }
+.verdict.dangerous, .verdict.deadly { border-left-color: var(--bad); }
+.verdict table { margin: 4px 0 8px; }
+.verdict td { padding: 2px 14px 2px 0; }
+.checkgrid fieldset { min-width: 0; }
+.checkgrid .form { flex-wrap: nowrap; }
+.checkgrid .form select { flex: 1 1 auto; min-width: 0; width: 100%; }
+
+/* The Scene screen (PLAN.md M7): the chat, with the state and the dice ledger beside it. */
+.scenegrid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr); gap: 12px; align-items: start; }
+@media (max-width: 800px) { .scenegrid { grid-template-columns: minmax(0, 1fr); } }
+.scenebrief { white-space: pre-line; max-width: 72em; border-left: 3px solid var(--rule); padding-left: 10px; margin: 8px 0; }
+.chat .line { margin: 8px 0; }
+.chat .line p { margin: 2px 0; white-space: pre-line; max-width: 72em; }
+.chat .line.you p { color: var(--accent); }
+.chat textarea { width: 100%; box-sizing: border-box; margin-top: 8px; font: inherit; }
+.tag { display: inline-block; font-size: 12px; border: 1px solid currentColor; border-radius: 3px; padding: 0 5px; margin-right: 6px; }
+.tag.pass { color: var(--zone-1); }
+.tag.fail { color: var(--bad); }
+.ledger { margin: 2px 0; padding-left: 22px; font-size: 13px; }
+.ledger li { margin: 3px 0; }
+.ruling p { margin: 2px 0 4px; }
+fieldset.fight { border-color: var(--team1); }
+fieldset.fight p { margin: 4px 0; }

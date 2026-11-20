@@ -1,0 +1,15 @@
+# pc1 wards both goblins; each shoots once. Seed 3: gob2's arrow hits and pc1 fails the save.
+kind: journal
+scenario: conc-break-cascade
+seed: 3
+run: 0
+engine: '0.8.0'
+contentHash: '86ca794c7c3a9eec'
+entries:
+  - { seat: pc1, key: 'cast:conc-ward@1' }
+  - { seat: pc1, key: 'place:E2' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: gob1, key: 'attack:shortbow>pc1' }
+  - { seat: gob1, key: 'pass' }
+  - { seat: gob2, key: 'attack:shortbow>pc1' }
+  - { seat: gob2, key: 'pass' }

@@ -1,0 +1,10 @@
+# Reviewed against SRD 5.2.1 p.88 (srd-raw.txt:20117-20121), the Defense Fighting Style feat:
+# "While you're wearing Light, Medium, or Heavy armor, you gain a +1 bonus to Armor Class."
+# The mapped item (the feat's own feature, map/feat.ts) is that whole text: a passive ac +1 stat
+# gated on armored, which holds exactly for light, medium or heavy armor (the reading in
+# tools/import-srd/pdf-gates.ts), so full.
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 88

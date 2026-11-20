@@ -1,0 +1,13 @@
+# Reviewed against SRD 5.2.1 p.51 (srd-raw.txt:11196-11199), Monk level 5: attack twice instead of
+# once with the Attack action on your turn.
+# Coverage C0 (T relabel, X1): this record carries no program because nothing in it needs one; it is
+# mechanized by the class table's extra attacks (classes/monk.yaml extraAttacks '5': 1; the
+# character expansion's Extra attacks number, content/character.ts), which the engine's Attack
+# action already uses.
+# Nothing in the text is left unmodeled in a fight, so full (mechanizedBy, never compiled).
+fidelity: full
+mechanizedBy: extraAttack
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 51

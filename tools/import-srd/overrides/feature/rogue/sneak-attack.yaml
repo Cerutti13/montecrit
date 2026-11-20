@@ -1,0 +1,37 @@
+# Reviewed against SRD 5.2.1 p.61-62 (srd-raw.txt:13564-13567, 13738-13746), Rogue level 1, Sneak
+# Attack (coverage W1, docs/design/w1-plan.md section 3, P4, P5, P6): "Once per turn, you can deal
+# an extra 1d6 damage to one creature you hit with an attack roll if you have Advantage on the roll
+# and the attack uses a Finesse or a Ranged weapon. The extra damage's type is the same as the
+# weapon's type. You don't need Advantage on the attack roll if at least one of your allies is within
+# 5 feet of the target, the ally doesn't have the Incapacitated condition, and you don't have
+# Disadvantage on the attack roll. The extra damage increases as you gain Rogue levels, as shown in
+# the Sneak Attack column of the Rogue Features table."
+#   - An on-hit rider ("you can": a decision, not auto), oncePerTurn global (C1: once in each turn,
+#     anyone's, so an Opportunity Attack on another creature's turn can carry it).
+#   - Filter weaponProperty [finesse, ranged]: a Finesse weapon or a Ranged weapon (the weapon's
+#     kind, not the attack's: a thrown Handaxe is a Melee weapon and doesn't qualify).
+#   - Gate anyOf: [rollAdv] or [allyWithin5ftOfTarget, rollNotDis], read on the roll as resolved
+#     (Advantage and Disadvantage together leave neither, srd-raw.txt:1056-1060).
+#     allyWithin5ftOfTarget is "an ally (not you) within 5 ft of the target without the
+#     Incapacitated condition".
+#   - Damage: the Sneak Attack column (@scale.rogue.sneak-attack, 1d6 at 1 to 10d6 at 19) of the
+#     weapon's type (type: weapon); a Critical Hit rolls it twice (srd-raw.txt:2207-2211).
+# Nothing else in the text, so full. Cunning Strike (srd:rogue/cunning-strike) adds its options to
+# this rider's one decision.
+fidelity: full
+riders:
+  - id: sneak-attack
+    name: Sneak Attack
+    on: hit
+    filter: { weaponProperty: [finesse, ranged] }
+    oncePerTurn: global
+    when:
+      - anyOf:
+          - [rollAdv]
+          - [allyWithin5ftOfTarget, rollNotDis]
+    do:
+      - damage: [{ roll: '@scale.rogue.sneak-attack', type: weapon }]
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 61

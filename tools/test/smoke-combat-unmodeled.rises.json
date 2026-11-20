@@ -1,0 +1,69 @@
+{
+ "test:smoke-bard-1": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-bard-10": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-bard-3": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-bard-5": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-bard-6": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-fighter-1": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-fighter-10": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-fighter-3": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-fighter-5": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-fighter-6": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-monk-1": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-monk-10": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-monk-3": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-monk-5": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-monk-6": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-rogue-1": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)"
+ },
+ "test:smoke-rogue-10": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)",
+  "srd:rogue/steady-aim": "Coverage W1 review: partial for an unverified reading on its path (C7): the consumed Advantage reads nextRollRiderConsumedWhenRedundant (docs/design/w1-plan.md section 12)",
+  "srd:rogue/uncanny-dodge": "Coverage W1 review: partial for unverified readings on its path (C7): per-type halving [U] and reduceBeforeResistance (docs/design/w1-plan.md section 12)"
+ },
+ "test:smoke-rogue-3": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)",
+  "srd:rogue/steady-aim": "Coverage W1 review: partial for an unverified reading on its path (C7): the consumed Advantage reads nextRollRiderConsumedWhenRedundant (docs/design/w1-plan.md section 12)"
+ },
+ "test:smoke-rogue-5": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)",
+  "srd:rogue/steady-aim": "Coverage W1 review: partial for an unverified reading on its path (C7): the consumed Advantage reads nextRollRiderConsumedWhenRedundant (docs/design/w1-plan.md section 12)",
+  "srd:rogue/uncanny-dodge": "Coverage W1 review: partial for unverified readings on its path (C7): per-type halving [U] and reduceBeforeResistance (docs/design/w1-plan.md section 12)"
+ },
+ "test:smoke-rogue-6": {
+  "srd:alert/alert": "Coverage W1: the Alert feat now grants its own feature item, srd:alert/alert (partial: Initiative Swap is not modeled); the feat id srd:alert stays partial with the same line (docs/design/w1-plan.md 4.2)",
+  "srd:rogue/steady-aim": "Coverage W1 review: partial for an unverified reading on its path (C7): the consumed Advantage reads nextRollRiderConsumedWhenRedundant (docs/design/w1-plan.md section 12)",
+  "srd:rogue/uncanny-dodge": "Coverage W1 review: partial for unverified readings on its path (C7): per-type halving [U] and reduceBeforeResistance (docs/design/w1-plan.md section 12)"
+ }
+}

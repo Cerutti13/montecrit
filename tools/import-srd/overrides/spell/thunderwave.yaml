@@ -1,0 +1,40 @@
+# SRD 5.2.1 p.169, Thunderwave (srd-raw.txt:31621-31643), read by hand at coverage step 7.3. The
+# mapper would lose the push silently (docs/design/step7-plan.md 1.7), so it stays out of
+# AREA_READINGS and this item stands in for the Foundry record.
+# A 15-foot Cube "originating from you", so it starts from the caster (an aimed Cube). CON save: 2d8
+# Thunder and "pushed 10 feet away from you" on a failure, half the damage only on a success. No size
+# limit in the text (gargantuan, the schema's largest), and "pushed 10 feet" states the distance
+# (exact). Upcast: 1d8 per slot level above 1.
+replace: true
+foundryPath: packs/_source/spells24/1st-level/thunderwave.yml
+kind: spell
+id: srd:thunderwave
+name: Thunderwave
+source: SRD 5.2.1 p.169
+fidelity: partial
+unimplemented:
+  - unsecured objects entirely within the Cube are pushed 10 feet
+  - the boom is audible within 300 feet
+level: 1
+castingTime: action
+range: self
+components: { v: true, s: true, m: none }
+duration: instant
+area: wave
+effects:
+  - id: wave
+    name: Thunderwave
+    zone: { shape: cube, size: 15 }
+    duration: { rounds: 1 }
+    on:
+      - when: [appear]
+        do:
+          - save:
+              ability: con
+              half: true
+              damage: [{ roll: 2d8, type: thunder, upcast: 1d8 }]
+              onFail: [{ forcedMove: { mode: push, maxFt: 10, maxSize: gargantuan, straight: true, exact: true } }]
+do: [{ apply: { effect: wave, to: point } }]
+provenance:
+  review: reviewed
+  pdfPage: 169

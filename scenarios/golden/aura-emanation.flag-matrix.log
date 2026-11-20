@@ -1,0 +1,1641 @@
+# Flag matrix for scenarios/golden/aura-emanation.yaml with scenarios/golden/aura-emanation.journal.yaml (docs/design/m1b.md, Critique resolutions item 9).
+# Every rule flag the default run read, re-run under each of its other values: same seed, same journal.
+# Matrix mode only: at the journal's first mismatch every journal seat hands over to its fallback (baseline if none).
+# Regenerate: UPDATE_FLAG_MATRIX=1 npx vitest run apps/cli/test/flag-matrix.test.ts
+
+#### seed 2 ####
+default  run 0 | journal of 22 entries: held | logHash 23f001201c4b637a
+flags read: diagonalCost, initiativeMode, initiativeTies, groupInitiative, monsterHp, selfTargetWhenTextSilent, zoneKnowledge, losMethod, creatureCover, emanationReach, emanationCastTrigger
+
+== diagonalCost=alternate (journal diverged at @10) ==
+flags read vs default: +statBlockAtZeroHp +corpseSpace +pauseInOccupiedSpace +conjuredHandEffectBlocksHand
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 13 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc4 12 (static)
+   #4   initiative adp2 12 (static)
+   #5   initiative pc3 12 (static)
+   #6   initiative gob1 12 (static)
+   #7   initiative adp1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc4 chooses pass  [journal @0]
+  #13   pc4's turn ends
+  #14 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #15   adp2 chooses cast:sacred-flame@0  [journal @1]
+  #16     adp2 casts Sacred Flame (cantrip)
+  #17       adp2 chooses target:pc4  [journal @2]
+  #18       pc4 DEX save vs Sacred Flame: d20 3 +2 = 5 vs DC 13, fail  [pc4 save r1 p2.0]
+  #19       pc4 takes 1 (1 radiant) from Sacred Flame, HP 24 -> 23  [adp2 effect r1 p0.0]
+  #20   adp2 chooses pass  [journal @3]
+  #21   adp2's turn ends
+  #22 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #23   pc3 chooses pass  [journal @4]
+  #24   pc3's turn ends
+  #25 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #29   adp1 chooses cast:sacred-flame@0  [journal @6]
+  #30     adp1 casts Sacred Flame (cantrip)
+  #31       adp1 chooses target:pc3  [journal @7]
+  #32       pc3 DEX save vs Sacred Flame: d20 18 +5 = 23 vs DC 13, success  [pc3 save r1 p1.0]
+  #33   adp1 chooses pass  [journal @8]
+  #34   adp1's turn ends
+  #35 pc1's turn (A2, 43 HP, 30 ft) [Sample Guardian]
+  #36   pc1 chooses cast:spirit-guardians@3  [journal @9]
+  #37     pc1 casts Spirit Guardians with a level 3 slot (1 left)
+  #38       pc1 is concentrating on Spirit Guardians
+  #39       Spirit Guardians appears at A2: 16 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+  #40   pc1 chooses move:E1/p0/d1  [greedy @10]
+  #41     pc1 steps A2 -> B1 (5 ft, 25 left)
+  #42       Spirit Guardians moves A2 -> B1
+  #43     pc1 steps B1 -> C1 (5 ft, 20 left)
+  #44       Spirit Guardians moves B1 -> C1
+  #45     pc1 steps C1 -> D1 (5 ft, 15 left)
+  #46       Spirit Guardians moves C1 -> D1
+  #47     pc1 steps D1 -> E1 (5 ft, 10 left)
+  #48       Spirit Guardians moves D1 -> E1; caught gob1
+  #49         gob1 WIS save vs Spirit Guardians: d20 18 -1 = 17 vs DC 15, success  [gob1 save r1 p4.0]
+  #50         gob1 takes 3 (7 radiant, half) from Spirit Guardians, HP 10 -> 7  [pc1 zone r1 p0.0]
+  #51     pc1's move ends at E1
+  #52   pc1 chooses pass  [greedy @11]
+  #53   pc1's turn ends
+  #54 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #55   pc2 chooses move:E8/p0/d1  [greedy @12]
+  #56     pc2 steps A7 -> B7 (5 ft, 25 left)
+  #57       Aura of Protection moves A7 -> B7
+  #58     pc2 steps B7 -> C7 (5 ft, 20 left)
+  #59       Aura of Protection moves B7 -> C7
+  #60     pc2 steps C7 -> D7 (5 ft, 15 left)
+  #61       Aura of Protection moves C7 -> D7
+  #62     pc2 steps D7 -> E8 (5 ft, 10 left)
+  #63       Aura of Protection moves D7 -> E8
+  #64     pc2's move ends at E8
+  #65   pc2 chooses move:C8/p0/d1  [greedy @13]
+  #66     pc2 steps E8 -> D8 (5 ft, 5 left)
+  #67       Aura of Protection moves E8 -> D8
+  #68     pc2 steps D8 -> C8 (5 ft, 0 left)
+  #69       Aura of Protection moves D8 -> C8
+  #70     pc2's move ends at C8
+  #71   pc2 chooses dodge  [greedy @14]
+  #72     pc2: Dodge
+  #73       pc2 is Dodging (dodge)
+  #74   pc2 chooses pass  [greedy @15]
+  #75   pc2's turn ends
+  #76 == round 2 ==
+  #77 pc4's turn (H7, 23 HP, 30 ft) [Sample Grove]
+  #78   pc4 chooses move:F5/p0/d0  [greedy @16]
+  #79     pc4 steps H7 -> G6 (5 ft, 25 left)
+  #80     pc4 steps G6 -> F5 (10 ft, 15 left)
+  #81     pc4's move ends at F5
+  #82   pc4 chooses cast:produce-flame@0  [greedy @17]
+  #83     pc4 casts Produce Flame (cantrip)
+  #84       Produce Flame on pc4
+  #85   pc4 chooses use:pc4/flame/hurl  [greedy @18]
+  #86     pc4: Hurl Flame
+  #87       pc4 chooses target:gob1  [greedy @19]
+  #88       pc4 Hurl Flame -> gob1: d20 11 +5 = 16 vs AC 15, hit  [pc4 attack r2 p0.0]
+  #89         gob1 takes 1 (1 fire), HP 7 -> 6  [pc4 damage r2 p0.0]
+  #90   pc4 chooses pass  [greedy @20]
+  #91   pc4's turn ends
+  #92 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #93   adp2 chooses cast:sacred-flame@0  [greedy @21]
+  #94     adp2 casts Sacred Flame (cantrip)
+  #95       adp2 chooses target:pc1  [greedy @22]
+  #96       pc1 DEX save vs Sacred Flame: d20 17 +0 = 17 vs DC 13, success  [pc1 save r2 p2.0]
+  #97   adp2 chooses pass  [greedy @23]
+  #98   adp2's turn ends
+  #99 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+ #100   pc3 chooses cast:produce-flame@0  [greedy @24]
+ #101     pc3 casts Produce Flame (cantrip)
+ #102       Produce Flame on pc3
+ #103   pc3 chooses use:pc3/flame/hurl  [greedy @25]
+ #104     pc3: Hurl Flame
+ #105       pc3 chooses target:gob1  [greedy @26]
+ #106       pc3 Hurl Flame -> gob1: d20 16 +5 = 21 vs AC 15, hit  [pc3 attack r2 p0.0]
+ #107         gob1 takes 5 (5 fire), HP 6 -> 1  [pc3 damage r2 p0.0]
+ #108   pc3 chooses pass  [greedy @27]
+ #109   pc3's turn ends
+ #110 gob1's turn (H2, 1 HP, 30 ft) [Goblin Warrior]
+ #111   gob1 chooses move:M1/p0/d1  [greedy @28]
+ #112     gob1 steps H2 -> I1 (5 ft, 25 left)
+ #113     gob1 steps I1 -> J1 (5 ft, 20 left)
+ #114     gob1 steps J1 -> K1 (5 ft, 15 left)
+ #115     gob1 steps K1 -> L1 (5 ft, 10 left)
+ #116     gob1 steps L1 -> M1 (5 ft, 5 left)
+ #117     gob1's move ends at M1
+ #118   gob1 chooses attack:shortbow>pc1  [greedy @29]
+ #119     gob1: Attack
+ #120     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 13, hit  [gob1 attack r2 p0.0]
+ #121       pc1 takes 3 (3 piercing), HP 43 -> 40  [gob1 damage r2 p0.0]
+ #122         pc1 concentration save (Spirit Guardians): d20 13 +2 = 15 vs DC 10, holds  [pc1 conc r2 p3.0]
+ #123   gob1 chooses pass  [greedy @30]
+ #124   gob1's turn ends
+ #125 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+ #126   adp1 chooses cast:sacred-flame@0  [greedy @31]
+ #127     adp1 casts Sacred Flame (cantrip)
+ #128       adp1 chooses target:pc1  [greedy @32]
+ #129       pc1 DEX save vs Sacred Flame: d20 2 +0 = 2 vs DC 13, fail  [pc1 save r2 p1.0]
+ #130       pc1 takes 1 (1 radiant) from Sacred Flame, HP 40 -> 39  [adp1 effect r2 p0.0]
+ #131         pc1 concentration save (Spirit Guardians): d20 8 +2 = 10 vs DC 10, holds  [pc1 conc r2 p1.0]
+ #132   adp1 chooses pass  [greedy @33]
+ #133   adp1's turn ends
+ #134 pc1's turn (E1, 39 HP, 30 ft) [Sample Guardian]
+ #135   pc1 chooses cast:guiding-bolt@3  [greedy @34]
+ #136     pc1 casts Guiding Bolt with a level 3 slot (0 left)
+ #137       pc1 chooses target:adp1  [greedy @35]
+ #138       pc1 Guiding Bolt -> adp1: d20 5 +7 = 12 vs AC 13, miss  [pc1 attack r2 p0.0]
+ #139   pc1 chooses move:J1/p0/d0  [greedy @36]
+ #140     pc1 steps E1 -> F1 (5 ft, 25 left)
+ #141       Spirit Guardians moves E1 -> F1
+ #142     pc1 steps F1 -> G1 (5 ft, 20 left)
+ #143       Spirit Guardians moves F1 -> G1
+ #144     pc1 steps G1 -> H1 (5 ft, 15 left)
+ #145       Spirit Guardians moves G1 -> H1
+ #146     pc1 steps H1 -> I1 (5 ft, 10 left)
+ #147       Spirit Guardians moves H1 -> I1
+ #148     pc1 steps I1 -> J1 (5 ft, 5 left)
+ #149       Spirit Guardians moves I1 -> J1; caught gob1
+ #150         gob1 WIS save vs Spirit Guardians: d20 13 -1 = 12 vs DC 15, fail  [gob1 save r2 p4.0]
+ #151         gob1 takes 16 (16 radiant) from Spirit Guardians, HP 1 -> 0  [pc1 zone r2 p0.0]
+ #152           gob1 dies (0 HP)
+ #153     pc1's move ends at J1
+ #154   pc1 chooses pass  [greedy @37]
+ #155   pc1's turn ends
+ #156   pc2 is no longer Dodging (turn-start)
+ #157 pc2's turn (C8, 58 HP, 30 ft) [Sample Sentinel]
+ #158   pc2 chooses move:E8/p0/d0  [greedy @38]
+ #159     pc2 steps C8 -> D8 (5 ft, 25 left)
+ #160       Aura of Protection moves C8 -> D8
+ #161     pc2 steps D8 -> E8 (5 ft, 20 left)
+ #162       Aura of Protection moves D8 -> E8
+ #163     pc2's move ends at E8
+ #164   pc2 chooses move:D7/p0/d1  [greedy @39]
+ #165     pc2 steps E8 -> D7 (5 ft, 15 left)
+ #166       Aura of Protection moves E8 -> D7
+ #167     pc2's move ends at D7
+ #168   pc2 chooses move:F7/p0/d1  [greedy @40]
+ #169     pc2 steps D7 -> E7 (5 ft, 10 left)
+ #170       Aura of Protection moves D7 -> E7; caught pc4
+ #171     pc2 steps E7 -> F7 (5 ft, 5 left)
+ #172       Aura of Protection moves E7 -> F7
+ #173     pc2's move ends at F7
+ #174   pc2 chooses move:E7/p0/d1  [greedy @41]
+ #175     pc2 steps F7 -> E7 (5 ft, 0 left)
+ #176       Aura of Protection moves F7 -> E7; caught pc3
+ #177     pc2's move ends at E7
+ #178   pc2 chooses pass  [greedy @42]
+ #179   pc2's turn ends
+ #180 fight ends: stalemate in round 2
+logHash 1ff60210bb8339e9
+
+== initiativeMode=roll (journal diverged at @0) ==
+flags read vs default: +statBlockAtZeroHp +corpseSpace +conjuredHandEffectBlocksHand +areaOriginOnGrid +areaGridCoverage -initiativeTies -zoneKnowledge -emanationCastTrigger
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 15 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc3 22 (d20 20+2)
+   #4   initiative adp1 17 (d20 15+2)
+   #5   initiative adp2 15 (d20 13+2)
+   #6   initiative pc2 13 (d20 13+0)
+   #7   initiative pc4 11 (d20 9+2)
+   #8   initiative pc1 9 (d20 9+0)
+   #9   initiative gob1 7 (d20 5+2)
+  #10 == round 1 ==
+  #11 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc3 chooses cast:faerie-fire@1  [greedy @0]
+  #13     pc3 casts Faerie Fire with a level 1 slot (3 left)
+  #14       pc3 is concentrating on Faerie Fire
+  #15       pc3 chooses place:F3  [greedy @1]
+  #16       Faerie Fire appears at F3: 16 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+  #17         gob1 DEX save vs Faerie Fire: d20 8 +2 = 10 vs DC 13, fail  [gob1 save r1 p6.0]
+  #18         Outlined (attacks against it have Advantage) on gob1
+  #19   pc3 chooses cast:produce-flame@0  [greedy @2]
+  #20     pc3 casts Produce Flame (cantrip)
+  #21       Produce Flame on pc3
+  #22   pc3 chooses pass  [greedy @3]
+  #23   pc3's turn ends
+  #24 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #25   adp1 chooses cast:sacred-flame@0  [greedy @4]
+  #26     adp1 casts Sacred Flame (cantrip)
+  #27       adp1 chooses target:pc1  [greedy @5]
+  #28       pc1 DEX save vs Sacred Flame: d20 12 +0 = 12 vs DC 13, fail  [pc1 save r1 p1.0]
+  #29       pc1 takes 1 (1 radiant) from Sacred Flame, HP 43 -> 42  [adp1 effect r1 p0.0]
+  #30   adp1 chooses pass  [greedy @6]
+  #31   adp1's turn ends
+  #32 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #33   adp2 chooses cast:sacred-flame@0  [greedy @7]
+  #34     adp2 casts Sacred Flame (cantrip)
+  #35       adp2 chooses target:pc1  [greedy @8]
+  #36       pc1 DEX save vs Sacred Flame: d20 17 +0 = 17 vs DC 13, success  [pc1 save r1 p2.0]
+  #37   adp2 chooses pass  [greedy @9]
+  #38   adp2's turn ends
+  #39 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #40   pc2 chooses move:G1/p0  [greedy @10]
+  #41     pc2 steps A7 -> B6 (5 ft, 25 left)
+  #42       Aura of Protection moves A7 -> B6
+  #43     pc2 steps B6 -> C5 (5 ft, 20 left)
+  #44       Aura of Protection moves B6 -> C5
+  #45     pc2 steps C5 -> D4 (5 ft, 15 left)
+  #46       Aura of Protection moves C5 -> D4
+  #47     pc2 steps D4 -> E3 (5 ft, 10 left)
+  #48       Aura of Protection moves D4 -> E3
+  #49     pc2 steps E3 -> F2 (5 ft, 5 left)
+  #50       Aura of Protection moves E3 -> F2; caught gob1
+  #51     pc2 steps F2 -> G1 (5 ft, 0 left)
+  #52       Aura of Protection moves F2 -> G1
+  #53     pc2's move ends at G1
+  #54   pc2 chooses attack:longsword>gob1  [greedy @11]
+  #55     pc2: Attack
+  #56     pc2 Longsword -> gob1: d20 9/19 adv -> 19 (+srd:faerie-fire/outlined) +6 = 25 vs AC 15, hit  [pc2 attack r1 p0.0]
+  #57       pc2: Sap (Longsword)
+  #58       gob1 takes 7 (7 slashing), HP 10 -> 3  [pc2 damage r1 p0.0]
+  #59         Sapped on gob1
+  #60   pc2 chooses attack:longsword>gob1  [greedy @12]
+  #61     pc2 Longsword -> gob1: d20 17/9 adv -> 17 (+srd:faerie-fire/outlined) +6 = 23 vs AC 15, hit  [pc2 attack r1 p0.1]
+  #62       pc2: Sap (Longsword)
+  #63       gob1 takes 7 (7 slashing), HP 3 -> 0  [pc2 damage r1 p0.1]
+  #64         gob1 dies (0 HP)
+  #65   pc2 chooses pass  [greedy @13]
+  #66   pc2's turn ends
+  #67 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #68   pc4 chooses move:D3/p0  [greedy @14]
+  #69     pc4 steps H7 -> G6 (5 ft, 25 left)
+  #70     pc4 steps G6 -> F5 (5 ft, 20 left)
+  #71     pc4 steps F5 -> E4 (5 ft, 15 left)
+  #72     pc4 steps E4 -> D3 (5 ft, 10 left)
+  #73     pc4's move ends at D3
+  #74   pc4 chooses cast:produce-flame@0  [greedy @15]
+  #75     pc4 casts Produce Flame (cantrip)
+  #76       Produce Flame on pc4
+  #77   pc4 chooses use:pc4/flame/hurl  [greedy @16]
+  #78     pc4: Hurl Flame
+  #79       pc4 chooses target:adp1  [greedy @17]
+  #80       pc4 Hurl Flame -> adp1: d20 1 +5 = 6 vs AC 13, miss  [pc4 attack r1 p0.0]
+  #81   pc4 chooses pass  [greedy @18]
+  #82   pc4's turn ends
+  #83 pc1's turn (A2, 42 HP, 30 ft) [Sample Guardian]
+  #84   pc1 chooses cast:guiding-bolt@3  [greedy @19]
+  #85     pc1 casts Guiding Bolt with a level 3 slot (1 left)
+  #86       pc1 chooses target:adp1  [greedy @20]
+  #87       pc1 Guiding Bolt -> adp1: d20 20 +7 = 27 vs AC 13, CRITICAL HIT  [pc1 attack r1 p0.0]
+  #88         adp1 takes 48 (48 radiant, crit), HP 24 -> 0  [pc1 damage r1 p0.0]
+  #89           adp1 dies (massive damage)
+  #90   pc1 chooses pass  [greedy @21]
+  #91   pc1's turn ends
+  #92 == round 2 ==
+  #93 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #94   pc3 chooses use:pc3/flame/hurl  [greedy @22]
+  #95     pc3: Hurl Flame
+  #96       pc3 chooses target:adp2  [greedy @23]
+  #97       pc3 Hurl Flame -> adp2: d20 16 +5 = 21 vs AC 13, hit  [pc3 attack r2 p0.0]
+  #98         adp2 takes 5 (5 fire), HP 24 -> 19  [pc3 damage r2 p0.0]
+  #99   pc3 chooses pass  [greedy @24]
+ #100   pc3's turn ends
+ #101 adp2's turn (M9, 19 HP, 30 ft) [Sample Adept]
+ #102   adp2 chooses cast:sacred-flame@0  [greedy @25]
+ #103     adp2 casts Sacred Flame (cantrip)
+ #104       adp2 chooses target:pc1  [greedy @26]
+ #105       pc1 DEX save vs Sacred Flame: d20 17 +0 = 17 vs DC 13, success  [pc1 save r2 p2.0]
+ #106   adp2 chooses pass  [greedy @27]
+ #107   adp2's turn ends
+ #108   Sapped on gob1 ends (expired)
+ #109 pc2's turn (G1, 58 HP, 30 ft) [Sample Sentinel]
+ #110   pc2 chooses move:F2/p0  [greedy @28]
+ #111     pc2 steps G1 -> F2 (5 ft, 25 left)
+ #112       Aura of Protection moves G1 -> F2; caught pc4
+ #113     pc2's move ends at F2
+ #114   pc2 chooses move:E1/p0  [greedy @29]
+ #115     pc2 steps F2 -> E1 (5 ft, 20 left)
+ #116       Aura of Protection moves F2 -> E1
+ #117     pc2's move ends at E1
+ #118   pc2 chooses move:F2/p0  [greedy @30]
+ #119     pc2 steps E1 -> F2 (5 ft, 15 left)
+ #120       Aura of Protection moves E1 -> F2
+ #121     pc2's move ends at F2
+ #122   pc2 chooses move:E1/p0  [greedy @31]
+ #123     pc2 steps F2 -> E1 (5 ft, 10 left)
+ #124       Aura of Protection moves F2 -> E1
+ #125     pc2's move ends at E1
+ #126   pc2 chooses move:F2/p0  [greedy @32]
+ #127     pc2 steps E1 -> F2 (5 ft, 5 left)
+ #128       Aura of Protection moves E1 -> F2
+ #129     pc2's move ends at F2
+ #130   pc2 chooses move:E1/p0  [greedy @33]
+ #131     pc2 steps F2 -> E1 (5 ft, 0 left)
+ #132       Aura of Protection moves F2 -> E1
+ #133     pc2's move ends at E1
+ #134   pc2 chooses pass  [greedy @34]
+ #135   pc2's turn ends
+ #136 pc4's turn (D3, 24 HP, 30 ft) [Sample Grove]
+ #137   pc4 chooses use:pc4/flame/hurl  [greedy @35]
+ #138     pc4: Hurl Flame
+ #139       pc4 chooses target:adp2  [greedy @36]
+ #140       pc4 Hurl Flame -> adp2: d20 11 +5 = 16 vs AC 13, hit  [pc4 attack r2 p0.0]
+ #141         adp2 takes 1 (1 fire), HP 19 -> 18  [pc4 damage r2 p0.0]
+ #142   pc4 chooses pass  [greedy @37]
+ #143   pc4's turn ends
+ #144 pc1's turn (A2, 42 HP, 30 ft) [Sample Guardian]
+ #145   pc1 chooses cast:guiding-bolt@1  [greedy @38]
+ #146     pc1 casts Guiding Bolt with a level 1 slot (3 left)
+ #147       pc1 chooses target:adp2  [greedy @39]
+ #148       pc1 Guiding Bolt -> adp2: d20 5 +7 = 12 vs AC 13, miss  [pc1 attack r2 p0.0]
+ #149   pc1 chooses pass  [greedy @40]
+ #150   pc1's turn ends
+ #151 fight ends: stalemate in round 2
+logHash 0bb8b314f2aaab94
+
+== initiativeTies=pcsFirst (journal diverged at @5) ==
+flags read vs default: +corpseSpace +conjuredHandEffectBlocksHand +areaOriginOnGrid +areaGridCoverage -zoneKnowledge -emanationCastTrigger
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 15 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc4 12 (static)
+   #4   initiative adp2 12 (static)
+   #5   initiative pc3 12 (static)
+   #6   initiative adp1 12 (static)
+   #7   initiative gob1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc4 chooses pass  [journal @0]
+  #13   pc4's turn ends
+  #14 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #15   adp2 chooses cast:sacred-flame@0  [journal @1]
+  #16     adp2 casts Sacred Flame (cantrip)
+  #17       adp2 chooses target:pc4  [journal @2]
+  #18       pc4 DEX save vs Sacred Flame: d20 3 +2 = 5 vs DC 13, fail  [pc4 save r1 p2.0]
+  #19       pc4 takes 1 (1 radiant) from Sacred Flame, HP 24 -> 23  [adp2 effect r1 p0.0]
+  #20   adp2 chooses pass  [journal @3]
+  #21   adp2's turn ends
+  #22 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #23   pc3 chooses pass  [journal @4]
+  #24   pc3's turn ends
+  #25 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #26   adp1 chooses cast:sacred-flame@0  [greedy @5]
+  #27     adp1 casts Sacred Flame (cantrip)
+  #28       adp1 chooses target:pc1  [greedy @6]
+  #29       pc1 DEX save vs Sacred Flame: d20 12 +0 = 12 vs DC 13, fail  [pc1 save r1 p1.0]
+  #30       pc1 takes 1 (1 radiant) from Sacred Flame, HP 43 -> 42  [adp1 effect r1 p0.0]
+  #31   adp1 chooses pass  [greedy @7]
+  #32   adp1's turn ends
+  #33 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #34   gob1 chooses move:K1/p0  [greedy @8]
+  #35     gob1 steps H2 -> I1 (5 ft, 25 left)
+  #36     gob1 steps I1 -> J1 (5 ft, 20 left)
+  #37     gob1 steps J1 -> K1 (5 ft, 15 left)
+  #38     gob1's move ends at K1
+  #39   gob1 chooses attack:shortbow>pc1  [greedy @9]
+  #40     gob1: Attack
+  #41     gob1 Shortbow -> pc1: d20 11 +4 = 15 vs AC 13, hit  [gob1 attack r1 p0.0]
+  #42       pc1 takes 7 (7 piercing), HP 42 -> 35  [gob1 damage r1 p0.0]
+  #43   gob1 chooses pass  [greedy @10]
+  #44   gob1's turn ends
+  #45 pc1's turn (A2, 35 HP, 30 ft) [Sample Guardian]
+  #46   pc1 chooses move:B1/p0  [greedy @11]
+  #47     pc1 steps A2 -> B1 (5 ft, 25 left)
+  #48     pc1's move ends at B1
+  #49   pc1 chooses cast:guiding-bolt@3  [greedy @12]
+  #50     pc1 casts Guiding Bolt with a level 3 slot (1 left)
+  #51       pc1 chooses target:adp1  [greedy @13]
+  #52       pc1 Guiding Bolt -> adp1: d20 20 +7 = 27 vs AC 13, CRITICAL HIT  [pc1 attack r1 p0.0]
+  #53         adp1 takes 48 (48 radiant, crit), HP 24 -> 0  [pc1 damage r1 p0.0]
+  #54           adp1 dies (massive damage)
+  #55   pc1 chooses pass  [greedy @14]
+  #56   pc1's turn ends
+  #57 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #58   pc2 chooses move:D4/p0  [greedy @15]
+  #59     pc2 steps A7 -> B6 (5 ft, 25 left)
+  #60       Aura of Protection moves A7 -> B6
+  #61     pc2 steps B6 -> C5 (5 ft, 20 left)
+  #62       Aura of Protection moves B6 -> C5
+  #63     pc2 steps C5 -> D4 (5 ft, 15 left)
+  #64       Aura of Protection moves C5 -> D4
+  #65     pc2's move ends at D4
+  #66   pc2 chooses cast:faerie-fire@1  [greedy @16]
+  #67     pc2 casts Faerie Fire with a level 1 slot (3 left)
+  #68       pc2 is concentrating on Faerie Fire
+  #69       pc2 chooses place:I1  [greedy @17]
+  #70       Faerie Fire appears at I1: 12 squares (seen by adp2, gob1, pc1, pc2, pc3, pc4)
+  #71         gob1 DEX save vs Faerie Fire: d20 16 +2 = 18 vs DC 14, success  [gob1 save r1 p5.0]
+  #72   pc2 chooses pass  [greedy @18]
+  #73   pc2's turn ends
+  #74 == round 2 ==
+  #75 pc4's turn (H7, 23 HP, 30 ft) [Sample Grove]
+  #76   pc4 chooses move:C4/p0  [greedy @19]
+  #77     pc4 steps H7 -> G6 (5 ft, 25 left)
+  #78     pc4 steps G6 -> F5 (5 ft, 20 left)
+  #79     pc4 steps F5 -> E4 (5 ft, 15 left)
+  #80     pc4 steps E4 -> D3 (5 ft, 10 left)
+  #81     pc4 steps D3 -> C4 (5 ft, 5 left)
+  #82     pc4's move ends at C4
+  #83   pc4 chooses cast:faerie-fire@1  [greedy @20]
+  #84     pc4 casts Faerie Fire with a level 1 slot (3 left)
+  #85       pc4 is concentrating on Faerie Fire
+  #86       pc4 chooses place:I1  [greedy @21]
+  #87       Faerie Fire appears at I1: 12 squares (seen by adp2, gob1, pc1, pc2, pc3, pc4)
+  #88         gob1 DEX save vs Faerie Fire: d20 19 +2 = 21 vs DC 13, success  [gob1 save r2 p7.0]
+  #89   pc4 chooses cast:produce-flame@0  [greedy @22]
+  #90     pc4 casts Produce Flame (cantrip)
+  #91       Produce Flame on pc4
+  #92   pc4 chooses pass  [greedy @23]
+  #93   pc4's turn ends
+  #94 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #95   adp2 chooses cast:sacred-flame@0  [greedy @24]
+  #96     adp2 casts Sacred Flame (cantrip)
+  #97       adp2 chooses target:pc1  [greedy @25]
+  #98       pc1 DEX save vs Sacred Flame: d20 17 +0 = 17 vs DC 13, success  [pc1 save r2 p2.0]
+  #99   adp2 chooses pass  [greedy @26]
+ #100   adp2's turn ends
+ #101 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+ #102   pc3 chooses move:B6/p0  [greedy @27]
+ #103     pc3 steps C7 -> B6 (5 ft, 25 left)
+ #104     pc3's move ends at B6
+ #105   pc3 chooses cast:faerie-fire@1  [greedy @28]
+ #106     pc3 casts Faerie Fire with a level 1 slot (3 left)
+ #107       pc3 is concentrating on Faerie Fire
+ #108       pc3 chooses place:I1  [greedy @29]
+ #109       Faerie Fire appears at I1: 12 squares (seen by adp2, gob1, pc1, pc2, pc3, pc4)
+ #110         gob1 DEX save vs Faerie Fire: d20 5 +2 = 7 vs DC 13, fail  [gob1 save r2 p6.0]
+ #111         Outlined (attacks against it have Advantage) on gob1
+ #112   pc3 chooses cast:produce-flame@0  [greedy @30]
+ #113     pc3 casts Produce Flame (cantrip)
+ #114       Produce Flame on pc3
+ #115   pc3 chooses move:D5/p0  [greedy @31]
+ #116     pc3 steps B6 -> C5 (5 ft, 20 left)
+ #117     pc3 steps C5 -> D5 (5 ft, 15 left)
+ #118     pc3's move ends at D5
+ #119   pc3 chooses pass  [greedy @32]
+ #120   pc3's turn ends
+ #121 gob1's turn (K1, 10 HP, 30 ft) [Goblin Warrior]
+ #122   gob1 chooses move:L1/p0  [greedy @33]
+ #123     gob1 steps K1 -> L1 (5 ft, 25 left)
+ #124     gob1's move ends at L1
+ #125   gob1 chooses attack:shortbow>pc1  [greedy @34]
+ #126     gob1: Attack
+ #127     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 13, hit  [gob1 attack r2 p0.0]
+ #128       pc1 takes 3 (3 piercing), HP 35 -> 32  [gob1 damage r2 p0.0]
+ #129   gob1 chooses pass  [greedy @35]
+ #130   gob1's turn ends
+ #131 pc1's turn (B1, 32 HP, 30 ft) [Sample Guardian]
+ #132   pc1 chooses cast:guiding-bolt@1  [greedy @36]
+ #133     pc1 casts Guiding Bolt with a level 1 slot (3 left)
+ #134       pc1 chooses target:gob1  [greedy @37]
+ #135       pc1 Guiding Bolt -> gob1: d20 5/12 adv -> 12 (+srd:faerie-fire/outlined) +7 = 19 vs AC 15, hit  [pc1 attack r2 p0.0]
+ #136         gob1 takes 8 (8 radiant), HP 10 -> 2  [pc1 damage r2 p0.0]
+ #137         Guiding Bolt (next attack has Advantage) on gob1
+ #138   pc1 chooses pass  [greedy @38]
+ #139   pc1's turn ends
+ #140 pc2's turn (D4, 58 HP, 30 ft) [Sample Sentinel]
+ #141   pc2 chooses move:F2/p0  [greedy @39]
+ #142     pc2 steps D4 -> E3 (5 ft, 25 left)
+ #143       Aura of Protection moves D4 -> E3
+ #144     pc2 steps E3 -> F2 (5 ft, 20 left)
+ #145       Aura of Protection moves E3 -> F2
+ #146     pc2's move ends at F2
+ #147   pc2 chooses move:C5/p0  [greedy @40]
+ #148     pc2 steps F2 -> E3 (5 ft, 15 left)
+ #149       Aura of Protection moves F2 -> E3; caught pc3, pc4
+ #150     pc2 steps E3 -> D4 (5 ft, 10 left)
+ #151       Aura of Protection moves E3 -> D4
+ #152     pc2 steps D4 -> C5 (5 ft, 5 left)
+ #153       Aura of Protection moves D4 -> C5
+ #154     pc2's move ends at C5
+ #155   pc2 chooses opt:dash  [greedy @41]
+ #156     pc2: Dash
+ #157   pc2 chooses move:F2/p0  [greedy @42]
+ #158     pc2 steps C5 -> D4 (5 ft, 30 left)
+ #159       Aura of Protection moves C5 -> D4
+ #160     pc2 steps D4 -> E3 (5 ft, 25 left)
+ #161       Aura of Protection moves D4 -> E3
+ #162     pc2 steps E3 -> F2 (5 ft, 20 left)
+ #163       Aura of Protection moves E3 -> F2
+ #164     pc2's move ends at F2
+ #165   pc2 chooses pass  [greedy @43]
+ #166   pc2's turn ends
+ #167 fight ends: stalemate in round 2
+logHash 4e1dc1e8d27f5578
+
+== initiativeTies=monstersFirst (journal diverged at @0) ==
+flags read vs default: +statBlockAtZeroHp +corpseSpace +conjuredHandEffectBlocksHand +areaOriginOnGrid +areaGridCoverage -zoneKnowledge -emanationCastTrigger
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 15 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative gob1 12 (static)
+   #4   initiative pc4 12 (static)
+   #5   initiative adp2 12 (static)
+   #6   initiative pc3 12 (static)
+   #7   initiative adp1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #12   gob1 chooses move:K1/p0  [greedy @0]
+  #13     gob1 steps H2 -> I1 (5 ft, 25 left)
+  #14     gob1 steps I1 -> J1 (5 ft, 20 left)
+  #15     gob1 steps J1 -> K1 (5 ft, 15 left)
+  #16     gob1's move ends at K1
+  #17   gob1 chooses attack:shortbow>pc1  [greedy @1]
+  #18     gob1: Attack
+  #19     gob1 Shortbow -> pc1: d20 11 +4 = 15 vs AC 13, hit  [gob1 attack r1 p0.0]
+  #20       pc1 takes 7 (7 piercing), HP 43 -> 36  [gob1 damage r1 p0.0]
+  #21   gob1 chooses pass  [greedy @2]
+  #22   gob1's turn ends
+  #23 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #24   pc4 chooses move:C8/p0  [greedy @3]
+  #25     pc4 steps H7 -> G6 (5 ft, 25 left)
+  #26     pc4 steps G6 -> F5 (5 ft, 20 left)
+  #27     pc4 steps F5 -> E6 (5 ft, 15 left)
+  #28     pc4 steps E6 -> D7 (5 ft, 10 left)
+  #29     pc4 steps D7 -> C8 (5 ft, 5 left)
+  #30     pc4's move ends at C8
+  #31   pc4 chooses cast:produce-flame@0  [greedy @4]
+  #32     pc4 casts Produce Flame (cantrip)
+  #33       Produce Flame on pc4
+  #34   pc4 chooses use:pc4/flame/hurl  [greedy @5]
+  #35     pc4: Hurl Flame
+  #36       pc4 chooses target:gob1  [greedy @6]
+  #37       pc4 Hurl Flame -> gob1: d20 1 +5 = 6 vs AC 15, miss  [pc4 attack r1 p0.0]
+  #38   pc4 chooses move:D7/p0  [greedy @7]
+  #39     pc4 steps C8 -> D7 (5 ft, 0 left)
+  #40     pc4's move ends at D7
+  #41   pc4 chooses pass  [greedy @8]
+  #42   pc4's turn ends
+  #43 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #44   adp2 chooses cast:sacred-flame@0  [greedy @9]
+  #45     adp2 casts Sacred Flame (cantrip)
+  #46       adp2 chooses target:pc1  [greedy @10]
+  #47       pc1 DEX save vs Sacred Flame: d20 17 +0 = 17 vs DC 13, success  [pc1 save r1 p2.0]
+  #48   adp2 chooses pass  [greedy @11]
+  #49   adp2's turn ends
+  #50 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #51   pc3 chooses cast:produce-flame@0  [greedy @12]
+  #52     pc3 casts Produce Flame (cantrip)
+  #53       Produce Flame on pc3
+  #54   pc3 chooses use:pc3/flame/hurl  [greedy @13]
+  #55     pc3: Hurl Flame
+  #56       pc3 chooses target:gob1  [greedy @14]
+  #57       pc3 Hurl Flame -> gob1: d20 15 +5 = 20 vs AC 15, hit  [pc3 attack r1 p0.0]
+  #58         gob1 takes 4 (4 fire), HP 10 -> 6  [pc3 damage r1 p0.0]
+  #59   pc3 chooses move:D6/p0  [greedy @15]
+  #60     pc3 steps C7 -> D6 (5 ft, 25 left)
+  #61     pc3's move ends at D6
+  #62   pc3 chooses pass  [greedy @16]
+  #63   pc3's turn ends
+  #64 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #65   adp1 chooses cast:sacred-flame@0  [greedy @17]
+  #66     adp1 casts Sacred Flame (cantrip)
+  #67       adp1 chooses target:pc1  [greedy @18]
+  #68       pc1 DEX save vs Sacred Flame: d20 12 +0 = 12 vs DC 13, fail  [pc1 save r1 p1.0]
+  #69       pc1 takes 1 (1 radiant) from Sacred Flame, HP 36 -> 35  [adp1 effect r1 p0.0]
+  #70   adp1 chooses pass  [greedy @19]
+  #71   adp1's turn ends
+  #72 pc1's turn (A2, 35 HP, 30 ft) [Sample Guardian]
+  #73   pc1 chooses cast:guiding-bolt@3  [greedy @20]
+  #74     pc1 casts Guiding Bolt with a level 3 slot (1 left)
+  #75       pc1 chooses target:adp1  [greedy @21]
+  #76       pc1 Guiding Bolt -> adp1: d20 20 +7 = 27 vs AC 13, CRITICAL HIT  [pc1 attack r1 p0.0]
+  #77         adp1 takes 48 (48 radiant, crit), HP 24 -> 0  [pc1 damage r1 p0.0]
+  #78           adp1 dies (massive damage)
+  #79   pc1 chooses pass  [greedy @22]
+  #80   pc1's turn ends
+  #81 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #82   pc2 chooses move:D4/p0  [greedy @23]
+  #83     pc2 steps A7 -> B6 (5 ft, 25 left)
+  #84       Aura of Protection moves A7 -> B6; caught pc3, pc4
+  #85     pc2 steps B6 -> C5 (5 ft, 20 left)
+  #86       Aura of Protection moves B6 -> C5
+  #87     pc2 steps C5 -> D4 (5 ft, 15 left)
+  #88       Aura of Protection moves C5 -> D4
+  #89     pc2's move ends at D4
+  #90   pc2 chooses move:B6/p0  [greedy @24]
+  #91     pc2 steps D4 -> C5 (5 ft, 10 left)
+  #92       Aura of Protection moves D4 -> C5; caught pc4
+  #93     pc2 steps C5 -> B6 (5 ft, 5 left)
+  #94       Aura of Protection moves C5 -> B6
+  #95     pc2's move ends at B6
+  #96   pc2 chooses opt:dash  [greedy @25]
+  #97     pc2: Dash
+  #98   pc2 chooses move:D4/p0  [greedy @26]
+  #99     pc2 steps B6 -> C5 (5 ft, 30 left)
+ #100       Aura of Protection moves B6 -> C5
+ #101     pc2 steps C5 -> D4 (5 ft, 25 left)
+ #102       Aura of Protection moves C5 -> D4
+ #103     pc2's move ends at D4
+ #104   pc2 chooses pass  [greedy @27]
+ #105   pc2's turn ends
+ #106 == round 2 ==
+ #107 gob1's turn (K1, 6 HP, 30 ft) [Goblin Warrior]
+ #108   gob1 chooses move:L1/p0  [greedy @28]
+ #109     gob1 steps K1 -> L1 (5 ft, 25 left)
+ #110     gob1's move ends at L1
+ #111   gob1 chooses attack:shortbow>pc1  [greedy @29]
+ #112     gob1: Attack
+ #113     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 13, hit  [gob1 attack r2 p0.0]
+ #114       pc1 takes 3 (3 piercing), HP 35 -> 32  [gob1 damage r2 p0.0]
+ #115   gob1 chooses pass  [greedy @30]
+ #116   gob1's turn ends
+ #117 pc4's turn (D7, 24 HP, 30 ft) [Sample Grove]
+ #118   pc4 chooses use:pc4/flame/hurl  [greedy @31]
+ #119     pc4: Hurl Flame
+ #120       pc4 chooses target:gob1  [greedy @32]
+ #121       pc4 Hurl Flame -> gob1: d20 11 +5 = 16 vs AC 15, hit  [pc4 attack r2 p0.0]
+ #122         gob1 takes 1 (1 fire), HP 6 -> 5  [pc4 damage r2 p0.0]
+ #123   pc4 chooses move:E6/p0  [greedy @33]
+ #124     pc4 steps D7 -> E6 (5 ft, 25 left)
+ #125     pc4's move ends at E6
+ #126   pc4 chooses move:D5/p0  [greedy @34]
+ #127     pc4 steps E6 -> D5 (5 ft, 20 left)
+ #128     pc4's move ends at D5
+ #129   pc4 chooses move:E4/p0  [greedy @35]
+ #130     pc4 steps D5 -> E4 (5 ft, 15 left)
+ #131     pc4's move ends at E4
+ #132   pc4 chooses move:D5/p0  [greedy @36]
+ #133     pc4 steps E4 -> D5 (5 ft, 10 left)
+ #134     pc4's move ends at D5
+ #135   pc4 chooses move:E4/p0  [greedy @37]
+ #136     pc4 steps D5 -> E4 (5 ft, 5 left)
+ #137     pc4's move ends at E4
+ #138   pc4 chooses move:D5/p0  [greedy @38]
+ #139     pc4 steps E4 -> D5 (5 ft, 0 left)
+ #140     pc4's move ends at D5
+ #141   pc4 chooses pass  [greedy @39]
+ #142   pc4's turn ends
+ #143 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+ #144   adp2 chooses cast:sacred-flame@0  [greedy @40]
+ #145     adp2 casts Sacred Flame (cantrip)
+ #146       adp2 chooses target:pc1  [greedy @41]
+ #147       pc1 DEX save vs Sacred Flame: d20 17 +0 = 17 vs DC 13, success  [pc1 save r2 p2.0]
+ #148   adp2 chooses pass  [greedy @42]
+ #149   adp2's turn ends
+ #150 pc3's turn (D6, 24 HP, 30 ft) [Sample Grove]
+ #151   pc3 chooses use:pc3/flame/hurl  [greedy @43]
+ #152     pc3: Hurl Flame
+ #153       pc3 chooses target:gob1  [greedy @44]
+ #154       pc3 Hurl Flame -> gob1: d20 16 +5 = 21 vs AC 15, hit  [pc3 attack r2 p0.0]
+ #155         gob1 takes 5 (5 fire), HP 5 -> 0  [pc3 damage r2 p0.0]
+ #156           gob1 dies (0 HP)
+ #157   pc3 chooses pass  [greedy @45]
+ #158   pc3's turn ends
+ #159 pc1's turn (A2, 32 HP, 30 ft) [Sample Guardian]
+ #160   pc1 chooses move:A1/p0  [greedy @46]
+ #161     pc1 steps A2 -> A1 (5 ft, 25 left)
+ #162     pc1's move ends at A1
+ #163   pc1 chooses cast:guiding-bolt@3  [greedy @47]
+ #164     pc1 casts Guiding Bolt with a level 3 slot (0 left)
+ #165       pc1 chooses target:adp2  [greedy @48]
+ #166       pc1 Guiding Bolt -> adp2: d20 5 +7 = 12 vs AC 13, miss  [pc1 attack r2 p0.0]
+ #167   pc1 chooses pass  [greedy @49]
+ #168   pc1's turn ends
+ #169 pc2's turn (D4, 58 HP, 30 ft) [Sample Sentinel]
+ #170   pc2 chooses move:F2/p0  [greedy @50]
+ #171     pc2 steps D4 -> E3 (5 ft, 25 left)
+ #172       Aura of Protection moves D4 -> E3
+ #173     pc2 steps E3 -> F2 (5 ft, 20 left)
+ #174       Aura of Protection moves E3 -> F2
+ #175     pc2's move ends at F2
+ #176   pc2 chooses move:E1/p0  [greedy @51]
+ #177     pc2 steps F2 -> E1 (5 ft, 15 left)
+ #178       Aura of Protection moves F2 -> E1
+ #179     pc2's move ends at E1
+ #180   pc2 chooses move:F2/p0  [greedy @52]
+ #181     pc2 steps E1 -> F2 (5 ft, 10 left)
+ #182       Aura of Protection moves E1 -> F2
+ #183     pc2's move ends at F2
+ #184   pc2 chooses move:E1/p0  [greedy @53]
+ #185     pc2 steps F2 -> E1 (5 ft, 5 left)
+ #186       Aura of Protection moves F2 -> E1
+ #187     pc2's move ends at E1
+ #188   pc2 chooses move:F2/p0  [greedy @54]
+ #189     pc2 steps E1 -> F2 (5 ft, 0 left)
+ #190       Aura of Protection moves E1 -> F2
+ #191     pc2's move ends at F2
+ #192   pc2 chooses cast:faerie-fire@1  [greedy @55]
+ #193     pc2 casts Faerie Fire with a level 1 slot (3 left)
+ #194       pc2 is concentrating on Faerie Fire
+ #195       pc2 chooses place:K7  [greedy @56]
+ #196       Faerie Fire appears at K7: 16 squares (seen by adp2, pc1, pc2, pc3, pc4)
+ #197         adp2 DEX save vs Faerie Fire: d20 16 +2 = 18 vs DC 14, success  [adp2 save r2 p5.0]
+ #198   pc2 chooses pass  [greedy @57]
+ #199   pc2's turn ends
+ #200 fight ends: stalemate in round 2
+logHash 4c99318f3c496f43
+
+== groupInitiative=individual (journal held; log identical to default) ==
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 15 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc4 12 (static)
+   #4   initiative adp2 12 (static)
+   #5   initiative pc3 12 (static)
+   #6   initiative gob1 12 (static)
+   #7   initiative adp1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc4 chooses pass  [journal @0]
+  #13   pc4's turn ends
+  #14 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #15   adp2 chooses cast:sacred-flame@0  [journal @1]
+  #16     adp2 casts Sacred Flame (cantrip)
+  #17       adp2 chooses target:pc4  [journal @2]
+  #18       pc4 DEX save vs Sacred Flame: d20 3 +2 = 5 vs DC 13, fail  [pc4 save r1 p2.0]
+  #19       pc4 takes 1 (1 radiant) from Sacred Flame, HP 24 -> 23  [adp2 effect r1 p0.0]
+  #20   adp2 chooses pass  [journal @3]
+  #21   adp2's turn ends
+  #22 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #23   pc3 chooses pass  [journal @4]
+  #24   pc3's turn ends
+  #25 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #29   adp1 chooses cast:sacred-flame@0  [journal @6]
+  #30     adp1 casts Sacred Flame (cantrip)
+  #31       adp1 chooses target:pc3  [journal @7]
+  #32       pc3 DEX save vs Sacred Flame: d20 18 +5 = 23 vs DC 13, success  [pc3 save r1 p1.0]
+  #33   adp1 chooses pass  [journal @8]
+  #34   adp1's turn ends
+  #35 pc1's turn (A2, 43 HP, 30 ft) [Sample Guardian]
+  #36   pc1 chooses cast:spirit-guardians@3  [journal @9]
+  #37     pc1 casts Spirit Guardians with a level 3 slot (1 left)
+  #38       pc1 is concentrating on Spirit Guardians
+  #39       Spirit Guardians appears at A2: 19 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+  #40   pc1 chooses move:E2/p0  [journal @10]
+  #41     pc1 steps A2 -> B1 (5 ft, 25 left)
+  #42       Spirit Guardians moves A2 -> B1
+  #43     pc1 steps B1 -> C1 (5 ft, 20 left)
+  #44       Spirit Guardians moves B1 -> C1
+  #45     pc1 steps C1 -> D1 (5 ft, 15 left)
+  #46       Spirit Guardians moves C1 -> D1
+  #47     pc1 steps D1 -> E2 (5 ft, 10 left)
+  #48       Spirit Guardians moves D1 -> E2; caught gob1
+  #49         gob1 WIS save vs Spirit Guardians: d20 18 -1 = 17 vs DC 15, success  [gob1 save r1 p4.0]
+  #50         gob1 takes 3 (7 radiant, half) from Spirit Guardians, HP 10 -> 7  [pc1 zone r1 p0.0]
+  #51     pc1's move ends at E2
+  #52   pc1 chooses move:D2/p0  [journal @11]
+  #53     pc1 steps E2 -> D2 (5 ft, 5 left)
+  #54       Spirit Guardians moves E2 -> D2
+  #55     pc1's move ends at D2
+  #56   pc1 chooses move:E2/p0  [journal @12]
+  #57     pc1 steps D2 -> E2 (5 ft, 0 left)
+  #58       Spirit Guardians moves D2 -> E2; caught gob1
+  #59     pc1's move ends at E2
+  #60   pc1 chooses pass  [journal @13]
+  #61   pc1's turn ends
+  #62 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #63   pc2 chooses pass  [journal @14]
+  #64   pc2's turn ends
+  #65 == round 2 ==
+  #66 pc4's turn (H7, 23 HP, 30 ft) [Sample Grove]
+  #67   pc4 chooses pass  [journal @15]
+  #68   pc4's turn ends
+  #69 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #70   adp2 chooses pass  [journal @16]
+  #71   adp2's turn ends
+  #72 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #73   pc3 chooses pass  [journal @17]
+  #74   pc3's turn ends
+  #75 gob1's turn (H2, 7 HP, 30 ft) [Goblin Warrior]
+  #76   gob1 chooses pass  [journal @18]
+  #77   gob1 WIS save vs Spirit Guardians: d20 1 -1 = 0 vs DC 15, fail  [gob1 save r2 p0.0]
+  #78   gob1 takes 4 (4 radiant) from Spirit Guardians, HP 7 -> 3  [pc1 zone r2 p3.0]
+  #79   gob1's turn ends
+  #80 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #81   adp1 chooses pass  [journal @19]
+  #82   adp1's turn ends
+  #83 pc1's turn (E2, 43 HP, 30 ft) [Sample Guardian]
+  #84   pc1 chooses pass  [journal @20]
+  #85   pc1's turn ends
+  #86 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #87   pc2 chooses pass  [journal @21]
+  #88   pc2's turn ends
+  #89 fight ends: stalemate in round 2
+logHash fc49b4deae26ab93
+
+== monsterHp=rolled (journal held) ==
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 15 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc4 12 (static)
+   #4   initiative adp2 12 (static)
+   #5   initiative pc3 12 (static)
+   #6   initiative gob1 12 (static)
+   #7   initiative adp1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc4 chooses pass  [journal @0]
+  #13   pc4's turn ends
+  #14 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #15   adp2 chooses cast:sacred-flame@0  [journal @1]
+  #16     adp2 casts Sacred Flame (cantrip)
+  #17       adp2 chooses target:pc4  [journal @2]
+  #18       pc4 DEX save vs Sacred Flame: d20 3 +2 = 5 vs DC 13, fail  [pc4 save r1 p2.0]
+  #19       pc4 takes 1 (1 radiant) from Sacred Flame, HP 24 -> 23  [adp2 effect r1 p0.0]
+  #20   adp2 chooses pass  [journal @3]
+  #21   adp2's turn ends
+  #22 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #23   pc3 chooses pass  [journal @4]
+  #24   pc3's turn ends
+  #25 gob1's turn (H2, 9 HP, 30 ft) [Goblin Warrior]
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #29   adp1 chooses cast:sacred-flame@0  [journal @6]
+  #30     adp1 casts Sacred Flame (cantrip)
+  #31       adp1 chooses target:pc3  [journal @7]
+  #32       pc3 DEX save vs Sacred Flame: d20 18 +5 = 23 vs DC 13, success  [pc3 save r1 p1.0]
+  #33   adp1 chooses pass  [journal @8]
+  #34   adp1's turn ends
+  #35 pc1's turn (A2, 43 HP, 30 ft) [Sample Guardian]
+  #36   pc1 chooses cast:spirit-guardians@3  [journal @9]
+  #37     pc1 casts Spirit Guardians with a level 3 slot (1 left)
+  #38       pc1 is concentrating on Spirit Guardians
+  #39       Spirit Guardians appears at A2: 19 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+  #40   pc1 chooses move:E2/p0  [journal @10]
+  #41     pc1 steps A2 -> B1 (5 ft, 25 left)
+  #42       Spirit Guardians moves A2 -> B1
+  #43     pc1 steps B1 -> C1 (5 ft, 20 left)
+  #44       Spirit Guardians moves B1 -> C1
+  #45     pc1 steps C1 -> D1 (5 ft, 15 left)
+  #46       Spirit Guardians moves C1 -> D1
+  #47     pc1 steps D1 -> E2 (5 ft, 10 left)
+  #48       Spirit Guardians moves D1 -> E2; caught gob1
+  #49         gob1 WIS save vs Spirit Guardians: d20 18 -1 = 17 vs DC 15, success  [gob1 save r1 p4.0]
+  #50         gob1 takes 3 (7 radiant, half) from Spirit Guardians, HP 9 -> 6  [pc1 zone r1 p0.0]
+  #51     pc1's move ends at E2
+  #52   pc1 chooses move:D2/p0  [journal @11]
+  #53     pc1 steps E2 -> D2 (5 ft, 5 left)
+  #54       Spirit Guardians moves E2 -> D2
+  #55     pc1's move ends at D2
+  #56   pc1 chooses move:E2/p0  [journal @12]
+  #57     pc1 steps D2 -> E2 (5 ft, 0 left)
+  #58       Spirit Guardians moves D2 -> E2; caught gob1
+  #59     pc1's move ends at E2
+  #60   pc1 chooses pass  [journal @13]
+  #61   pc1's turn ends
+  #62 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #63   pc2 chooses pass  [journal @14]
+  #64   pc2's turn ends
+  #65 == round 2 ==
+  #66 pc4's turn (H7, 23 HP, 30 ft) [Sample Grove]
+  #67   pc4 chooses pass  [journal @15]
+  #68   pc4's turn ends
+  #69 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #70   adp2 chooses pass  [journal @16]
+  #71   adp2's turn ends
+  #72 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #73   pc3 chooses pass  [journal @17]
+  #74   pc3's turn ends
+  #75 gob1's turn (H2, 6 HP, 30 ft) [Goblin Warrior]
+  #76   gob1 chooses pass  [journal @18]
+  #77   gob1 WIS save vs Spirit Guardians: d20 1 -1 = 0 vs DC 15, fail  [gob1 save r2 p0.0]
+  #78   gob1 takes 4 (4 radiant) from Spirit Guardians, HP 6 -> 2  [pc1 zone r2 p3.0]
+  #79   gob1's turn ends
+  #80 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #81   adp1 chooses pass  [journal @19]
+  #82   adp1's turn ends
+  #83 pc1's turn (E2, 43 HP, 30 ft) [Sample Guardian]
+  #84   pc1 chooses pass  [journal @20]
+  #85   pc1's turn ends
+  #86 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #87   pc2 chooses pass  [journal @21]
+  #88   pc2's turn ends
+  #89 fight ends: stalemate in round 2
+logHash e1ee2c4f76feff0e
+
+== selfTargetWhenTextSilent=notAllowed (journal held; log identical to default) ==
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 15 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc4 12 (static)
+   #4   initiative adp2 12 (static)
+   #5   initiative pc3 12 (static)
+   #6   initiative gob1 12 (static)
+   #7   initiative adp1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc4 chooses pass  [journal @0]
+  #13   pc4's turn ends
+  #14 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #15   adp2 chooses cast:sacred-flame@0  [journal @1]
+  #16     adp2 casts Sacred Flame (cantrip)
+  #17       adp2 chooses target:pc4  [journal @2]
+  #18       pc4 DEX save vs Sacred Flame: d20 3 +2 = 5 vs DC 13, fail  [pc4 save r1 p2.0]
+  #19       pc4 takes 1 (1 radiant) from Sacred Flame, HP 24 -> 23  [adp2 effect r1 p0.0]
+  #20   adp2 chooses pass  [journal @3]
+  #21   adp2's turn ends
+  #22 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #23   pc3 chooses pass  [journal @4]
+  #24   pc3's turn ends
+  #25 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #29   adp1 chooses cast:sacred-flame@0  [journal @6]
+  #30     adp1 casts Sacred Flame (cantrip)
+  #31       adp1 chooses target:pc3  [journal @7]
+  #32       pc3 DEX save vs Sacred Flame: d20 18 +5 = 23 vs DC 13, success  [pc3 save r1 p1.0]
+  #33   adp1 chooses pass  [journal @8]
+  #34   adp1's turn ends
+  #35 pc1's turn (A2, 43 HP, 30 ft) [Sample Guardian]
+  #36   pc1 chooses cast:spirit-guardians@3  [journal @9]
+  #37     pc1 casts Spirit Guardians with a level 3 slot (1 left)
+  #38       pc1 is concentrating on Spirit Guardians
+  #39       Spirit Guardians appears at A2: 19 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+  #40   pc1 chooses move:E2/p0  [journal @10]
+  #41     pc1 steps A2 -> B1 (5 ft, 25 left)
+  #42       Spirit Guardians moves A2 -> B1
+  #43     pc1 steps B1 -> C1 (5 ft, 20 left)
+  #44       Spirit Guardians moves B1 -> C1
+  #45     pc1 steps C1 -> D1 (5 ft, 15 left)
+  #46       Spirit Guardians moves C1 -> D1
+  #47     pc1 steps D1 -> E2 (5 ft, 10 left)
+  #48       Spirit Guardians moves D1 -> E2; caught gob1
+  #49         gob1 WIS save vs Spirit Guardians: d20 18 -1 = 17 vs DC 15, success  [gob1 save r1 p4.0]
+  #50         gob1 takes 3 (7 radiant, half) from Spirit Guardians, HP 10 -> 7  [pc1 zone r1 p0.0]
+  #51     pc1's move ends at E2
+  #52   pc1 chooses move:D2/p0  [journal @11]
+  #53     pc1 steps E2 -> D2 (5 ft, 5 left)
+  #54       Spirit Guardians moves E2 -> D2
+  #55     pc1's move ends at D2
+  #56   pc1 chooses move:E2/p0  [journal @12]
+  #57     pc1 steps D2 -> E2 (5 ft, 0 left)
+  #58       Spirit Guardians moves D2 -> E2; caught gob1
+  #59     pc1's move ends at E2
+  #60   pc1 chooses pass  [journal @13]
+  #61   pc1's turn ends
+  #62 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #63   pc2 chooses pass  [journal @14]
+  #64   pc2's turn ends
+  #65 == round 2 ==
+  #66 pc4's turn (H7, 23 HP, 30 ft) [Sample Grove]
+  #67   pc4 chooses pass  [journal @15]
+  #68   pc4's turn ends
+  #69 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #70   adp2 chooses pass  [journal @16]
+  #71   adp2's turn ends
+  #72 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #73   pc3 chooses pass  [journal @17]
+  #74   pc3's turn ends
+  #75 gob1's turn (H2, 7 HP, 30 ft) [Goblin Warrior]
+  #76   gob1 chooses pass  [journal @18]
+  #77   gob1 WIS save vs Spirit Guardians: d20 1 -1 = 0 vs DC 15, fail  [gob1 save r2 p0.0]
+  #78   gob1 takes 4 (4 radiant) from Spirit Guardians, HP 7 -> 3  [pc1 zone r2 p3.0]
+  #79   gob1's turn ends
+  #80 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #81   adp1 chooses pass  [journal @19]
+  #82   adp1's turn ends
+  #83 pc1's turn (E2, 43 HP, 30 ft) [Sample Guardian]
+  #84   pc1 chooses pass  [journal @20]
+  #85   pc1's turn ends
+  #86 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #87   pc2 chooses pass  [journal @21]
+  #88   pc2's turn ends
+  #89 fight ends: stalemate in round 2
+logHash 23b3ca1245cb45e8
+
+== zoneKnowledge=all (journal held; log identical to default) ==
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 15 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc4 12 (static)
+   #4   initiative adp2 12 (static)
+   #5   initiative pc3 12 (static)
+   #6   initiative gob1 12 (static)
+   #7   initiative adp1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc4 chooses pass  [journal @0]
+  #13   pc4's turn ends
+  #14 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #15   adp2 chooses cast:sacred-flame@0  [journal @1]
+  #16     adp2 casts Sacred Flame (cantrip)
+  #17       adp2 chooses target:pc4  [journal @2]
+  #18       pc4 DEX save vs Sacred Flame: d20 3 +2 = 5 vs DC 13, fail  [pc4 save r1 p2.0]
+  #19       pc4 takes 1 (1 radiant) from Sacred Flame, HP 24 -> 23  [adp2 effect r1 p0.0]
+  #20   adp2 chooses pass  [journal @3]
+  #21   adp2's turn ends
+  #22 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #23   pc3 chooses pass  [journal @4]
+  #24   pc3's turn ends
+  #25 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #29   adp1 chooses cast:sacred-flame@0  [journal @6]
+  #30     adp1 casts Sacred Flame (cantrip)
+  #31       adp1 chooses target:pc3  [journal @7]
+  #32       pc3 DEX save vs Sacred Flame: d20 18 +5 = 23 vs DC 13, success  [pc3 save r1 p1.0]
+  #33   adp1 chooses pass  [journal @8]
+  #34   adp1's turn ends
+  #35 pc1's turn (A2, 43 HP, 30 ft) [Sample Guardian]
+  #36   pc1 chooses cast:spirit-guardians@3  [journal @9]
+  #37     pc1 casts Spirit Guardians with a level 3 slot (1 left)
+  #38       pc1 is concentrating on Spirit Guardians
+  #39       Spirit Guardians appears at A2: 19 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+  #40   pc1 chooses move:E2/p0  [journal @10]
+  #41     pc1 steps A2 -> B1 (5 ft, 25 left)
+  #42       Spirit Guardians moves A2 -> B1
+  #43     pc1 steps B1 -> C1 (5 ft, 20 left)
+  #44       Spirit Guardians moves B1 -> C1
+  #45     pc1 steps C1 -> D1 (5 ft, 15 left)
+  #46       Spirit Guardians moves C1 -> D1
+  #47     pc1 steps D1 -> E2 (5 ft, 10 left)
+  #48       Spirit Guardians moves D1 -> E2; caught gob1
+  #49         gob1 WIS save vs Spirit Guardians: d20 18 -1 = 17 vs DC 15, success  [gob1 save r1 p4.0]
+  #50         gob1 takes 3 (7 radiant, half) from Spirit Guardians, HP 10 -> 7  [pc1 zone r1 p0.0]
+  #51     pc1's move ends at E2
+  #52   pc1 chooses move:D2/p0  [journal @11]
+  #53     pc1 steps E2 -> D2 (5 ft, 5 left)
+  #54       Spirit Guardians moves E2 -> D2
+  #55     pc1's move ends at D2
+  #56   pc1 chooses move:E2/p0  [journal @12]
+  #57     pc1 steps D2 -> E2 (5 ft, 0 left)
+  #58       Spirit Guardians moves D2 -> E2; caught gob1
+  #59     pc1's move ends at E2
+  #60   pc1 chooses pass  [journal @13]
+  #61   pc1's turn ends
+  #62 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #63   pc2 chooses pass  [journal @14]
+  #64   pc2's turn ends
+  #65 == round 2 ==
+  #66 pc4's turn (H7, 23 HP, 30 ft) [Sample Grove]
+  #67   pc4 chooses pass  [journal @15]
+  #68   pc4's turn ends
+  #69 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #70   adp2 chooses pass  [journal @16]
+  #71   adp2's turn ends
+  #72 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #73   pc3 chooses pass  [journal @17]
+  #74   pc3's turn ends
+  #75 gob1's turn (H2, 7 HP, 30 ft) [Goblin Warrior]
+  #76   gob1 chooses pass  [journal @18]
+  #77   gob1 WIS save vs Spirit Guardians: d20 1 -1 = 0 vs DC 15, fail  [gob1 save r2 p0.0]
+  #78   gob1 takes 4 (4 radiant) from Spirit Guardians, HP 7 -> 3  [pc1 zone r2 p3.0]
+  #79   gob1's turn ends
+  #80 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #81   adp1 chooses pass  [journal @19]
+  #82   adp1's turn ends
+  #83 pc1's turn (E2, 43 HP, 30 ft) [Sample Guardian]
+  #84   pc1 chooses pass  [journal @20]
+  #85   pc1's turn ends
+  #86 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #87   pc2 chooses pass  [journal @21]
+  #88   pc2's turn ends
+  #89 fight ends: stalemate in round 2
+logHash 71840d296e970195
+
+== zoneKnowledge=none (journal held; log identical to default) ==
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 15 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc4 12 (static)
+   #4   initiative adp2 12 (static)
+   #5   initiative pc3 12 (static)
+   #6   initiative gob1 12 (static)
+   #7   initiative adp1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc4 chooses pass  [journal @0]
+  #13   pc4's turn ends
+  #14 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #15   adp2 chooses cast:sacred-flame@0  [journal @1]
+  #16     adp2 casts Sacred Flame (cantrip)
+  #17       adp2 chooses target:pc4  [journal @2]
+  #18       pc4 DEX save vs Sacred Flame: d20 3 +2 = 5 vs DC 13, fail  [pc4 save r1 p2.0]
+  #19       pc4 takes 1 (1 radiant) from Sacred Flame, HP 24 -> 23  [adp2 effect r1 p0.0]
+  #20   adp2 chooses pass  [journal @3]
+  #21   adp2's turn ends
+  #22 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #23   pc3 chooses pass  [journal @4]
+  #24   pc3's turn ends
+  #25 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #29   adp1 chooses cast:sacred-flame@0  [journal @6]
+  #30     adp1 casts Sacred Flame (cantrip)
+  #31       adp1 chooses target:pc3  [journal @7]
+  #32       pc3 DEX save vs Sacred Flame: d20 18 +5 = 23 vs DC 13, success  [pc3 save r1 p1.0]
+  #33   adp1 chooses pass  [journal @8]
+  #34   adp1's turn ends
+  #35 pc1's turn (A2, 43 HP, 30 ft) [Sample Guardian]
+  #36   pc1 chooses cast:spirit-guardians@3  [journal @9]
+  #37     pc1 casts Spirit Guardians with a level 3 slot (1 left)
+  #38       pc1 is concentrating on Spirit Guardians
+  #39       Spirit Guardians appears at A2: 19 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+  #40   pc1 chooses move:E2/p0  [journal @10]
+  #41     pc1 steps A2 -> B1 (5 ft, 25 left)
+  #42       Spirit Guardians moves A2 -> B1
+  #43     pc1 steps B1 -> C1 (5 ft, 20 left)
+  #44       Spirit Guardians moves B1 -> C1
+  #45     pc1 steps C1 -> D1 (5 ft, 15 left)
+  #46       Spirit Guardians moves C1 -> D1
+  #47     pc1 steps D1 -> E2 (5 ft, 10 left)
+  #48       Spirit Guardians moves D1 -> E2; caught gob1
+  #49         gob1 WIS save vs Spirit Guardians: d20 18 -1 = 17 vs DC 15, success  [gob1 save r1 p4.0]
+  #50         gob1 takes 3 (7 radiant, half) from Spirit Guardians, HP 10 -> 7  [pc1 zone r1 p0.0]
+  #51     pc1's move ends at E2
+  #52   pc1 chooses move:D2/p0  [journal @11]
+  #53     pc1 steps E2 -> D2 (5 ft, 5 left)
+  #54       Spirit Guardians moves E2 -> D2
+  #55     pc1's move ends at D2
+  #56   pc1 chooses move:E2/p0  [journal @12]
+  #57     pc1 steps D2 -> E2 (5 ft, 0 left)
+  #58       Spirit Guardians moves D2 -> E2; caught gob1
+  #59     pc1's move ends at E2
+  #60   pc1 chooses pass  [journal @13]
+  #61   pc1's turn ends
+  #62 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #63   pc2 chooses pass  [journal @14]
+  #64   pc2's turn ends
+  #65 == round 2 ==
+  #66 pc4's turn (H7, 23 HP, 30 ft) [Sample Grove]
+  #67   pc4 chooses pass  [journal @15]
+  #68   pc4's turn ends
+  #69 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #70   adp2 chooses pass  [journal @16]
+  #71   adp2's turn ends
+  #72 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #73   pc3 chooses pass  [journal @17]
+  #74   pc3's turn ends
+  #75 gob1's turn (H2, 7 HP, 30 ft) [Goblin Warrior]
+  #76   gob1 chooses pass  [journal @18]
+  #77   gob1 WIS save vs Spirit Guardians: d20 1 -1 = 0 vs DC 15, fail  [gob1 save r2 p0.0]
+  #78   gob1 takes 4 (4 radiant) from Spirit Guardians, HP 7 -> 3  [pc1 zone r2 p3.0]
+  #79   gob1's turn ends
+  #80 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #81   adp1 chooses pass  [journal @19]
+  #82   adp1's turn ends
+  #83 pc1's turn (E2, 43 HP, 30 ft) [Sample Guardian]
+  #84   pc1 chooses pass  [journal @20]
+  #85   pc1's turn ends
+  #86 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #87   pc2 chooses pass  [journal @21]
+  #88   pc2's turn ends
+  #89 fight ends: stalemate in round 2
+logHash 3e196eb50397af69
+
+== losMethod=centers (journal held; log identical to default) ==
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 15 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc4 12 (static)
+   #4   initiative adp2 12 (static)
+   #5   initiative pc3 12 (static)
+   #6   initiative gob1 12 (static)
+   #7   initiative adp1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc4 chooses pass  [journal @0]
+  #13   pc4's turn ends
+  #14 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #15   adp2 chooses cast:sacred-flame@0  [journal @1]
+  #16     adp2 casts Sacred Flame (cantrip)
+  #17       adp2 chooses target:pc4  [journal @2]
+  #18       pc4 DEX save vs Sacred Flame: d20 3 +2 = 5 vs DC 13, fail  [pc4 save r1 p2.0]
+  #19       pc4 takes 1 (1 radiant) from Sacred Flame, HP 24 -> 23  [adp2 effect r1 p0.0]
+  #20   adp2 chooses pass  [journal @3]
+  #21   adp2's turn ends
+  #22 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #23   pc3 chooses pass  [journal @4]
+  #24   pc3's turn ends
+  #25 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #29   adp1 chooses cast:sacred-flame@0  [journal @6]
+  #30     adp1 casts Sacred Flame (cantrip)
+  #31       adp1 chooses target:pc3  [journal @7]
+  #32       pc3 DEX save vs Sacred Flame: d20 18 +5 = 23 vs DC 13, success  [pc3 save r1 p1.0]
+  #33   adp1 chooses pass  [journal @8]
+  #34   adp1's turn ends
+  #35 pc1's turn (A2, 43 HP, 30 ft) [Sample Guardian]
+  #36   pc1 chooses cast:spirit-guardians@3  [journal @9]
+  #37     pc1 casts Spirit Guardians with a level 3 slot (1 left)
+  #38       pc1 is concentrating on Spirit Guardians
+  #39       Spirit Guardians appears at A2: 19 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+  #40   pc1 chooses move:E2/p0  [journal @10]
+  #41     pc1 steps A2 -> B1 (5 ft, 25 left)
+  #42       Spirit Guardians moves A2 -> B1
+  #43     pc1 steps B1 -> C1 (5 ft, 20 left)
+  #44       Spirit Guardians moves B1 -> C1
+  #45     pc1 steps C1 -> D1 (5 ft, 15 left)
+  #46       Spirit Guardians moves C1 -> D1
+  #47     pc1 steps D1 -> E2 (5 ft, 10 left)
+  #48       Spirit Guardians moves D1 -> E2; caught gob1
+  #49         gob1 WIS save vs Spirit Guardians: d20 18 -1 = 17 vs DC 15, success  [gob1 save r1 p4.0]
+  #50         gob1 takes 3 (7 radiant, half) from Spirit Guardians, HP 10 -> 7  [pc1 zone r1 p0.0]
+  #51     pc1's move ends at E2
+  #52   pc1 chooses move:D2/p0  [journal @11]
+  #53     pc1 steps E2 -> D2 (5 ft, 5 left)
+  #54       Spirit Guardians moves E2 -> D2
+  #55     pc1's move ends at D2
+  #56   pc1 chooses move:E2/p0  [journal @12]
+  #57     pc1 steps D2 -> E2 (5 ft, 0 left)
+  #58       Spirit Guardians moves D2 -> E2; caught gob1
+  #59     pc1's move ends at E2
+  #60   pc1 chooses pass  [journal @13]
+  #61   pc1's turn ends
+  #62 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #63   pc2 chooses pass  [journal @14]
+  #64   pc2's turn ends
+  #65 == round 2 ==
+  #66 pc4's turn (H7, 23 HP, 30 ft) [Sample Grove]
+  #67   pc4 chooses pass  [journal @15]
+  #68   pc4's turn ends
+  #69 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #70   adp2 chooses pass  [journal @16]
+  #71   adp2's turn ends
+  #72 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #73   pc3 chooses pass  [journal @17]
+  #74   pc3's turn ends
+  #75 gob1's turn (H2, 7 HP, 30 ft) [Goblin Warrior]
+  #76   gob1 chooses pass  [journal @18]
+  #77   gob1 WIS save vs Spirit Guardians: d20 1 -1 = 0 vs DC 15, fail  [gob1 save r2 p0.0]
+  #78   gob1 takes 4 (4 radiant) from Spirit Guardians, HP 7 -> 3  [pc1 zone r2 p3.0]
+  #79   gob1's turn ends
+  #80 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #81   adp1 chooses pass  [journal @19]
+  #82   adp1's turn ends
+  #83 pc1's turn (E2, 43 HP, 30 ft) [Sample Guardian]
+  #84   pc1 chooses pass  [journal @20]
+  #85   pc1's turn ends
+  #86 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #87   pc2 chooses pass  [journal @21]
+  #88   pc2's turn ends
+  #89 fight ends: stalemate in round 2
+logHash 7d879504bd19ecde
+
+== losMethod=stubbed (journal held; log identical to default) ==
+flags read vs default: -losMethod -creatureCover
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 15 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc4 12 (static)
+   #4   initiative adp2 12 (static)
+   #5   initiative pc3 12 (static)
+   #6   initiative gob1 12 (static)
+   #7   initiative adp1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc4 chooses pass  [journal @0]
+  #13   pc4's turn ends
+  #14 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #15   adp2 chooses cast:sacred-flame@0  [journal @1]
+  #16     adp2 casts Sacred Flame (cantrip)
+  #17       adp2 chooses target:pc4  [journal @2]
+  #18       pc4 DEX save vs Sacred Flame: d20 3 +2 = 5 vs DC 13, fail  [pc4 save r1 p2.0]
+  #19       pc4 takes 1 (1 radiant) from Sacred Flame, HP 24 -> 23  [adp2 effect r1 p0.0]
+  #20   adp2 chooses pass  [journal @3]
+  #21   adp2's turn ends
+  #22 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #23   pc3 chooses pass  [journal @4]
+  #24   pc3's turn ends
+  #25 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #29   adp1 chooses cast:sacred-flame@0  [journal @6]
+  #30     adp1 casts Sacred Flame (cantrip)
+  #31       adp1 chooses target:pc3  [journal @7]
+  #32       pc3 DEX save vs Sacred Flame: d20 18 +5 = 23 vs DC 13, success  [pc3 save r1 p1.0]
+  #33   adp1 chooses pass  [journal @8]
+  #34   adp1's turn ends
+  #35 pc1's turn (A2, 43 HP, 30 ft) [Sample Guardian]
+  #36   pc1 chooses cast:spirit-guardians@3  [journal @9]
+  #37     pc1 casts Spirit Guardians with a level 3 slot (1 left)
+  #38       pc1 is concentrating on Spirit Guardians
+  #39       Spirit Guardians appears at A2: 19 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+  #40   pc1 chooses move:E2/p0  [journal @10]
+  #41     pc1 steps A2 -> B1 (5 ft, 25 left)
+  #42       Spirit Guardians moves A2 -> B1
+  #43     pc1 steps B1 -> C1 (5 ft, 20 left)
+  #44       Spirit Guardians moves B1 -> C1
+  #45     pc1 steps C1 -> D1 (5 ft, 15 left)
+  #46       Spirit Guardians moves C1 -> D1
+  #47     pc1 steps D1 -> E2 (5 ft, 10 left)
+  #48       Spirit Guardians moves D1 -> E2; caught gob1
+  #49         gob1 WIS save vs Spirit Guardians: d20 18 -1 = 17 vs DC 15, success  [gob1 save r1 p4.0]
+  #50         gob1 takes 3 (7 radiant, half) from Spirit Guardians, HP 10 -> 7  [pc1 zone r1 p0.0]
+  #51     pc1's move ends at E2
+  #52   pc1 chooses move:D2/p0  [journal @11]
+  #53     pc1 steps E2 -> D2 (5 ft, 5 left)
+  #54       Spirit Guardians moves E2 -> D2
+  #55     pc1's move ends at D2
+  #56   pc1 chooses move:E2/p0  [journal @12]
+  #57     pc1 steps D2 -> E2 (5 ft, 0 left)
+  #58       Spirit Guardians moves D2 -> E2; caught gob1
+  #59     pc1's move ends at E2
+  #60   pc1 chooses pass  [journal @13]
+  #61   pc1's turn ends
+  #62 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #63   pc2 chooses pass  [journal @14]
+  #64   pc2's turn ends
+  #65 == round 2 ==
+  #66 pc4's turn (H7, 23 HP, 30 ft) [Sample Grove]
+  #67   pc4 chooses pass  [journal @15]
+  #68   pc4's turn ends
+  #69 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #70   adp2 chooses pass  [journal @16]
+  #71   adp2's turn ends
+  #72 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #73   pc3 chooses pass  [journal @17]
+  #74   pc3's turn ends
+  #75 gob1's turn (H2, 7 HP, 30 ft) [Goblin Warrior]
+  #76   gob1 chooses pass  [journal @18]
+  #77   gob1 WIS save vs Spirit Guardians: d20 1 -1 = 0 vs DC 15, fail  [gob1 save r2 p0.0]
+  #78   gob1 takes 4 (4 radiant) from Spirit Guardians, HP 7 -> 3  [pc1 zone r2 p3.0]
+  #79   gob1's turn ends
+  #80 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #81   adp1 chooses pass  [journal @19]
+  #82   adp1's turn ends
+  #83 pc1's turn (E2, 43 HP, 30 ft) [Sample Guardian]
+  #84   pc1 chooses pass  [journal @20]
+  #85   pc1's turn ends
+  #86 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #87   pc2 chooses pass  [journal @21]
+  #88   pc2's turn ends
+  #89 fight ends: stalemate in round 2
+logHash 33470309cbfad671
+
+== creatureCover=off (journal held; log identical to default) ==
+flags read vs default: -losMethod
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 15 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc4 12 (static)
+   #4   initiative adp2 12 (static)
+   #5   initiative pc3 12 (static)
+   #6   initiative gob1 12 (static)
+   #7   initiative adp1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc4 chooses pass  [journal @0]
+  #13   pc4's turn ends
+  #14 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #15   adp2 chooses cast:sacred-flame@0  [journal @1]
+  #16     adp2 casts Sacred Flame (cantrip)
+  #17       adp2 chooses target:pc4  [journal @2]
+  #18       pc4 DEX save vs Sacred Flame: d20 3 +2 = 5 vs DC 13, fail  [pc4 save r1 p2.0]
+  #19       pc4 takes 1 (1 radiant) from Sacred Flame, HP 24 -> 23  [adp2 effect r1 p0.0]
+  #20   adp2 chooses pass  [journal @3]
+  #21   adp2's turn ends
+  #22 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #23   pc3 chooses pass  [journal @4]
+  #24   pc3's turn ends
+  #25 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #29   adp1 chooses cast:sacred-flame@0  [journal @6]
+  #30     adp1 casts Sacred Flame (cantrip)
+  #31       adp1 chooses target:pc3  [journal @7]
+  #32       pc3 DEX save vs Sacred Flame: d20 18 +5 = 23 vs DC 13, success  [pc3 save r1 p1.0]
+  #33   adp1 chooses pass  [journal @8]
+  #34   adp1's turn ends
+  #35 pc1's turn (A2, 43 HP, 30 ft) [Sample Guardian]
+  #36   pc1 chooses cast:spirit-guardians@3  [journal @9]
+  #37     pc1 casts Spirit Guardians with a level 3 slot (1 left)
+  #38       pc1 is concentrating on Spirit Guardians
+  #39       Spirit Guardians appears at A2: 19 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+  #40   pc1 chooses move:E2/p0  [journal @10]
+  #41     pc1 steps A2 -> B1 (5 ft, 25 left)
+  #42       Spirit Guardians moves A2 -> B1
+  #43     pc1 steps B1 -> C1 (5 ft, 20 left)
+  #44       Spirit Guardians moves B1 -> C1
+  #45     pc1 steps C1 -> D1 (5 ft, 15 left)
+  #46       Spirit Guardians moves C1 -> D1
+  #47     pc1 steps D1 -> E2 (5 ft, 10 left)
+  #48       Spirit Guardians moves D1 -> E2; caught gob1
+  #49         gob1 WIS save vs Spirit Guardians: d20 18 -1 = 17 vs DC 15, success  [gob1 save r1 p4.0]
+  #50         gob1 takes 3 (7 radiant, half) from Spirit Guardians, HP 10 -> 7  [pc1 zone r1 p0.0]
+  #51     pc1's move ends at E2
+  #52   pc1 chooses move:D2/p0  [journal @11]
+  #53     pc1 steps E2 -> D2 (5 ft, 5 left)
+  #54       Spirit Guardians moves E2 -> D2
+  #55     pc1's move ends at D2
+  #56   pc1 chooses move:E2/p0  [journal @12]
+  #57     pc1 steps D2 -> E2 (5 ft, 0 left)
+  #58       Spirit Guardians moves D2 -> E2; caught gob1
+  #59     pc1's move ends at E2
+  #60   pc1 chooses pass  [journal @13]
+  #61   pc1's turn ends
+  #62 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #63   pc2 chooses pass  [journal @14]
+  #64   pc2's turn ends
+  #65 == round 2 ==
+  #66 pc4's turn (H7, 23 HP, 30 ft) [Sample Grove]
+  #67   pc4 chooses pass  [journal @15]
+  #68   pc4's turn ends
+  #69 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #70   adp2 chooses pass  [journal @16]
+  #71   adp2's turn ends
+  #72 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #73   pc3 chooses pass  [journal @17]
+  #74   pc3's turn ends
+  #75 gob1's turn (H2, 7 HP, 30 ft) [Goblin Warrior]
+  #76   gob1 chooses pass  [journal @18]
+  #77   gob1 WIS save vs Spirit Guardians: d20 1 -1 = 0 vs DC 15, fail  [gob1 save r2 p0.0]
+  #78   gob1 takes 4 (4 radiant) from Spirit Guardians, HP 7 -> 3  [pc1 zone r2 p3.0]
+  #79   gob1's turn ends
+  #80 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #81   adp1 chooses pass  [journal @19]
+  #82   adp1's turn ends
+  #83 pc1's turn (E2, 43 HP, 30 ft) [Sample Guardian]
+  #84   pc1 chooses pass  [journal @20]
+  #85   pc1's turn ends
+  #86 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #87   pc2 chooses pass  [journal @21]
+  #88   pc2's turn ends
+  #89 fight ends: stalemate in round 2
+logHash 41e5c5dad4423779
+
+== emanationReach=radial (journal held) ==
+flags read vs default: +areaGridCoverage
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 6 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc4 12 (static)
+   #4   initiative adp2 12 (static)
+   #5   initiative pc3 12 (static)
+   #6   initiative gob1 12 (static)
+   #7   initiative adp1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc4 chooses pass  [journal @0]
+  #13   pc4's turn ends
+  #14 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #15   adp2 chooses cast:sacred-flame@0  [journal @1]
+  #16     adp2 casts Sacred Flame (cantrip)
+  #17       adp2 chooses target:pc4  [journal @2]
+  #18       pc4 DEX save vs Sacred Flame: d20 3 +2 = 5 vs DC 13, fail  [pc4 save r1 p2.0]
+  #19       pc4 takes 1 (1 radiant) from Sacred Flame, HP 24 -> 23  [adp2 effect r1 p0.0]
+  #20   adp2 chooses pass  [journal @3]
+  #21   adp2's turn ends
+  #22 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #23   pc3 chooses pass  [journal @4]
+  #24   pc3's turn ends
+  #25 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #29   adp1 chooses cast:sacred-flame@0  [journal @6]
+  #30     adp1 casts Sacred Flame (cantrip)
+  #31       adp1 chooses target:pc3  [journal @7]
+  #32       pc3 DEX save vs Sacred Flame: d20 18 +2 = 20 vs DC 13, success  [pc3 save r1 p1.0]
+  #33   adp1 chooses pass  [journal @8]
+  #34   adp1's turn ends
+  #35 pc1's turn (A2, 43 HP, 30 ft) [Sample Guardian]
+  #36   pc1 chooses cast:spirit-guardians@3  [journal @9]
+  #37     pc1 casts Spirit Guardians with a level 3 slot (1 left)
+  #38       pc1 is concentrating on Spirit Guardians
+  #39       Spirit Guardians appears at A2: 11 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+  #40   pc1 chooses move:E2/p0  [journal @10]
+  #41     pc1 steps A2 -> B1 (5 ft, 25 left)
+  #42       Spirit Guardians moves A2 -> B1
+  #43     pc1 steps B1 -> C1 (5 ft, 20 left)
+  #44       Spirit Guardians moves B1 -> C1
+  #45     pc1 steps C1 -> D1 (5 ft, 15 left)
+  #46       Spirit Guardians moves C1 -> D1
+  #47     pc1 steps D1 -> E2 (5 ft, 10 left)
+  #48       Spirit Guardians moves D1 -> E2
+  #49     pc1's move ends at E2
+  #50   pc1 chooses move:D2/p0  [journal @11]
+  #51     pc1 steps E2 -> D2 (5 ft, 5 left)
+  #52       Spirit Guardians moves E2 -> D2
+  #53     pc1's move ends at D2
+  #54   pc1 chooses move:E2/p0  [journal @12]
+  #55     pc1 steps D2 -> E2 (5 ft, 0 left)
+  #56       Spirit Guardians moves D2 -> E2
+  #57     pc1's move ends at E2
+  #58   pc1 chooses pass  [journal @13]
+  #59   pc1's turn ends
+  #60 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #61   pc2 chooses pass  [journal @14]
+  #62   pc2's turn ends
+  #63 == round 2 ==
+  #64 pc4's turn (H7, 23 HP, 30 ft) [Sample Grove]
+  #65   pc4 chooses pass  [journal @15]
+  #66   pc4's turn ends
+  #67 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #68   adp2 chooses pass  [journal @16]
+  #69   adp2's turn ends
+  #70 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #71   pc3 chooses pass  [journal @17]
+  #72   pc3's turn ends
+  #73 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #74   gob1 chooses pass  [journal @18]
+  #75   gob1's turn ends
+  #76 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #77   adp1 chooses pass  [journal @19]
+  #78   adp1's turn ends
+  #79 pc1's turn (E2, 43 HP, 30 ft) [Sample Guardian]
+  #80   pc1 chooses pass  [journal @20]
+  #81   pc1's turn ends
+  #82 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #83   pc2 chooses pass  [journal @21]
+  #84   pc2's turn ends
+  #85 fight ends: stalemate in round 2
+logHash bf29a6908ff43229
+
+== emanationCastTrigger=onCast (journal held; log identical to default) ==
+   #1   Defense on pc2
+   #2   Aura of Protection appears at A7: 15 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+   #3   initiative pc4 12 (static)
+   #4   initiative adp2 12 (static)
+   #5   initiative pc3 12 (static)
+   #6   initiative gob1 12 (static)
+   #7   initiative adp1 12 (static)
+   #8   initiative pc1 10 (static)
+   #9   initiative pc2 10 (static)
+  #10 == round 1 ==
+  #11 pc4's turn (H7, 24 HP, 30 ft) [Sample Grove]
+  #12   pc4 chooses pass  [journal @0]
+  #13   pc4's turn ends
+  #14 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #15   adp2 chooses cast:sacred-flame@0  [journal @1]
+  #16     adp2 casts Sacred Flame (cantrip)
+  #17       adp2 chooses target:pc4  [journal @2]
+  #18       pc4 DEX save vs Sacred Flame: d20 3 +2 = 5 vs DC 13, fail  [pc4 save r1 p2.0]
+  #19       pc4 takes 1 (1 radiant) from Sacred Flame, HP 24 -> 23  [adp2 effect r1 p0.0]
+  #20   adp2 chooses pass  [journal @3]
+  #21   adp2's turn ends
+  #22 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #23   pc3 chooses pass  [journal @4]
+  #24   pc3's turn ends
+  #25 gob1's turn (H2, 10 HP, 30 ft) [Goblin Warrior]
+  #26   gob1 chooses pass  [journal @5]
+  #27   gob1's turn ends
+  #28 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #29   adp1 chooses cast:sacred-flame@0  [journal @6]
+  #30     adp1 casts Sacred Flame (cantrip)
+  #31       adp1 chooses target:pc3  [journal @7]
+  #32       pc3 DEX save vs Sacred Flame: d20 18 +5 = 23 vs DC 13, success  [pc3 save r1 p1.0]
+  #33   adp1 chooses pass  [journal @8]
+  #34   adp1's turn ends
+  #35 pc1's turn (A2, 43 HP, 30 ft) [Sample Guardian]
+  #36   pc1 chooses cast:spirit-guardians@3  [journal @9]
+  #37     pc1 casts Spirit Guardians with a level 3 slot (1 left)
+  #38       pc1 is concentrating on Spirit Guardians
+  #39       Spirit Guardians appears at A2: 19 squares (seen by adp1, adp2, gob1, pc1, pc2, pc3, pc4)
+  #40   pc1 chooses move:E2/p0  [journal @10]
+  #41     pc1 steps A2 -> B1 (5 ft, 25 left)
+  #42       Spirit Guardians moves A2 -> B1
+  #43     pc1 steps B1 -> C1 (5 ft, 20 left)
+  #44       Spirit Guardians moves B1 -> C1
+  #45     pc1 steps C1 -> D1 (5 ft, 15 left)
+  #46       Spirit Guardians moves C1 -> D1
+  #47     pc1 steps D1 -> E2 (5 ft, 10 left)
+  #48       Spirit Guardians moves D1 -> E2; caught gob1
+  #49         gob1 WIS save vs Spirit Guardians: d20 18 -1 = 17 vs DC 15, success  [gob1 save r1 p4.0]
+  #50         gob1 takes 3 (7 radiant, half) from Spirit Guardians, HP 10 -> 7  [pc1 zone r1 p0.0]
+  #51     pc1's move ends at E2
+  #52   pc1 chooses move:D2/p0  [journal @11]
+  #53     pc1 steps E2 -> D2 (5 ft, 5 left)
+  #54       Spirit Guardians moves E2 -> D2
+  #55     pc1's move ends at D2
+  #56   pc1 chooses move:E2/p0  [journal @12]
+  #57     pc1 steps D2 -> E2 (5 ft, 0 left)
+  #58       Spirit Guardians moves D2 -> E2; caught gob1
+  #59     pc1's move ends at E2
+  #60   pc1 chooses pass  [journal @13]
+  #61   pc1's turn ends
+  #62 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #63   pc2 chooses pass  [journal @14]
+  #64   pc2's turn ends
+  #65 == round 2 ==
+  #66 pc4's turn (H7, 23 HP, 30 ft) [Sample Grove]
+  #67   pc4 chooses pass  [journal @15]
+  #68   pc4's turn ends
+  #69 adp2's turn (M9, 24 HP, 30 ft) [Sample Adept]
+  #70   adp2 chooses pass  [journal @16]
+  #71   adp2's turn ends
+  #72 pc3's turn (C7, 24 HP, 30 ft) [Sample Grove]
+  #73   pc3 chooses pass  [journal @17]
+  #74   pc3's turn ends
+  #75 gob1's turn (H2, 7 HP, 30 ft) [Goblin Warrior]
+  #76   gob1 chooses pass  [journal @18]
+  #77   gob1 WIS save vs Spirit Guardians: d20 1 -1 = 0 vs DC 15, fail  [gob1 save r2 p0.0]
+  #78   gob1 takes 4 (4 radiant) from Spirit Guardians, HP 7 -> 3  [pc1 zone r2 p3.0]
+  #79   gob1's turn ends
+  #80 adp1's turn (L9, 24 HP, 30 ft) [Sample Adept]
+  #81   adp1 chooses pass  [journal @19]
+  #82   adp1's turn ends
+  #83 pc1's turn (E2, 43 HP, 30 ft) [Sample Guardian]
+  #84   pc1 chooses pass  [journal @20]
+  #85   pc1's turn ends
+  #86 pc2's turn (A7, 58 HP, 30 ft) [Sample Sentinel]
+  #87   pc2 chooses pass  [journal @21]
+  #88   pc2's turn ends
+  #89 fight ends: stalemate in round 2
+logHash 016038c0e54505b7

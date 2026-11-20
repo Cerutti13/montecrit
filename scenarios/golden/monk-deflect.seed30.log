@@ -1,0 +1,87 @@
+replay   engine 0.8.0 | content fe1726049f9cf40d | scenario monk-deflect 6fa7fceebc6fbaee | seed 30 run 0 | journal 20
+policy   caster journal>greedy | gob1 journal>greedy | gob2 journal>greedy | pc1 journal>greedy
+knobs    maxRounds=2 attackDowned=ifNoOtherTarget lossCounts=pcs downEnds=false
+flags read:
+  diagonalCost=uniform [verified: SRD 5.2.1 p.13 "Playing on a Grid": any adjacent square costs 1; alternating 5/10 is a 2024 DMG option (its use for range is unverified)]
+  initiativeMode=static [verified: SRD 5.2.1 p.184 "Initiative" and p.254: static initiative is a GM option]
+  initiativeTies=rollOff [UNVERIFIED: SRD 5.2.1 p.13: the GM orders tied monsters and mixed ties, players order tied PCs; no procedure given (policy)]
+  groupInitiative=shared [verified: SRD 5.2.1 p.13: a group of identical creatures gets one roll]
+  monsterHp=listed [verified: SRD 5.2.1 p.255: use the number or the dice, the GM's choice]
+  focusHandSomatic=lenient [verified: 2024 Sage Advice SAC-SpellComponents3 and SRD 5.2.1 p.105-106: the focus hand does Somatic only for spells with a Material component; lenient is a common table ruling]
+  conjuredHandEffectBlocksHand=false [UNVERIFIED: SRD 5.2.1 p.156 Produce Flame: the flame is "in your hand"; unlike Flame Blade (p.132) it never says it needs or occupies a free hand]
+  selfTargetWhenTextSilent=allowed [UNVERIFIED: SRD 5.2.1 p.106 "Targeting Yourself" covers "a creature of your choice" only; no 2024 SAC entry]
+  reduceBeforeResistance=true [UNVERIFIED: SRD 5.2.1 "Playing the Game", "Order of Application" (srd-raw.txt:2259-2266): adjustments such as bonuses, penalties or multipliers first, then Resistance, then Vulnerability; Deflect Attacks (11154-11158) "reduce the attack's total damage" and does not say whether that reduction is such an adjustment]
+  losMethod=corners [UNVERIFIED: SRD 5.2.1 "Cover" (srd-raw.txt:1995-2032) and its glossary entry (33044-33050) give the three degrees and say a target benefits only when the effect "originates on the opposite side of the cover", but give no grid procedure. corners = the DMG's corner-to-corner lines (the attacker's best corner to the 4 corners of the target's square: 1-2 blocked Half, 3 Three-Quarters, 4 Total; known only secondhand, the DMG is not SRD); centers = one line between square centers; stubbed = no cover and everyone sees everyone (the engine before M3 step 8, a what-if)]
+  creatureCover=on [verified: SRD 5.2.1 Cover table (srd-raw.txt:2006-2017): Half Cover is offered by "Another creature or an object that covers at least half of the target"; off is a what-if]
+notes    LOS: grid (losMethod=corners, creatureCover=on)
+notes    ending concentration or dismissing an effect: offered only on your own turn
+notes    srd:goblin-warrior partial: unimplemented Nimble Escape: the Hide option
+notes    test:sample-monk partial: unimplemented Darkvision: narrative, not modeled; Monk: choice tools not mapped; Dwarf: species trait darkvision not mapped; Savage Attacker: narrative, not modeled; Dwarven Resilience: advantage on saves against the poisoned condition not modeled; Dwarven Resilience: not a bucket-A shape (needs a reviewed override to be full); Dwarven Toughness: not a bucket-A shape (needs a reviewed override to be full); Stonecunning: activity type utility; Deflect Attacks: part deflect-redirect not modeled; Martial Arts: part grapple-shove-dex-dc not modeled; Monk's Focus: part step-of-the-wind-jump not modeled; Slow Fall: activity type heal
+notes    srd:produce-flame partial: unimplemented the flame sheds Bright Light 20 ft and Dim Light 20 ft more
+
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative gob1 12 (static)
+   #5   initiative gob2 12 (static)
+   #6   initiative caster 12 (static)
+   #7   pc1 chooses pick:pass  [journal @0]
+   #8 == round 1 ==
+   #9 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #10   pc1 chooses pass  [journal @1]
+  #11   pc1's turn ends
+  #12 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:scimitar>pc1  [journal @2]
+  #14     gob1: Attack
+  #15     gob1 Scimitar -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #16       pc1 chooses react:monk/deflect-attacks  [journal @3]
+  #17         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #18       pc1 takes 0 (8 slashing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #19   gob1 chooses pass  [journal @4]
+  #20   gob1's turn ends
+  #21 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #22   gob2 chooses attack:shortbow>pc1  [journal @5]
+  #23     gob2: Attack
+  #24     gob2 Shortbow -> pc1: d20 6 +4 = 10 vs AC 18 (Half Cover +2), miss  [gob2 attack r1 p0.0]
+  #25   gob2 chooses pass  [journal @6]
+  #26   gob2's turn ends
+  #27 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #28   caster chooses cast:produce-flame@0  [journal @7]
+  #29     caster casts Produce Flame (cantrip)
+  #30       Produce Flame on caster
+  #31   caster chooses use:caster/flame/hurl  [journal @8]
+  #32     caster: Hurl Flame
+  #33       caster chooses target:pc1  [journal @9]
+  #34       caster Hurl Flame -> pc1: d20 11 +7 = 18 vs AC 18 (Half Cover +2), hit  [caster attack r1 p0.0]
+  #35         pc1 takes 9 (9 fire), HP 51 -> 42  [caster damage r1 p0.0]
+  #36   caster chooses pass  [journal @10]
+  #37   caster's turn ends
+  #38 == round 2 ==
+  #39 pc1's turn (C3, 42 HP, 45 ft) [Sample Monk]
+  #40   pc1 chooses pass  [journal @11]
+  #41   pc1's turn ends
+  #42 gob1's turn (D3, 10 HP, 30 ft) [Goblin Warrior]
+  #43   gob1 chooses attack:scimitar>pc1  [journal @12]
+  #44     gob1: Attack
+  #45     gob1 Scimitar -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #46       pc1 chooses react:monk/deflect-attacks  [journal @13]
+  #47         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #48       pc1 takes 0 (5 slashing), HP 42 -> 42  [gob1 damage r2 p0.0]
+  #49   gob1 chooses pass  [journal @14]
+  #50   gob1's turn ends
+  #51 gob2's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #52   gob2 chooses attack:shortbow>pc1  [journal @15]
+  #53     gob2: Attack
+  #54     gob2 Shortbow -> pc1: d20 20 +4 = 24 vs AC 18 (Half Cover +2), CRITICAL HIT  [gob2 attack r2 p0.0]
+  #55       pc1 takes 5 (5 piercing, crit), HP 42 -> 37  [gob2 damage r2 p0.0]
+  #56   gob2 chooses pass  [journal @16]
+  #57   gob2's turn ends
+  #58 caster's turn (H1, 45 HP, 30 ft) [Sample Druid]
+  #59   caster chooses use:caster/flame/hurl  [journal @17]
+  #60     caster: Hurl Flame
+  #61       caster chooses target:pc1  [journal @18]
+  #62       caster Hurl Flame -> pc1: d20 4 +7 = 11 vs AC 18 (Half Cover +2), miss  [caster attack r2 p0.0]
+  #63   caster chooses pass  [journal @19]
+  #64   caster's turn ends
+  #65 fight ends: stalemate in round 2
+logHash 0196848cf1e659f8

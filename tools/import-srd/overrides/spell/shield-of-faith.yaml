@@ -1,0 +1,7 @@
+# Shield of Faith, SRD 5.2.1 p.162, read against the mapped item (M3 step 6): a creature of your choice within range gets +2 AC for the duration (Concentration, up to 10 minutes; Bonus Action; 60 feet; V, S, M).
+# Nothing in the text is left out, so the importer's C7 review lines are cleared and the spell is full.
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 162

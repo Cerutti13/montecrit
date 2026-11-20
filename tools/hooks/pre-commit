@@ -1,0 +1,7 @@
+#!/bin/sh
+# montecrit managed hook (installed by tools/install-hooks.ts; edit the copy in tools/hooks/)
+# Blocks commits that would leak private (non-SRD) content or API keys, or that break
+# the engine's determinism rules.
+set -e
+node tools/check-private.ts --staged
+node tools/lint-determinism.ts --staged

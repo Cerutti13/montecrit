@@ -1,0 +1,15 @@
+# Reviewed against SRD 5.2.1 p.71 (srd-raw.txt:16263-16325), Warlock level 1: cantrips, Pact Magic
+# slots all of one level (a level 5 Warlock has two level 3 slots, and casts a level 1 spell with
+# one as level 3), prepared spells, CHA, a focus.
+# Coverage C0 (T relabel, X1): this record carries no program because nothing in it needs one; it is
+# mechanized by the class's slots column, which already holds every slot at the table's slot level
+# (classes/warlock.yaml scale.slots: '5': [0, 0, 2]), so any spell cast with one is cast at that
+# level; the casting lists and the CHA spell ability; slot recovery on a Short Rest is rest
+# recovery, which isn't modeled (hard rule 4).
+# Nothing in the text is left unmodeled in a fight, so full (mechanizedBy, never compiled).
+fidelity: full
+mechanizedBy: pactMagic
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 71

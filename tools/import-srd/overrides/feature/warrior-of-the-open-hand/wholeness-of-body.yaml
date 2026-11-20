@@ -1,0 +1,29 @@
+# Reviewed against SRD 5.2.1 p.52 (srd-raw.txt:11321-11330), Warrior of the Open Hand level 6: "As
+# a Bonus Action, you can roll your Martial Arts die. You regain a number of Hit Points equal to
+# the number rolled plus your Wisdom modifier (minimum of 1 Hit Point regained). You can use this
+# feature a number of times equal to your Wisdom modifier (minimum of once)".
+# The pool is the subclass's wholeness-of-body (max(1,@mod.wis)). The program would be
+#   activate: { id: wholeness-of-body, cost: bonus, uses: { pool: wholeness-of-body },
+#               do: [{ heal: { roll: 'max(1, @scale.monk.die + @mod.wis)' } }] }   (C11)
+# but an activation's frame starts with no target and a target step can't be limited to its user
+# (target: self is yes/no/textSilent, always with a range), so the heal would land on no one, or
+# could be aimed at an ally. Held at narrative with the engine gap named.
+# M3 step 6: the engine now has `target: self` (Second Wind uses it), and the full program
+#   activate: { ..., cost: bonus, uses: { pool: wholeness-of-body }, target: self,
+#               do: [{ heal: { roll: 'max(1, @scale.monk.die + @mod.wis)' } }] }
+# was built and run, but it changes test:sample-monk's template, so the content hash and notes
+# line of the monk-deflect and monk-stunning-strike goldens move (bodies identical), which step
+# 6's golden rule forbids. Flipped after step 6 as its own commit (headers-only golden diffs).
+fidelity: full
+activate:
+  id: wholeness-of-body
+  name: Wholeness of Body
+  cost: bonus
+  uses: { pool: wholeness-of-body }
+  target: self
+  do:
+    - heal: { roll: 'max(1, @scale.monk.die + @mod.wis)' }
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 52

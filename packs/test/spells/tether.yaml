@@ -1,0 +1,18 @@
+# A synthetic cantrip: a 30-ft melee spell attack whose hit offers a chosen-distance pull (0 to 10 ft).
+kind: spell
+id: test:tether
+name: Tether
+source: synthetic test fixture (generic chosen-distance pull)
+level: 0
+castingTime: action
+range: 30
+components: { v: true, s: true, m: focus }
+duration: instant
+do:
+  - target: { range: 30, self: no }
+  - attack:
+      kind: melee # melee from the text, not the range: no close-combat Disadvantage
+      range: 30
+      onHit:
+        - damage: [{ roll: 1d6, type: piercing, cantrip: true }]
+        - forcedMove: { mode: pull, maxFt: 10, maxSize: large }

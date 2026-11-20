@@ -1,0 +1,32 @@
+# SRD 5.2.1 p.115, Charm Person (srd-raw.txt:24862-24870), read by hand at coverage step 7.4. WIS save,
+# "with Advantage if you or your allies are fighting it" (24863-24864): every sim target is in the
+# fight, so always [U]. Charmed "until the spell ends or until you or your allies damage it": read as
+# any damage ending it [U].
+replace: true
+foundryPath: packs/_source/spells24/1st-level/charm-person.yml
+kind: spell
+id: srd:charm-person
+name: Charm Person
+source: SRD 5.2.1 p.115
+fidelity: partial
+unimplemented:
+  - One Humanoid only (any creature can be targeted)
+  - one additional target for each spell slot level above 1
+  - the Advantage is read as always, since every target is in the fight
+  - any damage ends it, not only damage from the caster or the caster's allies
+  - the Charmed creature is Friendly to the caster, and knows it was Charmed when the spell ends
+level: 1
+castingTime: action
+range: 30
+components: { v: true, s: true, m: none }
+duration: { minutes: 60 }
+do:
+  - target: { range: 30, self: no }
+  - save:
+      ability: wis
+      targetAdv: true
+      onFail:
+        - condition: { id: charmed, until: { minutes: 60 }, endsOnDamage: true }
+provenance:
+  review: reviewed
+  pdfPage: 115

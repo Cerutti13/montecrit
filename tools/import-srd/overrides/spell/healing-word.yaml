@@ -1,0 +1,22 @@
+# SRD 5.2.1 p.139, Healing Word. Stat line and effect checked in docs/research/m1b-rules-2024.md ("The six spells").
+# "A creature of your choice that you can see": p.106 lets a creature of your choice include you.
+# Moved here unchanged at M3 step 6 (docs/design/m3.md 4.6): the hand-written item stands
+# in for the Foundry record as replace: true, so its compiled spell, every closure hash and
+# every golden stay byte-identical (tools/import-srd/test/spell-overrides.test.ts).
+replace: true
+foundryPath: packs/_source/spells24/1st-level/healing-word.yml
+kind: spell
+id: srd:healing-word
+name: Healing Word
+source: SRD 5.2.1 p.139
+level: 1
+castingTime: bonus
+range: 60
+components: { v: true, s: false }
+duration: instant
+do:
+  - target: { range: 60, self: yes }
+  - heal: { roll: 2d4 + @mod, upcast: 2d4 }
+provenance:
+  review: reviewed
+  pdfPage: 139

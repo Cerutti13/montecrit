@@ -1,0 +1,9 @@
+# Reviewed against SRD 5.2.1 p.29 (srd-raw.txt:5012-5017), Barbarian level 2: "You have Advantage
+# on Dexterity saving throws unless you have the Incapacitated condition."
+# The mapped item is that whole text: a passive Advantage mod on d20.save.dex gated on
+# notIncapacitated (the reading in tools/import-srd/pdf-gates.ts), so full.
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 29

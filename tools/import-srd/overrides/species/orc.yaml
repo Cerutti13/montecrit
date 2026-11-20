@@ -1,0 +1,22 @@
+# Reviewed against SRD 5.2.1 p.86 (srd-raw.txt:19919-19930), the Orc's limited traits (coverage W1,
+# docs/design/w1-plan.md section 3). Species pools, each named like the trait it counts (from
+# character level 1); rest recovery is metadata (hard rule 4):
+#   - adrenaline-rush, max @pb: "You can use this trait a number of times equal to your Proficiency
+#     Bonus, and you regain all expended uses when you finish a Short or Long Rest" (19924-19925);
+#   - relentless-endurance, max 1: "Once you use this trait, you can't do so again until you finish
+#     a Long Rest" (19930-19931).
+pools:
+  - id: adrenaline-rush
+    name: Adrenaline Rush
+    max: '@pb'
+    recharge:
+      - { period: short, amount: all }
+      - { period: long, amount: all }
+  - id: relentless-endurance
+    name: Relentless Endurance
+    max: 1
+    recharge:
+      - { period: long, amount: all }
+provenance:
+  review: reviewed
+  pdfPage: 86

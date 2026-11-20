@@ -1,0 +1,23 @@
+# Coverage step 7.3 golden (docs/design/step7-plan.md section 6): Entangle, SRD 5.2.1 p.128-129
+# (srd-raw.txt:26551-26567). Each creature in the square when it's cast (other than the caster) makes
+# a STR save or is Restrained until the spell ends; "A Restrained creature can take an action to make
+# a Strength (Athletics) check against your spell save DC"; the ground stays Difficult Terrain.
+# Static initiative; pc1, gob1 and gob2 tie on 12, and seed 4 sorts pc1 first.
+#   Round 1: pc1 casts Entangle over both goblins (DC 13, 16 squares). gob1 fails and is Restrained
+#   (Speed 0); gob2 saves. gob1 takes the Escape action: Athletics vs DC 13, success, Restrained ends.
+#   Its next step still costs 10 ft (G3 -> F3), because the plants stay.
+#   Round 2: pc1 passes, so the plants stay up; the goblins are the AI.
+# The AI weighs shooting at Disadvantage against Escape, and here it would shoot, so the journal
+# scripts the Escape.
+kind: scenario
+id: entangle-escape
+name: Entangle and the Escape action
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid: { w: 14, h: 7 }
+flags: { initiativeMode: static }
+knobs: { maxRounds: 2 }
+units:
+  - { seat: pc1, team: party, use: 'test:sample-grove', at: A4, decider: greedy }
+  - { seat: gob1, team: enemies, use: 'srd:goblin-warrior', at: G3, decider: greedy }
+  - { seat: gob2, team: enemies, use: 'srd:goblin-warrior', at: H4, decider: greedy }

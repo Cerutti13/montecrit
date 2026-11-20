@@ -1,0 +1,441 @@
+# Flag matrix for scenarios/golden/moonbeam-moved-then-turn-end.yaml with scenarios/golden/moonbeam-moved-then-turn-end.journal.yaml (docs/design/m1b.md, Critique resolutions item 9).
+# Every rule flag the default run read, re-run under each of its other values: same seed, same journal.
+# Matrix mode only: at the journal's first mismatch every journal seat hands over to its fallback (baseline if none).
+# Regenerate: UPDATE_FLAG_MATRIX=1 npx vitest run apps/cli/test/flag-matrix.test.ts
+
+#### seed 1 ####
+default  run 0 | journal of 10 entries: held | logHash d7fc63ece24a7c32
+flags read: initiativeMode, groupInitiative, monsterHp, focusHandSomatic, conjuredHandEffectBlocksHand, areaOriginOnGrid, areaGridCoverage, zoneKnowledge
+
+== initiativeMode=roll (journal held) ==
+   #1   initiative pc1 13 (d20 11+2)
+   #2   initiative gob2 9 (d20 7+2)
+   #3   initiative knight 3 (d20 3+0)
+   #4 == round 1 ==
+   #5 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:moonbeam@2  [journal @0]
+   #7     pc1 casts Moonbeam with a level 2 slot (2 left)
+   #8       pc1 is concentrating on Moonbeam
+   #9       pc1 chooses place:A7  [journal @1]
+  #10       Moonbeam appears at A7: 1 square (seen by gob2, knight, pc1)
+  #11   pc1 chooses pass  [journal @2]
+  #12   pc1's turn ends
+  #13 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses pass  [journal @3]
+  #15   gob2's turn ends
+  #16 knight's turn (H3, 52 HP, 30 ft) [Knight]
+  #17   knight chooses pass  [journal @4]
+  #18   knight's turn ends
+  #19 == round 2 ==
+  #20 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #21   pc1 chooses use:pc1/beam/move  [journal @5]
+  #22     pc1: Move Moonbeam
+  #23       pc1 chooses place:H3  [journal @6]
+  #24       Moonbeam moves A7 -> H3; caught knight
+  #25         knight CON save vs Moonbeam: d20 6 +4 = 10 vs DC 15, fail  [knight save r2 p3.0]
+  #26         knight takes 20 (20 radiant) from Moonbeam, HP 52 -> 32  [pc1 zone r2 p0.0]
+  #27   pc1 chooses pass  [journal @7]
+  #28   pc1's turn ends
+  #29 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #30   gob2 chooses pass  [journal @8]
+  #31   gob2's turn ends
+  #32 knight's turn (H3, 32 HP, 30 ft) [Knight]
+  #33   knight chooses pass  [journal @9]
+  #34   knight CON save vs Moonbeam: d20 3 +4 = 7 vs DC 15, fail  [knight save r2 p0.0]
+  #35   knight takes 10 (10 radiant) from Moonbeam, HP 32 -> 22  [pc1 zone r2 p2.0]
+  #36   knight's turn ends
+  #37 fight ends: stalemate in round 2
+logHash 1c68052371fb2799
+
+== groupInitiative=individual (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob2 7 (static)
+   #3   initiative knight 5 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:moonbeam@2  [journal @0]
+   #7     pc1 casts Moonbeam with a level 2 slot (2 left)
+   #8       pc1 is concentrating on Moonbeam
+   #9       pc1 chooses place:A7  [journal @1]
+  #10       Moonbeam appears at A7: 1 square (seen by gob2, knight, pc1)
+  #11   pc1 chooses pass  [journal @2]
+  #12   pc1's turn ends
+  #13 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses pass  [journal @3]
+  #15   gob2's turn ends
+  #16 knight's turn (H3, 52 HP, 30 ft) [Knight]
+  #17   knight chooses pass  [journal @4]
+  #18   knight's turn ends
+  #19 == round 2 ==
+  #20 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #21   pc1 chooses use:pc1/beam/move  [journal @5]
+  #22     pc1: Move Moonbeam
+  #23       pc1 chooses place:H3  [journal @6]
+  #24       Moonbeam moves A7 -> H3; caught knight
+  #25         knight CON save vs Moonbeam: d20 6 +4 = 10 vs DC 15, fail  [knight save r2 p3.0]
+  #26         knight takes 20 (20 radiant) from Moonbeam, HP 52 -> 32  [pc1 zone r2 p0.0]
+  #27   pc1 chooses pass  [journal @7]
+  #28   pc1's turn ends
+  #29 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #30   gob2 chooses pass  [journal @8]
+  #31   gob2's turn ends
+  #32 knight's turn (H3, 32 HP, 30 ft) [Knight]
+  #33   knight chooses pass  [journal @9]
+  #34   knight CON save vs Moonbeam: d20 3 +4 = 7 vs DC 15, fail  [knight save r2 p0.0]
+  #35   knight takes 10 (10 radiant) from Moonbeam, HP 32 -> 22  [pc1 zone r2 p2.0]
+  #36   knight's turn ends
+  #37 fight ends: stalemate in round 2
+logHash 52b04866fc320ab9
+
+== monsterHp=rolled (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob2 7 (static)
+   #3   initiative knight 5 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:moonbeam@2  [journal @0]
+   #7     pc1 casts Moonbeam with a level 2 slot (2 left)
+   #8       pc1 is concentrating on Moonbeam
+   #9       pc1 chooses place:A7  [journal @1]
+  #10       Moonbeam appears at A7: 1 square (seen by gob2, knight, pc1)
+  #11   pc1 chooses pass  [journal @2]
+  #12   pc1's turn ends
+  #13 gob2's turn (J7, 9 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses pass  [journal @3]
+  #15   gob2's turn ends
+  #16 knight's turn (H3, 52 HP, 30 ft) [Knight]
+  #17   knight chooses pass  [journal @4]
+  #18   knight's turn ends
+  #19 == round 2 ==
+  #20 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #21   pc1 chooses use:pc1/beam/move  [journal @5]
+  #22     pc1: Move Moonbeam
+  #23       pc1 chooses place:H3  [journal @6]
+  #24       Moonbeam moves A7 -> H3; caught knight
+  #25         knight CON save vs Moonbeam: d20 6 +4 = 10 vs DC 15, fail  [knight save r2 p3.0]
+  #26         knight takes 20 (20 radiant) from Moonbeam, HP 52 -> 32  [pc1 zone r2 p0.0]
+  #27   pc1 chooses pass  [journal @7]
+  #28   pc1's turn ends
+  #29 gob2's turn (J7, 9 HP, 30 ft) [Goblin Warrior]
+  #30   gob2 chooses pass  [journal @8]
+  #31   gob2's turn ends
+  #32 knight's turn (H3, 32 HP, 30 ft) [Knight]
+  #33   knight chooses pass  [journal @9]
+  #34   knight CON save vs Moonbeam: d20 3 +4 = 7 vs DC 15, fail  [knight save r2 p0.0]
+  #35   knight takes 10 (10 radiant) from Moonbeam, HP 32 -> 22  [pc1 zone r2 p2.0]
+  #36   knight's turn ends
+  #37 fight ends: stalemate in round 2
+logHash db78a2a7ff914915
+
+== focusHandSomatic=lenient (journal held; log identical to default) ==
+flags read vs default: +selfTargetWhenTextSilent
+   #1   initiative pc1 12 (static)
+   #2   initiative gob2 7 (static)
+   #3   initiative knight 5 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:moonbeam@2  [journal @0]
+   #7     pc1 casts Moonbeam with a level 2 slot (2 left)
+   #8       pc1 is concentrating on Moonbeam
+   #9       pc1 chooses place:A7  [journal @1]
+  #10       Moonbeam appears at A7: 1 square (seen by gob2, knight, pc1)
+  #11   pc1 chooses pass  [journal @2]
+  #12   pc1's turn ends
+  #13 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses pass  [journal @3]
+  #15   gob2's turn ends
+  #16 knight's turn (H3, 52 HP, 30 ft) [Knight]
+  #17   knight chooses pass  [journal @4]
+  #18   knight's turn ends
+  #19 == round 2 ==
+  #20 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #21   pc1 chooses use:pc1/beam/move  [journal @5]
+  #22     pc1: Move Moonbeam
+  #23       pc1 chooses place:H3  [journal @6]
+  #24       Moonbeam moves A7 -> H3; caught knight
+  #25         knight CON save vs Moonbeam: d20 6 +4 = 10 vs DC 15, fail  [knight save r2 p3.0]
+  #26         knight takes 20 (20 radiant) from Moonbeam, HP 52 -> 32  [pc1 zone r2 p0.0]
+  #27   pc1 chooses pass  [journal @7]
+  #28   pc1's turn ends
+  #29 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #30   gob2 chooses pass  [journal @8]
+  #31   gob2's turn ends
+  #32 knight's turn (H3, 32 HP, 30 ft) [Knight]
+  #33   knight chooses pass  [journal @9]
+  #34   knight CON save vs Moonbeam: d20 3 +4 = 7 vs DC 15, fail  [knight save r2 p0.0]
+  #35   knight takes 10 (10 radiant) from Moonbeam, HP 32 -> 22  [pc1 zone r2 p2.0]
+  #36   knight's turn ends
+  #37 fight ends: stalemate in round 2
+logHash ebcd05df11da68a2
+
+== conjuredHandEffectBlocksHand=true (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob2 7 (static)
+   #3   initiative knight 5 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:moonbeam@2  [journal @0]
+   #7     pc1 casts Moonbeam with a level 2 slot (2 left)
+   #8       pc1 is concentrating on Moonbeam
+   #9       pc1 chooses place:A7  [journal @1]
+  #10       Moonbeam appears at A7: 1 square (seen by gob2, knight, pc1)
+  #11   pc1 chooses pass  [journal @2]
+  #12   pc1's turn ends
+  #13 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses pass  [journal @3]
+  #15   gob2's turn ends
+  #16 knight's turn (H3, 52 HP, 30 ft) [Knight]
+  #17   knight chooses pass  [journal @4]
+  #18   knight's turn ends
+  #19 == round 2 ==
+  #20 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #21   pc1 chooses use:pc1/beam/move  [journal @5]
+  #22     pc1: Move Moonbeam
+  #23       pc1 chooses place:H3  [journal @6]
+  #24       Moonbeam moves A7 -> H3; caught knight
+  #25         knight CON save vs Moonbeam: d20 6 +4 = 10 vs DC 15, fail  [knight save r2 p3.0]
+  #26         knight takes 20 (20 radiant) from Moonbeam, HP 52 -> 32  [pc1 zone r2 p0.0]
+  #27   pc1 chooses pass  [journal @7]
+  #28   pc1's turn ends
+  #29 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #30   gob2 chooses pass  [journal @8]
+  #31   gob2's turn ends
+  #32 knight's turn (H3, 32 HP, 30 ft) [Knight]
+  #33   knight chooses pass  [journal @9]
+  #34   knight CON save vs Moonbeam: d20 3 +4 = 7 vs DC 15, fail  [knight save r2 p0.0]
+  #35   knight takes 10 (10 radiant) from Moonbeam, HP 32 -> 22  [pc1 zone r2 p2.0]
+  #36   knight's turn ends
+  #37 fight ends: stalemate in round 2
+logHash ddf822f73e6ce04f
+
+== areaOriginOnGrid=gridIntersection (journal diverged at @1) ==
+flags read vs default: +diagonalCost +moveBetweenAttacks +concentrationSaveGrouping +unconsciousDropsShield +losMethod +creatureCover
+   #1   initiative pc1 12 (static)
+   #2   initiative gob2 7 (static)
+   #3   initiative knight 5 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:moonbeam@2  [journal @0]
+   #7     pc1 casts Moonbeam with a level 2 slot (2 left)
+   #8       pc1 is concentrating on Moonbeam
+   #9       pc1 chooses place:^A1  [baseline @1]
+  #10       Moonbeam appears at ^A1: 1 square (seen by gob2, knight, pc1)
+  #11   pc1 chooses move:G2/p0  [baseline @2]
+  #12     pc1 steps B1 -> C1 (5 ft, 25 left)
+  #13     pc1 steps C1 -> D1 (5 ft, 20 left)
+  #14     pc1 steps D1 -> E1 (5 ft, 15 left)
+  #15     pc1 steps E1 -> F1 (5 ft, 10 left)
+  #16     pc1 steps F1 -> G2 (5 ft, 5 left)
+  #17     pc1's move ends at G2
+  #18   pc1 chooses pass  [baseline @3]
+  #19   pc1's turn ends
+  #20 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #21   gob2 chooses attack:shortbow>pc1  [baseline @4]
+  #22     gob2: Attack
+  #23     gob2 Shortbow -> pc1: d20 15 +4 = 19 vs AC 17 (Half Cover +2), hit  [gob2 attack r1 p0.0]
+  #24       pc1 takes 3 (3 piercing), HP 45 -> 42  [gob2 damage r1 p0.0]
+  #25         pc1 concentration save (Moonbeam): d20 19 +2 = 21 vs DC 10, holds  [pc1 conc r1 p1.0]
+  #26   gob2 chooses move:F3/p0  [baseline @5]
+  #27     gob2 steps J7 -> I6 (5 ft, 25 left)
+  #28     gob2 steps I6 -> H5 (5 ft, 20 left)
+  #29     gob2 steps H5 -> G4 (5 ft, 15 left)
+  #30     gob2 steps G4 -> F3 (5 ft, 10 left)
+  #31     gob2's move ends at F3
+  #32   gob2 chooses pass  [baseline @6]
+  #33   gob2's turn ends
+  #34 knight's turn (H3, 52 HP, 30 ft) [Knight]
+  #35   knight chooses attack:greatsword>pc1  [baseline @7]
+  #36     knight: Multiattack
+  #37     knight Greatsword -> pc1: d20 13 +5 = 18 vs AC 15, hit  [knight attack r1 p0.0]
+  #38       pc1 takes 16 (10 slashing + 6 radiant), HP 42 -> 26  [knight damage r1 p0.0]
+  #39         pc1 concentration save (Moonbeam): d20 11 +2 = 13 vs DC 10, holds  [pc1 conc r1 p2.0]
+  #40   knight chooses attack:greatsword>pc1  [baseline @8]
+  #41     knight Greatsword -> pc1: d20 14 +5 = 19 vs AC 15, hit  [knight attack r1 p0.1]
+  #42       pc1 takes 19 (13 slashing + 6 radiant), HP 26 -> 7  [knight damage r1 p0.1]
+  #43         pc1 concentration save (Moonbeam): d20 2 +2 = 4 vs DC 10, breaks  [pc1 conc r1 p2.1]
+  #44           Moonbeam (pc1) ends (concentration broken)
+  #45             Moonbeam ends (its source ended)
+  #46   knight chooses pass  [baseline @9]
+  #47   knight's turn ends
+  #48 == round 2 ==
+  #49 pc1's turn (G2, 7 HP, 30 ft) [Sample Druid]
+  #50   pc1 chooses attack:unarmed-strike>gob2  [baseline @10]
+  #51     pc1: Attack
+  #52     pc1 Unarmed Strike -> gob2: d20 20 +2 = 22 vs AC 15, CRITICAL HIT  [pc1 attack r2 p0.0]
+  #53       gob2 takes 0 (0 bludgeoning, crit), HP 10 -> 10  [pc1 damage r2 p0.0]
+  #54   pc1 chooses pass  [baseline @11]
+  #55   pc1's turn ends
+  #56 gob2's turn (F3, 10 HP, 30 ft) [Goblin Warrior]
+  #57   gob2 chooses attack:scimitar>pc1  [baseline @12]
+  #58     gob2: Attack
+  #59     gob2 Scimitar -> pc1: d20 20 +4 = 24 vs AC 15, CRITICAL HIT  [gob2 attack r2 p0.0]
+  #60       pc1 takes 7 (7 slashing, crit), HP 7 -> 0  [gob2 damage r2 p0.0]
+  #61         pc1 drops to 0 HP and falls Unconscious
+  #62           pc1 is Unconscious (downed)
+  #63           pc1 is Incapacitated (downed)
+  #64           pc1 is Prone (fell-prone)
+  #65           pc1 drops Shield
+  #66           pc1 drops Charm
+  #67   gob2's turn ends
+  #68 fight ends: loss in round 2
+logHash 6d360835346fdcc6
+
+== areaGridCoverage=squareCenterInside (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob2 7 (static)
+   #3   initiative knight 5 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:moonbeam@2  [journal @0]
+   #7     pc1 casts Moonbeam with a level 2 slot (2 left)
+   #8       pc1 is concentrating on Moonbeam
+   #9       pc1 chooses place:A7  [journal @1]
+  #10       Moonbeam appears at A7: 3 squares (seen by gob2, knight, pc1)
+  #11   pc1 chooses pass  [journal @2]
+  #12   pc1's turn ends
+  #13 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses pass  [journal @3]
+  #15   gob2's turn ends
+  #16 knight's turn (H3, 52 HP, 30 ft) [Knight]
+  #17   knight chooses pass  [journal @4]
+  #18   knight's turn ends
+  #19 == round 2 ==
+  #20 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #21   pc1 chooses use:pc1/beam/move  [journal @5]
+  #22     pc1: Move Moonbeam
+  #23       pc1 chooses place:H3  [journal @6]
+  #24       Moonbeam moves A7 -> H3; caught knight
+  #25         knight CON save vs Moonbeam: d20 6 +4 = 10 vs DC 15, fail  [knight save r2 p3.0]
+  #26         knight takes 20 (20 radiant) from Moonbeam, HP 52 -> 32  [pc1 zone r2 p0.0]
+  #27   pc1 chooses pass  [journal @7]
+  #28   pc1's turn ends
+  #29 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #30   gob2 chooses pass  [journal @8]
+  #31   gob2's turn ends
+  #32 knight's turn (H3, 32 HP, 30 ft) [Knight]
+  #33   knight chooses pass  [journal @9]
+  #34   knight CON save vs Moonbeam: d20 3 +4 = 7 vs DC 15, fail  [knight save r2 p0.0]
+  #35   knight takes 10 (10 radiant) from Moonbeam, HP 32 -> 22  [pc1 zone r2 p2.0]
+  #36   knight's turn ends
+  #37 fight ends: stalemate in round 2
+logHash 41c6e22b6251121f
+
+== areaGridCoverage=anyOverlap (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob2 7 (static)
+   #3   initiative knight 5 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:moonbeam@2  [journal @0]
+   #7     pc1 casts Moonbeam with a level 2 slot (2 left)
+   #8       pc1 is concentrating on Moonbeam
+   #9       pc1 chooses place:A7  [journal @1]
+  #10       Moonbeam appears at A7: 4 squares (seen by gob2, knight, pc1)
+  #11   pc1 chooses pass  [journal @2]
+  #12   pc1's turn ends
+  #13 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses pass  [journal @3]
+  #15   gob2's turn ends
+  #16 knight's turn (H3, 52 HP, 30 ft) [Knight]
+  #17   knight chooses pass  [journal @4]
+  #18   knight's turn ends
+  #19 == round 2 ==
+  #20 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #21   pc1 chooses use:pc1/beam/move  [journal @5]
+  #22     pc1: Move Moonbeam
+  #23       pc1 chooses place:H3  [journal @6]
+  #24       Moonbeam moves A7 -> H3; caught knight
+  #25         knight CON save vs Moonbeam: d20 6 +4 = 10 vs DC 15, fail  [knight save r2 p3.0]
+  #26         knight takes 20 (20 radiant) from Moonbeam, HP 52 -> 32  [pc1 zone r2 p0.0]
+  #27   pc1 chooses pass  [journal @7]
+  #28   pc1's turn ends
+  #29 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #30   gob2 chooses pass  [journal @8]
+  #31   gob2's turn ends
+  #32 knight's turn (H3, 32 HP, 30 ft) [Knight]
+  #33   knight chooses pass  [journal @9]
+  #34   knight CON save vs Moonbeam: d20 3 +4 = 7 vs DC 15, fail  [knight save r2 p0.0]
+  #35   knight takes 10 (10 radiant) from Moonbeam, HP 32 -> 22  [pc1 zone r2 p2.0]
+  #36   knight's turn ends
+  #37 fight ends: stalemate in round 2
+logHash ae3e3404644edfc2
+
+== zoneKnowledge=all (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob2 7 (static)
+   #3   initiative knight 5 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:moonbeam@2  [journal @0]
+   #7     pc1 casts Moonbeam with a level 2 slot (2 left)
+   #8       pc1 is concentrating on Moonbeam
+   #9       pc1 chooses place:A7  [journal @1]
+  #10       Moonbeam appears at A7: 1 square (seen by gob2, knight, pc1)
+  #11   pc1 chooses pass  [journal @2]
+  #12   pc1's turn ends
+  #13 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses pass  [journal @3]
+  #15   gob2's turn ends
+  #16 knight's turn (H3, 52 HP, 30 ft) [Knight]
+  #17   knight chooses pass  [journal @4]
+  #18   knight's turn ends
+  #19 == round 2 ==
+  #20 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #21   pc1 chooses use:pc1/beam/move  [journal @5]
+  #22     pc1: Move Moonbeam
+  #23       pc1 chooses place:H3  [journal @6]
+  #24       Moonbeam moves A7 -> H3; caught knight
+  #25         knight CON save vs Moonbeam: d20 6 +4 = 10 vs DC 15, fail  [knight save r2 p3.0]
+  #26         knight takes 20 (20 radiant) from Moonbeam, HP 52 -> 32  [pc1 zone r2 p0.0]
+  #27   pc1 chooses pass  [journal @7]
+  #28   pc1's turn ends
+  #29 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #30   gob2 chooses pass  [journal @8]
+  #31   gob2's turn ends
+  #32 knight's turn (H3, 32 HP, 30 ft) [Knight]
+  #33   knight chooses pass  [journal @9]
+  #34   knight CON save vs Moonbeam: d20 3 +4 = 7 vs DC 15, fail  [knight save r2 p0.0]
+  #35   knight takes 10 (10 radiant) from Moonbeam, HP 32 -> 22  [pc1 zone r2 p2.0]
+  #36   knight's turn ends
+  #37 fight ends: stalemate in round 2
+logHash 264f9dc5d1b5ca70
+
+== zoneKnowledge=none (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative gob2 7 (static)
+   #3   initiative knight 5 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:moonbeam@2  [journal @0]
+   #7     pc1 casts Moonbeam with a level 2 slot (2 left)
+   #8       pc1 is concentrating on Moonbeam
+   #9       pc1 chooses place:A7  [journal @1]
+  #10       Moonbeam appears at A7: 1 square (seen by gob2, knight, pc1)
+  #11   pc1 chooses pass  [journal @2]
+  #12   pc1's turn ends
+  #13 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses pass  [journal @3]
+  #15   gob2's turn ends
+  #16 knight's turn (H3, 52 HP, 30 ft) [Knight]
+  #17   knight chooses pass  [journal @4]
+  #18   knight's turn ends
+  #19 == round 2 ==
+  #20 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #21   pc1 chooses use:pc1/beam/move  [journal @5]
+  #22     pc1: Move Moonbeam
+  #23       pc1 chooses place:H3  [journal @6]
+  #24       Moonbeam moves A7 -> H3; caught knight
+  #25         knight CON save vs Moonbeam: d20 6 +4 = 10 vs DC 15, fail  [knight save r2 p3.0]
+  #26         knight takes 20 (20 radiant) from Moonbeam, HP 52 -> 32  [pc1 zone r2 p0.0]
+  #27   pc1 chooses pass  [journal @7]
+  #28   pc1's turn ends
+  #29 gob2's turn (J7, 10 HP, 30 ft) [Goblin Warrior]
+  #30   gob2 chooses pass  [journal @8]
+  #31   gob2's turn ends
+  #32 knight's turn (H3, 32 HP, 30 ft) [Knight]
+  #33   knight chooses pass  [journal @9]
+  #34   knight CON save vs Moonbeam: d20 3 +4 = 7 vs DC 15, fail  [knight save r2 p0.0]
+  #35   knight takes 10 (10 radiant) from Moonbeam, HP 32 -> 22  [pc1 zone r2 p2.0]
+  #36   knight's turn ends
+  #37 fight ends: stalemate in round 2
+logHash 0271cadef4de88f7

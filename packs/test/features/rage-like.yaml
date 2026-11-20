@@ -1,0 +1,19 @@
+# A synthetic self-buff in Rage's shape (coverage 8'b G6's stand-in; Rage itself comes in W1): a
+# Bonus Action that spends one use of the character's "forms" pool, lasts 10 rounds (no
+# concentration) and gives Resistance to bludgeoning, piercing and slashing damage.
+kind: feature
+id: test:rage-like
+name: Rage-like Fury
+source: synthetic test fixture (generic self-buff with a pool cost)
+activate:
+  id: fury
+  name: Enter a Fury
+  cost: bonus
+  pool: forms
+  do: [{ apply: { effect: fury, to: self } }]
+effects:
+  - id: fury
+    name: Fury
+    duration: { rounds: 10 }
+    endsOn: [incapacitated]
+    stats: [{ resist: [bludgeoning, piercing, slashing] }]

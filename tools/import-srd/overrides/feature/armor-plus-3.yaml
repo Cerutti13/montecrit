@@ -1,0 +1,12 @@
+# Reviewed against SRD 5.2.1 p.210 (srd-raw.txt:37067-37072), "Armor, +1, +2, or +3": "Armor (Any
+# Light, Medium, or Heavy), Rare (+1), Very Rare (+2), or Legendary (+3)" / "You have a bonus to
+# Armor Class while wearing this armor. The bonus is determined by its rarity."
+# The mapped item (map/magic-item.ts MAGIC_READINGS) is that whole text for the +3 variant: a
+# passive ac +3 stat gated on armored, which holds exactly while Light, Medium or Heavy armor is
+# worn (sim/stats.ts); a character lists it under features: when its worn armor is this armor.
+# No attunement. So full.
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 210

@@ -1,0 +1,15 @@
+# Open with Moonbeam: cast it (lowest level) on the PC's first turn it's legal, retrying for two
+# more turns, and never trade that concentration away. The greedy AI plays everything else
+# (where to stand, where the spell lands, the bonus action, later turns).
+kind: policy
+id: moonbeam-first
+name: Moonbeam first
+seats: pcs
+base: greedy
+script:
+  - id: open
+    when: { myTurn: 1 }
+    do: { cast: 'srd:moonbeam', level: lowest }
+    retry: 2
+hold:
+  - { concentration: 'srd:moonbeam' }

@@ -1,0 +1,38 @@
+# SRD 5.2.1 p.290, Goblin Minion. Numbers checked against the PDF text.
+# Moved here unchanged at M3 step 6 (docs/design/m3.md 4.6): the hand-written stat block stands in
+# for the Foundry record as replace: true, so its compiled template, every closure hash and every
+# golden stay byte-identical (tools/import-srd/test/step6-monsters.test.ts).
+replace: true
+foundryPath: packs/_source/actors24/fey/goblin-minion.yml
+kind: monster
+id: srd:goblin-minion
+name: Goblin Minion
+source: SRD 5.2.1 p.290
+fidelity: partial
+size: small
+cr: 1/8
+pb: 2
+ac: 12
+hp: { average: 7, formula: 2d6 }
+speed: { walk: 30 }
+initiative: { mod: 2, score: 12 }
+abilities: { str: 8, dex: 15, con: 10, int: 10, wis: 8, cha: 8 }
+gear:
+  - { name: Daggers, count: 3 }
+attacks:
+  - id: dagger
+    name: Dagger
+    kind: meleeOrRanged
+    toHit: 4
+    reach: 5
+    range: [20, 60]
+    thrownGear: Daggers
+    damage:
+      - { roll: 1d4 + 2, type: piercing, avg: 4 }
+options:
+  - { id: nimble-escape-disengage, name: Nimble Escape (Disengage), cost: bonus, core: 'core:disengage' }
+unimplemented:
+  - 'Nimble Escape: the Hide option'
+provenance:
+  review: reviewed
+  pdfPage: 290

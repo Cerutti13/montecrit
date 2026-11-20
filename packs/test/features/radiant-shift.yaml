@@ -1,0 +1,87 @@
+# A synthetic once-per-Long-Rest transformation (session S, the repo half): a Bonus Action that
+# spends the character's "radiant-shift" pool and lasts 1 minute, ending early when its bearer
+# dismisses it (no action). Each use picks one of three options:
+#   wings     a Fly Speed equal to the bearer's walking Speed (30 here: write the number; the grid
+#             has no altitude, so a flier moves as a walker, flyingAvoidsGroundZones);
+#   radiance  at the end of each of the bearer's turns, every other creature within 10 ft (allies
+#             too, no save) takes radiant damage equal to the bearer's Proficiency Bonus;
+#   shroud    on activation only, each creature other than its allies within 10 ft makes a CHA save
+#             against 8 + CHA modifier + PB or has the Frightened condition until the end of the
+#             bearer's next turn.
+# While any option is up, once on each of the bearer's turns, when it deals damage to a creature
+# with an attack or a spell (a spell's save, damage step or zone damage too: spellDamage), it may
+# deal that creature extra damage equal to its PB: radiant for wings and radiance, necrotic for
+# shroud. Every name here is neutral; nothing is taken from a published trait.
+kind: feature
+id: test:radiant-shift
+name: Radiant Shift
+source: synthetic test fixture (generic one-minute self transformation, three options and a damage rider)
+spellAbility: cha
+activate:
+  id: shift
+  name: Radiant Shift
+  cost: bonus
+  pool: radiant-shift
+  do:
+    - choose:
+        - id: wings
+          name: Wings
+          do: [{ apply: { effect: wings, to: self } }]
+        - id: radiance
+          name: Radiance
+          do: [{ apply: { effect: radiance, to: self } }]
+        - id: shroud
+          name: Shroud
+          do:
+            - apply: { effect: shroud, to: self }
+            - around: { size: 10, who: enemy }
+            - save:
+                ability: cha
+                onFail: [{ condition: { id: frightened, until: { until: endOfNextTurn, of: caster } } }]
+effects:
+  - id: wings
+    name: Radiant Shift (Wings)
+    duration: { minutes: 1 }
+    endsOn: [dismiss]
+    group: shift
+    stats: [{ fly: 30 }]
+  - id: radiance
+    name: Radiant Shift (Radiance)
+    duration: { minutes: 1 }
+    endsOn: [dismiss]
+    group: shift
+    on:
+      - when: [turnEnd]
+        do:
+          - around: { size: 10, who: any }
+          - damage: [{ roll: '@pb', type: radiant }]
+  - id: shroud
+    name: Radiant Shift (Shroud)
+    duration: { minutes: 1 }
+    endsOn: [dismiss]
+    group: shift
+riders:
+  - id: wings-strike
+    name: Radiant Shift (Wings) extra damage
+    on: dealtDamage
+    filter: { attack: [weapon, unarmed, spell] }
+    spellDamage: true
+    oncePerTurn: ownTurn
+    when: [{ selfHas: wings }]
+    do: [{ damage: [{ roll: '@pb', type: radiant }] }]
+  - id: radiance-strike
+    name: Radiant Shift (Radiance) extra damage
+    on: dealtDamage
+    filter: { attack: [weapon, unarmed, spell] }
+    spellDamage: true
+    oncePerTurn: ownTurn
+    when: [{ selfHas: radiance }]
+    do: [{ damage: [{ roll: '@pb', type: radiant }] }]
+  - id: shroud-strike
+    name: Radiant Shift (Shroud) extra damage
+    on: dealtDamage
+    filter: { attack: [weapon, unarmed, spell] }
+    spellDamage: true
+    oncePerTurn: ownTurn
+    when: [{ selfHas: shroud }]
+    do: [{ damage: [{ roll: '@pb', type: necrotic }] }]

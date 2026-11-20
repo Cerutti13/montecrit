@@ -1,0 +1,14 @@
+# Round 1: gob1 shoots pc1 past the low wall at I4 (Half Cover), gob2 shoots the Guard past gob3
+# (a creature in the line: Half Cover). Everything after is the greedy AI.
+kind: journal
+scenario: "cover-archer"
+seed: 3
+run: 0
+engine: "0.8.0"
+contentHash: "f6bf9acde1eb19a9"
+scenarioHash: "e1666b2a73d7dc6a"
+entries:
+  - { seat: gob1, key: 'attack:shortbow>pc1' }
+  - { seat: gob1, key: 'pass' }
+  - { seat: gob2, key: 'attack:shortbow>ally1' }
+  - { seat: gob2, key: 'pass' }

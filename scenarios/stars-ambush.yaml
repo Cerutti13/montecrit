@@ -1,0 +1,72 @@
+# M1c's acceptance scenario (docs/design/m1c.md 7): a level-6 caster and a soldier ally,
+# ambushed by goblins on a 12x12 grid. Public version: the PC is the test stand-in
+# test:sample-druid; the private twin in ~/.montecrit/scenarios/ extends this file and swaps in
+# the real character.
+#
+# Group MOD-1 (SRD 5.2.1 p.202-203, level 6: Low 600 / Moderate 1,000 / High 1,400 XP;
+# allies not counted): 4 Goblin Boss + 4 Goblin Warrior = 1,000 XP. Known gaps, printed on reports:
+# Goblin Hide isn't modeled yet (the Bosses' Redirect Attack and the Veteran's Parry are, since
+# coverage step 9+, 2026-11-10).
+#
+# Calibrated (docs/design/m1c.md 7.2): greedy on every seat, the private PC, 4,000 runs at seed
+# 7, the group whose win rate is nearest 0.75 within 0.60-0.90; candidates within 1 point of each
+# other count as tied and the current group stays. Re-run when the engine, the greedy AI
+# (GREEDY_VERSION) or DEFAULT_WEIGHTS change; reports mark the record STALE when they do. The
+# record names the scenario and content hashes it was measured on (the private twin's), so a
+# report on this public file, or on an edited twin, says it was measured on a different setup.
+# 2026-11-14, engine 0.8.0 + greedy v13 (step E: Multiattack monsters may take the plain Attack
+# action; thrown monster gear lands and the thrower picks it back up; later strikes counted per
+# Multiattack alternative): MOD-1 re-measured, 70.1% [68.6, 71.5], unchanged; 20 private seeds
+# byte-identical to v12.
+# 2026-11-14, greedy v12 (monsters count only strikes their Multiattack can hold; a downed body no
+# longer holds a non-PC while a standing hostile is up): MOD-1 re-measured, 70.1% [68.6, 71.5],
+# unchanged; 20 private seeds byte-identical to v11.
+# 2026-11-11, engine 0.7.0 + greedy v11 (session S: the PC's full species kit, including a
+# one-minute transformation; v11 stops greedy walking its turn-end pulse into melee and spending it
+# over Healing Word), win [95% Wilson]: MOD-1 70.1% [68.6, 71.5] (chosen: 1.3 points nearer 0.75
+# than MOD-1b, outside the 1-point tie band); MOD-1b 68.8% [67.3, 70.2]; MOD-1a 66.1%; MOD-3 and
+# HIGH-A not rerun (their layouts were never recorded; they ran 87-89% and 43-44% every time).
+# On greedy v10 the transformation cost the PC 2.7 points (65.6% with it, 68.3% without); on v11
+# it's 68.8% with, 68.3% without.
+# 2026-11-05, engine 0.6.0 + greedy v5 (core Dodge, Monk primitives), win [95% Wilson]: MOD-1b
+# 73.0% [71.6, 74.3] (re-stamped; other candidates not rerun: only a group at 74-76% could
+# displace it under the tie band, and MOD-1a has trailed MOD-1b in every run).
+# 2026-11-03, greedy v4 (heals count the drop chance they remove; a concentration spell's later
+# rounds count only if the caster stays up), win [95% Wilson]: MOD-1b 71.8% [70.4, 73.1] (chosen:
+# 1.1 points nearer 0.75 than MOD-1a, outside the 1-point tie band); MOD-1a 70.7% [69.3, 72.1];
+# MOD-1 70.4%; MOD-3 87.4%; HIGH-A 43.9%.
+# 2026-11-02, greedy v3 (a revived PC picks its focus back up), win [95% Wilson]: MOD-1b 72.2%
+# [70.7, 73.5]; MOD-1a 71.4% [69.9, 72.7] (kept: tied with MOD-1b); MOD-1 70.3%; MOD-3 88.7%;
+# HIGH-A 44.3%. MOD-1a lost 0.6 points to v2 on the same fights: back up at 1 HP, the PC now
+# grabs its focus and casts instead of fighting on without it, and then stands its ground.
+# 2026-11-02, greedy v2 (zone moves value swept creatures), win [95% Wilson]: MOD-1b (5 Boss +
+# 2 Warrior, 1,100 XP) 72.3% [70.9, 73.7]; MOD-1a 72.0% [70.6, 73.3] (kept: tied with MOD-1b);
+# MOD-1 (4 Boss + 4 Warrior, 1,000 XP) 70.9%; MOD-3 (Veteran + Boss + 2 Warrior) 88.6%;
+# HIGH-A (1,350 XP) 44.1%.
+# 2026-11-01, greedy v1: MOD-1a 70.1% [68.7, 71.5] (chosen); MOD-1 68.5%; MOD-1b 67.3%;
+# MOD-3 88.5%; HIGH-A 43.2%.
+#
+# downEnds: false lets death saves play out while the ally fights on, so P(PC drops) and
+# P(PC dies) differ and attackDowned matters.
+kind: scenario
+id: stars-ambush
+name: Stars Ambush
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid: { w: 12, h: 12 }
+knobs: { downEnds: false, lossCounts: pcs, maxRounds: 20 }
+calibrated: { engine: '0.8.0', weights: 47cc0aed, ai: 13, scenarioHash: 'c84993d116cb3af8', contentHash: '8f261969b685def0', policy: greedy, seed: 7, runs: 4000, win: 0.701, note: 'group chosen with the private PC, in the private twin' }
+reportNotes:
+  - 'encounter: 4 Goblin Boss + 4 Goblin Warrior = 1,000 XP; budgets for one level-6 character are Low 600, Moderate 1,000, High 1,400 (SRD 5.2.1 p.202-203). The ally is not counted, a convention the 2024 DMG may not share (unverified)'
+  - 'bias from what is not modeled: without Hide (the Goblin Bosses'' Nimble Escape; the hidden attackers'' Initiative and first-attack Advantage) the ambush is milder than written. Redirect Attack and the ally''s Parry are modeled since coverage step 9+'
+units:
+  - { seat: pc1, team: party, use: 'test:sample-druid', at: F10, surprised: true, decider: greedy }
+  - { seat: ally1, team: party, use: 'srd:warrior-veteran', at: G9, surprised: true, decider: greedy }
+  - { seat: boss1, team: enemies, use: 'srd:goblin-boss', at: D4, decider: greedy }
+  - { seat: boss2, team: enemies, use: 'srd:goblin-boss', at: I4, decider: greedy }
+  - { seat: boss3, team: enemies, use: 'srd:goblin-boss', at: B7, decider: greedy }
+  - { seat: boss4, team: enemies, use: 'srd:goblin-boss', at: K7, decider: greedy }
+  - { seat: gob1, team: enemies, use: 'srd:goblin-warrior', at: C2, decider: greedy }
+  - { seat: gob2, team: enemies, use: 'srd:goblin-warrior', at: J2, decider: greedy }
+  - { seat: gob3, team: enemies, use: 'srd:goblin-warrior', at: F5, decider: greedy }
+  - { seat: gob4, team: enemies, use: 'srd:goblin-warrior', at: H5, decider: greedy }

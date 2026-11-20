@@ -1,0 +1,38 @@
+# A synthetic level-6 caster: a shield plus a held focus (the hand problem), spells prepared only
+# while an item is held, free casts from a pool, a pool-spending form, and a resistance.
+kind: pc
+id: test:sample-druid
+name: Sample Druid
+source: synthetic test fixture
+rules: '2024'
+level: 6
+size: medium
+speed: 30
+abilities: { str: 8, dex: 14, con: 14, int: 10, wis: 18, cha: 10 }
+hpMax: 45
+ac: 13 # without the shield; 15 while it's held
+saveProficiencies: [int, wis]
+skills: { proficient: [perception, nature] }
+resist: [necrotic]
+items:
+  - { id: shield, name: Shield, kind: shield, shieldAc: 2 }
+  - { id: charm, name: Charm, kind: focus, focusFor: [druid] }
+hands: [shield, charm]
+slots: [4, 3, 3]
+pools:
+  - { id: forms, name: Forms, max: 3, recharge: longRest }
+  - { id: charm-bolts, name: Charm Bolts, max: '@mod.wis', recharge: longRest }
+casting:
+  - source: druid
+    ability: wis
+    list: druid
+    cantrips: [test:tether, srd:produce-flame]
+    prepared: [srd:healing-word, srd:moonbeam, srd:spike-growth]
+  - source: charm
+    ability: wis
+    list: druid
+    whileHeld: charm
+    always: [srd:guidance, srd:guiding-bolt]
+    free: [{ spell: srd:guiding-bolt, pool: charm-bolts }]
+features: [test:stance]
+expect: { cantrips: 2, prepared: 3 }

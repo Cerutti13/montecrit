@@ -1,0 +1,24 @@
+# M3 step 5a golden (docs/design/m3.md section 12): Stunning Strike, SRD 5.2.1 Monk level 5
+# (srd-raw.txt:11201-11210). The sample Monk 6 (test:sample-monk) starts next to a Goblin Boss.
+# Round 1: two Unarmed Strikes (the Attack action with Extra Attack), then the journal passes (no
+# Flurry of Blows, no bonus strike). Stunning Strike is "once per turn" (critique C1: global
+# scope), so only the first hit is offered it; the Boss fails the CON save (DC 8 + WIS + PB = 14)
+# and is Stunned "until the start of your next turn" (Incapacitated; attacks against it have
+# Advantage). Its turn is a scripted pass: the 2024 Stunned gives no Speed 0, so it could still
+# move. The condition ends when the Monk's round-2 turn starts. Round 2: a Shortsword miss, a
+# Flurry of Blows whose two Unarmed Strikes both miss, then a Shortsword hit (a Monk weapon) that
+# is offered Stunning Strike again (a new turn), passes, and drops the Boss. Open Hand
+# Technique (srd-raw.txt:11310-11319) never fires here: m3-monk-content.test.ts covers it.
+# Static initiative: the Monk acts first.
+kind: scenario
+id: monk-stunning-strike
+name: Monk Stunning Strike
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid: { w: 8, h: 6 }
+flags: { initiativeMode: static }
+knobs: { maxRounds: 2, downEnds: false }
+units:
+  - { seat: pc1, team: party, use: 'test:sample-monk', at: C3, decider: greedy }
+  - { seat: boss1, team: enemies, use: 'srd:goblin-boss', at: D3, decider: greedy }
+  - { seat: gob1, team: enemies, use: 'srd:goblin-warrior', at: H6, decider: greedy }

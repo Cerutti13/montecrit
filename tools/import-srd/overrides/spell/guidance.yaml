@@ -1,0 +1,28 @@
+# SRD 5.2.1 p.138, Guidance. Stat line and effect checked in docs/research/m1b-rules-2024.md ("The six spells").
+# "You touch a willing creature": the text doesn't say whether the caster can be that creature (selfTargetWhenTextSilent).
+# Moved here unchanged at M3 step 6 (docs/design/m3.md 4.6): the hand-written item stands
+# in for the Foundry record as replace: true, so its compiled spell, every closure hash and
+# every golden stay byte-identical (tools/import-srd/test/spell-overrides.test.ts).
+replace: true
+foundryPath: packs/_source/spells24/cantrips/guidance.yml
+kind: spell
+id: srd:guidance
+name: Guidance
+source: SRD 5.2.1 p.138
+level: 0
+castingTime: action
+range: touch
+components: { v: true, s: true }
+concentration: true
+duration: { minutes: 1 }
+effects:
+  - id: guided
+    name: Guidance
+    mods: [{ on: [d20.check], op: preDice, dice: 1d4, skill: chosen }]
+do:
+  - target: { range: touch, who: ally, self: textSilent } # "a willing creature": an ally, never a foe
+  - chooseSkill: {}
+  - apply: { effect: guided, to: target }
+provenance:
+  review: reviewed
+  pdfPage: 138

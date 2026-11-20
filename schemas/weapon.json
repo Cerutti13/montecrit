@@ -1,0 +1,334 @@
+{
+  "title": "montecrit weapon",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "weapon"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fidelity": {
+      "default": "full",
+      "type": "string",
+      "enum": [
+        "full",
+        "partial",
+        "narrative"
+      ]
+    },
+    "placeholder": {
+      "default": false,
+      "type": "boolean"
+    },
+    "unimplemented": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "provenance": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "const": "foundry-dnd5e"
+            },
+            "ref": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$"
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "foreignId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "recordSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "importer": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "overrides": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "sha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "file",
+                  "sha256"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "pdfPage": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "crossCheck": {
+              "type": "object",
+              "properties": {
+                "open5e": {
+                  "type": "string",
+                  "enum": [
+                    "agree",
+                    "disagree",
+                    "missing"
+                  ]
+                }
+              },
+              "required": [
+                "open5e"
+              ],
+              "additionalProperties": false
+            },
+            "review": {
+              "type": "string",
+              "enum": [
+                "auto",
+                "reviewed"
+              ]
+            }
+          },
+          "required": [
+            "source",
+            "ref",
+            "path",
+            "foreignId",
+            "recordSha256",
+            "importer",
+            "review"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "const": "srd-pdf"
+            },
+            "pdfPage": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "importer": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "overrides": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "sha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "file",
+                  "sha256"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "replaces": {
+              "type": "object",
+              "properties": {
+                "ref": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{40}$"
+                },
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "foreignId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "recordSha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "ref",
+                "path",
+                "foreignId",
+                "recordSha256"
+              ],
+              "additionalProperties": false
+            },
+            "review": {
+              "type": "string",
+              "enum": [
+                "hand",
+                "reviewed"
+              ]
+            }
+          },
+          "required": [
+            "source",
+            "pdfPage",
+            "importer",
+            "overrides",
+            "review"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "simple",
+        "martial"
+      ]
+    },
+    "attack": {
+      "type": "string",
+      "enum": [
+        "melee",
+        "ranged"
+      ]
+    },
+    "damage": {
+      "type": "object",
+      "properties": {
+        "roll": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "acid",
+            "bludgeoning",
+            "cold",
+            "fire",
+            "force",
+            "lightning",
+            "necrotic",
+            "piercing",
+            "poison",
+            "psychic",
+            "radiant",
+            "slashing",
+            "thunder"
+          ]
+        }
+      },
+      "required": [
+        "roll",
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "properties": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "finesse",
+          "light",
+          "heavy",
+          "two-handed",
+          "versatile",
+          "thrown",
+          "ammunition",
+          "loading",
+          "reach"
+        ]
+      }
+    },
+    "range": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 9007199254740991,
+          "multipleOf": 5
+        },
+        {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 9007199254740991,
+          "multipleOf": 5
+        }
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "versatile": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mastery": {
+      "type": "string",
+      "enum": [
+        "cleave",
+        "graze",
+        "nick",
+        "push",
+        "sap",
+        "slow",
+        "topple",
+        "vex"
+      ]
+    }
+  },
+  "required": [
+    "kind",
+    "id",
+    "name",
+    "source",
+    "category",
+    "attack",
+    "damage",
+    "mastery"
+  ],
+  "additionalProperties": false
+}

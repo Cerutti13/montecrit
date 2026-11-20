@@ -1,0 +1,2397 @@
+{
+  "title": "montecrit spell",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "spell"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fidelity": {
+      "default": "full",
+      "type": "string",
+      "enum": [
+        "full",
+        "partial",
+        "narrative"
+      ]
+    },
+    "placeholder": {
+      "default": false,
+      "type": "boolean"
+    },
+    "unimplemented": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "provenance": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "const": "foundry-dnd5e"
+            },
+            "ref": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$"
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "foreignId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "recordSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "importer": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "overrides": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "sha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "file",
+                  "sha256"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "pdfPage": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "crossCheck": {
+              "type": "object",
+              "properties": {
+                "open5e": {
+                  "type": "string",
+                  "enum": [
+                    "agree",
+                    "disagree",
+                    "missing"
+                  ]
+                }
+              },
+              "required": [
+                "open5e"
+              ],
+              "additionalProperties": false
+            },
+            "review": {
+              "type": "string",
+              "enum": [
+                "auto",
+                "reviewed"
+              ]
+            }
+          },
+          "required": [
+            "source",
+            "ref",
+            "path",
+            "foreignId",
+            "recordSha256",
+            "importer",
+            "review"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "const": "srd-pdf"
+            },
+            "pdfPage": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "importer": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "overrides": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "sha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "file",
+                  "sha256"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "replaces": {
+              "type": "object",
+              "properties": {
+                "ref": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{40}$"
+                },
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "foreignId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "recordSha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "ref",
+                "path",
+                "foreignId",
+                "recordSha256"
+              ],
+              "additionalProperties": false
+            },
+            "review": {
+              "type": "string",
+              "enum": [
+                "hand",
+                "reviewed"
+              ]
+            }
+          },
+          "required": [
+            "source",
+            "pdfPage",
+            "importer",
+            "overrides",
+            "review"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9
+    },
+    "castingTime": {
+      "type": "string",
+      "enum": [
+        "action",
+        "bonus"
+      ]
+    },
+    "range": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 9007199254740991,
+          "multipleOf": 5
+        },
+        {
+          "type": "string",
+          "enum": [
+            "self",
+            "touch"
+          ]
+        }
+      ]
+    },
+    "components": {
+      "type": "object",
+      "properties": {
+        "v": {
+          "type": "boolean"
+        },
+        "s": {
+          "type": "boolean"
+        },
+        "m": {
+          "default": "none",
+          "type": "string",
+          "enum": [
+            "none",
+            "focus",
+            "costly"
+          ]
+        }
+      },
+      "required": [
+        "v",
+        "s"
+      ],
+      "additionalProperties": false
+    },
+    "concentration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "duration": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "instant"
+        },
+        {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "parent"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "rounds": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "rounds"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "minutes": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "minutes"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "until": {
+                  "type": "string",
+                  "enum": [
+                    "startOfNextTurn",
+                    "endOfNextTurn",
+                    "endOfThisTurn"
+                  ]
+                },
+                "of": {
+                  "type": "string",
+                  "enum": [
+                    "caster",
+                    "bearer"
+                  ]
+                }
+              },
+              "required": [
+                "until",
+                "of"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    },
+    "area": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "recast": {
+      "default": "stack",
+      "type": "string",
+      "enum": [
+        "stack",
+        "replace"
+      ]
+    },
+    "effects": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "zone": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "shape": {
+                    "type": "string",
+                    "enum": [
+                      "sphere",
+                      "cylinder"
+                    ]
+                  },
+                  "radius": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 9007199254740991,
+                    "multipleOf": 5
+                  },
+                  "height": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 9007199254740991,
+                    "multipleOf": 5
+                  },
+                  "difficult": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "affects": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "notOwner",
+                      "foes",
+                      "allies"
+                    ]
+                  }
+                },
+                "required": [
+                  "shape",
+                  "radius"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "shape": {
+                    "type": "string",
+                    "enum": [
+                      "cube",
+                      "square"
+                    ]
+                  },
+                  "size": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 9007199254740991,
+                    "multipleOf": 5
+                  },
+                  "difficult": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "affects": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "notOwner",
+                      "foes",
+                      "allies"
+                    ]
+                  }
+                },
+                "required": [
+                  "shape",
+                  "size"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "shape": {
+                    "type": "string",
+                    "const": "cone"
+                  },
+                  "size": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 9007199254740991,
+                    "multipleOf": 5
+                  },
+                  "difficult": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "affects": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "notOwner",
+                      "foes",
+                      "allies"
+                    ]
+                  }
+                },
+                "required": [
+                  "shape",
+                  "size"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "shape": {
+                    "type": "string",
+                    "const": "line"
+                  },
+                  "size": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 9007199254740991,
+                    "multipleOf": 5
+                  },
+                  "width": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 9007199254740991,
+                    "multipleOf": 5
+                  },
+                  "difficult": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "affects": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "notOwner",
+                      "foes",
+                      "allies"
+                    ]
+                  }
+                },
+                "required": [
+                  "shape",
+                  "size",
+                  "width"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "shape": {
+                    "type": "string",
+                    "const": "emanation"
+                  },
+                  "size": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 9007199254740991,
+                    "multipleOf": 5
+                  },
+                  "includesOrigin": {
+                    "type": "boolean"
+                  },
+                  "offWhen": {
+                    "minItems": 1,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "const": "incapacitated"
+                    }
+                  },
+                  "difficult": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "affects": {
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "notOwner",
+                      "foes",
+                      "allies"
+                    ]
+                  }
+                },
+                "required": [
+                  "shape",
+                  "size"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "hidden": {
+            "type": "object",
+            "properties": {
+              "dc": {
+                "type": "string",
+                "const": "caster"
+              }
+            },
+            "required": [
+              "dc"
+            ],
+            "additionalProperties": false
+          },
+          "duration": {
+            "default": "parent",
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "parent"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "rounds": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "rounds"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "minutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "minutes"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "until": {
+                    "type": "string",
+                    "enum": [
+                      "startOfNextTurn",
+                      "endOfNextTurn",
+                      "endOfThisTurn"
+                    ]
+                  },
+                  "of": {
+                    "type": "string",
+                    "enum": [
+                      "caster",
+                      "bearer"
+                    ]
+                  }
+                },
+                "required": [
+                  "until",
+                  "of"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "oncePerTurn": {
+            "type": "string",
+            "enum": [
+              "perCreature"
+            ]
+          },
+          "endsOn": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "incapacitated",
+                "dismiss"
+              ]
+            }
+          },
+          "inHand": {
+            "default": false,
+            "type": "boolean"
+          },
+          "group": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "mods": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "on": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^d20(?:\\.[a-z]+(?:-[a-z]+)*)*$"
+                  }
+                },
+                "side": {
+                  "default": "self",
+                  "type": "string",
+                  "enum": [
+                    "self",
+                    "incoming"
+                  ]
+                },
+                "op": {
+                  "type": "string",
+                  "enum": [
+                    "adv",
+                    "dis",
+                    "flat",
+                    "preDice",
+                    "floor"
+                  ]
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  ]
+                },
+                "dice": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "consume": {
+                  "type": "string",
+                  "const": "nextRoll"
+                },
+                "skill": {
+                  "type": "string",
+                  "const": "chosen"
+                },
+                "when": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/gate"
+                  }
+                },
+                "from": {
+                  "type": "string",
+                  "const": "owner"
+                }
+              },
+              "required": [
+                "on",
+                "op"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "immune": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "blinded",
+                "charmed",
+                "frightened",
+                "incapacitated",
+                "paralyzed",
+                "poisoned",
+                "prone",
+                "restrained",
+                "stunned",
+                "unconscious"
+              ]
+            }
+          },
+          "stats": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "ac": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      ]
+                    },
+                    "when": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/gate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "ac"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "acFloor": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      ]
+                    },
+                    "when": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/gate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "acFloor"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "speed": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "enum": [
+                            "half",
+                            "zero"
+                          ]
+                        },
+                        {
+                          "anyOf": [
+                            {
+                              "type": "integer",
+                              "minimum": -9007199254740991,
+                              "maximum": 9007199254740991
+                            },
+                            {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "noStack": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    },
+                    "when": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/gate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "speed"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "resist": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "acid",
+                          "bludgeoning",
+                          "cold",
+                          "fire",
+                          "force",
+                          "lightning",
+                          "necrotic",
+                          "piercing",
+                          "poison",
+                          "psychic",
+                          "radiant",
+                          "slashing",
+                          "thunder"
+                        ]
+                      }
+                    },
+                    "when": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/gate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "resist"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "vuln": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "acid",
+                          "bludgeoning",
+                          "cold",
+                          "fire",
+                          "force",
+                          "lightning",
+                          "necrotic",
+                          "piercing",
+                          "poison",
+                          "psychic",
+                          "radiant",
+                          "slashing",
+                          "thunder"
+                        ]
+                      }
+                    },
+                    "when": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/gate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "vuln"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "immune": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "acid",
+                          "bludgeoning",
+                          "cold",
+                          "fire",
+                          "force",
+                          "lightning",
+                          "necrotic",
+                          "piercing",
+                          "poison",
+                          "psychic",
+                          "radiant",
+                          "slashing",
+                          "thunder"
+                        ]
+                      }
+                    },
+                    "when": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/gate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "immune"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "critMin": {
+                      "type": "integer",
+                      "minimum": 2,
+                      "maximum": 19
+                    },
+                    "when": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/gate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "critMin"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "noOpportunityAttacks": {
+                      "type": "boolean",
+                      "const": true
+                    },
+                    "when": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/gate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "noOpportunityAttacks"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "damageType": {
+                      "type": "string",
+                      "enum": [
+                        "acid",
+                        "bludgeoning",
+                        "cold",
+                        "fire",
+                        "force",
+                        "lightning",
+                        "necrotic",
+                        "piercing",
+                        "poison",
+                        "psychic",
+                        "radiant",
+                        "slashing",
+                        "thunder"
+                      ]
+                    },
+                    "on": {
+                      "type": "string",
+                      "const": "unarmed"
+                    },
+                    "when": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/gate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "damageType",
+                    "on"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "fly": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      ]
+                    },
+                    "when": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/gate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "fly"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "magicWeapon": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 10
+                    }
+                  },
+                  "required": [
+                    "magicWeapon"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "noCasting": {
+                      "type": "boolean",
+                      "const": true
+                    },
+                    "when": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/gate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "noCasting"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "noConcentration": {
+                      "type": "boolean",
+                      "const": true
+                    },
+                    "when": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/gate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "noConcentration"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "on": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "when": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "appear",
+                      "movedOnto",
+                      "enter",
+                      "travel",
+                      "turnEndIn",
+                      "turnStart",
+                      "turnEnd",
+                      "damaged",
+                      "slotHeal"
+                    ]
+                  }
+                },
+                "do": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/step"
+                  }
+                }
+              },
+              "required": [
+                "when",
+                "do"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "sustain": {
+            "type": "object",
+            "properties": {
+              "by": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "attackRoll",
+                    "enemySave"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "by"
+            ],
+            "additionalProperties": false
+          },
+          "grants": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "cost": {
+                  "type": "string",
+                  "enum": [
+                    "action",
+                    "bonus"
+                  ]
+                },
+                "laterTurns": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "to": {
+                  "default": "owner",
+                  "type": "string",
+                  "enum": [
+                    "owner",
+                    "bearer"
+                  ]
+                },
+                "when": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/gate"
+                  }
+                },
+                "do": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/step"
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "cost",
+                "do"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "do": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/step"
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "id",
+    "name",
+    "source",
+    "level",
+    "castingTime",
+    "range",
+    "components",
+    "duration",
+    "do"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "gate": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "unarmored",
+                "noShield",
+                "armored",
+                "notIncapacitated",
+                "ownTurn",
+                "hasntMoved",
+                "shieldHeld",
+                "itemHeld",
+                "lightExtra",
+                "allyWithin5ftOfTarget",
+                "notHeavyArmor",
+                "rollAdv",
+                "rollNotDis"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "targetHas": {
+                  "type": "string",
+                  "enum": [
+                    "blinded",
+                    "charmed",
+                    "frightened",
+                    "incapacitated",
+                    "paralyzed",
+                    "poisoned",
+                    "prone",
+                    "restrained",
+                    "stunned",
+                    "unconscious"
+                  ]
+                }
+              },
+              "required": [
+                "targetHas"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "selfHas": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*#[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "selfHas"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "anyOf": {
+              "minItems": 2,
+              "type": "array",
+              "items": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "unarmored",
+                        "noShield",
+                        "armored",
+                        "notIncapacitated",
+                        "ownTurn",
+                        "hasntMoved",
+                        "shieldHeld",
+                        "itemHeld",
+                        "lightExtra",
+                        "allyWithin5ftOfTarget",
+                        "notHeavyArmor",
+                        "rollAdv",
+                        "rollNotDis"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "targetHas": {
+                          "type": "string",
+                          "enum": [
+                            "blinded",
+                            "charmed",
+                            "frightened",
+                            "incapacitated",
+                            "paralyzed",
+                            "poisoned",
+                            "prone",
+                            "restrained",
+                            "stunned",
+                            "unconscious"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "targetHas"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "selfHas": {
+                          "anyOf": [
+                            {
+                              "type": "string",
+                              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                            },
+                            {
+                              "type": "string",
+                              "pattern": "^(core|srd|private|test):[a-z0-9]+(?:-[a-z0-9]+)*(?:\\/[a-z0-9]+(?:-[a-z0-9]+)*)*#[a-z0-9]+(?:-[a-z0-9]+)*$"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "selfHas"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "required": [
+            "anyOf"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "step": {
+      "description": "One step: target, attack, save, damage, heal, apply, moveZone, forcedMove, choose, chooseSkill, use, condition, tempHp, weaponAttack, core, gainAction, pool, around, extendSource, endConditions, move",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "target": {
+              "type": "object",
+              "properties": {
+                "range": {
+                  "anyOf": [
+                    {
+                      "type": "integer",
+                      "minimum": 5,
+                      "maximum": 9007199254740991,
+                      "multipleOf": 5
+                    },
+                    {
+                      "type": "string",
+                      "const": "touch"
+                    }
+                  ]
+                },
+                "who": {
+                  "default": "any",
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "ally",
+                    "enemy"
+                  ]
+                },
+                "self": {
+                  "type": "string",
+                  "enum": [
+                    "yes",
+                    "no",
+                    "textSilent"
+                  ]
+                },
+                "maxSize": {
+                  "type": "string",
+                  "enum": [
+                    "tiny",
+                    "small",
+                    "medium",
+                    "large",
+                    "huge",
+                    "gargantuan"
+                  ]
+                }
+              },
+              "required": [
+                "range",
+                "self"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "target"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "attack": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "melee",
+                    "ranged"
+                  ]
+                },
+                "range": {
+                  "type": "integer",
+                  "minimum": 5,
+                  "maximum": 9007199254740991,
+                  "multipleOf": 5
+                },
+                "onHit": {
+                  "default": [],
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/step"
+                  }
+                },
+                "onMiss": {
+                  "default": [],
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/step"
+                  }
+                }
+              },
+              "required": [
+                "kind",
+                "range"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "attack"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "save": {
+              "type": "object",
+              "properties": {
+                "ability": {
+                  "type": "string",
+                  "enum": [
+                    "str",
+                    "dex",
+                    "con",
+                    "int",
+                    "wis",
+                    "cha"
+                  ]
+                },
+                "damage": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "roll": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "acid",
+                          "bludgeoning",
+                          "cold",
+                          "fire",
+                          "force",
+                          "lightning",
+                          "necrotic",
+                          "piercing",
+                          "poison",
+                          "psychic",
+                          "radiant",
+                          "slashing",
+                          "thunder",
+                          "weapon"
+                        ]
+                      },
+                      "upcast": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "cantrip": {
+                        "default": false,
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "roll",
+                      "type"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "half": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "onFail": {
+                  "default": [],
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/step"
+                  }
+                },
+                "onSuccess": {
+                  "default": [],
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/step"
+                  }
+                },
+                "ignoresCover": {
+                  "type": "string",
+                  "const": "partial"
+                },
+                "targetAdv": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "dc": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 40
+                }
+              },
+              "required": [
+                "ability"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "save"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "damage": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "roll": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "acid",
+                      "bludgeoning",
+                      "cold",
+                      "fire",
+                      "force",
+                      "lightning",
+                      "necrotic",
+                      "piercing",
+                      "poison",
+                      "psychic",
+                      "radiant",
+                      "slashing",
+                      "thunder",
+                      "weapon"
+                    ]
+                  },
+                  "upcast": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "cantrip": {
+                    "default": false,
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "roll",
+                  "type"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "damage"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "heal": {
+              "type": "object",
+              "properties": {
+                "roll": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "upcast": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "roll"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "heal"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "apply": {
+              "type": "object",
+              "properties": {
+                "effect": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "to": {
+                  "type": "string",
+                  "enum": [
+                    "self",
+                    "target",
+                    "point"
+                  ]
+                },
+                "when": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/gate"
+                  }
+                }
+              },
+              "required": [
+                "effect",
+                "to"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "apply"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "moveZone": {
+              "type": "object",
+              "properties": {
+                "ft": {
+                  "type": "integer",
+                  "minimum": 5,
+                  "maximum": 9007199254740991,
+                  "multipleOf": 5
+                }
+              },
+              "required": [
+                "ft"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "moveZone"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "forcedMove": {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "enum": [
+                    "pull",
+                    "push"
+                  ]
+                },
+                "maxFt": {
+                  "type": "integer",
+                  "minimum": 5,
+                  "maximum": 9007199254740991,
+                  "multipleOf": 5
+                },
+                "maxSize": {
+                  "type": "string",
+                  "enum": [
+                    "tiny",
+                    "small",
+                    "medium",
+                    "large",
+                    "huge",
+                    "gargantuan"
+                  ]
+                },
+                "straight": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "exact": {
+                  "type": "boolean",
+                  "const": true
+                }
+              },
+              "required": [
+                "mode",
+                "maxFt",
+                "maxSize"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "forcedMove"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "choose": {
+              "minItems": 2,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "do": {
+                    "minItems": 1,
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/step"
+                    }
+                  }
+                },
+                "required": [
+                  "id",
+                  "name",
+                  "do"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "choose"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "chooseSkill": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "chooseSkill"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "use": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            }
+          },
+          "required": [
+            "use"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "condition": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "enum": [
+                    "blinded",
+                    "charmed",
+                    "frightened",
+                    "incapacitated",
+                    "paralyzed",
+                    "poisoned",
+                    "prone",
+                    "restrained",
+                    "stunned",
+                    "unconscious"
+                  ]
+                },
+                "until": {
+                  "default": "parent",
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "parent"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "rounds": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        }
+                      },
+                      "required": [
+                        "rounds"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "minutes": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 9007199254740991
+                        }
+                      },
+                      "required": [
+                        "minutes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "until": {
+                          "type": "string",
+                          "enum": [
+                            "startOfNextTurn",
+                            "endOfNextTurn",
+                            "endOfThisTurn"
+                          ]
+                        },
+                        "of": {
+                          "type": "string",
+                          "enum": [
+                            "caster",
+                            "bearer"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "until",
+                        "of"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "save": {
+                  "type": "object",
+                  "properties": {
+                    "ability": {
+                      "type": "string",
+                      "enum": [
+                        "str",
+                        "dex",
+                        "con",
+                        "int",
+                        "wis",
+                        "cha"
+                      ]
+                    },
+                    "dc": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 40
+                    },
+                    "at": {
+                      "type": "string",
+                      "const": "turnEnd"
+                    },
+                    "onFail": {
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/step"
+                      }
+                    }
+                  },
+                  "required": [
+                    "ability",
+                    "at"
+                  ],
+                  "additionalProperties": false
+                },
+                "endsOnDamage": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "also": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "blinded",
+                      "charmed",
+                      "frightened",
+                      "incapacitated",
+                      "paralyzed",
+                      "poisoned",
+                      "prone",
+                      "restrained",
+                      "stunned",
+                      "unconscious"
+                    ]
+                  }
+                },
+                "speed": {
+                  "type": "string",
+                  "const": "zero"
+                },
+                "dropHeld": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "escape": {
+                  "type": "object",
+                  "properties": {
+                    "check": {
+                      "type": "object",
+                      "properties": {
+                        "ability": {
+                          "type": "string",
+                          "enum": [
+                            "str",
+                            "dex",
+                            "con",
+                            "int",
+                            "wis",
+                            "cha"
+                          ]
+                        },
+                        "skills": {
+                          "default": [],
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "acrobatics",
+                              "animal-handling",
+                              "arcana",
+                              "athletics",
+                              "deception",
+                              "history",
+                              "insight",
+                              "intimidation",
+                              "investigation",
+                              "medicine",
+                              "nature",
+                              "perception",
+                              "performance",
+                              "persuasion",
+                              "religion",
+                              "sleight-of-hand",
+                              "stealth",
+                              "survival"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "ability"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "dc": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 40
+                    },
+                    "cost": {
+                      "type": "string",
+                      "const": "action"
+                    }
+                  },
+                  "required": [
+                    "check",
+                    "cost"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "condition"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tempHp": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "tempHp"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "weaponAttack": {
+              "type": "object",
+              "properties": {
+                "with": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "held",
+                        "unarmed"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    }
+                  ]
+                },
+                "noAbilityToDamage": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "count": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 4
+                },
+                "lightExtra": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "near": {
+                  "type": "boolean",
+                  "const": true
+                }
+              },
+              "required": [
+                "with"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "weaponAttack"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "core": {
+              "type": "string",
+              "enum": [
+                "dash",
+                "disengage",
+                "dodge"
+              ]
+            }
+          },
+          "required": [
+            "core"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "gainAction": {
+              "type": "string",
+              "const": "action"
+            }
+          },
+          "required": [
+            "gainAction"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "pool": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "delta": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "refill"
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "delta"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "pool"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "around": {
+              "type": "object",
+              "properties": {
+                "size": {
+                  "type": "integer",
+                  "minimum": 5,
+                  "maximum": 9007199254740991,
+                  "multipleOf": 5
+                },
+                "who": {
+                  "default": "any",
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "ally",
+                    "enemy"
+                  ]
+                }
+              },
+              "required": [
+                "size"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "around"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "extendSource": {
+              "type": "boolean",
+              "const": true
+            }
+          },
+          "required": [
+            "extendSource"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "endConditions": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "blinded",
+                  "charmed",
+                  "frightened",
+                  "incapacitated",
+                  "paralyzed",
+                  "poisoned",
+                  "prone",
+                  "restrained",
+                  "stunned",
+                  "unconscious"
+                ]
+              }
+            }
+          },
+          "required": [
+            "endConditions"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "move": {
+              "type": "object",
+              "properties": {
+                "speed": {
+                  "type": "string",
+                  "const": "half"
+                },
+                "noOpportunityAttacks": {
+                  "type": "boolean",
+                  "const": true
+                }
+              },
+              "required": [
+                "speed",
+                "noOpportunityAttacks"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "move"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

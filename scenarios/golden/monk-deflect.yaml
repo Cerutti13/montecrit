@@ -1,0 +1,22 @@
+# M3 step 5a golden (docs/design/m3.md section 12, critique C12): Deflect Attacks, SRD 5.2.1 Monk
+# level 3 (srd-raw.txt:11154-11158): "When an attack roll hits you and its damage includes
+# Bludgeoning, Piercing, or Slashing damage, you can take a Reaction to reduce the attack's total
+# damage against you. The reduction equals 1d10 plus your Dexterity modifier and Monk level."
+# The sample Monk 6 (DEX +3) reduces by 1d10 + 9. A Goblin Warrior's Scimitar (Slashing) hits it
+# and it reacts; the sample druid stand-in, here on the goblins' side, hurls Produce Flame (Fire
+# only) and its hit offers no Deflect. Round 2: the Reaction is back at the Monk's turn start
+# (srd-raw.txt:1438-1439), the Scimitar hit is deflected again, and a second goblin's Shortbow
+# (Piercing) crit then hits with the Reaction spent, so nothing is offered. Static initiative.
+kind: scenario
+id: monk-deflect
+name: Monk Deflect Attacks
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid: { w: 8, h: 6 }
+flags: { initiativeMode: static, focusHandSomatic: lenient }
+knobs: { maxRounds: 2, downEnds: false }
+units:
+  - { seat: pc1, team: party, use: 'test:sample-monk', at: C3, decider: greedy }
+  - { seat: gob1, team: enemies, use: 'srd:goblin-warrior', at: D3, decider: greedy }
+  - { seat: gob2, team: enemies, use: 'srd:goblin-warrior', at: H6, decider: greedy }
+  - { seat: caster, team: enemies, use: 'test:sample-druid', at: H1, decider: greedy }

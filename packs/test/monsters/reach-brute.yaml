@@ -1,0 +1,21 @@
+# A 10-ft reach attacker, for reach and opportunity-attack tests.
+kind: monster
+id: test:reach-brute
+name: Reach Brute
+source: synthetic test fixture
+size: medium
+cr: 1
+pb: 2
+ac: 13
+hp: { average: 22, formula: 4d8 + 4 }
+speed: { walk: 30 }
+initiative: { mod: 0, score: 10 }
+abilities: { str: 16, dex: 10, con: 12, int: 6, wis: 10, cha: 6 }
+attacks:
+  - id: pole
+    name: Pole
+    kind: melee
+    toHit: 5
+    reach: 10
+    damage:
+      - { roll: 1d10 + 3, type: slashing, avg: 8 }

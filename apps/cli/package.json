@@ -1,0 +1,13 @@
+{
+  "name": "@montecrit/cli",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "montecrit": "src/main.ts"
+  },
+  "dependencies": {
+    "@montecrit/engine": "*",
+    "@montecrit/host": "*"
+  },
+  "license": "AGPL-3.0-only"
+}

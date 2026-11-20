@@ -1,0 +1,426 @@
+# Flag matrix for scenarios/golden/low-hp-self-heal.yaml with scenarios/golden/low-hp-self-heal.journal.yaml (docs/design/m1b.md, Critique resolutions item 9).
+# Every rule flag the default run read, re-run under each of its other values: same seed, same journal.
+# Matrix mode only: at the journal's first mismatch every journal seat hands over to its fallback (baseline if none).
+# Regenerate: UPDATE_FLAG_MATRIX=1 npx vitest run apps/cli/test/flag-matrix.test.ts
+
+#### seed 42 ####
+default  run 0 | journal of 0 entries: held | logHash 6a5bf83b7c05d561
+flags read: diagonalCost, initiativeMode, initiativeTies, groupInitiative, monsterHp, moveBetweenAttacks, focusHandSomatic, conjuredHandEffectBlocksHand, selfTargetWhenTextSilent, forcedMovementPath
+
+== diagonalCost=alternate (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative boss2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (D4, 3 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:healing-word@3  [greedy @0]
+   #7     pc1 casts Healing Word with a level 3 slot (2 left)
+   #8       pc1 chooses target:pc1  [greedy @1]
+   #9       pc1 regains 16 (16 rolled) from Healing Word, HP 3 -> 19  [pc1 heal r1 p0.0]
+  #10   pc1 chooses cast:tether@0  [greedy @2]
+  #11     pc1 casts Tether (cantrip)
+  #12       pc1 chooses target:boss1  [greedy @3]
+  #13       boss1 chooses pass  [greedy @4]
+  #14       pc1 Tether -> boss1: d20 17 +7 = 24 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #15         boss1 takes 5 (5 piercing), HP 21 -> 16  [pc1 damage r1 p0.0]
+  #16   pc1 chooses pass  [greedy @5]
+  #17   pc1's turn ends
+  #18 boss1's turn (E4, 16 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>pc1  [greedy @6]
+  #20     boss1: Multiattack
+  #21     boss1 Scimitar -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss1 attack r1 p0.0]
+  #22   boss1 chooses attack:scimitar>pc1  [greedy @7]
+  #23     boss1 Scimitar -> pc1: d20 11 +4 = 15 vs AC 15, hit  [boss1 attack r1 p0.1]
+  #24       pc1 takes 3 (3 slashing), HP 19 -> 16  [boss1 damage r1 p0.1]
+  #25   boss1 chooses pass  [greedy @8]
+  #26   boss1's turn ends
+  #27 boss2's turn (D5, 21 HP, 30 ft) [Goblin Boss]
+  #28   boss2 chooses attack:scimitar>pc1  [greedy @9]
+  #29     boss2: Multiattack
+  #30     boss2 Scimitar -> pc1: d20 10 +4 = 14 vs AC 15, miss  [boss2 attack r1 p0.0]
+  #31   boss2 chooses attack:scimitar>pc1  [greedy @10]
+  #32     boss2 Scimitar -> pc1: d20 8 +4 = 12 vs AC 15, miss  [boss2 attack r1 p0.1]
+  #33   boss2 chooses pass  [greedy @11]
+  #34   boss2's turn ends
+  #35 fight ends: stalemate in round 1
+logHash 19fdb16ae9357504
+
+== initiativeMode=roll (journal held) ==
+flags read vs default: -initiativeTies
+   #1   initiative pc1 18 (d20 16+2)
+   #2   initiative boss1 11 (d20 9+2)
+   #3   initiative boss2 11 (shares boss1's roll)
+   #4 == round 1 ==
+   #5 pc1's turn (D4, 3 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:healing-word@3  [greedy @0]
+   #7     pc1 casts Healing Word with a level 3 slot (2 left)
+   #8       pc1 chooses target:pc1  [greedy @1]
+   #9       pc1 regains 16 (16 rolled) from Healing Word, HP 3 -> 19  [pc1 heal r1 p0.0]
+  #10   pc1 chooses cast:tether@0  [greedy @2]
+  #11     pc1 casts Tether (cantrip)
+  #12       pc1 chooses target:boss1  [greedy @3]
+  #13       boss1 chooses pass  [greedy @4]
+  #14       pc1 Tether -> boss1: d20 17 +7 = 24 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #15         boss1 takes 5 (5 piercing), HP 21 -> 16  [pc1 damage r1 p0.0]
+  #16   pc1 chooses pass  [greedy @5]
+  #17   pc1's turn ends
+  #18 boss1's turn (E4, 16 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>pc1  [greedy @6]
+  #20     boss1: Multiattack
+  #21     boss1 Scimitar -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss1 attack r1 p0.0]
+  #22   boss1 chooses attack:scimitar>pc1  [greedy @7]
+  #23     boss1 Scimitar -> pc1: d20 11 +4 = 15 vs AC 15, hit  [boss1 attack r1 p0.1]
+  #24       pc1 takes 3 (3 slashing), HP 19 -> 16  [boss1 damage r1 p0.1]
+  #25   boss1 chooses pass  [greedy @8]
+  #26   boss1's turn ends
+  #27 boss2's turn (D5, 21 HP, 30 ft) [Goblin Boss]
+  #28   boss2 chooses attack:scimitar>pc1  [greedy @9]
+  #29     boss2: Multiattack
+  #30     boss2 Scimitar -> pc1: d20 10 +4 = 14 vs AC 15, miss  [boss2 attack r1 p0.0]
+  #31   boss2 chooses attack:scimitar>pc1  [greedy @10]
+  #32     boss2 Scimitar -> pc1: d20 8 +4 = 12 vs AC 15, miss  [boss2 attack r1 p0.1]
+  #33   boss2 chooses pass  [greedy @11]
+  #34   boss2's turn ends
+  #35 fight ends: stalemate in round 1
+logHash 316ac7371e1ace68
+
+== initiativeTies=pcsFirst (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative boss2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (D4, 3 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:healing-word@3  [greedy @0]
+   #7     pc1 casts Healing Word with a level 3 slot (2 left)
+   #8       pc1 chooses target:pc1  [greedy @1]
+   #9       pc1 regains 16 (16 rolled) from Healing Word, HP 3 -> 19  [pc1 heal r1 p0.0]
+  #10   pc1 chooses cast:tether@0  [greedy @2]
+  #11     pc1 casts Tether (cantrip)
+  #12       pc1 chooses target:boss1  [greedy @3]
+  #13       boss1 chooses pass  [greedy @4]
+  #14       pc1 Tether -> boss1: d20 17 +7 = 24 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #15         boss1 takes 5 (5 piercing), HP 21 -> 16  [pc1 damage r1 p0.0]
+  #16   pc1 chooses pass  [greedy @5]
+  #17   pc1's turn ends
+  #18 boss1's turn (E4, 16 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>pc1  [greedy @6]
+  #20     boss1: Multiattack
+  #21     boss1 Scimitar -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss1 attack r1 p0.0]
+  #22   boss1 chooses attack:scimitar>pc1  [greedy @7]
+  #23     boss1 Scimitar -> pc1: d20 11 +4 = 15 vs AC 15, hit  [boss1 attack r1 p0.1]
+  #24       pc1 takes 3 (3 slashing), HP 19 -> 16  [boss1 damage r1 p0.1]
+  #25   boss1 chooses pass  [greedy @8]
+  #26   boss1's turn ends
+  #27 boss2's turn (D5, 21 HP, 30 ft) [Goblin Boss]
+  #28   boss2 chooses attack:scimitar>pc1  [greedy @9]
+  #29     boss2: Multiattack
+  #30     boss2 Scimitar -> pc1: d20 10 +4 = 14 vs AC 15, miss  [boss2 attack r1 p0.0]
+  #31   boss2 chooses attack:scimitar>pc1  [greedy @10]
+  #32     boss2 Scimitar -> pc1: d20 8 +4 = 12 vs AC 15, miss  [boss2 attack r1 p0.1]
+  #33   boss2 chooses pass  [greedy @11]
+  #34   boss2's turn ends
+  #35 fight ends: stalemate in round 1
+logHash d870d01b2449a736
+
+== initiativeTies=monstersFirst (journal held) ==
+flags read vs default: +unconsciousDropsShield -focusHandSomatic -conjuredHandEffectBlocksHand -selfTargetWhenTextSilent -forcedMovementPath
+   #1   initiative boss1 12 (static)
+   #2   initiative boss2 12 (static)
+   #3   initiative pc1 12 (static)
+   #4 == round 1 ==
+   #5 boss1's turn (E4, 21 HP, 30 ft) [Goblin Boss]
+   #6   boss1 chooses attack:scimitar>pc1  [greedy @0]
+   #7     boss1: Multiattack
+   #8     boss1 Scimitar -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss1 attack r1 p0.0]
+   #9   boss1 chooses attack:scimitar>pc1  [greedy @1]
+  #10     boss1 Scimitar -> pc1: d20 11 +4 = 15 vs AC 15, hit  [boss1 attack r1 p0.1]
+  #11       pc1 takes 3 (3 slashing), HP 3 -> 0  [boss1 damage r1 p0.1]
+  #12         pc1 drops to 0 HP and falls Unconscious
+  #13           pc1 is Unconscious (downed)
+  #14           pc1 is Incapacitated (downed)
+  #15           pc1 is Prone (fell-prone)
+  #16           pc1 drops Shield
+  #17           pc1 drops Charm
+  #18   boss1 chooses pass  [greedy @2]
+  #19   boss1's turn ends
+  #20 boss2's turn (D5, 21 HP, 30 ft) [Goblin Boss]
+  #21   boss2 chooses attack:scimitar>pc1  [greedy @3]
+  #22     boss2: Multiattack
+  #23     boss2 Scimitar -> pc1: d20 10/12 adv -> 12 (+target-prone +target-unconscious) +4 = 16 vs AC 13, CRITICAL HIT  [boss2 attack r1 p0.0]
+  #24       pc1 takes 16 (9 slashing + 7 slashing, crit), at 0 HP  [boss2 damage r1 p0.0]
+  #25         pc1 takes 2 death save failures (failures 2)
+  #26   boss2 chooses attack:scimitar>pc1  [greedy @4]
+  #27     boss2 Scimitar -> pc1: d20 8/9 adv -> 9 (+target-prone +target-unconscious) +4 = 13 vs AC 13, CRITICAL HIT  [boss2 attack r1 p0.1]
+  #28       pc1 takes 14 (7 slashing + 7 slashing, crit), at 0 HP  [boss2 damage r1 p0.1]
+  #29         pc1 takes 2 death save failures (failures 4)
+  #30           pc1 dies (three failed death saves)
+  #31   boss2's turn ends
+  #32 fight ends: loss in round 1 (TPK)
+logHash 5a22cac76111a05d
+
+== groupInitiative=individual (journal held) ==
+   #1   initiative boss2 12 (static)
+   #2   initiative pc1 12 (static)
+   #3   initiative boss1 12 (static)
+   #4 == round 1 ==
+   #5 boss2's turn (D5, 21 HP, 30 ft) [Goblin Boss]
+   #6   boss2 chooses attack:scimitar>pc1  [greedy @0]
+   #7     boss2: Multiattack
+   #8     boss2 Scimitar -> pc1: d20 10 +4 = 14 vs AC 15, miss  [boss2 attack r1 p0.0]
+   #9   boss2 chooses attack:scimitar>pc1  [greedy @1]
+  #10     boss2 Scimitar -> pc1: d20 8 +4 = 12 vs AC 15, miss  [boss2 attack r1 p0.1]
+  #11   boss2 chooses pass  [greedy @2]
+  #12   boss2's turn ends
+  #13 pc1's turn (D4, 3 HP, 30 ft) [Sample Druid]
+  #14   pc1 chooses cast:healing-word@3  [greedy @3]
+  #15     pc1 casts Healing Word with a level 3 slot (2 left)
+  #16       pc1 chooses target:pc1  [greedy @4]
+  #17       pc1 regains 16 (16 rolled) from Healing Word, HP 3 -> 19  [pc1 heal r1 p0.0]
+  #18   pc1 chooses cast:tether@0  [greedy @5]
+  #19     pc1 casts Tether (cantrip)
+  #20       pc1 chooses target:boss1  [greedy @6]
+  #21       boss1 chooses pass  [greedy @7]
+  #22       pc1 Tether -> boss1: d20 17 +7 = 24 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #23         boss1 takes 5 (5 piercing), HP 21 -> 16  [pc1 damage r1 p0.0]
+  #24   pc1 chooses pass  [greedy @8]
+  #25   pc1's turn ends
+  #26 boss1's turn (E4, 16 HP, 30 ft) [Goblin Boss]
+  #27   boss1 chooses attack:scimitar>pc1  [greedy @9]
+  #28     boss1: Multiattack
+  #29     boss1 Scimitar -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss1 attack r1 p0.0]
+  #30   boss1 chooses attack:scimitar>pc1  [greedy @10]
+  #31     boss1 Scimitar -> pc1: d20 11 +4 = 15 vs AC 15, hit  [boss1 attack r1 p0.1]
+  #32       pc1 takes 3 (3 slashing), HP 19 -> 16  [boss1 damage r1 p0.1]
+  #33   boss1 chooses pass  [greedy @11]
+  #34   boss1's turn ends
+  #35 fight ends: stalemate in round 1
+logHash d55226362722478b
+
+== monsterHp=rolled (journal held) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative boss2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (D4, 3 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:healing-word@3  [greedy @0]
+   #7     pc1 casts Healing Word with a level 3 slot (2 left)
+   #8       pc1 chooses target:pc1  [greedy @1]
+   #9       pc1 regains 16 (16 rolled) from Healing Word, HP 3 -> 19  [pc1 heal r1 p0.0]
+  #10   pc1 chooses cast:tether@0  [greedy @2]
+  #11     pc1 casts Tether (cantrip)
+  #12       pc1 chooses target:boss1  [greedy @3]
+  #13       boss1 chooses pass  [greedy @4]
+  #14       pc1 Tether -> boss1: d20 17 +7 = 24 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #15         boss1 takes 5 (5 piercing), HP 20 -> 15  [pc1 damage r1 p0.0]
+  #16   pc1 chooses pass  [greedy @5]
+  #17   pc1's turn ends
+  #18 boss1's turn (E4, 15 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>pc1  [greedy @6]
+  #20     boss1: Multiattack
+  #21     boss1 Scimitar -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss1 attack r1 p0.0]
+  #22   boss1 chooses attack:scimitar>pc1  [greedy @7]
+  #23     boss1 Scimitar -> pc1: d20 11 +4 = 15 vs AC 15, hit  [boss1 attack r1 p0.1]
+  #24       pc1 takes 3 (3 slashing), HP 19 -> 16  [boss1 damage r1 p0.1]
+  #25   boss1 chooses pass  [greedy @8]
+  #26   boss1's turn ends
+  #27 boss2's turn (D5, 25 HP, 30 ft) [Goblin Boss]
+  #28   boss2 chooses attack:scimitar>pc1  [greedy @9]
+  #29     boss2: Multiattack
+  #30     boss2 Scimitar -> pc1: d20 10 +4 = 14 vs AC 15, miss  [boss2 attack r1 p0.0]
+  #31   boss2 chooses attack:scimitar>pc1  [greedy @10]
+  #32     boss2 Scimitar -> pc1: d20 8 +4 = 12 vs AC 15, miss  [boss2 attack r1 p0.1]
+  #33   boss2 chooses pass  [greedy @11]
+  #34   boss2's turn ends
+  #35 fight ends: stalemate in round 1
+logHash 754b3ee12cdd9695
+
+== moveBetweenAttacks=extraAttackOnly (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative boss2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (D4, 3 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:healing-word@3  [greedy @0]
+   #7     pc1 casts Healing Word with a level 3 slot (2 left)
+   #8       pc1 chooses target:pc1  [greedy @1]
+   #9       pc1 regains 16 (16 rolled) from Healing Word, HP 3 -> 19  [pc1 heal r1 p0.0]
+  #10   pc1 chooses cast:tether@0  [greedy @2]
+  #11     pc1 casts Tether (cantrip)
+  #12       pc1 chooses target:boss1  [greedy @3]
+  #13       boss1 chooses pass  [greedy @4]
+  #14       pc1 Tether -> boss1: d20 17 +7 = 24 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #15         boss1 takes 5 (5 piercing), HP 21 -> 16  [pc1 damage r1 p0.0]
+  #16   pc1 chooses pass  [greedy @5]
+  #17   pc1's turn ends
+  #18 boss1's turn (E4, 16 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>pc1  [greedy @6]
+  #20     boss1: Multiattack
+  #21     boss1 Scimitar -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss1 attack r1 p0.0]
+  #22   boss1 chooses attack:scimitar>pc1  [greedy @7]
+  #23     boss1 Scimitar -> pc1: d20 11 +4 = 15 vs AC 15, hit  [boss1 attack r1 p0.1]
+  #24       pc1 takes 3 (3 slashing), HP 19 -> 16  [boss1 damage r1 p0.1]
+  #25   boss1 chooses pass  [greedy @8]
+  #26   boss1's turn ends
+  #27 boss2's turn (D5, 21 HP, 30 ft) [Goblin Boss]
+  #28   boss2 chooses attack:scimitar>pc1  [greedy @9]
+  #29     boss2: Multiattack
+  #30     boss2 Scimitar -> pc1: d20 10 +4 = 14 vs AC 15, miss  [boss2 attack r1 p0.0]
+  #31   boss2 chooses attack:scimitar>pc1  [greedy @10]
+  #32     boss2 Scimitar -> pc1: d20 8 +4 = 12 vs AC 15, miss  [boss2 attack r1 p0.1]
+  #33   boss2 chooses pass  [greedy @11]
+  #34   boss2's turn ends
+  #35 fight ends: stalemate in round 1
+logHash de1c7576dc9d19fe
+
+== focusHandSomatic=strict (journal held; log identical to default) ==
+flags read vs default: -selfTargetWhenTextSilent
+   #1   initiative pc1 12 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative boss2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (D4, 3 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:healing-word@3  [greedy @0]
+   #7     pc1 casts Healing Word with a level 3 slot (2 left)
+   #8       pc1 chooses target:pc1  [greedy @1]
+   #9       pc1 regains 16 (16 rolled) from Healing Word, HP 3 -> 19  [pc1 heal r1 p0.0]
+  #10   pc1 chooses cast:tether@0  [greedy @2]
+  #11     pc1 casts Tether (cantrip)
+  #12       pc1 chooses target:boss1  [greedy @3]
+  #13       boss1 chooses pass  [greedy @4]
+  #14       pc1 Tether -> boss1: d20 17 +7 = 24 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #15         boss1 takes 5 (5 piercing), HP 21 -> 16  [pc1 damage r1 p0.0]
+  #16   pc1 chooses pass  [greedy @5]
+  #17   pc1's turn ends
+  #18 boss1's turn (E4, 16 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>pc1  [greedy @6]
+  #20     boss1: Multiattack
+  #21     boss1 Scimitar -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss1 attack r1 p0.0]
+  #22   boss1 chooses attack:scimitar>pc1  [greedy @7]
+  #23     boss1 Scimitar -> pc1: d20 11 +4 = 15 vs AC 15, hit  [boss1 attack r1 p0.1]
+  #24       pc1 takes 3 (3 slashing), HP 19 -> 16  [boss1 damage r1 p0.1]
+  #25   boss1 chooses pass  [greedy @8]
+  #26   boss1's turn ends
+  #27 boss2's turn (D5, 21 HP, 30 ft) [Goblin Boss]
+  #28   boss2 chooses attack:scimitar>pc1  [greedy @9]
+  #29     boss2: Multiattack
+  #30     boss2 Scimitar -> pc1: d20 10 +4 = 14 vs AC 15, miss  [boss2 attack r1 p0.0]
+  #31   boss2 chooses attack:scimitar>pc1  [greedy @10]
+  #32     boss2 Scimitar -> pc1: d20 8 +4 = 12 vs AC 15, miss  [boss2 attack r1 p0.1]
+  #33   boss2 chooses pass  [greedy @11]
+  #34   boss2's turn ends
+  #35 fight ends: stalemate in round 1
+logHash 8efed65b274b7fd6
+
+== conjuredHandEffectBlocksHand=true (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative boss2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (D4, 3 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:healing-word@3  [greedy @0]
+   #7     pc1 casts Healing Word with a level 3 slot (2 left)
+   #8       pc1 chooses target:pc1  [greedy @1]
+   #9       pc1 regains 16 (16 rolled) from Healing Word, HP 3 -> 19  [pc1 heal r1 p0.0]
+  #10   pc1 chooses cast:tether@0  [greedy @2]
+  #11     pc1 casts Tether (cantrip)
+  #12       pc1 chooses target:boss1  [greedy @3]
+  #13       boss1 chooses pass  [greedy @4]
+  #14       pc1 Tether -> boss1: d20 17 +7 = 24 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #15         boss1 takes 5 (5 piercing), HP 21 -> 16  [pc1 damage r1 p0.0]
+  #16   pc1 chooses pass  [greedy @5]
+  #17   pc1's turn ends
+  #18 boss1's turn (E4, 16 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>pc1  [greedy @6]
+  #20     boss1: Multiattack
+  #21     boss1 Scimitar -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss1 attack r1 p0.0]
+  #22   boss1 chooses attack:scimitar>pc1  [greedy @7]
+  #23     boss1 Scimitar -> pc1: d20 11 +4 = 15 vs AC 15, hit  [boss1 attack r1 p0.1]
+  #24       pc1 takes 3 (3 slashing), HP 19 -> 16  [boss1 damage r1 p0.1]
+  #25   boss1 chooses pass  [greedy @8]
+  #26   boss1's turn ends
+  #27 boss2's turn (D5, 21 HP, 30 ft) [Goblin Boss]
+  #28   boss2 chooses attack:scimitar>pc1  [greedy @9]
+  #29     boss2: Multiattack
+  #30     boss2 Scimitar -> pc1: d20 10 +4 = 14 vs AC 15, miss  [boss2 attack r1 p0.0]
+  #31   boss2 chooses attack:scimitar>pc1  [greedy @10]
+  #32     boss2 Scimitar -> pc1: d20 8 +4 = 12 vs AC 15, miss  [boss2 attack r1 p0.1]
+  #33   boss2 chooses pass  [greedy @11]
+  #34   boss2's turn ends
+  #35 fight ends: stalemate in round 1
+logHash 84686ca62000a465
+
+== selfTargetWhenTextSilent=notAllowed (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative boss2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (D4, 3 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:healing-word@3  [greedy @0]
+   #7     pc1 casts Healing Word with a level 3 slot (2 left)
+   #8       pc1 chooses target:pc1  [greedy @1]
+   #9       pc1 regains 16 (16 rolled) from Healing Word, HP 3 -> 19  [pc1 heal r1 p0.0]
+  #10   pc1 chooses cast:tether@0  [greedy @2]
+  #11     pc1 casts Tether (cantrip)
+  #12       pc1 chooses target:boss1  [greedy @3]
+  #13       boss1 chooses pass  [greedy @4]
+  #14       pc1 Tether -> boss1: d20 17 +7 = 24 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #15         boss1 takes 5 (5 piercing), HP 21 -> 16  [pc1 damage r1 p0.0]
+  #16   pc1 chooses pass  [greedy @5]
+  #17   pc1's turn ends
+  #18 boss1's turn (E4, 16 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>pc1  [greedy @6]
+  #20     boss1: Multiattack
+  #21     boss1 Scimitar -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss1 attack r1 p0.0]
+  #22   boss1 chooses attack:scimitar>pc1  [greedy @7]
+  #23     boss1 Scimitar -> pc1: d20 11 +4 = 15 vs AC 15, hit  [boss1 attack r1 p0.1]
+  #24       pc1 takes 3 (3 slashing), HP 19 -> 16  [boss1 damage r1 p0.1]
+  #25   boss1 chooses pass  [greedy @8]
+  #26   boss1's turn ends
+  #27 boss2's turn (D5, 21 HP, 30 ft) [Goblin Boss]
+  #28   boss2 chooses attack:scimitar>pc1  [greedy @9]
+  #29     boss2: Multiattack
+  #30     boss2 Scimitar -> pc1: d20 10 +4 = 14 vs AC 15, miss  [boss2 attack r1 p0.0]
+  #31   boss2 chooses attack:scimitar>pc1  [greedy @10]
+  #32     boss2 Scimitar -> pc1: d20 8 +4 = 12 vs AC 15, miss  [boss2 attack r1 p0.1]
+  #33   boss2 chooses pass  [greedy @11]
+  #34   boss2's turn ends
+  #35 fight ends: stalemate in round 1
+logHash aeda9dc2fa4aebe4
+
+== forcedMovementPath=straightLineOnly (journal held; log identical to default) ==
+   #1   initiative pc1 12 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative boss2 12 (static)
+   #4 == round 1 ==
+   #5 pc1's turn (D4, 3 HP, 30 ft) [Sample Druid]
+   #6   pc1 chooses cast:healing-word@3  [greedy @0]
+   #7     pc1 casts Healing Word with a level 3 slot (2 left)
+   #8       pc1 chooses target:pc1  [greedy @1]
+   #9       pc1 regains 16 (16 rolled) from Healing Word, HP 3 -> 19  [pc1 heal r1 p0.0]
+  #10   pc1 chooses cast:tether@0  [greedy @2]
+  #11     pc1 casts Tether (cantrip)
+  #12       pc1 chooses target:boss1  [greedy @3]
+  #13       boss1 chooses pass  [greedy @4]
+  #14       pc1 Tether -> boss1: d20 17 +7 = 24 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #15         boss1 takes 5 (5 piercing), HP 21 -> 16  [pc1 damage r1 p0.0]
+  #16   pc1 chooses pass  [greedy @5]
+  #17   pc1's turn ends
+  #18 boss1's turn (E4, 16 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>pc1  [greedy @6]
+  #20     boss1: Multiattack
+  #21     boss1 Scimitar -> pc1: d20 5 +4 = 9 vs AC 15, miss  [boss1 attack r1 p0.0]
+  #22   boss1 chooses attack:scimitar>pc1  [greedy @7]
+  #23     boss1 Scimitar -> pc1: d20 11 +4 = 15 vs AC 15, hit  [boss1 attack r1 p0.1]
+  #24       pc1 takes 3 (3 slashing), HP 19 -> 16  [boss1 damage r1 p0.1]
+  #25   boss1 chooses pass  [greedy @8]
+  #26   boss1's turn ends
+  #27 boss2's turn (D5, 21 HP, 30 ft) [Goblin Boss]
+  #28   boss2 chooses attack:scimitar>pc1  [greedy @9]
+  #29     boss2: Multiattack
+  #30     boss2 Scimitar -> pc1: d20 10 +4 = 14 vs AC 15, miss  [boss2 attack r1 p0.0]
+  #31   boss2 chooses attack:scimitar>pc1  [greedy @10]
+  #32     boss2 Scimitar -> pc1: d20 8 +4 = 12 vs AC 15, miss  [boss2 attack r1 p0.1]
+  #33   boss2 chooses pass  [greedy @11]
+  #34   boss2's turn ends
+  #35 fight ends: stalemate in round 1
+logHash 3329663899e0515c

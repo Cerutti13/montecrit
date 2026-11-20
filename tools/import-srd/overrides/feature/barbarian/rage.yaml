@@ -1,0 +1,72 @@
+# Reviewed against SRD 5.2.1 p.28-29 (srd-raw.txt:4697-4702, 4970-4994), Barbarian level 1, Rage
+# (coverage W1, docs/design/w1-plan.md section 3, P1, P2, P3, P4, P11).
+#   - "You can enter it as a Bonus Action if you aren't wearing Heavy armor" (4701-4702), the
+#     number of times in the Rages column (4703-4705): a bonus activation gated notHeavyArmor that
+#     spends the class pool rage (@scale.barbarian.rages). Rest recovery is metadata (hard rule 4).
+#   - The activation's root is the Rage itself, `raging`: "The Rage lasts until the end of your next
+#     turn, and it ends early if you don Heavy armor or have the Incapacitated condition" (4982-4984):
+#     until endOfNextTurn of its bearer, endsOn incapacitated. Donning armor is inert (armor never
+#     changes mid-fight).
+#   - "If your Rage is still active on your next turn, you can extend the Rage for another round by
+#     ... Make an attack roll against an enemy. Force an enemy to make a saving throw. Take a Bonus
+#     Action to extend your Rage. Each time the Rage is extended, it lasts until the end of your next
+#     turn" (4984-4993): sustain by attackRoll and enemySave (on the bearer's own turn, P1), and a
+#     Bonus Action grant on later turns that runs extendSource.
+#   - While it lasts, a child effect `rage-benefits` (duration parent, so it ends with the Rage):
+#     Damage Resistance "to Bludgeoning, Piercing, and Slashing damage" (4971); Strength Advantage
+#     "on Strength checks and Strength saving throws" (4978-4979); "You can't maintain
+#     Concentration, and you can't cast spells" (4980-4981): noConcentration and noCasting.
+#   - Rage Damage (4972-4977): "When you make an attack using Strength (with either a weapon or an
+#     Unarmed Strike) and deal damage to the target", the Rage Damage column (@scale.barbarian.
+#     rage-damage, +2/+3/+4 at 1/9/16): an automatic on-hit rider, filtered on weapon and unarmed
+#     attacks using Strength, gated on the Rage being up, of the attack's damage type (type: weapon).
+# Left out, both inert in a fight: the 10-minute maximum (4993-4994, longer than the 20-round cap)
+# and donning Heavy armor mid-fight. Nothing else in the text, so full. The root needs a program,
+# so the activation's one step applies the child effect.
+fidelity: full
+activate:
+  id: rage
+  name: Rage
+  cost: bonus
+  uses: { pool: rage }
+  when: [notHeavyArmor]
+  target: self
+  root: raging
+  do:
+    - apply: { effect: rage-benefits, to: self }
+effects:
+  - id: raging
+    name: Rage
+    duration: { until: endOfNextTurn, of: bearer }
+    sustain: { by: [attackRoll, enemySave] }
+    endsOn: [incapacitated]
+    group: rage
+    grants:
+      - id: extend
+        name: Extend Rage
+        cost: bonus
+        laterTurns: true
+        to: owner
+        do:
+          - extendSource: true
+  - id: rage-benefits
+    name: Rage (Resistance, Strength Advantage, no Concentration or spells)
+    mods:
+      - { on: [d20.check.str, d20.save.str], op: adv }
+    stats:
+      - resist: [bludgeoning, piercing, slashing]
+      - noConcentration: true
+      - noCasting: true
+riders:
+  - id: rage-damage
+    name: Rage Damage
+    on: hit
+    filter: { attack: [weapon, unarmed], ability: str }
+    auto: true
+    when: [{ selfHas: raging }]
+    do:
+      - damage: [{ roll: '@scale.barbarian.rage-damage', type: weapon }]
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 28

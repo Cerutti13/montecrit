@@ -1,0 +1,17 @@
+# Coverage step 7.6: only the two PCs are scripted, to pass; the wyrmling is the greedy AI.
+kind: journal
+scenario: "breath-cone"
+seed: 60
+run: 0
+engine: "0.8.0"
+contentHash: "833078d8e54dd159"
+scenarioHash: "ac5f97fb7b9209b4"
+entries:
+  - { seat: pc1, key: 'pass' }
+  - { seat: pc2, key: 'pass' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: pc2, key: 'pass' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: pc2, key: 'pass' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: pc2, key: 'pass' }

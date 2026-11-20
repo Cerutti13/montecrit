@@ -1,0 +1,776 @@
+# Flag matrix for scenarios/golden/monk-stunning-strike.yaml with scenarios/golden/monk-stunning-strike.journal.yaml (docs/design/m1b.md, Critique resolutions item 9).
+# Every rule flag the default run read, re-run under each of its other values: same seed, same journal.
+# Matrix mode only: at the journal's first mismatch every journal seat hands over to its fallback (baseline if none).
+# Regenerate: UPDATE_FLAG_MATRIX=1 npx vitest run apps/cli/test/flag-matrix.test.ts
+
+#### seed 30 ####
+default  run 0 | journal of 17 entries: held | logHash 4a8a72401f7a1455
+flags read: diagonalCost, initiativeMode, initiativeTies, groupInitiative, monsterHp, statBlockAtZeroHp, reduceBeforeResistance, losMethod, creatureCover
+
+== diagonalCost=alternate (journal held; log identical to default) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative boss1 12 (static)
+   #5   initiative gob1 12 (static)
+   #6   pc1 chooses pick:pass  [journal @0]
+   #7 == round 1 ==
+   #8 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+   #9   pc1 chooses attack:unarmed-strike>boss1  [journal @1]
+  #10     pc1: Attack
+  #11     pc1 Unarmed Strike -> boss1: d20 17 +6 = 23 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #12       pc1 chooses rider:stunning-strike  [journal @2]
+  #13         pc1: Stunning Strike
+  #14           pc1 spends Monk's Focus (5 left)
+  #15       boss1 takes 8 (8 bludgeoning), HP 21 -> 13  [pc1 damage r1 p0.0]
+  #16           boss1 CON save vs Stunning Strike: d20 4 +0 = 4 vs DC 14, fail  [boss1 rider r1 p3.0]
+  #17           Stunned on boss1
+  #18           boss1 is Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #19           boss1 is Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #20   pc1 chooses attack:unarmed-strike>boss1  [journal @3]
+  #21     pc1 Unarmed Strike -> boss1: d20 19/2 adv -> 19 (+target-stunned) +6 = 25 vs AC 17, hit  [pc1 attack r1 p0.1]
+  #22       boss1 takes 6 (6 bludgeoning), HP 13 -> 7  [pc1 damage r1 p0.1]
+  #23   pc1 chooses pass  [journal @4]
+  #24   pc1's turn ends
+  #25 boss1's turn (D3, 7 HP, 30 ft) [Goblin Boss]
+  #26   boss1 chooses pass  [journal @5]
+  #27   boss1's turn ends
+  #28 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob1 chooses attack:shortbow>pc1  [journal @6]
+  #30     gob1: Attack
+  #31     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 18 (Half Cover +2), hit  [gob1 attack r1 p0.0]
+  #32       pc1 chooses react:monk/deflect-attacks  [journal @7]
+  #33         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #34       pc1 takes 0 (8 piercing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #35   gob1 chooses pass  [journal @8]
+  #36   gob1's turn ends
+  #37 == round 2 ==
+  #38   Stunned on boss1 ends (expired)
+  #39   boss1 is no longer Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #40   boss1 is no longer Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #41 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #42   pc1 chooses attack:shortsword>boss1  [journal @9]
+  #43     pc1: Attack
+  #44     pc1 Shortsword -> boss1: d20 4 +6 = 10 vs AC 17, miss  [pc1 attack r2 p0.0]
+  #45   pc1 chooses use:monk/monks-focus/flurry  [journal @10]
+  #46     pc1: Flurry of Blows
+  #47       pc1 spends Monk's Focus (4 left)
+  #48       pc1 Unarmed Strike -> boss1: d20 10 +6 = 16 vs AC 17, miss  [pc1 attack r2 p0.1]
+  #49       pc1 Unarmed Strike -> boss1: d20 3 +6 = 9 vs AC 17, miss  [pc1 attack r2 p0.2]
+  #50   pc1 chooses attack:shortsword>boss1  [journal @11]
+  #51     pc1 Shortsword -> boss1: d20 13 +6 = 19 vs AC 17, hit  [pc1 attack r2 p0.3]
+  #52       pc1 chooses pass  [journal @12]
+  #53       boss1 takes 8 (8 piercing), HP 7 -> 0  [pc1 damage r2 p0.3]
+  #54         boss1 dies (0 HP)
+  #55   pc1 chooses pass  [journal @13]
+  #56   pc1's turn ends
+  #57 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #58   gob1 chooses attack:shortbow>pc1  [journal @14]
+  #59     gob1: Attack
+  #60     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #61       pc1 chooses react:monk/deflect-attacks  [journal @15]
+  #62         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #63       pc1 takes 0 (5 piercing), HP 51 -> 51  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [journal @16]
+  #65   gob1's turn ends
+  #66 fight ends: stalemate in round 2
+logHash a29a3f070edd0feb
+
+== initiativeMode=roll (journal held) ==
+flags read vs default: -initiativeTies
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 22 (d20 19+3)
+   #4   initiative boss1 7 (d20 5+2)
+   #5   initiative gob1 5 (d20 3+2)
+   #6   pc1 chooses pick:pass  [journal @0]
+   #7 == round 1 ==
+   #8 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+   #9   pc1 chooses attack:unarmed-strike>boss1  [journal @1]
+  #10     pc1: Attack
+  #11     pc1 Unarmed Strike -> boss1: d20 17 +6 = 23 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #12       pc1 chooses rider:stunning-strike  [journal @2]
+  #13         pc1: Stunning Strike
+  #14           pc1 spends Monk's Focus (5 left)
+  #15       boss1 takes 8 (8 bludgeoning), HP 21 -> 13  [pc1 damage r1 p0.0]
+  #16           boss1 CON save vs Stunning Strike: d20 4 +0 = 4 vs DC 14, fail  [boss1 rider r1 p3.0]
+  #17           Stunned on boss1
+  #18           boss1 is Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #19           boss1 is Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #20   pc1 chooses attack:unarmed-strike>boss1  [journal @3]
+  #21     pc1 Unarmed Strike -> boss1: d20 19/2 adv -> 19 (+target-stunned) +6 = 25 vs AC 17, hit  [pc1 attack r1 p0.1]
+  #22       boss1 takes 6 (6 bludgeoning), HP 13 -> 7  [pc1 damage r1 p0.1]
+  #23   pc1 chooses pass  [journal @4]
+  #24   pc1's turn ends
+  #25 boss1's turn (D3, 7 HP, 30 ft) [Goblin Boss]
+  #26   boss1 chooses pass  [journal @5]
+  #27   boss1's turn ends
+  #28 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob1 chooses attack:shortbow>pc1  [journal @6]
+  #30     gob1: Attack
+  #31     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 18 (Half Cover +2), hit  [gob1 attack r1 p0.0]
+  #32       pc1 chooses react:monk/deflect-attacks  [journal @7]
+  #33         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #34       pc1 takes 0 (8 piercing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #35   gob1 chooses pass  [journal @8]
+  #36   gob1's turn ends
+  #37 == round 2 ==
+  #38   Stunned on boss1 ends (expired)
+  #39   boss1 is no longer Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #40   boss1 is no longer Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #41 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #42   pc1 chooses attack:shortsword>boss1  [journal @9]
+  #43     pc1: Attack
+  #44     pc1 Shortsword -> boss1: d20 4 +6 = 10 vs AC 17, miss  [pc1 attack r2 p0.0]
+  #45   pc1 chooses use:monk/monks-focus/flurry  [journal @10]
+  #46     pc1: Flurry of Blows
+  #47       pc1 spends Monk's Focus (4 left)
+  #48       pc1 Unarmed Strike -> boss1: d20 10 +6 = 16 vs AC 17, miss  [pc1 attack r2 p0.1]
+  #49       pc1 Unarmed Strike -> boss1: d20 3 +6 = 9 vs AC 17, miss  [pc1 attack r2 p0.2]
+  #50   pc1 chooses attack:shortsword>boss1  [journal @11]
+  #51     pc1 Shortsword -> boss1: d20 13 +6 = 19 vs AC 17, hit  [pc1 attack r2 p0.3]
+  #52       pc1 chooses pass  [journal @12]
+  #53       boss1 takes 8 (8 piercing), HP 7 -> 0  [pc1 damage r2 p0.3]
+  #54         boss1 dies (0 HP)
+  #55   pc1 chooses pass  [journal @13]
+  #56   pc1's turn ends
+  #57 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #58   gob1 chooses attack:shortbow>pc1  [journal @14]
+  #59     gob1: Attack
+  #60     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #61       pc1 chooses react:monk/deflect-attacks  [journal @15]
+  #62         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #63       pc1 takes 0 (5 piercing), HP 51 -> 51  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [journal @16]
+  #65   gob1's turn ends
+  #66 fight ends: stalemate in round 2
+logHash b5d69c479e9ab95a
+
+== initiativeTies=pcsFirst (journal held; log identical to default) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative boss1 12 (static)
+   #5   initiative gob1 12 (static)
+   #6   pc1 chooses pick:pass  [journal @0]
+   #7 == round 1 ==
+   #8 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+   #9   pc1 chooses attack:unarmed-strike>boss1  [journal @1]
+  #10     pc1: Attack
+  #11     pc1 Unarmed Strike -> boss1: d20 17 +6 = 23 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #12       pc1 chooses rider:stunning-strike  [journal @2]
+  #13         pc1: Stunning Strike
+  #14           pc1 spends Monk's Focus (5 left)
+  #15       boss1 takes 8 (8 bludgeoning), HP 21 -> 13  [pc1 damage r1 p0.0]
+  #16           boss1 CON save vs Stunning Strike: d20 4 +0 = 4 vs DC 14, fail  [boss1 rider r1 p3.0]
+  #17           Stunned on boss1
+  #18           boss1 is Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #19           boss1 is Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #20   pc1 chooses attack:unarmed-strike>boss1  [journal @3]
+  #21     pc1 Unarmed Strike -> boss1: d20 19/2 adv -> 19 (+target-stunned) +6 = 25 vs AC 17, hit  [pc1 attack r1 p0.1]
+  #22       boss1 takes 6 (6 bludgeoning), HP 13 -> 7  [pc1 damage r1 p0.1]
+  #23   pc1 chooses pass  [journal @4]
+  #24   pc1's turn ends
+  #25 boss1's turn (D3, 7 HP, 30 ft) [Goblin Boss]
+  #26   boss1 chooses pass  [journal @5]
+  #27   boss1's turn ends
+  #28 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob1 chooses attack:shortbow>pc1  [journal @6]
+  #30     gob1: Attack
+  #31     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 18 (Half Cover +2), hit  [gob1 attack r1 p0.0]
+  #32       pc1 chooses react:monk/deflect-attacks  [journal @7]
+  #33         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #34       pc1 takes 0 (8 piercing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #35   gob1 chooses pass  [journal @8]
+  #36   gob1's turn ends
+  #37 == round 2 ==
+  #38   Stunned on boss1 ends (expired)
+  #39   boss1 is no longer Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #40   boss1 is no longer Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #41 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #42   pc1 chooses attack:shortsword>boss1  [journal @9]
+  #43     pc1: Attack
+  #44     pc1 Shortsword -> boss1: d20 4 +6 = 10 vs AC 17, miss  [pc1 attack r2 p0.0]
+  #45   pc1 chooses use:monk/monks-focus/flurry  [journal @10]
+  #46     pc1: Flurry of Blows
+  #47       pc1 spends Monk's Focus (4 left)
+  #48       pc1 Unarmed Strike -> boss1: d20 10 +6 = 16 vs AC 17, miss  [pc1 attack r2 p0.1]
+  #49       pc1 Unarmed Strike -> boss1: d20 3 +6 = 9 vs AC 17, miss  [pc1 attack r2 p0.2]
+  #50   pc1 chooses attack:shortsword>boss1  [journal @11]
+  #51     pc1 Shortsword -> boss1: d20 13 +6 = 19 vs AC 17, hit  [pc1 attack r2 p0.3]
+  #52       pc1 chooses pass  [journal @12]
+  #53       boss1 takes 8 (8 piercing), HP 7 -> 0  [pc1 damage r2 p0.3]
+  #54         boss1 dies (0 HP)
+  #55   pc1 chooses pass  [journal @13]
+  #56   pc1's turn ends
+  #57 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #58   gob1 chooses attack:shortbow>pc1  [journal @14]
+  #59     gob1: Attack
+  #60     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #61       pc1 chooses react:monk/deflect-attacks  [journal @15]
+  #62         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #63       pc1 takes 0 (5 piercing), HP 51 -> 51  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [journal @16]
+  #65   gob1's turn ends
+  #66 fight ends: stalemate in round 2
+logHash 5b777060143d9eaa
+
+== initiativeTies=monstersFirst (journal held; log identical to default) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative boss1 12 (static)
+   #5   initiative gob1 12 (static)
+   #6   pc1 chooses pick:pass  [journal @0]
+   #7 == round 1 ==
+   #8 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+   #9   pc1 chooses attack:unarmed-strike>boss1  [journal @1]
+  #10     pc1: Attack
+  #11     pc1 Unarmed Strike -> boss1: d20 17 +6 = 23 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #12       pc1 chooses rider:stunning-strike  [journal @2]
+  #13         pc1: Stunning Strike
+  #14           pc1 spends Monk's Focus (5 left)
+  #15       boss1 takes 8 (8 bludgeoning), HP 21 -> 13  [pc1 damage r1 p0.0]
+  #16           boss1 CON save vs Stunning Strike: d20 4 +0 = 4 vs DC 14, fail  [boss1 rider r1 p3.0]
+  #17           Stunned on boss1
+  #18           boss1 is Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #19           boss1 is Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #20   pc1 chooses attack:unarmed-strike>boss1  [journal @3]
+  #21     pc1 Unarmed Strike -> boss1: d20 19/2 adv -> 19 (+target-stunned) +6 = 25 vs AC 17, hit  [pc1 attack r1 p0.1]
+  #22       boss1 takes 6 (6 bludgeoning), HP 13 -> 7  [pc1 damage r1 p0.1]
+  #23   pc1 chooses pass  [journal @4]
+  #24   pc1's turn ends
+  #25 boss1's turn (D3, 7 HP, 30 ft) [Goblin Boss]
+  #26   boss1 chooses pass  [journal @5]
+  #27   boss1's turn ends
+  #28 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob1 chooses attack:shortbow>pc1  [journal @6]
+  #30     gob1: Attack
+  #31     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 18 (Half Cover +2), hit  [gob1 attack r1 p0.0]
+  #32       pc1 chooses react:monk/deflect-attacks  [journal @7]
+  #33         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #34       pc1 takes 0 (8 piercing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #35   gob1 chooses pass  [journal @8]
+  #36   gob1's turn ends
+  #37 == round 2 ==
+  #38   Stunned on boss1 ends (expired)
+  #39   boss1 is no longer Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #40   boss1 is no longer Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #41 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #42   pc1 chooses attack:shortsword>boss1  [journal @9]
+  #43     pc1: Attack
+  #44     pc1 Shortsword -> boss1: d20 4 +6 = 10 vs AC 17, miss  [pc1 attack r2 p0.0]
+  #45   pc1 chooses use:monk/monks-focus/flurry  [journal @10]
+  #46     pc1: Flurry of Blows
+  #47       pc1 spends Monk's Focus (4 left)
+  #48       pc1 Unarmed Strike -> boss1: d20 10 +6 = 16 vs AC 17, miss  [pc1 attack r2 p0.1]
+  #49       pc1 Unarmed Strike -> boss1: d20 3 +6 = 9 vs AC 17, miss  [pc1 attack r2 p0.2]
+  #50   pc1 chooses attack:shortsword>boss1  [journal @11]
+  #51     pc1 Shortsword -> boss1: d20 13 +6 = 19 vs AC 17, hit  [pc1 attack r2 p0.3]
+  #52       pc1 chooses pass  [journal @12]
+  #53       boss1 takes 8 (8 piercing), HP 7 -> 0  [pc1 damage r2 p0.3]
+  #54         boss1 dies (0 HP)
+  #55   pc1 chooses pass  [journal @13]
+  #56   pc1's turn ends
+  #57 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #58   gob1 chooses attack:shortbow>pc1  [journal @14]
+  #59     gob1: Attack
+  #60     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #61       pc1 chooses react:monk/deflect-attacks  [journal @15]
+  #62         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #63       pc1 takes 0 (5 piercing), HP 51 -> 51  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [journal @16]
+  #65   gob1's turn ends
+  #66 fight ends: stalemate in round 2
+logHash 959fc64c2446e311
+
+== groupInitiative=individual (journal held; log identical to default) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative boss1 12 (static)
+   #5   initiative gob1 12 (static)
+   #6   pc1 chooses pick:pass  [journal @0]
+   #7 == round 1 ==
+   #8 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+   #9   pc1 chooses attack:unarmed-strike>boss1  [journal @1]
+  #10     pc1: Attack
+  #11     pc1 Unarmed Strike -> boss1: d20 17 +6 = 23 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #12       pc1 chooses rider:stunning-strike  [journal @2]
+  #13         pc1: Stunning Strike
+  #14           pc1 spends Monk's Focus (5 left)
+  #15       boss1 takes 8 (8 bludgeoning), HP 21 -> 13  [pc1 damage r1 p0.0]
+  #16           boss1 CON save vs Stunning Strike: d20 4 +0 = 4 vs DC 14, fail  [boss1 rider r1 p3.0]
+  #17           Stunned on boss1
+  #18           boss1 is Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #19           boss1 is Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #20   pc1 chooses attack:unarmed-strike>boss1  [journal @3]
+  #21     pc1 Unarmed Strike -> boss1: d20 19/2 adv -> 19 (+target-stunned) +6 = 25 vs AC 17, hit  [pc1 attack r1 p0.1]
+  #22       boss1 takes 6 (6 bludgeoning), HP 13 -> 7  [pc1 damage r1 p0.1]
+  #23   pc1 chooses pass  [journal @4]
+  #24   pc1's turn ends
+  #25 boss1's turn (D3, 7 HP, 30 ft) [Goblin Boss]
+  #26   boss1 chooses pass  [journal @5]
+  #27   boss1's turn ends
+  #28 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob1 chooses attack:shortbow>pc1  [journal @6]
+  #30     gob1: Attack
+  #31     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 18 (Half Cover +2), hit  [gob1 attack r1 p0.0]
+  #32       pc1 chooses react:monk/deflect-attacks  [journal @7]
+  #33         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #34       pc1 takes 0 (8 piercing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #35   gob1 chooses pass  [journal @8]
+  #36   gob1's turn ends
+  #37 == round 2 ==
+  #38   Stunned on boss1 ends (expired)
+  #39   boss1 is no longer Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #40   boss1 is no longer Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #41 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #42   pc1 chooses attack:shortsword>boss1  [journal @9]
+  #43     pc1: Attack
+  #44     pc1 Shortsword -> boss1: d20 4 +6 = 10 vs AC 17, miss  [pc1 attack r2 p0.0]
+  #45   pc1 chooses use:monk/monks-focus/flurry  [journal @10]
+  #46     pc1: Flurry of Blows
+  #47       pc1 spends Monk's Focus (4 left)
+  #48       pc1 Unarmed Strike -> boss1: d20 10 +6 = 16 vs AC 17, miss  [pc1 attack r2 p0.1]
+  #49       pc1 Unarmed Strike -> boss1: d20 3 +6 = 9 vs AC 17, miss  [pc1 attack r2 p0.2]
+  #50   pc1 chooses attack:shortsword>boss1  [journal @11]
+  #51     pc1 Shortsword -> boss1: d20 13 +6 = 19 vs AC 17, hit  [pc1 attack r2 p0.3]
+  #52       pc1 chooses pass  [journal @12]
+  #53       boss1 takes 8 (8 piercing), HP 7 -> 0  [pc1 damage r2 p0.3]
+  #54         boss1 dies (0 HP)
+  #55   pc1 chooses pass  [journal @13]
+  #56   pc1's turn ends
+  #57 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #58   gob1 chooses attack:shortbow>pc1  [journal @14]
+  #59     gob1: Attack
+  #60     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #61       pc1 chooses react:monk/deflect-attacks  [journal @15]
+  #62         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #63       pc1 takes 0 (5 piercing), HP 51 -> 51  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [journal @16]
+  #65   gob1's turn ends
+  #66 fight ends: stalemate in round 2
+logHash 2ba4dc14cd0f4d38
+
+== monsterHp=rolled (journal held) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative boss1 12 (static)
+   #5   initiative gob1 12 (static)
+   #6   pc1 chooses pick:pass  [journal @0]
+   #7 == round 1 ==
+   #8 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+   #9   pc1 chooses attack:unarmed-strike>boss1  [journal @1]
+  #10     pc1: Attack
+  #11     pc1 Unarmed Strike -> boss1: d20 17 +6 = 23 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #12       pc1 chooses rider:stunning-strike  [journal @2]
+  #13         pc1: Stunning Strike
+  #14           pc1 spends Monk's Focus (5 left)
+  #15       boss1 takes 8 (8 bludgeoning), HP 17 -> 9  [pc1 damage r1 p0.0]
+  #16           boss1 CON save vs Stunning Strike: d20 4 +0 = 4 vs DC 14, fail  [boss1 rider r1 p3.0]
+  #17           Stunned on boss1
+  #18           boss1 is Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #19           boss1 is Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #20   pc1 chooses attack:unarmed-strike>boss1  [journal @3]
+  #21     pc1 Unarmed Strike -> boss1: d20 19/2 adv -> 19 (+target-stunned) +6 = 25 vs AC 17, hit  [pc1 attack r1 p0.1]
+  #22       boss1 takes 6 (6 bludgeoning), HP 9 -> 3  [pc1 damage r1 p0.1]
+  #23   pc1 chooses pass  [journal @4]
+  #24   pc1's turn ends
+  #25 boss1's turn (D3, 3 HP, 30 ft) [Goblin Boss]
+  #26   boss1 chooses pass  [journal @5]
+  #27   boss1's turn ends
+  #28 gob1's turn (H6, 14 HP, 30 ft) [Goblin Warrior]
+  #29   gob1 chooses attack:shortbow>pc1  [journal @6]
+  #30     gob1: Attack
+  #31     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 18 (Half Cover +2), hit  [gob1 attack r1 p0.0]
+  #32       pc1 chooses react:monk/deflect-attacks  [journal @7]
+  #33         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #34       pc1 takes 0 (8 piercing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #35   gob1 chooses pass  [journal @8]
+  #36   gob1's turn ends
+  #37 == round 2 ==
+  #38   Stunned on boss1 ends (expired)
+  #39   boss1 is no longer Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #40   boss1 is no longer Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #41 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #42   pc1 chooses attack:shortsword>boss1  [journal @9]
+  #43     pc1: Attack
+  #44     pc1 Shortsword -> boss1: d20 4 +6 = 10 vs AC 17, miss  [pc1 attack r2 p0.0]
+  #45   pc1 chooses use:monk/monks-focus/flurry  [journal @10]
+  #46     pc1: Flurry of Blows
+  #47       pc1 spends Monk's Focus (4 left)
+  #48       pc1 Unarmed Strike -> boss1: d20 10 +6 = 16 vs AC 17, miss  [pc1 attack r2 p0.1]
+  #49       pc1 Unarmed Strike -> boss1: d20 3 +6 = 9 vs AC 17, miss  [pc1 attack r2 p0.2]
+  #50   pc1 chooses attack:shortsword>boss1  [journal @11]
+  #51     pc1 Shortsword -> boss1: d20 13 +6 = 19 vs AC 17, hit  [pc1 attack r2 p0.3]
+  #52       pc1 chooses pass  [journal @12]
+  #53       boss1 takes 8 (8 piercing), HP 3 -> 0  [pc1 damage r2 p0.3]
+  #54         boss1 dies (0 HP)
+  #55   pc1 chooses pass  [journal @13]
+  #56   pc1's turn ends
+  #57 gob1's turn (H6, 14 HP, 30 ft) [Goblin Warrior]
+  #58   gob1 chooses attack:shortbow>pc1  [journal @14]
+  #59     gob1: Attack
+  #60     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #61       pc1 chooses react:monk/deflect-attacks  [journal @15]
+  #62         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #63       pc1 takes 0 (5 piercing), HP 51 -> 51  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [journal @16]
+  #65   gob1's turn ends
+  #66 fight ends: stalemate in round 2
+logHash 104b6644e169a1f2
+
+== statBlockAtZeroHp=deathSaves (journal held) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative boss1 12 (static)
+   #5   initiative gob1 12 (static)
+   #6   pc1 chooses pick:pass  [journal @0]
+   #7 == round 1 ==
+   #8 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+   #9   pc1 chooses attack:unarmed-strike>boss1  [journal @1]
+  #10     pc1: Attack
+  #11     pc1 Unarmed Strike -> boss1: d20 17 +6 = 23 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #12       pc1 chooses rider:stunning-strike  [journal @2]
+  #13         pc1: Stunning Strike
+  #14           pc1 spends Monk's Focus (5 left)
+  #15       boss1 takes 8 (8 bludgeoning), HP 21 -> 13  [pc1 damage r1 p0.0]
+  #16           boss1 CON save vs Stunning Strike: d20 4 +0 = 4 vs DC 14, fail  [boss1 rider r1 p3.0]
+  #17           Stunned on boss1
+  #18           boss1 is Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #19           boss1 is Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #20   pc1 chooses attack:unarmed-strike>boss1  [journal @3]
+  #21     pc1 Unarmed Strike -> boss1: d20 19/2 adv -> 19 (+target-stunned) +6 = 25 vs AC 17, hit  [pc1 attack r1 p0.1]
+  #22       boss1 takes 6 (6 bludgeoning), HP 13 -> 7  [pc1 damage r1 p0.1]
+  #23   pc1 chooses pass  [journal @4]
+  #24   pc1's turn ends
+  #25 boss1's turn (D3, 7 HP, 30 ft) [Goblin Boss]
+  #26   boss1 chooses pass  [journal @5]
+  #27   boss1's turn ends
+  #28 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob1 chooses attack:shortbow>pc1  [journal @6]
+  #30     gob1: Attack
+  #31     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 18 (Half Cover +2), hit  [gob1 attack r1 p0.0]
+  #32       pc1 chooses react:monk/deflect-attacks  [journal @7]
+  #33         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #34       pc1 takes 0 (8 piercing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #35   gob1 chooses pass  [journal @8]
+  #36   gob1's turn ends
+  #37 == round 2 ==
+  #38   Stunned on boss1 ends (expired)
+  #39   boss1 is no longer Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #40   boss1 is no longer Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #41 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #42   pc1 chooses attack:shortsword>boss1  [journal @9]
+  #43     pc1: Attack
+  #44     pc1 Shortsword -> boss1: d20 4 +6 = 10 vs AC 17, miss  [pc1 attack r2 p0.0]
+  #45   pc1 chooses use:monk/monks-focus/flurry  [journal @10]
+  #46     pc1: Flurry of Blows
+  #47       pc1 spends Monk's Focus (4 left)
+  #48       pc1 Unarmed Strike -> boss1: d20 10 +6 = 16 vs AC 17, miss  [pc1 attack r2 p0.1]
+  #49       pc1 Unarmed Strike -> boss1: d20 3 +6 = 9 vs AC 17, miss  [pc1 attack r2 p0.2]
+  #50   pc1 chooses attack:shortsword>boss1  [journal @11]
+  #51     pc1 Shortsword -> boss1: d20 13 +6 = 19 vs AC 17, hit  [pc1 attack r2 p0.3]
+  #52       pc1 chooses pass  [journal @12]
+  #53       boss1 takes 8 (8 piercing), HP 7 -> 0  [pc1 damage r2 p0.3]
+  #54         boss1 drops to 0 HP and falls Unconscious
+  #55           boss1 is Unconscious (downed)
+  #56           boss1 is Incapacitated (downed)
+  #57           boss1 is Prone (fell-prone)
+  #58   pc1 chooses pass  [journal @13]
+  #59   pc1's turn ends
+  #60 boss1's turn (D3, 0 HP, 0 ft) [Goblin Boss]
+  #61   boss1 death save: d20 19 (successes 1, failures 0)  [boss1 death r2 p0.0]
+  #62   boss1's turn ends
+  #63 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #64   gob1 chooses attack:shortbow>pc1  [journal @14]
+  #65     gob1: Attack
+  #66     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 18 (Half Cover +2), hit  [gob1 attack r2 p0.0]
+  #67       pc1 chooses react:monk/deflect-attacks  [journal @15]
+  #68         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #69       pc1 takes 0 (5 piercing), HP 51 -> 51  [gob1 damage r2 p0.0]
+  #70   gob1 chooses pass  [journal @16]
+  #71   gob1's turn ends
+  #72 fight ends: stalemate in round 2
+logHash aac79fc81d4104b8
+
+== reduceBeforeResistance=false (journal held; log identical to default) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative boss1 12 (static)
+   #5   initiative gob1 12 (static)
+   #6   pc1 chooses pick:pass  [journal @0]
+   #7 == round 1 ==
+   #8 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+   #9   pc1 chooses attack:unarmed-strike>boss1  [journal @1]
+  #10     pc1: Attack
+  #11     pc1 Unarmed Strike -> boss1: d20 17 +6 = 23 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #12       pc1 chooses rider:stunning-strike  [journal @2]
+  #13         pc1: Stunning Strike
+  #14           pc1 spends Monk's Focus (5 left)
+  #15       boss1 takes 8 (8 bludgeoning), HP 21 -> 13  [pc1 damage r1 p0.0]
+  #16           boss1 CON save vs Stunning Strike: d20 4 +0 = 4 vs DC 14, fail  [boss1 rider r1 p3.0]
+  #17           Stunned on boss1
+  #18           boss1 is Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #19           boss1 is Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #20   pc1 chooses attack:unarmed-strike>boss1  [journal @3]
+  #21     pc1 Unarmed Strike -> boss1: d20 19/2 adv -> 19 (+target-stunned) +6 = 25 vs AC 17, hit  [pc1 attack r1 p0.1]
+  #22       boss1 takes 6 (6 bludgeoning), HP 13 -> 7  [pc1 damage r1 p0.1]
+  #23   pc1 chooses pass  [journal @4]
+  #24   pc1's turn ends
+  #25 boss1's turn (D3, 7 HP, 30 ft) [Goblin Boss]
+  #26   boss1 chooses pass  [journal @5]
+  #27   boss1's turn ends
+  #28 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob1 chooses attack:shortbow>pc1  [journal @6]
+  #30     gob1: Attack
+  #31     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 18 (Half Cover +2), hit  [gob1 attack r1 p0.0]
+  #32       pc1 chooses react:monk/deflect-attacks  [journal @7]
+  #33         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #34       pc1 takes 0 (8 piercing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #35   gob1 chooses pass  [journal @8]
+  #36   gob1's turn ends
+  #37 == round 2 ==
+  #38   Stunned on boss1 ends (expired)
+  #39   boss1 is no longer Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #40   boss1 is no longer Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #41 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #42   pc1 chooses attack:shortsword>boss1  [journal @9]
+  #43     pc1: Attack
+  #44     pc1 Shortsword -> boss1: d20 4 +6 = 10 vs AC 17, miss  [pc1 attack r2 p0.0]
+  #45   pc1 chooses use:monk/monks-focus/flurry  [journal @10]
+  #46     pc1: Flurry of Blows
+  #47       pc1 spends Monk's Focus (4 left)
+  #48       pc1 Unarmed Strike -> boss1: d20 10 +6 = 16 vs AC 17, miss  [pc1 attack r2 p0.1]
+  #49       pc1 Unarmed Strike -> boss1: d20 3 +6 = 9 vs AC 17, miss  [pc1 attack r2 p0.2]
+  #50   pc1 chooses attack:shortsword>boss1  [journal @11]
+  #51     pc1 Shortsword -> boss1: d20 13 +6 = 19 vs AC 17, hit  [pc1 attack r2 p0.3]
+  #52       pc1 chooses pass  [journal @12]
+  #53       boss1 takes 8 (8 piercing), HP 7 -> 0  [pc1 damage r2 p0.3]
+  #54         boss1 dies (0 HP)
+  #55   pc1 chooses pass  [journal @13]
+  #56   pc1's turn ends
+  #57 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #58   gob1 chooses attack:shortbow>pc1  [journal @14]
+  #59     gob1: Attack
+  #60     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #61       pc1 chooses react:monk/deflect-attacks  [journal @15]
+  #62         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #63       pc1 takes 0 (5 piercing), HP 51 -> 51  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [journal @16]
+  #65   gob1's turn ends
+  #66 fight ends: stalemate in round 2
+logHash 16b412c8d015eb10
+
+== losMethod=centers (journal held; log identical to default) ==
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative boss1 12 (static)
+   #5   initiative gob1 12 (static)
+   #6   pc1 chooses pick:pass  [journal @0]
+   #7 == round 1 ==
+   #8 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+   #9   pc1 chooses attack:unarmed-strike>boss1  [journal @1]
+  #10     pc1: Attack
+  #11     pc1 Unarmed Strike -> boss1: d20 17 +6 = 23 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #12       pc1 chooses rider:stunning-strike  [journal @2]
+  #13         pc1: Stunning Strike
+  #14           pc1 spends Monk's Focus (5 left)
+  #15       boss1 takes 8 (8 bludgeoning), HP 21 -> 13  [pc1 damage r1 p0.0]
+  #16           boss1 CON save vs Stunning Strike: d20 4 +0 = 4 vs DC 14, fail  [boss1 rider r1 p3.0]
+  #17           Stunned on boss1
+  #18           boss1 is Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #19           boss1 is Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #20   pc1 chooses attack:unarmed-strike>boss1  [journal @3]
+  #21     pc1 Unarmed Strike -> boss1: d20 19/2 adv -> 19 (+target-stunned) +6 = 25 vs AC 17, hit  [pc1 attack r1 p0.1]
+  #22       boss1 takes 6 (6 bludgeoning), HP 13 -> 7  [pc1 damage r1 p0.1]
+  #23   pc1 chooses pass  [journal @4]
+  #24   pc1's turn ends
+  #25 boss1's turn (D3, 7 HP, 30 ft) [Goblin Boss]
+  #26   boss1 chooses pass  [journal @5]
+  #27   boss1's turn ends
+  #28 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob1 chooses attack:shortbow>pc1  [journal @6]
+  #30     gob1: Attack
+  #31     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 18 (Half Cover +2), hit  [gob1 attack r1 p0.0]
+  #32       pc1 chooses react:monk/deflect-attacks  [journal @7]
+  #33         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #34       pc1 takes 0 (8 piercing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #35   gob1 chooses pass  [journal @8]
+  #36   gob1's turn ends
+  #37 == round 2 ==
+  #38   Stunned on boss1 ends (expired)
+  #39   boss1 is no longer Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #40   boss1 is no longer Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #41 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #42   pc1 chooses attack:shortsword>boss1  [journal @9]
+  #43     pc1: Attack
+  #44     pc1 Shortsword -> boss1: d20 4 +6 = 10 vs AC 17, miss  [pc1 attack r2 p0.0]
+  #45   pc1 chooses use:monk/monks-focus/flurry  [journal @10]
+  #46     pc1: Flurry of Blows
+  #47       pc1 spends Monk's Focus (4 left)
+  #48       pc1 Unarmed Strike -> boss1: d20 10 +6 = 16 vs AC 17, miss  [pc1 attack r2 p0.1]
+  #49       pc1 Unarmed Strike -> boss1: d20 3 +6 = 9 vs AC 17, miss  [pc1 attack r2 p0.2]
+  #50   pc1 chooses attack:shortsword>boss1  [journal @11]
+  #51     pc1 Shortsword -> boss1: d20 13 +6 = 19 vs AC 17, hit  [pc1 attack r2 p0.3]
+  #52       pc1 chooses pass  [journal @12]
+  #53       boss1 takes 8 (8 piercing), HP 7 -> 0  [pc1 damage r2 p0.3]
+  #54         boss1 dies (0 HP)
+  #55   pc1 chooses pass  [journal @13]
+  #56   pc1's turn ends
+  #57 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #58   gob1 chooses attack:shortbow>pc1  [journal @14]
+  #59     gob1: Attack
+  #60     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #61       pc1 chooses react:monk/deflect-attacks  [journal @15]
+  #62         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #63       pc1 takes 0 (5 piercing), HP 51 -> 51  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [journal @16]
+  #65   gob1's turn ends
+  #66 fight ends: stalemate in round 2
+logHash ab41b3968fa1aef1
+
+== losMethod=stubbed (journal held) ==
+flags read vs default: -losMethod -creatureCover
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative boss1 12 (static)
+   #5   initiative gob1 12 (static)
+   #6   pc1 chooses pick:pass  [journal @0]
+   #7 == round 1 ==
+   #8 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+   #9   pc1 chooses attack:unarmed-strike>boss1  [journal @1]
+  #10     pc1: Attack
+  #11     pc1 Unarmed Strike -> boss1: d20 17 +6 = 23 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #12       pc1 chooses rider:stunning-strike  [journal @2]
+  #13         pc1: Stunning Strike
+  #14           pc1 spends Monk's Focus (5 left)
+  #15       boss1 takes 8 (8 bludgeoning), HP 21 -> 13  [pc1 damage r1 p0.0]
+  #16           boss1 CON save vs Stunning Strike: d20 4 +0 = 4 vs DC 14, fail  [boss1 rider r1 p3.0]
+  #17           Stunned on boss1
+  #18           boss1 is Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #19           boss1 is Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #20   pc1 chooses attack:unarmed-strike>boss1  [journal @3]
+  #21     pc1 Unarmed Strike -> boss1: d20 19/2 adv -> 19 (+target-stunned) +6 = 25 vs AC 17, hit  [pc1 attack r1 p0.1]
+  #22       boss1 takes 6 (6 bludgeoning), HP 13 -> 7  [pc1 damage r1 p0.1]
+  #23   pc1 chooses pass  [journal @4]
+  #24   pc1's turn ends
+  #25 boss1's turn (D3, 7 HP, 30 ft) [Goblin Boss]
+  #26   boss1 chooses pass  [journal @5]
+  #27   boss1's turn ends
+  #28 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob1 chooses attack:shortbow>pc1  [journal @6]
+  #30     gob1: Attack
+  #31     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #32       pc1 chooses react:monk/deflect-attacks  [journal @7]
+  #33         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #34       pc1 takes 0 (8 piercing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #35   gob1 chooses pass  [journal @8]
+  #36   gob1's turn ends
+  #37 == round 2 ==
+  #38   Stunned on boss1 ends (expired)
+  #39   boss1 is no longer Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #40   boss1 is no longer Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #41 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #42   pc1 chooses attack:shortsword>boss1  [journal @9]
+  #43     pc1: Attack
+  #44     pc1 Shortsword -> boss1: d20 4 +6 = 10 vs AC 17, miss  [pc1 attack r2 p0.0]
+  #45   pc1 chooses use:monk/monks-focus/flurry  [journal @10]
+  #46     pc1: Flurry of Blows
+  #47       pc1 spends Monk's Focus (4 left)
+  #48       pc1 Unarmed Strike -> boss1: d20 10 +6 = 16 vs AC 17, miss  [pc1 attack r2 p0.1]
+  #49       pc1 Unarmed Strike -> boss1: d20 3 +6 = 9 vs AC 17, miss  [pc1 attack r2 p0.2]
+  #50   pc1 chooses attack:shortsword>boss1  [journal @11]
+  #51     pc1 Shortsword -> boss1: d20 13 +6 = 19 vs AC 17, hit  [pc1 attack r2 p0.3]
+  #52       pc1 chooses pass  [journal @12]
+  #53       boss1 takes 8 (8 piercing), HP 7 -> 0  [pc1 damage r2 p0.3]
+  #54         boss1 dies (0 HP)
+  #55   pc1 chooses pass  [journal @13]
+  #56   pc1's turn ends
+  #57 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #58   gob1 chooses attack:shortbow>pc1  [journal @14]
+  #59     gob1: Attack
+  #60     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #61       pc1 chooses react:monk/deflect-attacks  [journal @15]
+  #62         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #63       pc1 takes 0 (5 piercing), HP 51 -> 51  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [journal @16]
+  #65   gob1's turn ends
+  #66 fight ends: stalemate in round 2
+logHash c634079a76b199f8
+
+== creatureCover=off (journal held) ==
+flags read vs default: -losMethod
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative boss1 12 (static)
+   #5   initiative gob1 12 (static)
+   #6   pc1 chooses pick:pass  [journal @0]
+   #7 == round 1 ==
+   #8 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+   #9   pc1 chooses attack:unarmed-strike>boss1  [journal @1]
+  #10     pc1: Attack
+  #11     pc1 Unarmed Strike -> boss1: d20 17 +6 = 23 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #12       pc1 chooses rider:stunning-strike  [journal @2]
+  #13         pc1: Stunning Strike
+  #14           pc1 spends Monk's Focus (5 left)
+  #15       boss1 takes 8 (8 bludgeoning), HP 21 -> 13  [pc1 damage r1 p0.0]
+  #16           boss1 CON save vs Stunning Strike: d20 4 +0 = 4 vs DC 14, fail  [boss1 rider r1 p3.0]
+  #17           Stunned on boss1
+  #18           boss1 is Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #19           boss1 is Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #20   pc1 chooses attack:unarmed-strike>boss1  [journal @3]
+  #21     pc1 Unarmed Strike -> boss1: d20 19/2 adv -> 19 (+target-stunned) +6 = 25 vs AC 17, hit  [pc1 attack r1 p0.1]
+  #22       boss1 takes 6 (6 bludgeoning), HP 13 -> 7  [pc1 damage r1 p0.1]
+  #23   pc1 chooses pass  [journal @4]
+  #24   pc1's turn ends
+  #25 boss1's turn (D3, 7 HP, 30 ft) [Goblin Boss]
+  #26   boss1 chooses pass  [journal @5]
+  #27   boss1's turn ends
+  #28 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob1 chooses attack:shortbow>pc1  [journal @6]
+  #30     gob1: Attack
+  #31     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 16, hit  [gob1 attack r1 p0.0]
+  #32       pc1 chooses react:monk/deflect-attacks  [journal @7]
+  #33         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #34       pc1 takes 0 (8 piercing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #35   gob1 chooses pass  [journal @8]
+  #36   gob1's turn ends
+  #37 == round 2 ==
+  #38   Stunned on boss1 ends (expired)
+  #39   boss1 is no longer Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #40   boss1 is no longer Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #41 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #42   pc1 chooses attack:shortsword>boss1  [journal @9]
+  #43     pc1: Attack
+  #44     pc1 Shortsword -> boss1: d20 4 +6 = 10 vs AC 17, miss  [pc1 attack r2 p0.0]
+  #45   pc1 chooses use:monk/monks-focus/flurry  [journal @10]
+  #46     pc1: Flurry of Blows
+  #47       pc1 spends Monk's Focus (4 left)
+  #48       pc1 Unarmed Strike -> boss1: d20 10 +6 = 16 vs AC 17, miss  [pc1 attack r2 p0.1]
+  #49       pc1 Unarmed Strike -> boss1: d20 3 +6 = 9 vs AC 17, miss  [pc1 attack r2 p0.2]
+  #50   pc1 chooses attack:shortsword>boss1  [journal @11]
+  #51     pc1 Shortsword -> boss1: d20 13 +6 = 19 vs AC 17, hit  [pc1 attack r2 p0.3]
+  #52       pc1 chooses pass  [journal @12]
+  #53       boss1 takes 8 (8 piercing), HP 7 -> 0  [pc1 damage r2 p0.3]
+  #54         boss1 dies (0 HP)
+  #55   pc1 chooses pass  [journal @13]
+  #56   pc1's turn ends
+  #57 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #58   gob1 chooses attack:shortbow>pc1  [journal @14]
+  #59     gob1: Attack
+  #60     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #61       pc1 chooses react:monk/deflect-attacks  [journal @15]
+  #62         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #63       pc1 takes 0 (5 piercing), HP 51 -> 51  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [journal @16]
+  #65   gob1's turn ends
+  #66 fight ends: stalemate in round 2
+logHash 8b1f1512aa73ec04

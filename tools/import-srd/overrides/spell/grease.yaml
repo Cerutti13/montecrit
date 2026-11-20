@@ -1,0 +1,31 @@
+# SRD 5.2.1 p.137, Grease (srd-raw.txt:27635-27648), read by hand at coverage step 7.4. A 10-foot
+# square within 60 feet, Difficult Terrain for the duration ("Nonflammable", so nothing to leave out).
+# DEX save or Prone when it appears, and for a creature that "enters the area or ends its turn there".
+replace: true
+foundryPath: packs/_source/spells24/1st-level/grease.yml
+kind: spell
+id: srd:grease
+name: Grease
+source: SRD 5.2.1 p.137
+fidelity: full
+level: 1
+castingTime: action
+range: 60
+components: { v: true, s: true, m: focus }
+duration: { minutes: 1 }
+area: slick
+effects:
+  - id: slick
+    name: Grease
+    zone: { shape: square, size: 10, difficult: true }
+    duration: { minutes: 1 }
+    on:
+      - when: [appear, enter, turnEndIn]
+        do:
+          - save:
+              ability: dex
+              onFail: [{ condition: { id: prone } }]
+do: [{ apply: { effect: slick, to: point } }]
+provenance:
+  review: reviewed
+  pdfPage: 137

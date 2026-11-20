@@ -1,0 +1,21 @@
+# The forewarned variant of stars-ambush (docs/design/m1c.md 7.4): the party isn't surprised, and
+# the PC cast Spike Growth over the goblins' ground before the fight. The goblins didn't see it
+# cast (seenBy: party), so under zoneKnowledge: sawCast they would path through it unaware. The
+# zone appeared before the fight, so it deals nothing at the start; it costs 2d4 piercing per
+# 5 ft moved inside it, and its slot counts as a precast slot on reports.
+# What actually happens: the zone is gone in round 1, before any goblin moves into it. In about
+# half the runs the goblin archers break the PC's concentration; in the other half greedy trades
+# it for Moonbeam on the PC's first turn (300 runs, milestone review 2026-11-02: 151 and 149, no
+# Spike Growth damage). So this variant mostly measures "not surprised, one 2nd-level slot
+# spent", and its report notes say so.
+kind: scenario
+id: stars-ambush-precast
+name: Stars Ambush (forewarned)
+extends: stars-ambush
+reportNotes:
+  - 'encounter: 4 Goblin Boss + 4 Goblin Warrior = 1,000 XP; budgets for one level-6 character are Low 600, Moderate 1,000, High 1,400 (SRD 5.2.1 p.202-203). The ally is not counted, a convention the 2024 DMG may not share (unverified)'
+  - 'the precast Spike Growth almost never matters here: it is gone in round 1, before anyone walks in, either because the archers break its concentration or because greedy trades it for Moonbeam on the PC''s first turn (about half each; 300 runs, 2026-11-02: no Spike Growth damage), so this variant mostly measures not being surprised, with a 2nd-level slot spent'
+override:
+  units:
+    pc1: { surprised: false, precast: [{ cast: 'srd:spike-growth', level: 2, at: G5, seenBy: party }] }
+    ally1: { surprised: false }

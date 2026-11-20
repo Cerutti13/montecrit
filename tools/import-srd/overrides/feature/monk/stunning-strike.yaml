@@ -1,0 +1,44 @@
+# Reviewed against SRD 5.2.1 p.51 (srd-raw.txt:11201-11210), Monk level 5: "Once per turn when you
+# hit a creature with a Monk weapon or an Unarmed Strike, you can expend 1 Focus Point to attempt
+# a stunning strike. The target must make a Constitution saving throw. On a failed save, the
+# target has the Stunned condition until the start of your next turn. On a successful save, the
+# target's Speed is halved until the start of your next turn, and the next attack roll made
+# against the target before then has Advantage."
+# Mapped whole: an on-hit rider (RIDER) filtered on unarmed or monkWeapon, oncePerTurn global
+# (C1: any turn, so an Opportunity Attack counts), 1 point of monks-focus; a CON save against
+# 8 + WIS + PB (Monk's Focus, 11123-11125, through spellAbility: wis). Fail: Stunned until the
+# start of the Monk's next turn. Success: two effects on the target lasting the same time, Speed
+# halved and one incoming attack Advantage consumed by the next attack roll (two effects, so the
+# Advantage being used doesn't end the halved Speed). Nothing else, so full.
+fidelity: full
+spellAbility: wis
+effects:
+  - id: stunning-strike-slowed
+    name: Stunning Strike (Speed halved)
+    duration: { until: startOfNextTurn, of: caster }
+    stats:
+      - speed: half
+  - id: stunning-strike-opened
+    name: Stunning Strike (next attack has Advantage)
+    duration: { until: startOfNextTurn, of: caster }
+    mods:
+      - { on: [d20.attack], side: incoming, op: adv, consume: nextRoll }
+riders:
+  - id: stunning-strike
+    name: Stunning Strike
+    on: hit
+    filter: { attack: [unarmed, monkWeapon] }
+    oncePerTurn: global
+    cost: { pool: monks-focus }
+    do:
+      - save:
+          ability: con
+          onFail:
+            - condition: { id: stunned, until: { until: startOfNextTurn, of: caster } }
+          onSuccess:
+            - apply: { effect: stunning-strike-slowed, to: target }
+            - apply: { effect: stunning-strike-opened, to: target }
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 51

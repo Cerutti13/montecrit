@@ -1,0 +1,109 @@
+montecrit 0.8.0 | content 8a796bce0f88ecfb | scenario stars-ambush 6a6466de4286e53c | seed 42 | n 40 (fixed) | chunks 2x20
+arms     greedy [reference] moonbeam-first@fdd80421
+seats    ally1 boss1 boss2 boss3 boss4 gob1 gob2 gob3 gob4 greedy | pc1 the arm
+ai       greedy v13: one ply per decision, horizon 3 rounds, gamma 0.7, 6 zone anchors, simultaneous triggers in engine order (not scored); default weights 47cc0aed
+script   moonbeam-first open: taken 100.0% of fights, retired 0.0%, 0.00 retries/fight
+knobs    maxRounds=20 attackDowned=ifNoOtherTarget lossCounts=pcs downEnds=false
+defs     win = no enemy up; loss = every PC dead or stable; stalemate = round 20 ends;
+         TPK = every party member dead; rates are over all runs, stalemates included;
+         damage = HP and temp HP removed from the other side (overkill clamped); damage to its own side (itself included) is friendly fire, shown on its own rows;
+         DPR = total damage / total rounds (a stalemate counts every round);
+         PC per fight = each fight's PC damage / its rounds, quantiles over fights;
+         per PC turn = PC damage / PC turns that started up;
+         uptime = PC turns that started up concentrating / PC turns that started up;
+         all PCs out = every PC dead, dying or stable when the fight ends;
+         win with PC down = wins where a PC dropped at least once;
+         PC deaths by cause count runs where some PC died that way;
+         per-fight figures (resources, picks, concentration, retries) are means over all runs
+flags read by the fights (union over arms; * = unverified):
+  natOnChecksAndSaves=none diagonalCost=uniform initiativeMode=roll initiativeTies=rollOff*
+  groupInitiative=shared monsterHp=listed statBlockAtZeroHp=dies corpseSpace=clear* moveBetweenAttacks=all*
+  pauseInOccupiedSpace=false* focusHandSomatic=strict conjuredHandEffectBlocksHand=false*
+  deadAnchorTurnBoundary=keepInitiativeSlot* selfTargetWhenTextSilent=allowed* areaOriginOnGrid=squareCenter*
+  areaGridCoverage=atLeastHalfSquare* areaSaveGroupingPerEvent=groupByEvent*
+  movedAreaTriggersAlongPath=sweepPath* involuntaryMovementTriggersArea=true*
+  forcedMovementPath=eachStepCloser* unconsciousDropsShield=true* zoneKnowledge=sawCast* losMethod=corners*
+  creatureCover=on swapProvokesOpportunityAttacks=false*
+flags consulted by the AI while deciding (union over arms; * = unverified):
+  natOnChecksAndSaves=none expandedCritAutoHits=false* diagonalCost=uniform diagonalCorner=eitherBlocks*
+  corpseSpace=clear* focusHandSomatic=strict conjuredHandEffectBlocksHand=false*
+  selfTargetWhenTextSilent=allowed* areaOriginOnGrid=squareCenter* areaGridCoverage=atLeastHalfSquare*
+  movedAreaTriggersAlongPath=sweepPath* involuntaryMovementTriggersArea=true*
+  forcedMovementPath=eachStepCloser* losMethod=corners* creatureCover=on
+notes    LOS: grid (losMethod=corners, creatureCover=on)
+notes    calibrated: engine 0.8.0, greedy v13, weights 47cc0aed, greedy, 4,000 runs at seed 7: win 70.1% (group chosen with the private PC, in the private twin) -- measured on a different setup (scenario c84993d116cb3af8, content 8f261969b685def0), not this one
+notes    target priority: ev
+notes    encounter: 4 Goblin Boss + 4 Goblin Warrior = 1,000 XP; budgets for one level-6 character are Low 600, Moderate 1,000, High 1,400 (SRD 5.2.1 p.202-203). The ally is not counted, a convention the 2024 DMG may not share (unverified)
+notes    bias from what is not modeled: without Hide (the Goblin Bosses' Nimble Escape; the hidden attackers' Initiative and first-attack Advantage) the ambush is milder than written. Redirect Attack and the ally's Parry are modeled since coverage step 9+
+notes    placeholder stats: none
+notes    ending concentration or dismissing an effect: offered only on your own turn
+notes    srd:warrior-veteran partial: unimplemented Multiattack reading: two of the same attack (the text does not say "in any combination")
+notes    srd:goblin-boss partial: unimplemented Nimble Escape: the Hide option
+notes    srd:goblin-warrior partial: unimplemented Nimble Escape: the Hide option
+notes    srd:produce-flame partial: unimplemented the flame sheds Bright Light 20 ft and Dim Light 20 ft more
+notes    srd:moonbeam partial: unimplemented Dim Light in the Cylinder; a failed save reverts a shape-shifted creature
+notes    pc1 options never chosen: Dash, Disengage, Unarmed Strike, Spike Growth, Guidance, Hurl Flame (Produce Flame), Search
+
+OUTCOMES (95% Wilson CIs, %)
+  greedy          win 70.0% [54.6, 81.9]  loss 30.0% [18.1, 45.4]  stalemate 0.0% [0.0, 8.8]
+                  TPK 20.0% [10.5, 34.8]  all PCs out at end 37.5% [24.2, 53.0]  PC drops 42.5% [28.5, 57.8]  win with PC down 12.5% [5.5, 26.1]
+                  PC dies 25.0% [14.2, 40.2]; by cause: at 0 HP 0.0% [0.0, 8.8], massive damage 0.0% [0.0, 8.8], death saves 25.0% [14.2, 40.2]
+                  ally1 dies 20.0% [10.5, 34.8]
+  moonbeam-first  win 82.5% [68.1, 91.3]  loss 17.5% [8.7, 31.9]  stalemate 0.0% [0.0, 8.8]
+                  TPK 7.5% [2.6, 19.9]  all PCs out at end 17.5% [8.7, 31.9]  PC drops 20.0% [10.5, 34.8]  win with PC down 2.5% [0.4, 12.9]
+                  PC dies 7.5% [2.6, 19.9]; by cause: at 0 HP 0.0% [0.0, 8.8], massive damage 0.0% [0.0, 8.8], death saves 7.5% [2.6, 19.9]
+                  ally1 dies 15.0% [7.1, 29.1]
+
+PAIRED (other - reference, same runs; 95% per comparison, not simultaneous; Holm over 1 comparison)
+  moonbeam-first - greedy
+    win +12.5 pts [-4.3, 28.6]  only moonbeam-first won 8, only greedy won 3  McNemar p 0.227  Holm p 0.227 ns
+    PC DPR -1.01 [-2.69, 0.67] (paired bootstrap; descriptive, not adjusted)
+
+ROUNDS
+  greedy          mean 5.80  p10/p50/p90 5/5/7  fights by length 4:3 5:17 6:10 7:7 8:2 10:1
+  moonbeam-first  mean 6.30  p10/p50/p90 5/6/8  fights by length 4:1 5:9 6:15 7:9 8:4 9:2
+
+DPR (effective; percentile bootstrap 95% CIs)
+  greedy          PC 12.52 [10.96, 14.14]  party 19.10 [17.47, 20.86]  PC per PC turn 15.78 [14.41, 17.19]  PC per fight p10/p50/p90 5.83/13.60/19.40
+  moonbeam-first  PC 11.51 [10.45, 12.57]  party 18.42 [17.08, 19.73]  PC per PC turn 13.18 [12.22, 14.17]  PC per fight p10/p50/p90 6.80/12.17/15.50
+PC DPR HISTOGRAM (% of fights per 5 HP/round; --verbose for 1 HP/round bins)
+  greedy          0-4:7.5% 5-9:15.0% 10-14:32.5% 15-19:37.5% 20-24:7.5%
+  moonbeam-first  0-4:5.0% 5-9:20.0% 10-14:57.5% 15-19:17.5%
+
+DAMAGE PER ROUND (mean per fight, effective, to the other side unless marked friendly fire; a fight that ended counts 0; rolled = before the HP clamp)
+  greedy                      r1     r2     r3     r4     r5     r6     r7     r8     r9    r10  later  total rolled
+    pc1 Moonbeam           15.65  23.50  13.35  11.15   4.65   1.30   0.45   0.17   0.00   0.00   0.00  70.22  96.25
+    pc1 Stance (Volley)     0.25   0.00   0.00   0.95   0.40   0.00   0.00   0.00   0.00   0.00   0.00   1.60   3.50
+    pc1 Tether              0.00   0.00   0.28   0.20   0.13   0.00   0.17   0.00   0.00   0.00   0.00   0.78   0.78
+    ally1 (all sources)     9.07   8.57   7.03   6.45   3.73   2.02   0.75   0.53   0.00   0.05   0.00  38.20  51.88
+    enemies (all sources)  33.92  25.23  21.38  16.50   9.28   3.45   1.40   0.78   0.00   0.35   0.00 112.28 114.95
+    pc1 friendly fire       0.00   0.33   0.28   0.00   0.00   0.00   0.00   0.00   0.00   0.00   0.00   0.60   0.60
+    reached               100.0% 100.0% 100.0% 100.0%  92.5%  50.0%  25.0%   7.5%   2.5%   2.5%
+  moonbeam-first              r1     r2     r3     r4     r5     r6     r7     r8     r9    r10  later  total rolled
+    pc1 Moonbeam            9.93  17.57  11.93  13.47   8.45   4.35   1.32   0.00   0.00   0.00   0.00  67.02  85.80
+    pc1 Stance (Volley)     2.15   0.45   0.38   0.97   0.93   0.00   0.05   0.03   0.13   0.00   0.00   5.08   6.95
+    pc1 Tether              0.00   0.00   0.00   0.00   0.10   0.17   0.00   0.13   0.00   0.00   0.00   0.40   0.70
+    ally1 (all sources)     9.40   8.97   7.50   6.92   4.45   3.83   2.00   0.28   0.20   0.00   0.00  43.55  56.92
+    enemies (all sources)  34.73  25.85  22.80  17.25  10.40   4.65   1.85   1.07   0.17   0.00   0.00 118.78 120.45
+    pc1 friendly fire       0.00   0.00   0.38   0.00   0.00   0.00   0.00   0.00   0.00   0.00   0.00   0.38   0.38
+    reached               100.0% 100.0% 100.0% 100.0%  97.5%  75.0%  37.5%  15.0%   5.0%   0.0%
+
+CONCENTRATION (PC)
+  greedy          uptime 0.723 [0.670, 0.766]  starts 1.32/fight  ends/fight: concentration 0.15, newConcentration 0.10, incapacitated 0.45
+  moonbeam-first  uptime 0.723 [0.679, 0.764]  starts 1.50/fight  ends/fight: concentration 0.53, incapacitated 0.20
+
+RESOURCES (PC, per fight)
+  greedy          L1 0.10, L2 0.95, L3 2.73, Forms 1.55, Charm Bolts 0.03, free casts 0.03
+  moonbeam-first  L1 0.17, L2 1.68, L3 2.65, Forms 1.38, Charm Bolts 0.00, free casts 0.00
+
+OPTION PICKS (PC, chosen per fight; top 8)
+  greedy          pass 4.13, move 3.20, Move Moonbeam (Moonbeam) 3.10, Healing Word 2.45, Stance 1.55,
+                  Moonbeam 1.32, Volley Shot (Stance (Volley)) 0.30, Tether 0.15
+  moonbeam-first  pass 5.03, Move Moonbeam (Moonbeam) 3.55, move 3.48, Healing Word 3.00, Moonbeam 1.50,
+                  Stance 1.38, Volley Shot (Stance (Volley)) 0.75, Dodge 0.23
+
+EXEMPLARS (run indices; replay one with the command below)
+  greedy          closest loss run 15 (enemies 16/124 HP left, 5 rounds) | typical win run 32 (5 rounds, PC HP 12) | TPK run 6 | PC death run 6
+  moonbeam-first  closest loss run 7 (enemies 14/124 HP left, 9 rounds) | typical win run 13 (6 rounds, PC HP 15) | TPK run 18 | PC death run 18
+replay   greedy closest loss: montecrit run scenarios/stars-ambush.yaml --seed 42 --run 15 --policy greedy
+replay   moonbeam-first closest loss: montecrit run scenarios/stars-ambush.yaml --seed 42 --run 7 --policy moonbeam-first

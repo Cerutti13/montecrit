@@ -1,0 +1,16 @@
+# A small synthetic level-3 PC carrying the pre-roll reaction, so the demo caster's journals stay short.
+kind: pc
+id: test:sample-seer
+name: Sample Seer
+source: synthetic test fixture
+rules: '2024'
+level: 3
+size: medium
+speed: 30
+abilities: { str: 10, dex: 12, con: 12, int: 10, wis: 16, cha: 10 }
+hpMax: 21
+ac: 13
+saveProficiencies: [wis, cha]
+pools:
+  - { id: twist, name: Fate Twist, max: 3, recharge: longRest }
+features: [test:fate-twist-bane]

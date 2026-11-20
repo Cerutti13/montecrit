@@ -1,0 +1,27 @@
+# Reviewed against SRD 5.2.1 p.63 (srd-raw.txt:13838-13841), Rogue level 5, Uncanny Dodge (coverage
+# W1, docs/design/w1-plan.md section 3, P11): "When an attacker that you can see hits you with an
+# attack roll, you can take a Reaction to halve the attack's damage against you (round down)."
+# The hitTaken reaction window (C12), reduce halve, only against an attacker the bearer can see
+# (sees: true: not Blinded, and a line of sight from the bearer). Reaction activations are never
+# promoted without a review (C7); this is that review.
+# Partial, for two readings on its path (C7: full only with no unverified reading on the path):
+#   - The text halves "the attack's damage" once (round down). The engine's `reduce: halve`
+#     (sim/damage.ts cutTypes) halves each damage type separately and rounds each down [U]: a hit
+#     of 7 Piercing + 3 Poison leaves 3 + 1 = 4, not floor(10/2) = 5. Only a mixed-type hit differs.
+#   - Every hit with a cut reads the RuleFlag reduceBeforeResistance (verified: false): whether the
+#     halving comes before or after Resistance and Vulnerability (an odd amount doubled then
+#     halved gives x; halved then doubled gives 2*floor(x/2)).
+# Known limit (W2): the hitTaken window offers only the first eligible feature (sim/riders.ts
+# hitTakenWindow), so a creature with a second hitTaken feature (a Goliath Rogue's Stone's
+# Endurance) never sees it after this one. No curated build has that pairing.
+fidelity: partial
+reaction:
+  window: hitTaken
+  reduce: halve
+  sees: true
+unimplemented:
+  - part halve-per-type-unverified not modeled
+  - part reduce-before-resistance-unverified not modeled
+provenance:
+  review: reviewed
+  pdfPage: 63

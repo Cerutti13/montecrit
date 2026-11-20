@@ -1,0 +1,48 @@
+# Reviewed against SRD 5.2.1 p.50-51 (srd-raw.txt:11109-11137), Monk level 2, Monk's Focus. The
+# Focus Points are the class pool monks-focus (@scale.monk.focus, 11112-11115); rest recovery is
+# metadata (hard rule 4). The three features it starts with, each a Bonus Action:
+#   - Flurry of Blows (11126-11127): 1 Focus Point, two Unarmed Strikes.
+#   - Patient Defense (11128-11132): Disengage; or 1 Focus Point for Disengage and Dodge.
+#   - Step of the Wind (11133-11137): Dash; or 1 Focus Point for Disengage and Dash "and your jump
+#     distance is doubled for the turn". Jumping isn't modeled (no altitude), so that part is the
+#     one line left and the feature stays partial.
+# The save DC "8 plus your Wisdom modifier and Proficiency Bonus" (11123-11125) is set on each
+# feature that asks for a save (spellAbility: wis on Stunning Strike and Open Hand Technique).
+# Foundry's utility activities and its dodging status are replaced by the steps below.
+fidelity: partial
+activate:
+  - id: flurry
+    name: Flurry of Blows
+    cost: bonus
+    uses: { pool: monks-focus }
+    do:
+      - weaponAttack: { with: unarmed, count: 2 }
+  - id: patient
+    name: Patient Defense
+    cost: bonus
+    do:
+      - core: disengage
+  - id: patient-focus
+    name: Patient Defense (Focus)
+    cost: bonus
+    uses: { pool: monks-focus }
+    do:
+      - core: disengage
+      - core: dodge
+  - id: wind
+    name: Step of the Wind
+    cost: bonus
+    do:
+      - core: dash
+  - id: wind-focus
+    name: Step of the Wind (Focus)
+    cost: bonus
+    uses: { pool: monks-focus }
+    do:
+      - core: disengage
+      - core: dash
+unimplemented:
+  - part step-of-the-wind-jump not modeled
+provenance:
+  review: reviewed
+  pdfPage: 50

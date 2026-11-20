@@ -1,0 +1,23 @@
+# Reviewed against SRD 5.2.1 p.85 (srd-raw.txt:19861-19864), the Goliath's Giant Ancestry option
+# Stone's Endurance (coverage W1, docs/design/w1-plan.md section 3, D2): "When you take damage, you
+# can take a Reaction to roll 1d12. Add your Constitution modifier to the number rolled and reduce
+# the damage by that total."
+#   - The hitTaken reaction window (C12): reduce 1d12 + @mod.con, spending one use of the species
+#     pool giant-ancestry (max @pb, overrides/species/goliath.yaml).
+#   - "When you take damage" also covers damage from a save or a zone; hitTaken fires only on an
+#     attack hit, so that part is a line and the feature stays partial (D2, Shane 2026-11-12: a
+#     reduction for any damage fits W4's RollSpec and reduction pass).
+#   - Known limit (W2): the hitTaken window offers only the first eligible feature (sim/riders.ts
+#     hitTakenWindow), so a Goliath Rogue or Monk never sees this after Uncanny Dodge or Deflect
+#     Attacks. No curated build has that pairing.
+# Reaction activations are never promoted without a review (C7); this is that review.
+fidelity: partial
+reaction:
+  window: hitTaken
+  reduce: 1d12 + @mod.con
+  pool: giant-ancestry
+unimplemented:
+  - part non-attack-damage not modeled
+provenance:
+  review: reviewed
+  pdfPage: 85

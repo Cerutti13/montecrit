@@ -1,0 +1,56 @@
+# A synthetic timed form: a Bonus Action that spends one use of the character's "forms" pool and
+# lasts 10 minutes (not concentration), ending early on Incapacitated, on dismissal, or when used
+# again. Each activation picks one of three options.
+kind: feature
+id: test:stance
+name: Stance
+source: synthetic test fixture (generic pool-spending form with three options)
+spellAbility: wis
+activate:
+  id: stance
+  name: Assume Stance
+  cost: bonus
+  pool: forms
+  root: form
+  do:
+    - choose:
+        - id: volley
+          name: Volley
+          do:
+            - apply: { effect: volley, to: self }
+            - use: shot # fires once on activation, at no cost
+        - id: mending
+          name: Mending
+          do: [{ apply: { effect: mending, to: self } }]
+        - id: steady
+          name: Steady
+          do: [{ apply: { effect: steady, to: self } }]
+effects:
+  - id: form
+    name: Stance
+    duration: { rounds: 100 } # 10 minutes
+    endsOn: [incapacitated, dismiss]
+    group: stance # using it again ends the old form
+  - id: volley
+    name: Stance (Volley)
+    grants:
+      - id: shot
+        name: Volley Shot
+        cost: bonus
+        laterTurns: true
+        do:
+          - target: { range: 60, self: no }
+          - attack:
+              kind: ranged
+              range: 60
+              onHit: [{ damage: [{ roll: 1d8 + @mod, type: radiant }] }]
+  - id: mending
+    name: Stance (Mending)
+    on:
+      - when: [slotHeal] # a spell cast with a slot resolves a heal step
+        do:
+          - target: { range: 30, self: yes }
+          - heal: { roll: 1d8 + @mod }
+  - id: steady
+    name: Stance (Steady)
+    mods: [{ on: [d20.check.int, d20.check.wis, d20.save.con.concentration], op: floor, value: 10 }]

@@ -1,0 +1,13 @@
+# Reviewed against SRD 5.2.1 p.59 (srd-raw.txt:13001-13010), Ranger level 2: a Fighting Style feat
+# of your choice, or the Druidic Warrior option.
+# Coverage C0 (T relabel, X1): this record carries no program because nothing in it needs one; it is
+# mechanized by the class's Fighting Style choice (classes/ranger.yaml choices id fighting-style:
+# the Fighting Style feats and srd:ranger/druidic-warrior), which the character expansion takes as a
+# pick; the picked feat or option has its own fidelity.
+# Nothing in the text is left unmodeled in a fight, so full (mechanizedBy, never compiled).
+fidelity: full
+mechanizedBy: fightingStyle
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 59

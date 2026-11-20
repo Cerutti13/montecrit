@@ -1,0 +1,11 @@
+# A synthetic Druid subclass (session S, the repo half): one level-3 feature, the synthetic form
+# test:stance, with its own pool.
+kind: subclass
+id: test:sample-path
+name: Sample Path
+source: synthetic test fixture (generic subclass with a pooled form)
+parent: srd:druid
+pools:
+  - { id: forms, name: Forms, max: 3, recharge: longRest }
+features:
+  '3': [test:stance]

@@ -1,0 +1,16 @@
+# Precast golden (docs/design/m1c.md 7.4, 8): the first three rounds of stars-ambush-precast at
+# seed 1, every seat greedy. Spike Growth is up before initiative (a precast event at round 0,
+# a precast slot), nobody takes appear damage, and no goblin saw it cast. It ends in round 1
+# when boss1's arrows break the PC's concentration, before any goblin steps into it. In this
+# variant the zone is usually gone in round 1 either way: broken by the archers, as here, or
+# traded by greedy for Moonbeam on the PC's first turn. Same override as scenarios/stars-ambush-precast.yaml (extends allows
+# one level).
+kind: scenario
+id: precast-spikes
+name: Precast Spike Growth, greedy, three rounds
+extends: stars-ambush
+knobs: { maxRounds: 3 }
+override:
+  units:
+    pc1: { surprised: false, precast: [{ cast: 'srd:spike-growth', level: 2, at: G5, seenBy: party }] }
+    ally1: { surprised: false }

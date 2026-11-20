@@ -1,0 +1,36 @@
+# SRD 5.2.1 p.296, Guard ("Medium or Small"; modeled Medium). Numbers checked against the PDF text.
+# Gear lists a single Spear; throwing it uses it up under monsterThrownWeapons=gearCount.
+# Moved here unchanged at M3 step 6 (docs/design/m3.md 4.6): the hand-written stat block stands in
+# for the Foundry record as replace: true, so its compiled template, every closure hash and every
+# golden stay byte-identical (tools/import-srd/test/step6-monsters.test.ts).
+replace: true
+foundryPath: packs/_source/actors24/humanoid/guard.yml
+kind: monster
+id: srd:guard
+name: Guard
+source: SRD 5.2.1 p.296
+size: medium
+cr: 1/8
+pb: 2
+ac: 16
+hp: { average: 11, formula: 2d8 + 2 }
+speed: { walk: 30 }
+initiative: { mod: 1, score: 11 }
+abilities: { str: 13, dex: 12, con: 12, int: 10, wis: 11, cha: 10 }
+gear:
+  - { name: Chain Shirt }
+  - { name: Shield }
+  - { name: Spear, count: 1 }
+attacks:
+  - id: spear
+    name: Spear
+    kind: meleeOrRanged
+    toHit: 3
+    reach: 5
+    range: [20, 60]
+    thrownGear: Spear
+    damage:
+      - { roll: 1d6 + 1, type: piercing, avg: 4 }
+provenance:
+  review: reviewed
+  pdfPage: 296

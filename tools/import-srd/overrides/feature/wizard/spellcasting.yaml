@@ -1,0 +1,16 @@
+# Reviewed against SRD 5.2.1 p.77 (srd-raw.txt:17350-17358, 17853-17899), Wizard level 1: cantrips,
+# the spellbook, spell slots, prepared spells from the spellbook, INT, a focus or the spellbook as
+# one.
+# Coverage C0 (T relabel, X1): this record carries no program because nothing in it needs one; it is
+# mechanized by the class's spellcasting block and its spell-slot, cantrip and prepared columns
+# (classes/wizard.yaml spellcasting, progression full), which the character expansion turns into
+# slots, the casting lists and the INT spell ability; the focus is a held item (sim/hands.ts).
+# Partial: the spellbook isn't: a character file lists prepared spells only, so nothing checks they
+# come from a book, and the book isn't a focus item.
+fidelity: partial
+mechanizedBy: spellcasting
+unimplemented:
+  - part spellbook not modeled
+provenance:
+  review: reviewed
+  pdfPage: 77

@@ -1,0 +1,20 @@
+# A synthetic concentration mark (coverage 8'b G6's stand-in, the shape of a lasting mark such as
+# Hunter's Mark, whose damage reader comes with its content in W1): its caster has a +2 bonus to
+# attack rolls against the marked creature for a minute.
+kind: spell
+id: test:mark-like
+name: Quarry-like Mark
+source: synthetic test fixture (concentration mark, owner's rolls only)
+level: 1
+castingTime: bonus
+range: 60
+components: { v: true, s: false }
+concentration: true
+duration: { minutes: 1 }
+effects:
+  - id: marked
+    name: Marked (the caster's attack rolls +2)
+    mods: [{ on: [d20.attack], side: incoming, op: flat, value: 2, from: owner }]
+do:
+  - target: { range: 60, who: enemy, self: no }
+  - apply: { effect: marked, to: target }

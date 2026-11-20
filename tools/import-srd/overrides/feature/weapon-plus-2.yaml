@@ -1,0 +1,13 @@
+# Reviewed against SRD 5.2.1 p.253 (srd-raw.txt:43329-43334, 43342-43343), "Weapon, +1, +2, or +3":
+# "Weapon (Any Simple or Martial), Uncommon (+1), Rare (+2), or Very Rare (+3)" / "You have a bonus
+# to attack rolls and damage rolls made with this magic weapon. The bonus is determined by the
+# weapon's rarity."
+# The mapped item (map/magic-item.ts MAGIC_READINGS) is that whole text for the +2 variant: a
+# passive magicWeapon 2 stat, folded at compile into the attack and damage rolls of the weapon
+# whose magic names this feature, every mode of it (M3 step 5b, content/compile.ts). No
+# attunement. So full.
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 253

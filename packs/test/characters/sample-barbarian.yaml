@@ -1,0 +1,33 @@
+# M3 step 10 (docs/design/coverage.md, "perf/barbarian-5"): a class-built Barbarian 5 (Path of
+# the Berserker), the martial perf case's PC. Synthetic test fixture built only from SRD 5.2.1
+# data, following tools/class-picks.ts's curated Barbarian (Goliath, Soldier, Greataxe two-handed
+# and two Handaxes to throw, Unarmored Defense, Stone's Endurance).
+# Scores: the Standard Array (15, 14, 13, 12, 10, 8) in STR, CON, DEX, WIS, CHA, INT order, the
+# Soldier's +2 STR / +1 CON, then the level-4 ASI's +1 STR / +1 CON.
+# Rage, Reckless Attack and Frenzy are not modeled yet (wave W1), so on today's engine this plays
+# as a martial with Extra Attack and weapon mastery only. Soldier already gives Athletics and
+# Intimidation; Greatsword is a mastery pick the build does not carry (the curated preference).
+kind: character
+id: test:sample-barbarian
+name: Sample Barbarian
+source: synthetic test fixture
+rules: '2024'
+classes:
+  - { class: srd:barbarian, level: 5, subclass: srd:path-of-the-berserker }
+species: srd:goliath
+background: srd:soldier
+abilities: { str: 18, dex: 13, con: 16, int: 8, wis: 12, cha: 10 }
+hp: average
+picks:
+  srd:barbarian#skills: [perception, survival]
+  srd:barbarian#skills-3: [animal-handling]
+  srd:barbarian#weapon-mastery: [srd:greataxe, srd:handaxe, srd:greatsword]
+  srd:barbarian#asi-4: { asi: { str: 1, con: 1 } }
+  srd:goliath#giant-ancestry: [srd:goliath/stones-endurance]
+  srd:soldier#tools: [Gaming Set (Dice)]
+  srd:soldier#abilities: { asi: { str: 2, con: 1 } }
+equipment:
+  armor: null
+  shield: false
+  weapons: [srd:greataxe, { id: srd:handaxe, count: 2 }]
+  hands: [greataxe, greataxe]

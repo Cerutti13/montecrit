@@ -1,0 +1,86 @@
+replay   engine 0.8.0 | content c78006367086638f | scenario monk-stunning-strike 93ab788df05a509a | seed 30 run 0 | journal 17
+policy   boss1 journal>greedy | gob1 journal>greedy | pc1 journal>greedy
+knobs    maxRounds=2 attackDowned=ifNoOtherTarget lossCounts=pcs downEnds=false
+flags read:
+  diagonalCost=uniform [verified: SRD 5.2.1 p.13 "Playing on a Grid": any adjacent square costs 1; alternating 5/10 is a 2024 DMG option (its use for range is unverified)]
+  initiativeMode=static [verified: SRD 5.2.1 p.184 "Initiative" and p.254: static initiative is a GM option]
+  initiativeTies=rollOff [UNVERIFIED: SRD 5.2.1 p.13: the GM orders tied monsters and mixed ties, players order tied PCs; no procedure given (policy)]
+  groupInitiative=shared [verified: SRD 5.2.1 p.13: a group of identical creatures gets one roll]
+  monsterHp=listed [verified: SRD 5.2.1 p.255: use the number or the dice, the GM's choice]
+  statBlockAtZeroHp=dies [verified: SRD 5.2.1 p.17 "Monster Death": dies at 0 HP unless the GM treats it like a character]
+  reduceBeforeResistance=true [UNVERIFIED: SRD 5.2.1 "Playing the Game", "Order of Application" (srd-raw.txt:2259-2266): adjustments such as bonuses, penalties or multipliers first, then Resistance, then Vulnerability; Deflect Attacks (11154-11158) "reduce the attack's total damage" and does not say whether that reduction is such an adjustment]
+  losMethod=corners [UNVERIFIED: SRD 5.2.1 "Cover" (srd-raw.txt:1995-2032) and its glossary entry (33044-33050) give the three degrees and say a target benefits only when the effect "originates on the opposite side of the cover", but give no grid procedure. corners = the DMG's corner-to-corner lines (the attacker's best corner to the 4 corners of the target's square: 1-2 blocked Half, 3 Three-Quarters, 4 Total; known only secondhand, the DMG is not SRD); centers = one line between square centers; stubbed = no cover and everyone sees everyone (the engine before M3 step 8, a what-if)]
+  creatureCover=on [verified: SRD 5.2.1 Cover table (srd-raw.txt:2006-2017): Half Cover is offered by "Another creature or an object that covers at least half of the target"; off is a what-if]
+notes    LOS: grid (losMethod=corners, creatureCover=on)
+notes    ending concentration or dismissing an effect: offered only on your own turn
+notes    srd:goblin-boss partial: unimplemented Nimble Escape: the Hide option
+notes    srd:goblin-warrior partial: unimplemented Nimble Escape: the Hide option
+notes    test:sample-monk partial: unimplemented Darkvision: narrative, not modeled; Monk: choice tools not mapped; Dwarf: species trait darkvision not mapped; Savage Attacker: narrative, not modeled; Dwarven Resilience: advantage on saves against the poisoned condition not modeled; Dwarven Resilience: not a bucket-A shape (needs a reviewed override to be full); Dwarven Toughness: not a bucket-A shape (needs a reviewed override to be full); Stonecunning: activity type utility; Deflect Attacks: part deflect-redirect not modeled; Martial Arts: part grapple-shove-dex-dc not modeled; Monk's Focus: part step-of-the-wind-jump not modeled; Slow Fall: activity type heal
+
+   #1   Empowered Strikes on pc1
+   #2   Unarmored Movement on pc1
+   #3   initiative pc1 13 (static)
+   #4   initiative boss1 12 (static)
+   #5   initiative gob1 12 (static)
+   #6   pc1 chooses pick:pass  [journal @0]
+   #7 == round 1 ==
+   #8 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+   #9   pc1 chooses attack:unarmed-strike>boss1  [journal @1]
+  #10     pc1: Attack
+  #11     pc1 Unarmed Strike -> boss1: d20 17 +6 = 23 vs AC 17, hit  [pc1 attack r1 p0.0]
+  #12       pc1 chooses rider:stunning-strike  [journal @2]
+  #13         pc1: Stunning Strike
+  #14           pc1 spends Monk's Focus (5 left)
+  #15       boss1 takes 8 (8 bludgeoning), HP 21 -> 13  [pc1 damage r1 p0.0]
+  #16           boss1 CON save vs Stunning Strike: d20 4 +0 = 4 vs DC 14, fail  [boss1 rider r1 p3.0]
+  #17           Stunned on boss1
+  #18           boss1 is Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #19           boss1 is Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #20   pc1 chooses attack:unarmed-strike>boss1  [journal @3]
+  #21     pc1 Unarmed Strike -> boss1: d20 19/2 adv -> 19 (+target-stunned) +6 = 25 vs AC 17, hit  [pc1 attack r1 p0.1]
+  #22       boss1 takes 6 (6 bludgeoning), HP 13 -> 7  [pc1 damage r1 p0.1]
+  #23   pc1 chooses pass  [journal @4]
+  #24   pc1's turn ends
+  #25 boss1's turn (D3, 7 HP, 30 ft) [Goblin Boss]
+  #26   boss1 chooses pass  [journal @5]
+  #27   boss1's turn ends
+  #28 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #29   gob1 chooses attack:shortbow>pc1  [journal @6]
+  #30     gob1: Attack
+  #31     gob1 Shortbow -> pc1: d20 17 +4 = 21 vs AC 18 (Half Cover +2), hit  [gob1 attack r1 p0.0]
+  #32       pc1 chooses react:monk/deflect-attacks  [journal @7]
+  #33         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 12  [pc1 hitTaken r1 p2.0]
+  #34       pc1 takes 0 (8 piercing), HP 51 -> 51  [gob1 damage r1 p0.0]
+  #35   gob1 chooses pass  [journal @8]
+  #36   gob1's turn ends
+  #37 == round 2 ==
+  #38   Stunned on boss1 ends (expired)
+  #39   boss1 is no longer Incapacitated (srd:monk/stunning-strike/stunning-strike-stunned)
+  #40   boss1 is no longer Stunned (srd:monk/stunning-strike/stunning-strike-stunned)
+  #41 pc1's turn (C3, 51 HP, 45 ft) [Sample Monk]
+  #42   pc1 chooses attack:shortsword>boss1  [journal @9]
+  #43     pc1: Attack
+  #44     pc1 Shortsword -> boss1: d20 4 +6 = 10 vs AC 17, miss  [pc1 attack r2 p0.0]
+  #45   pc1 chooses use:monk/monks-focus/flurry  [journal @10]
+  #46     pc1: Flurry of Blows
+  #47       pc1 spends Monk's Focus (4 left)
+  #48       pc1 Unarmed Strike -> boss1: d20 10 +6 = 16 vs AC 17, miss  [pc1 attack r2 p0.1]
+  #49       pc1 Unarmed Strike -> boss1: d20 3 +6 = 9 vs AC 17, miss  [pc1 attack r2 p0.2]
+  #50   pc1 chooses attack:shortsword>boss1  [journal @11]
+  #51     pc1 Shortsword -> boss1: d20 13 +6 = 19 vs AC 17, hit  [pc1 attack r2 p0.3]
+  #52       pc1 chooses pass  [journal @12]
+  #53       boss1 takes 8 (8 piercing), HP 7 -> 0  [pc1 damage r2 p0.3]
+  #54         boss1 dies (0 HP)
+  #55   pc1 chooses pass  [journal @13]
+  #56   pc1's turn ends
+  #57 gob1's turn (H6, 10 HP, 30 ft) [Goblin Warrior]
+  #58   gob1 chooses attack:shortbow>pc1  [journal @14]
+  #59     gob1: Attack
+  #60     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #61       pc1 chooses react:monk/deflect-attacks  [journal @15]
+  #62         pc1 reacts to gob1's hit: Deflect Attacks reduces the damage by 14  [pc1 hitTaken r2 p2.0]
+  #63       pc1 takes 0 (5 piercing), HP 51 -> 51  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [journal @16]
+  #65   gob1's turn ends
+  #66 fight ends: stalemate in round 2
+logHash 4a8a72401f7a1455

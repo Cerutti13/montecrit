@@ -1,0 +1,49 @@
+# SRD 5.2.1 pp.336-337, Warrior Infantry ("Medium or Small"; modeled Medium).
+# Numbers checked against the PDF text.
+# Gear lists a single Spear; throwing it uses it up under monsterThrownWeapons=gearCount.
+# Moved here unchanged at M3 step 6 (docs/design/m3.md 4.6): the hand-written stat block stands in
+# for the Foundry record as replace: true, so its compiled template, every closure hash and every
+# golden stay byte-identical (tools/import-srd/test/step6-monsters.test.ts).
+# Coverage step 9+: Pack Tactics ("The warrior has Advantage on an attack roll against a creature if at
+# least one of the warrior's allies is within 5 feet of the creature and the ally doesn't have the
+# Incapacitated condition", srd-raw.txt:55578-55580) as a passive Advantage gated by
+# allyWithin5ftOfTarget; nothing on the block is unmodeled now, so fidelity is full.
+replace: true
+foundryPath: packs/_source/actors24/humanoid/warrior-infantry.yml
+kind: monster
+id: srd:warrior-infantry
+name: Warrior Infantry
+source: SRD 5.2.1 p.336-337
+fidelity: full
+size: medium
+cr: 1/8
+pb: 2
+ac: 13
+hp: { average: 9, formula: 2d8 }
+speed: { walk: 30 }
+initiative: { mod: 0, score: 10 }
+abilities: { str: 13, dex: 11, con: 11, int: 8, wis: 11, cha: 8 }
+gear:
+  - { name: Chain Shirt }
+  - { name: Spear, count: 1 }
+attacks:
+  - id: spear
+    name: Spear
+    kind: meleeOrRanged
+    toHit: 3
+    reach: 5
+    range: [20, 60]
+    thrownGear: Spear
+    damage:
+      - { roll: 1d6 + 1, type: piercing, avg: 4 }
+traits:
+  - id: pack-tactics
+    name: Pack Tactics
+    effects:
+      - id: pack-tactics
+        name: Pack Tactics
+        mods:
+          - { on: [d20.attack], op: adv, when: [allyWithin5ftOfTarget] }
+provenance:
+  review: reviewed
+  pdfPage: 336

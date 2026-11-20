@@ -1,0 +1,65 @@
+replay   engine 0.8.0 | content 92c9d7d9e1d94298 | scenario redirect-attack 678db84844b3d842 | seed 2 run 0 | journal 0
+policy   ally1 greedy | boss1 greedy | gob1 greedy
+knobs    maxRounds=2 attackDowned=ifNoOtherTarget lossCounts=pcs downEnds=true
+flags read:
+  diagonalCost=uniform [verified: SRD 5.2.1 p.13 "Playing on a Grid": any adjacent square costs 1; alternating 5/10 is a 2024 DMG option (its use for range is unverified)]
+  initiativeMode=static [verified: SRD 5.2.1 p.184 "Initiative" and p.254: static initiative is a GM option]
+  initiativeTies=pcsFirst [UNVERIFIED: SRD 5.2.1 p.13: the GM orders tied monsters and mixed ties, players order tied PCs; no procedure given (policy)]
+  groupInitiative=shared [verified: SRD 5.2.1 p.13: a group of identical creatures gets one roll]
+  monsterHp=listed [verified: SRD 5.2.1 p.255: use the number or the dice, the GM's choice]
+  statBlockAtZeroHp=dies [verified: SRD 5.2.1 p.17 "Monster Death": dies at 0 HP unless the GM treats it like a character]
+  moveBetweenAttacks=all [UNVERIFIED: SRD 5.2.1 p.177 "Moving between Attacks" plus p.257 (Multiattack is part of the Attack action): an inference for Multiattack]
+notes    LOS: grid (losMethod=corners, creatureCover=on)
+notes    ending concentration or dismissing an effect: offered only on your own turn
+notes    srd:warrior-veteran partial: unimplemented Multiattack reading: two of the same attack (the text does not say "in any combination")
+notes    srd:goblin-boss partial: unimplemented Nimble Escape: the Hide option
+notes    srd:goblin-warrior partial: unimplemented Nimble Escape: the Hide option
+
+   #1   initiative ally1 13 (static)
+   #2   initiative boss1 12 (static)
+   #3   initiative gob1 12 (static)
+   #4 == round 1 ==
+   #5 ally1's turn (C3, 65 HP, 30 ft) [Warrior Veteran]
+   #6   ally1 chooses attack:greatsword>boss1  [greedy @0]
+   #7     ally1: Multiattack
+   #8     boss1 chooses react:redirect-attack>gob1  [greedy @1]
+   #9       boss1: Redirect Attack
+  #10         boss1 swaps places with gob1 (Redirect Attack): boss1 D3 -> D4, gob1 D4 -> D3
+  #11     ally1 Greatsword -> gob1: d20 19 +5 = 24 vs AC 15, hit  [ally1 attack r1 p0.0]
+  #12       gob1 takes 13 (13 slashing), HP 10 -> 0  [ally1 damage r1 p0.0]
+  #13         gob1 dies (0 HP)
+  #14   ally1 chooses attack:greatsword>boss1  [greedy @2]
+  #15     ally1 Greatsword -> boss1: d20 7 +5 = 12 vs AC 17, miss  [ally1 attack r1 p0.1]
+  #16   ally1 chooses pass  [greedy @3]
+  #17   ally1's turn ends
+  #18 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #19   boss1 chooses attack:scimitar>ally1  [greedy @4]
+  #20     boss1: Multiattack
+  #21     ally1 chooses pass  [greedy @5]
+  #22     boss1 Scimitar -> ally1: d20 18 +4 = 22 vs AC 17, hit  [boss1 attack r1 p0.0]
+  #23       ally1 takes 6 (6 slashing), HP 65 -> 59  [boss1 damage r1 p0.0]
+  #24   boss1 chooses attack:scimitar>ally1  [greedy @6]
+  #25     boss1 Scimitar -> ally1: d20 10 +4 = 14 vs AC 17, miss  [boss1 attack r1 p0.1]
+  #26   boss1 chooses pass  [greedy @7]
+  #27   boss1's turn ends
+  #28 == round 2 ==
+  #29 ally1's turn (C3, 59 HP, 30 ft) [Warrior Veteran]
+  #30   ally1 chooses attack:greatsword>boss1  [greedy @8]
+  #31     ally1: Multiattack
+  #32     ally1 Greatsword -> boss1: d20 5 +5 = 10 vs AC 17, miss  [ally1 attack r2 p0.0]
+  #33   ally1 chooses attack:greatsword>boss1  [greedy @9]
+  #34     ally1 Greatsword -> boss1: d20 11 +5 = 16 vs AC 17, miss  [ally1 attack r2 p0.1]
+  #35   ally1 chooses pass  [greedy @10]
+  #36   ally1's turn ends
+  #37 boss1's turn (D4, 6 HP, 30 ft) [Goblin Boss]
+  #38   boss1 chooses attack:scimitar>ally1  [greedy @11]
+  #39     boss1: Multiattack
+  #40     boss1 Scimitar -> ally1: d20 1 +4 = 5 vs AC 17, miss  [boss1 attack r2 p0.0]
+  #41   boss1 chooses attack:scimitar>ally1  [greedy @12]
+  #42     ally1 chooses react:parry  [greedy @13]
+  #43       ally1: Parry
+  #44     boss1 Scimitar -> ally1: d20 13 +4 = 17 vs AC 19 (+2 after the hit), miss  [boss1 attack r2 p0.1]
+  #45   boss1 chooses pass  [greedy @14]
+  #46   boss1's turn ends
+  #47 fight ends: stalemate in round 2
+logHash aaa9bd2649748bcc

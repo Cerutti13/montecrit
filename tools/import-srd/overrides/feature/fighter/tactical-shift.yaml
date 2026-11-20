@@ -1,0 +1,18 @@
+# Reviewed against SRD 5.2.1 p.48 (srd-raw.txt:10659-10663), Fighter level 5, Tactical Shift
+# (coverage W1, docs/design/w1-plan.md section 3, P9, P10): "Whenever you activate your Second Wind
+# with a Bonus Action, you can move up to half your Speed without provoking Opportunity Attacks."
+# An augment on Second Wind's activation (srd:fighter/second-wind, a Bonus Action): after the heal,
+# a move step (half Speed rounded down to 5 ft, no Opportunity Attacks; a moveTo decision whose
+# first item is not moving). Tactical Mind's non-Bonus-Action use of Second Wind isn't modeled, so
+# every Second Wind is a Bonus Action. Whose movement the move spends is the freeMoveUsesMovement
+# flag (false by default, Shane 2026-11-12), unverified, so partial.
+fidelity: partial
+augments:
+  feature: srd:fighter/second-wind
+  steps:
+    - move: { speed: half, noOpportunityAttacks: true }
+unimplemented:
+  - part free-move-budget-unverified not modeled
+provenance:
+  review: reviewed
+  pdfPage: 48

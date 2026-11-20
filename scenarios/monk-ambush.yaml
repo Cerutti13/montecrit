@@ -1,0 +1,19 @@
+# M3 step 5a's demo scenario (docs/design/m3.md build order step 5, critique C8): stars-ambush with
+# the PC seat swapped for the sample Monk 6 (Warrior of the Open Hand), a `kind: character` built
+# from the imported SRD Monk (packs/test/characters/sample-monk.yaml). Everything else (map, the
+# Veteran ally, 4 Goblin Boss + 4 Goblin Warrior, surprise, knobs) is stars-ambush's.
+#
+# Not calibrated: stars-ambush's encounter was sized for the druid stand-in and its private twin,
+# and a child scenario never inherits a calibration record (scenario/extend.ts). The Monk's
+# win rate here is a measurement, not a target.
+kind: scenario
+id: monk-ambush
+name: Monk Ambush
+extends: stars-ambush
+reportNotes:
+  - 'encounter: 4 Goblin Boss + 4 Goblin Warrior = 1,000 XP; budgets for one level-6 character are Low 600, Moderate 1,000, High 1,400 (SRD 5.2.1 p.202-203). The ally is not counted, a convention the 2024 DMG may not share (unverified)'
+  - 'bias from what is not modeled: without Hide (the Goblin Bosses'' Nimble Escape; the hidden attackers'' Initiative and first-attack Advantage) the ambush is milder than written. Redirect Attack and the ally''s Parry are modeled since coverage step 9+'
+  - 'the PC is test:sample-monk (Monk 6, Open Hand); not modeled for it: Wholeness of Body (needs a self-only target), Deflect Attacks'' redirect (needs Total Cover), Step of the Wind''s jump, Martial Arts'' Grapple/Shove DEX DC, Weapon Mastery and Light-property attacks (step 5b)'
+override:
+  units:
+    pc1: { use: 'test:sample-monk' }

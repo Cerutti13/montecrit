@@ -1,0 +1,22 @@
+# C0 class bench (tools/bench-classes.ts, docs/design/coverage.md section 6): a target that stays
+# put and never harms anyone (the bench plays it with a decider that only passes), AC 14 for its
+# level band, HP high enough that nothing runs out in 5 rounds.
+kind: monster
+id: test:bench-dummy-ac14
+name: Bench Dummy (AC 14)
+source: synthetic test fixture
+size: medium
+cr: 0
+pb: 2
+ac: 14
+hp: { average: 5000, formula: 100d10 + 4450 }
+speed: { walk: 0 }
+initiative: { mod: 0, score: 10 }
+abilities: { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 }
+attacks:
+  - id: swat
+    name: Swat
+    kind: melee
+    toHit: 2
+    damage:
+      - { roll: 1d4, type: bludgeoning, avg: 2 }

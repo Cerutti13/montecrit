@@ -1,0 +1,40 @@
+# SRD 5.2.1 p.164, Spirit Guardians (srd-raw.txt:31027-31048), read by hand at coverage step 7.5.
+# A 15-foot Emanation that moves with the caster. "You can designate creatures to be unaffected"
+# (31039-31040) reads as affects: foes [U: the caster always spares every ally and hits every foe,
+# no decision]. "Whenever the Emanation enters a creature's space and whenever a creature enters the
+# Emanation or ends its turn there" (31041-31044) is movedOnto, enter, turnEndIn; "only once per
+# turn" (31047) is the ledger. The cast itself isn't addressed: emanationCastTrigger, no appear hook.
+replace: true
+foundryPath: packs/_source/spells24/3rd-level/spirit-guardians.yml
+kind: spell
+id: srd:spirit-guardians
+name: Spirit Guardians
+source: SRD 5.2.1 p.164
+fidelity: partial
+level: 3
+castingTime: action
+range: self
+components: { v: true, s: true, m: focus }
+concentration: true
+duration: { minutes: 10 }
+area: guardians
+effects:
+  - id: guardians
+    name: Spirit Guardians
+    zone: { shape: emanation, size: 15, affects: foes }
+    oncePerTurn: perCreature
+    on:
+      - when: [movedOnto, enter, turnEndIn]
+        do:
+          - save:
+              ability: wis
+              half: true
+              damage:
+                - { roll: 3d8, type: radiant, upcast: 1d8 }
+do: [{ apply: { effect: guardians, to: point } }]
+unimplemented:
+  - Speed is halved in the Emanation for a creature it affects
+  - Necrotic instead of Radiant for an evil caster
+provenance:
+  review: reviewed
+  pdfPage: 164

@@ -1,0 +1,88 @@
+Sample Monk (test:sample-monk)
+Monk 6 (Warrior of the Open Hand), Dwarf (medium), Soldier   source: synthetic test fixture   fidelity: partial
+Abilities    STR 10 (+0)  DEX 16 (+3)  CON 14 (+2)  INT 10 (+0)  WIS 16 (+3)  CHA 8 (-1)
+PB             +3   level 6 (Character Advancement table: 2 + floor((level - 1) / 4))
+HP max         51   8 (L1 max d8, p.22) + 5 x 5 (fixed d8, p.23) + 6 x 2 (CON) + 6 x 1 (Dwarven Toughness, character levels)
+AC             16   10 + 3 (DEX) + 3 (WIS) = 16 (Monk, while unarmored and noShield); best of unarmored 13, srd:monk 16
+Speed          45   30 (Dwarf) + 15 (Unarmored Movement: @scale.monk.unarmored-movement at level 6, while unarmored and noShield)
+Initiative     +3   3 (DEX mod)
+Extra attacks   1   1 (Monk 5)
+Saves
+  STR  +3*  0 (STR mod) + 3 (PB, Monk save)
+  DEX  +6*  3 (DEX mod) + 3 (PB, Monk save)
+  CON  +2   2 (CON mod)
+  INT  +0   0 (INT mod)
+  WIS  +3   3 (WIS mod)
+  CHA  -1   -1 (CHA mod)
+Skills (proficient or better)
+  acrobatics       +6  3 (DEX mod) + 3 (proficient: srd:monk#skills)
+  athletics        +3  0 (STR mod) + 3 (proficient: Soldier)
+  insight          +6  3 (WIS mod) + 3 (proficient: srd:monk#skills)
+  intimidation     +2  -1 (CHA mod) + 3 (proficient: Soldier)
+Attacks
+  Shortsword: +6 to hit (3 (DEX mod, finesse) + 3 (PB, proficient: srd:shortsword)), 1d8 + 3 piercing, reach 5 ft
+    - properties: finesse, light
+    - mastery vex: not usable (no Weapon Mastery feature)
+    - Light: no second Light weapon, so no extra attack
+    - 1d8 Martial Arts die in place of 1d6 (Martial Arts, @scale.monk.die at level 6)
+  Dart: +6 to hit (3 (DEX mod, finesse) + 3 (PB, proficient: simple weapons)), 1d4 + 3 piercing, range 20/60 ft
+    - properties: finesse, thrown
+    - mastery vex: not usable (no Weapon Mastery feature)
+  Unarmed Strike: +6 to hit (3 (DEX mod, Martial Arts, @scale.monk.die at level 6) + 3 (PB; every creature, SRD 5.2.1 p.190)), 1d8 + 3 bludgeoning (Martial Arts, @scale.monk.die at level 6), reach 5 ft
+    - can deal force damage instead (Empowered Strikes; the type the target defends against least, its own on a tie)
+Spell slots  none   (none)
+Pools
+  Monk's Focus 6   (@scale.monk.focus at level 6 (Monk)); spent by Flurry of Blows, Patient Defense (Focus), Step of the Wind (Focus), Stunning Strike
+  Uncanny Metabolism 1   (1 (Monk)); spent by Uncanny Metabolism
+  Wholeness of Body 3   (max(1,@mod.wis) at level 6 (Warrior of the Open Hand)); spent by Wholeness of Body
+Options (what the compiled features offer in a fight)
+  Deflect Attacks           reaction: when an attack roll hits you with bludgeoning, piercing, slashing damage, reduce its damage by 1d10 + 3 (DEX) + 6 (Monk level)   (Deflect Attacks (Monk 3))
+  Bonus Unarmed Strike      activation: bonus action, while unarmored and noShield   (Martial Arts (Monk 1))
+  Flurry of Blows           activation: bonus action, 1 Monk's Focus   (Monk's Focus (Monk 2))
+  Patient Defense           activation: bonus action   (Monk's Focus (Monk 2))
+  Patient Defense (Focus)   activation: bonus action, 1 Monk's Focus   (Monk's Focus (Monk 2))
+  Step of the Wind          activation: bonus action   (Monk's Focus (Monk 2))
+  Step of the Wind (Focus)  activation: bonus action, 1 Monk's Focus   (Monk's Focus (Monk 2))
+  Stunning Strike           rider: on hit, with unarmed or monkWeapon, once per turn (global), 1 Monk's Focus   (Stunning Strike (Monk 5))
+  Uncanny Metabolism        initiative: when you roll Initiative (optional), 1 Uncanny Metabolism   (Uncanny Metabolism (Monk 2))
+  Open Hand Technique       rider: on hit, granted by flurry, choose Addle, Push, Topple   (Open Hand Technique (Warrior of the Open Hand 3))
+  Wholeness of Body         activation: bonus action, 1 Wholeness of Body   (Wholeness of Body (Warrior of the Open Hand 6))
+Feats
+  srd:savage-attacker Savage Attacker (Soldier)  narrative
+Features
+  srd:dwarf/darkvision                             Darkvision (Dwarf)  narrative
+  srd:dwarf/dwarven-resilience                     Dwarven Resilience (Dwarf)  partial
+  srd:dwarf/dwarven-toughness                      Dwarven Toughness (Dwarf)  partial
+  srd:dwarf/stonecunning                           Stonecunning (Dwarf)  narrative
+  srd:monk/deflect-attacks                         Deflect Attacks (Monk 3)  partial
+  srd:monk/empowered-strikes                       Empowered Strikes (Monk 6)  full
+  srd:monk/extra-attack                            Extra Attack (Monk 5)  full
+  srd:monk/martial-arts                            Martial Arts (Monk 1)  partial
+  srd:monk/monks-focus                             Monk's Focus (Monk 2)  partial
+  srd:monk/slow-fall                               Slow Fall (Monk 4)  narrative
+  srd:monk/stunning-strike                         Stunning Strike (Monk 5)  full
+  srd:monk/unarmored-defense                       Unarmored Defense (Monk 1)  full
+  srd:monk/unarmored-movement                      Unarmored Movement (Monk 2)  full
+  srd:monk/uncanny-metabolism                      Uncanny Metabolism (Monk 2)  full
+  srd:warrior-of-the-open-hand/open-hand-technique Open Hand Technique (Warrior of the Open Hand 3)  full
+  srd:warrior-of-the-open-hand/wholeness-of-body   Wholeness of Body (Warrior of the Open Hand 6)  full
+Picks
+  srd:monk#asi-4: ASI DEX +1, WIS +1
+  srd:monk#skills: acrobatics, insight
+  srd:soldier#abilities: increases DEX +2, CON +1
+  srd:soldier#tools: Gaming Set (Dice)
+Not modeled (12)
+  - Darkvision: narrative, not modeled
+  - Monk: choice tools not mapped
+  - Dwarf: species trait darkvision not mapped
+  - Savage Attacker: narrative, not modeled
+  - Dwarven Resilience: advantage on saves against the poisoned condition not modeled
+  - Dwarven Resilience: not a bucket-A shape (needs a reviewed override to be full)
+  - Dwarven Toughness: not a bucket-A shape (needs a reviewed override to be full)
+  - Stonecunning: activity type utility
+  - Deflect Attacks: part deflect-redirect not modeled
+  - Martial Arts: part grapple-shove-dex-dc not modeled
+  - Monk's Focus: part step-of-the-wind-jump not modeled
+  - Slow Fall: activity type heal
+File: packs/test/characters/sample-monk.yaml
+Character lint: 0 error(s), 0 warning(s)

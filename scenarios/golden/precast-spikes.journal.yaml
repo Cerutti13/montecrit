@@ -1,0 +1,8 @@
+# No scripted decisions: every seat is the greedy AI; the precast comes from the scenario.
+kind: journal
+scenario: precast-spikes
+seed: 1
+run: 0
+engine: '0.8.0'
+contentHash: '8a796bce0f88ecfb'
+entries: []

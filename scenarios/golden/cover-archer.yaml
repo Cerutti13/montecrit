@@ -1,0 +1,36 @@
+# M3 step 8 golden (docs/design/m3.md section 7 demo): cover and line of sight, SRD 5.2.1 "Cover"
+# (srd-raw.txt:1995-2032). Half Cover is +2 AC, Three-Quarters +5, Total "can't be targeted
+# directly"; "another creature" gives Half. The map: a wall (#) at G3-G5 and a low wall (+, Half
+# Cover) at I4. Static initiative; seed 3.
+#   Round 1: gob1 shoots pc1 past the low wall: vs AC 20 (Half Cover +2). gob2 shoots the Guard
+#   past gob3, a creature in the line: vs AC 18 (Half Cover +2). gob3 steps out of line and shoots
+#   it clear. pc1 (greedy, 9 HP, three archers on it) steps behind the wall to D4.
+#   Round 2: from O4 pc1 is behind Total Cover, so gob1 has no shot (only moves are offered; with
+#   --explain gob1 every top option is a move); it moves to L1 and shoots vs AC 23 (Three-Quarters
+#   Cover +5), as does gob3 from M1. The flag matrix's losMethod=stubbed section is the engine
+#   before step 8 (everyone sees everyone, no cover).
+# gob1 and gob2 script their first shots (journal); everything else is the greedy AI.
+kind: scenario
+id: cover-archer
+name: Cover against goblin archers
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid:
+  w: 16
+  h: 7
+  terrain:
+    - '................'
+    - '................'
+    - '......#.........'
+    - '......#.+.......'
+    - '......#.........'
+    - '................'
+    - '................'
+flags: { initiativeMode: static }
+knobs: { maxRounds: 2 }
+units:
+  - { seat: pc1, team: party, use: 'test:sample-fighter', at: H4, hp: 9, surprised: true, decider: greedy }
+  - { seat: ally1, team: party, use: 'srd:guard', at: J6, surprised: true, decider: greedy }
+  - { seat: gob1, team: enemies, use: 'srd:goblin-warrior', at: O4, decider: greedy }
+  - { seat: gob2, team: enemies, use: 'srd:goblin-warrior', at: O6, decider: greedy }
+  - { seat: gob3, team: enemies, use: 'srd:goblin-warrior', at: M6, decider: greedy }

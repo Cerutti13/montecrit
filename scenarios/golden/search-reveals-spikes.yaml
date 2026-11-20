@@ -1,0 +1,51 @@
+# Coverage step 9 golden (docs/design/m3.md section 8): a hidden zone and the Search action.
+# Spike Growth is "camouflaged to look natural. Any creature that can't see the area when the
+# spell is cast must take a Search action and succeed on a Wisdom (Perception or Survival) check
+# against your spell save DC to recognize the terrain as hazardous" (SRD 5.2.1 p.164,
+# srd-raw.txt:31015-31021). An open map: pc1 on G9, on the near edge of Spike Growth precast on K9
+# (DC 15, the Sample Druid's); the wolves on T9 and T11. Static initiative, monsters first; seed 5.
+# pc1 passes every turn (journal); the wolves are greedy.
+#   hiddenHazardRevealedByDamage is false here (the default since 2026-11-10, kept explicit): a wolf hurt
+#   by the spikes it doesn't know keeps not knowing, so not knowing costs the whole walk through. (Under true the first spiked
+#   step teaches it, the walk stops there and it plans again, so not knowing costs about one step,
+#   and greedy Dashes instead of Searching.)
+#   wolf2 saw the spikes go down (seenBy); wolf1 didn't. To wolf1 the spikes are plain ground, so the
+#   route it would plan is the 12-step line through 3 spiked squares; knowing, it would go round the
+#   top. Its witness ally is a reason it can know, so its Search is worth P(plain WIS +1 vs DC 15)
+#   0.35 x 15.05 = 5.27, more than the Dash (4.00). Seed 5: it rolls 16, recognizes the spikes, and
+#   in round 2 goes round the top (L4 -> K3 -> ... -> G8) and bites, never stepping in. wolf2 goes
+#   round from the start. Seed 1 is the contrast: both of wolf1's Searches fail, and in round 2 it
+#   heads straight in from L4, stops on the first spiked square (J6: it learned something hurt it
+#   there), plans again still not knowing, and dies on the third.
+kind: scenario
+id: search-reveals-spikes
+name: Search reveals Spike Growth
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid:
+  w: 22
+  h: 17
+  terrain:
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+    - '......................'
+flags: { initiativeMode: static, initiativeTies: monstersFirst, hiddenHazardRevealedByDamage: false }
+knobs: { maxRounds: 3 }
+units:
+  - { seat: pc1, team: party, use: 'test:sample-druid', at: G9, decider: greedy, precast: [{ cast: 'srd:spike-growth', level: 2, at: K9, seenBy: [pc1, wolf2] }] }
+  - { seat: wolf1, team: enemies, use: 'srd:wolf', at: T9, decider: greedy }
+  - { seat: wolf2, team: enemies, use: 'srd:wolf', at: T11, decider: greedy }

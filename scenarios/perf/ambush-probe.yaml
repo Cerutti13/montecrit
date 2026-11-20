@@ -1,0 +1,21 @@
+# Perf probe for M1c (docs/design/m1c.md, build step 1): a stars-ambush-shaped fight with 10
+# units on 12x12, so pathfinding dominates. Not a balanced encounter; tools/perf.ts runs it
+# with the baseline AI, and with the PC casting the spike zone on its first turn.
+kind: scenario
+id: ambush-probe
+name: Ambush perf probe
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid: { w: 12, h: 12 }
+knobs: { downEnds: false }
+units:
+  - { seat: pc1, team: party, use: 'test:sample-druid', at: F10, surprised: true }
+  - { seat: ally1, team: party, use: 'srd:warrior-veteran', at: G9, surprised: true }
+  - { seat: boss1, team: enemies, use: 'srd:goblin-boss', at: D4 }
+  - { seat: boss2, team: enemies, use: 'srd:goblin-boss', at: I4 }
+  - { seat: boss3, team: enemies, use: 'srd:goblin-boss', at: B7 }
+  - { seat: boss4, team: enemies, use: 'srd:goblin-boss', at: K7 }
+  - { seat: gob1, team: enemies, use: 'srd:goblin-warrior', at: C2 }
+  - { seat: gob2, team: enemies, use: 'srd:goblin-warrior', at: J2 }
+  - { seat: gob3, team: enemies, use: 'srd:goblin-warrior', at: F5 }
+  - { seat: gob4, team: enemies, use: 'srd:goblin-warrior', at: H5 }

@@ -1,0 +1,40 @@
+# SRD 5.2.1 p.156, Produce Flame. Stat line and effect checked in docs/research/m1b-rules-2024.md ("The six spells").
+# Hurling doesn't end the spell and has no "on later turns" limit, so cast and hurl can share a turn.
+# Moved here unchanged at M3 step 6 (docs/design/m3.md 4.6): the hand-written item stands
+# in for the Foundry record as replace: true, so its compiled spell, every closure hash and
+# every golden stay byte-identical (tools/import-srd/test/spell-overrides.test.ts).
+replace: true
+foundryPath: packs/_source/spells24/cantrips/produce-flame.yml
+kind: spell
+id: srd:produce-flame
+name: Produce Flame
+source: SRD 5.2.1 p.156
+fidelity: partial
+unimplemented:
+  - the flame sheds Bright Light 20 ft and Dim Light 20 ft more
+level: 0
+castingTime: bonus
+range: self
+components: { v: true, s: true }
+duration: { minutes: 10 }
+recast: replace # the spell ends if you cast it again
+effects:
+  - id: flame
+    name: Produce Flame
+    duration: { minutes: 10 }
+    inHand: true
+    endsOn: [dismiss] # a time-span spell you can dismiss (p.106)
+    grants:
+      - id: hurl
+        name: Hurl Flame
+        cost: action
+        do:
+          - target: { range: 60, self: no }
+          - attack:
+              kind: ranged
+              range: 60
+              onHit: [{ damage: [{ roll: 1d8, type: fire, cantrip: true }] }]
+do: [{ apply: { effect: flame, to: self } }]
+provenance:
+  review: reviewed
+  pdfPage: 156

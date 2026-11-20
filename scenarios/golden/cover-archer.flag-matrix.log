@@ -1,0 +1,899 @@
+# Flag matrix for scenarios/golden/cover-archer.yaml with scenarios/golden/cover-archer.journal.yaml (docs/design/m1b.md, Critique resolutions item 9).
+# Every rule flag the default run read, re-run under each of its other values: same seed, same journal.
+# Matrix mode only: at the journal's first mismatch every journal seat hands over to its fallback (baseline if none).
+# Regenerate: UPDATE_FLAG_MATRIX=1 npx vitest run apps/cli/test/flag-matrix.test.ts
+
+#### seed 3 ####
+default  run 0 | journal of 4 entries: held | logHash 571dff884b530042
+flags read: diagonalCost, diagonalCorner, initiativeMode, groupInitiative, monsterHp, statBlockAtZeroHp, corpseSpace, pauseInOccupiedSpace, losMethod, creatureCover
+
+== diagonalCost=alternate (journal held) ==
+flags read vs default: -pauseInOccupiedSpace
+   #1   initiative gob1 12 (static)
+   #2   initiative gob2 12 (static)
+   #3   initiative gob3 12 (static)
+   #4   initiative pc1 7 (static)
+   #5   initiative ally1 6 (static)
+   #6 == round 1 ==
+   #7 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+   #8   gob1 chooses attack:shortbow>pc1  [journal @0]
+   #9     gob1: Attack
+  #10     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 20 (Half Cover +2), miss  [gob1 attack r1 p0.0]
+  #11   gob1 chooses pass  [journal @1]
+  #12   gob1's turn ends
+  #13 gob2's turn (O6, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses attack:shortbow>ally1  [journal @2]
+  #15     gob2: Attack
+  #16     gob2 Shortbow -> ally1: d20 15 +4 = 19 vs AC 18 (Half Cover +2), hit  [gob2 attack r1 p0.0]
+  #17       ally1 takes 6 (6 piercing), HP 11 -> 5  [gob2 damage r1 p0.0]
+  #18   gob2 chooses pass  [journal @3]
+  #19   gob2's turn ends
+  #20 gob3's turn (M6, 10 HP, 30 ft) [Goblin Warrior]
+  #21   gob3 chooses move:P2/p0/d1  [greedy @4]
+  #22     gob3 steps M6 -> M5 (5 ft, 25 left)
+  #23     gob3 steps M5 -> N4 (5 ft, 20 left)
+  #24     gob3 steps N4 -> O3 (10 ft, 10 left)
+  #25     gob3 steps O3 -> P2 (5 ft, 5 left)
+  #26     gob3's move ends at P2
+  #27   gob3 chooses attack:shortbow>ally1  [greedy @5]
+  #28     gob3: Attack
+  #29     gob3 Shortbow -> ally1: d20 15 +4 = 19 vs AC 16, hit  [gob3 attack r1 p0.0]
+  #30       ally1 takes 7 (7 piercing), HP 5 -> 0  [gob3 damage r1 p0.0]
+  #31         ally1 dies (0 HP)
+  #32   gob3 chooses pass  [greedy @6]
+  #33   gob3's turn ends
+  #34 pc1's turn (H4, 9 HP, 30 ft) [Sample Fighter]
+  #35   pc1 chooses move:E3/p0/d1  [greedy @7]
+  #36     pc1 steps H4 -> H3 (5 ft, 25 left)
+  #37     pc1 steps H3 -> H2 (5 ft, 20 left)
+  #38     pc1 steps H2 -> G2 (5 ft, 15 left)
+  #39     pc1 steps G2 -> F2 (5 ft, 10 left)
+  #40     pc1 steps F2 -> E3 (5 ft, 5 left)
+  #41     pc1's move ends at E3
+  #42   pc1 chooses attack:handaxe-thrown>gob3  [greedy @8]
+  #43     pc1: Attack
+  #44     pc1 Handaxe (thrown) -> gob3: d20 5/20 dis -> 5 (-long-range) +6 = 11 vs AC 15, miss  [pc1 attack r1 p0.0]
+  #45       pc1 throws Handaxe (1 left)
+  #46   pc1 chooses attack:handaxe-thrown>gob3  [greedy @9]
+  #47     pc1 Handaxe (thrown) -> gob3: d20 15/16 dis -> 15 (-long-range) +6 = 21 vs AC 15, hit  [pc1 attack r1 p0.1]
+  #48       pc1 throws Handaxe (0 left)
+  #49       gob3 takes 7 (7 slashing), HP 10 -> 3  [pc1 damage r1 p0.1]
+  #50   pc1 chooses move:E4/p0/d1  [greedy @10]
+  #51     pc1 steps E3 -> E4 (5 ft, 0 left)
+  #52     pc1's move ends at E4
+  #53   pc1's turn ends
+  #54 == round 2 ==
+  #55 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+  #56   gob1 chooses pass  [greedy @11]
+  #57   gob1's turn ends
+  #58 gob2's turn (O6, 10 HP, 30 ft) [Goblin Warrior]
+  #59   gob2 chooses pass  [greedy @12]
+  #60   gob2's turn ends
+  #61 gob3's turn (P2, 3 HP, 30 ft) [Goblin Warrior]
+  #62   gob3 chooses pass  [greedy @13]
+  #63   gob3's turn ends
+  #64 pc1's turn (E4, 9 HP, 30 ft) [Sample Fighter]
+  #65   pc1 chooses pass  [greedy @14]
+  #66   pc1's turn ends
+  #67 fight ends: stalemate in round 2
+logHash 1415f50aa5b65e14
+
+== diagonalCorner=bothBlock (journal held) ==
+   #1   initiative gob1 12 (static)
+   #2   initiative gob2 12 (static)
+   #3   initiative gob3 12 (static)
+   #4   initiative pc1 7 (static)
+   #5   initiative ally1 6 (static)
+   #6 == round 1 ==
+   #7 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+   #8   gob1 chooses attack:shortbow>pc1  [journal @0]
+   #9     gob1: Attack
+  #10     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 20 (Half Cover +2), miss  [gob1 attack r1 p0.0]
+  #11   gob1 chooses pass  [journal @1]
+  #12   gob1's turn ends
+  #13 gob2's turn (O6, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses attack:shortbow>ally1  [journal @2]
+  #15     gob2: Attack
+  #16     gob2 Shortbow -> ally1: d20 15 +4 = 19 vs AC 18 (Half Cover +2), hit  [gob2 attack r1 p0.0]
+  #17       ally1 takes 6 (6 piercing), HP 11 -> 5  [gob2 damage r1 p0.0]
+  #18   gob2 chooses pass  [journal @3]
+  #19   gob2's turn ends
+  #20 gob3's turn (M6, 10 HP, 30 ft) [Goblin Warrior]
+  #21   gob3 chooses move:P3/p0  [greedy @4]
+  #22     gob3 steps M6 -> N5 (5 ft, 25 left)
+  #23     gob3 steps N5 -> O4 (5 ft, 20 left)
+  #24     gob3 steps O4 -> P3 (5 ft, 15 left)
+  #25     gob3's move ends at P3
+  #26   gob3 chooses attack:shortbow>ally1  [greedy @5]
+  #27     gob3: Attack
+  #28     gob3 Shortbow -> ally1: d20 15 +4 = 19 vs AC 16, hit  [gob3 attack r1 p0.0]
+  #29       ally1 takes 7 (7 piercing), HP 5 -> 0  [gob3 damage r1 p0.0]
+  #30         ally1 dies (0 HP)
+  #31   gob3 chooses pass  [greedy @6]
+  #32   gob3's turn ends
+  #33 pc1's turn (H4, 9 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses move:F5/p0  [greedy @7]
+  #35     pc1 steps H4 -> H5 (5 ft, 25 left)
+  #36     pc1 steps H5 -> G6 (5 ft, 20 left)
+  #37     pc1 steps G6 -> F5 (5 ft, 15 left)
+  #38     pc1's move ends at F5
+  #39   pc1 chooses attack:handaxe-thrown>gob2  [greedy @8]
+  #40     pc1: Attack
+  #41     pc1 Handaxe (thrown) -> gob2: d20 5/20 dis -> 5 (-long-range) +6 = 11 vs AC 15, miss  [pc1 attack r1 p0.0]
+  #42       pc1 throws Handaxe (1 left)
+  #43   pc1 chooses attack:handaxe-thrown>gob2  [greedy @9]
+  #44     pc1 Handaxe (thrown) -> gob2: d20 15/16 dis -> 15 (-long-range) +6 = 21 vs AC 15, hit  [pc1 attack r1 p0.1]
+  #45       pc1 throws Handaxe (0 left)
+  #46       gob2 takes 7 (7 slashing), HP 10 -> 3  [pc1 damage r1 p0.1]
+  #47   pc1 chooses move:E4/p0  [greedy @10]
+  #48     pc1 steps F5 -> E4 (5 ft, 10 left)
+  #49     pc1's move ends at E4
+  #50   pc1 chooses pass  [greedy @11]
+  #51   pc1's turn ends
+  #52 == round 2 ==
+  #53 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+  #54   gob1 chooses pass  [greedy @12]
+  #55   gob1's turn ends
+  #56 gob2's turn (O6, 3 HP, 30 ft) [Goblin Warrior]
+  #57   gob2 chooses pass  [greedy @13]
+  #58   gob2's turn ends
+  #59 gob3's turn (P3, 10 HP, 30 ft) [Goblin Warrior]
+  #60   gob3 chooses pass  [greedy @14]
+  #61   gob3's turn ends
+  #62 pc1's turn (E4, 9 HP, 30 ft) [Sample Fighter]
+  #63   pc1 chooses pass  [greedy @15]
+  #64   pc1's turn ends
+  #65 fight ends: stalemate in round 2
+logHash a1ae2a41b09524f7
+
+== initiativeMode=roll (journal held) ==
+   #1   initiative gob1 10 (d20 8+2)
+   #2   initiative gob2 10 (shares gob1's roll)
+   #3   initiative gob3 10 (shares gob1's roll)
+   #4   initiative ally1 9 (d20 8+1)
+   #5   initiative pc1 3 (d20 1+2)
+   #6 == round 1 ==
+   #7 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+   #8   gob1 chooses attack:shortbow>pc1  [journal @0]
+   #9     gob1: Attack
+  #10     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 20 (Half Cover +2), miss  [gob1 attack r1 p0.0]
+  #11   gob1 chooses pass  [journal @1]
+  #12   gob1's turn ends
+  #13 gob2's turn (O6, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses attack:shortbow>ally1  [journal @2]
+  #15     gob2: Attack
+  #16     gob2 Shortbow -> ally1: d20 15 +4 = 19 vs AC 18 (Half Cover +2), hit  [gob2 attack r1 p0.0]
+  #17       ally1 takes 6 (6 piercing), HP 11 -> 5  [gob2 damage r1 p0.0]
+  #18   gob2 chooses pass  [journal @3]
+  #19   gob2's turn ends
+  #20 gob3's turn (M6, 10 HP, 30 ft) [Goblin Warrior]
+  #21   gob3 chooses move:P3/p0  [greedy @4]
+  #22     gob3 steps M6 -> N5 (5 ft, 25 left)
+  #23     gob3 steps N5 -> O4 (5 ft, 20 left)
+  #24     gob3 steps O4 -> P3 (5 ft, 15 left)
+  #25     gob3's move ends at P3
+  #26   gob3 chooses attack:shortbow>ally1  [greedy @5]
+  #27     gob3: Attack
+  #28     gob3 Shortbow -> ally1: d20 15 +4 = 19 vs AC 16, hit  [gob3 attack r1 p0.0]
+  #29       ally1 takes 7 (7 piercing), HP 5 -> 0  [gob3 damage r1 p0.0]
+  #30         ally1 dies (0 HP)
+  #31   gob3 chooses pass  [greedy @6]
+  #32   gob3's turn ends
+  #33 pc1's turn (H4, 9 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses move:E5/p0  [greedy @7]
+  #35     pc1 steps H4 -> H5 (5 ft, 25 left)
+  #36     pc1 steps H5 -> H6 (5 ft, 20 left)
+  #37     pc1 steps H6 -> G6 (5 ft, 15 left)
+  #38     pc1 steps G6 -> F6 (5 ft, 10 left)
+  #39     pc1 steps F6 -> E5 (5 ft, 5 left)
+  #40     pc1's move ends at E5
+  #41   pc1 chooses attack:handaxe-thrown>gob2  [greedy @8]
+  #42     pc1: Attack
+  #43     pc1 Handaxe (thrown) -> gob2: d20 5/20 dis -> 5 (-long-range) +6 = 11 vs AC 15, miss  [pc1 attack r1 p0.0]
+  #44       pc1 throws Handaxe (1 left)
+  #45   pc1 chooses attack:handaxe-thrown>gob2  [greedy @9]
+  #46     pc1 Handaxe (thrown) -> gob2: d20 15/16 dis -> 15 (-long-range) +6 = 21 vs AC 15, hit  [pc1 attack r1 p0.1]
+  #47       pc1 throws Handaxe (0 left)
+  #48       gob2 takes 7 (7 slashing), HP 10 -> 3  [pc1 damage r1 p0.1]
+  #49   pc1 chooses move:D4/p0  [greedy @10]
+  #50     pc1 steps E5 -> D4 (5 ft, 0 left)
+  #51     pc1's move ends at D4
+  #52   pc1's turn ends
+  #53 == round 2 ==
+  #54 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+  #55   gob1 chooses move:L1/p0  [greedy @11]
+  #56     gob1 steps O4 -> N3 (5 ft, 25 left)
+  #57     gob1 steps N3 -> M2 (5 ft, 20 left)
+  #58     gob1 steps M2 -> L1 (5 ft, 15 left)
+  #59     gob1's move ends at L1
+  #60   gob1 chooses attack:shortbow>pc1  [greedy @12]
+  #61     gob1: Attack
+  #62     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 23 (Three-Quarters Cover +5), hit  [gob1 attack r2 p0.0]
+  #63       pc1 takes 5 (5 piercing), HP 9 -> 4  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [greedy @13]
+  #65   gob1's turn ends
+  #66 gob2's turn (O6, 3 HP, 30 ft) [Goblin Warrior]
+  #67   gob2 chooses move:I1/p0  [greedy @14]
+  #68     gob2 steps O6 -> N5 (5 ft, 25 left)
+  #69     gob2 steps N5 -> M4 (5 ft, 20 left)
+  #70     gob2 steps M4 -> L3 (5 ft, 15 left)
+  #71     gob2 steps L3 -> K2 (5 ft, 10 left)
+  #72     gob2 steps K2 -> J1 (5 ft, 5 left)
+  #73     gob2 steps J1 -> I1 (5 ft, 0 left)
+  #74     gob2's move ends at I1
+  #75   gob2 chooses attack:shortbow>pc1  [greedy @15]
+  #76     gob2: Attack
+  #77     gob2 Shortbow -> pc1: d20 7 +4 = 11 vs AC 18, miss  [gob2 attack r2 p0.0]
+  #78   gob2 chooses pass  [greedy @16]
+  #79   gob2's turn ends
+  #80 gob3's turn (P3, 10 HP, 30 ft) [Goblin Warrior]
+  #81   gob3 chooses move:M1/p0  [greedy @17]
+  #82     gob3 steps P3 -> O2 (5 ft, 25 left)
+  #83     gob3 steps O2 -> N1 (5 ft, 20 left)
+  #84     gob3 steps N1 -> M1 (5 ft, 15 left)
+  #85     gob3's move ends at M1
+  #86   gob3 chooses attack:shortbow>pc1  [greedy @18]
+  #87     gob3: Attack
+  #88     gob3 Shortbow -> pc1: d20 14 +4 = 18 vs AC 23 (Three-Quarters Cover +5), miss  [gob3 attack r2 p0.0]
+  #89   gob3 chooses pass  [greedy @19]
+  #90   gob3's turn ends
+  #91 pc1's turn (D4, 4 HP, 30 ft) [Sample Fighter]
+  #92   pc1 chooses move:C5/p0  [greedy @20]
+  #93     pc1 steps D4 -> C5 (5 ft, 25 left)
+  #94     pc1's move ends at C5
+  #95   pc1 chooses pass  [greedy @21]
+  #96   pc1's turn ends
+  #97 fight ends: stalemate in round 2
+logHash de6e3135a1ab86b5
+
+== groupInitiative=individual (journal held; log identical to default) ==
+flags read vs default: +initiativeTies
+   #1   initiative gob1 12 (static)
+   #2   initiative gob2 12 (static)
+   #3   initiative gob3 12 (static)
+   #4   initiative pc1 7 (static)
+   #5   initiative ally1 6 (static)
+   #6 == round 1 ==
+   #7 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+   #8   gob1 chooses attack:shortbow>pc1  [journal @0]
+   #9     gob1: Attack
+  #10     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 20 (Half Cover +2), miss  [gob1 attack r1 p0.0]
+  #11   gob1 chooses pass  [journal @1]
+  #12   gob1's turn ends
+  #13 gob2's turn (O6, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses attack:shortbow>ally1  [journal @2]
+  #15     gob2: Attack
+  #16     gob2 Shortbow -> ally1: d20 15 +4 = 19 vs AC 18 (Half Cover +2), hit  [gob2 attack r1 p0.0]
+  #17       ally1 takes 6 (6 piercing), HP 11 -> 5  [gob2 damage r1 p0.0]
+  #18   gob2 chooses pass  [journal @3]
+  #19   gob2's turn ends
+  #20 gob3's turn (M6, 10 HP, 30 ft) [Goblin Warrior]
+  #21   gob3 chooses move:P3/p0  [greedy @4]
+  #22     gob3 steps M6 -> N5 (5 ft, 25 left)
+  #23     gob3 steps N5 -> O4 (5 ft, 20 left)
+  #24     gob3 steps O4 -> P3 (5 ft, 15 left)
+  #25     gob3's move ends at P3
+  #26   gob3 chooses attack:shortbow>ally1  [greedy @5]
+  #27     gob3: Attack
+  #28     gob3 Shortbow -> ally1: d20 15 +4 = 19 vs AC 16, hit  [gob3 attack r1 p0.0]
+  #29       ally1 takes 7 (7 piercing), HP 5 -> 0  [gob3 damage r1 p0.0]
+  #30         ally1 dies (0 HP)
+  #31   gob3 chooses pass  [greedy @6]
+  #32   gob3's turn ends
+  #33 pc1's turn (H4, 9 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses move:E5/p0  [greedy @7]
+  #35     pc1 steps H4 -> H5 (5 ft, 25 left)
+  #36     pc1 steps H5 -> H6 (5 ft, 20 left)
+  #37     pc1 steps H6 -> G6 (5 ft, 15 left)
+  #38     pc1 steps G6 -> F6 (5 ft, 10 left)
+  #39     pc1 steps F6 -> E5 (5 ft, 5 left)
+  #40     pc1's move ends at E5
+  #41   pc1 chooses attack:handaxe-thrown>gob2  [greedy @8]
+  #42     pc1: Attack
+  #43     pc1 Handaxe (thrown) -> gob2: d20 5/20 dis -> 5 (-long-range) +6 = 11 vs AC 15, miss  [pc1 attack r1 p0.0]
+  #44       pc1 throws Handaxe (1 left)
+  #45   pc1 chooses attack:handaxe-thrown>gob2  [greedy @9]
+  #46     pc1 Handaxe (thrown) -> gob2: d20 15/16 dis -> 15 (-long-range) +6 = 21 vs AC 15, hit  [pc1 attack r1 p0.1]
+  #47       pc1 throws Handaxe (0 left)
+  #48       gob2 takes 7 (7 slashing), HP 10 -> 3  [pc1 damage r1 p0.1]
+  #49   pc1 chooses move:D4/p0  [greedy @10]
+  #50     pc1 steps E5 -> D4 (5 ft, 0 left)
+  #51     pc1's move ends at D4
+  #52   pc1's turn ends
+  #53 == round 2 ==
+  #54 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+  #55   gob1 chooses move:L1/p0  [greedy @11]
+  #56     gob1 steps O4 -> N3 (5 ft, 25 left)
+  #57     gob1 steps N3 -> M2 (5 ft, 20 left)
+  #58     gob1 steps M2 -> L1 (5 ft, 15 left)
+  #59     gob1's move ends at L1
+  #60   gob1 chooses attack:shortbow>pc1  [greedy @12]
+  #61     gob1: Attack
+  #62     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 23 (Three-Quarters Cover +5), hit  [gob1 attack r2 p0.0]
+  #63       pc1 takes 5 (5 piercing), HP 9 -> 4  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [greedy @13]
+  #65   gob1's turn ends
+  #66 gob2's turn (O6, 3 HP, 30 ft) [Goblin Warrior]
+  #67   gob2 chooses move:I1/p0  [greedy @14]
+  #68     gob2 steps O6 -> N5 (5 ft, 25 left)
+  #69     gob2 steps N5 -> M4 (5 ft, 20 left)
+  #70     gob2 steps M4 -> L3 (5 ft, 15 left)
+  #71     gob2 steps L3 -> K2 (5 ft, 10 left)
+  #72     gob2 steps K2 -> J1 (5 ft, 5 left)
+  #73     gob2 steps J1 -> I1 (5 ft, 0 left)
+  #74     gob2's move ends at I1
+  #75   gob2 chooses attack:shortbow>pc1  [greedy @15]
+  #76     gob2: Attack
+  #77     gob2 Shortbow -> pc1: d20 7 +4 = 11 vs AC 18, miss  [gob2 attack r2 p0.0]
+  #78   gob2 chooses pass  [greedy @16]
+  #79   gob2's turn ends
+  #80 gob3's turn (P3, 10 HP, 30 ft) [Goblin Warrior]
+  #81   gob3 chooses move:M1/p0  [greedy @17]
+  #82     gob3 steps P3 -> O2 (5 ft, 25 left)
+  #83     gob3 steps O2 -> N1 (5 ft, 20 left)
+  #84     gob3 steps N1 -> M1 (5 ft, 15 left)
+  #85     gob3's move ends at M1
+  #86   gob3 chooses attack:shortbow>pc1  [greedy @18]
+  #87     gob3: Attack
+  #88     gob3 Shortbow -> pc1: d20 14 +4 = 18 vs AC 23 (Three-Quarters Cover +5), miss  [gob3 attack r2 p0.0]
+  #89   gob3 chooses pass  [greedy @19]
+  #90   gob3's turn ends
+  #91 pc1's turn (D4, 4 HP, 30 ft) [Sample Fighter]
+  #92   pc1 chooses move:C5/p0  [greedy @20]
+  #93     pc1 steps D4 -> C5 (5 ft, 25 left)
+  #94     pc1's move ends at C5
+  #95   pc1 chooses pass  [greedy @21]
+  #96   pc1's turn ends
+  #97 fight ends: stalemate in round 2
+logHash fe2dda924e5607bd
+
+== monsterHp=rolled (journal held) ==
+   #1   initiative gob1 12 (static)
+   #2   initiative gob2 12 (static)
+   #3   initiative gob3 12 (static)
+   #4   initiative pc1 7 (static)
+   #5   initiative ally1 6 (static)
+   #6 == round 1 ==
+   #7 gob1's turn (O4, 12 HP, 30 ft) [Goblin Warrior]
+   #8   gob1 chooses attack:shortbow>pc1  [journal @0]
+   #9     gob1: Attack
+  #10     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 20 (Half Cover +2), miss  [gob1 attack r1 p0.0]
+  #11   gob1 chooses pass  [journal @1]
+  #12   gob1's turn ends
+  #13 gob2's turn (O6, 11 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses attack:shortbow>ally1  [journal @2]
+  #15     gob2: Attack
+  #16     gob2 Shortbow -> ally1: d20 15 +4 = 19 vs AC 18 (Half Cover +2), hit  [gob2 attack r1 p0.0]
+  #17       ally1 takes 6 (6 piercing), HP 17 -> 11  [gob2 damage r1 p0.0]
+  #18   gob2 chooses pass  [journal @3]
+  #19   gob2's turn ends
+  #20 gob3's turn (M6, 7 HP, 30 ft) [Goblin Warrior]
+  #21   gob3 chooses move:P3/p0  [greedy @4]
+  #22     gob3 steps M6 -> N5 (5 ft, 25 left)
+  #23     gob3 steps N5 -> O4 (5 ft, 20 left)
+  #24     gob3 steps O4 -> P3 (5 ft, 15 left)
+  #25     gob3's move ends at P3
+  #26   gob3 chooses attack:shortbow>ally1  [greedy @5]
+  #27     gob3: Attack
+  #28     gob3 Shortbow -> ally1: d20 15 +4 = 19 vs AC 16, hit  [gob3 attack r1 p0.0]
+  #29       ally1 takes 7 (7 piercing), HP 11 -> 4  [gob3 damage r1 p0.0]
+  #30   gob3 chooses pass  [greedy @6]
+  #31   gob3's turn ends
+  #32 pc1's turn (H4, 9 HP, 30 ft) [Sample Fighter]
+  #33   pc1 chooses move:N5/p0  [greedy @7]
+  #34     pc1 steps H4 -> I3 (5 ft, 25 left)
+  #35     pc1 steps I3 -> J2 (5 ft, 20 left)
+  #36     pc1 steps J2 -> K2 (5 ft, 15 left)
+  #37     pc1 steps K2 -> L3 (5 ft, 10 left)
+  #38     pc1 steps L3 -> M4 (5 ft, 5 left)
+  #39     pc1 steps M4 -> N5 (5 ft, 0 left)
+  #40     pc1's move ends at N5
+  #41   pc1 chooses attack:longsword>gob2  [greedy @8]
+  #42     pc1: Attack
+  #43     pc1 Longsword -> gob2: d20 5 +6 = 11 vs AC 15, miss  [pc1 attack r1 p0.0]
+  #44   pc1 chooses attack:longsword>gob2  [greedy @9]
+  #45     pc1 Longsword -> gob2: d20 15 +6 = 21 vs AC 15, hit  [pc1 attack r1 p0.1]
+  #46       gob2 takes 9 (9 slashing), HP 11 -> 2  [pc1 damage r1 p0.1]
+  #47   pc1's turn ends
+  #48 ally1's turn (J6, 4 HP, 30 ft) [Guard]
+  #49   ally1 chooses move:N6/p0  [greedy @10]
+  #50     ally1 steps J6 -> K5 (5 ft, 25 left)
+  #51     ally1 steps K5 -> L4 (5 ft, 20 left)
+  #52     ally1 steps L4 -> M5 (5 ft, 15 left)
+  #53     ally1 steps M5 -> N6 (5 ft, 10 left)
+  #54     ally1's move ends at N6
+  #55   ally1 chooses attack:spear>gob2  [greedy @11]
+  #56     ally1: Attack
+  #57     ally1 Spear -> gob2: d20 20 +3 = 23 vs AC 15, CRITICAL HIT  [ally1 attack r1 p0.0]
+  #58       gob2 takes 9 (9 piercing, crit), HP 2 -> 0  [ally1 damage r1 p0.0]
+  #59         gob2 dies (0 HP)
+  #60   ally1 chooses pass  [greedy @12]
+  #61   ally1's turn ends
+  #62 == round 2 ==
+  #63 gob1's turn (O4, 12 HP, 30 ft) [Goblin Warrior]
+  #64   gob1 chooses move:O5/p0  [greedy @13]
+  #65     gob1 steps O4 -> O5 (5 ft, 25 left)
+  #66     gob1's move ends at O5
+  #67   gob1 chooses attack:scimitar>ally1  [greedy @14]
+  #68     gob1: Attack
+  #69     gob1 Scimitar -> ally1: d20 19 +4 = 23 vs AC 16, hit  [gob1 attack r2 p0.0]
+  #70       ally1 takes 5 (5 slashing), HP 4 -> 0  [gob1 damage r2 p0.0]
+  #71         ally1 dies (0 HP)
+  #72   gob1 chooses pass  [greedy @15]
+  #73   gob1's turn ends
+  #74 gob3's turn (P3, 7 HP, 30 ft) [Goblin Warrior]
+  #75   gob3 chooses move:O2/p0  [greedy @16]
+  #76     gob3 steps P3 -> O2 (5 ft, 25 left)
+  #77     gob3's move ends at O2
+  #78   gob3 chooses attack:shortbow>pc1  [greedy @17]
+  #79     gob3: Attack
+  #80     gob3 Shortbow -> pc1: d20 14 +4 = 18 vs AC 18, hit  [gob3 attack r2 p0.0]
+  #81       pc1 takes 6 (6 piercing), HP 9 -> 3  [gob3 damage r2 p0.0]
+  #82   gob3 chooses pass  [greedy @18]
+  #83   gob3's turn ends
+  #84 pc1's turn (N5, 3 HP, 30 ft) [Sample Fighter]
+  #85   pc1 chooses attack:longsword>gob1  [greedy @19]
+  #86     pc1: Attack
+  #87     pc1 Longsword -> gob1: d20 7 +6 = 13 vs AC 15, miss  [pc1 attack r2 p0.0]
+  #88   pc1 chooses attack:longsword>gob1  [greedy @20]
+  #89     pc1 Longsword -> gob1: d20 13 +6 = 19 vs AC 15, hit  [pc1 attack r2 p0.1]
+  #90       gob1 takes 10 (10 slashing), HP 12 -> 2  [pc1 damage r2 p0.1]
+  #91   pc1 chooses pass  [greedy @21]
+  #92   pc1's turn ends
+  #93 fight ends: stalemate in round 2
+logHash 7fe2198fce5451ab
+
+== statBlockAtZeroHp=deathSaves (journal held) ==
+flags read vs default: -corpseSpace
+   #1   initiative gob1 12 (static)
+   #2   initiative gob2 12 (static)
+   #3   initiative gob3 12 (static)
+   #4   initiative pc1 7 (static)
+   #5   initiative ally1 6 (static)
+   #6 == round 1 ==
+   #7 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+   #8   gob1 chooses attack:shortbow>pc1  [journal @0]
+   #9     gob1: Attack
+  #10     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 20 (Half Cover +2), miss  [gob1 attack r1 p0.0]
+  #11   gob1 chooses pass  [journal @1]
+  #12   gob1's turn ends
+  #13 gob2's turn (O6, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses attack:shortbow>ally1  [journal @2]
+  #15     gob2: Attack
+  #16     gob2 Shortbow -> ally1: d20 15 +4 = 19 vs AC 18 (Half Cover +2), hit  [gob2 attack r1 p0.0]
+  #17       ally1 takes 6 (6 piercing), HP 11 -> 5  [gob2 damage r1 p0.0]
+  #18   gob2 chooses pass  [journal @3]
+  #19   gob2's turn ends
+  #20 gob3's turn (M6, 10 HP, 30 ft) [Goblin Warrior]
+  #21   gob3 chooses move:P3/p0  [greedy @4]
+  #22     gob3 steps M6 -> N5 (5 ft, 25 left)
+  #23     gob3 steps N5 -> O4 (5 ft, 20 left)
+  #24     gob3 steps O4 -> P3 (5 ft, 15 left)
+  #25     gob3's move ends at P3
+  #26   gob3 chooses attack:shortbow>ally1  [greedy @5]
+  #27     gob3: Attack
+  #28     gob3 Shortbow -> ally1: d20 15 +4 = 19 vs AC 16, hit  [gob3 attack r1 p0.0]
+  #29       ally1 takes 7 (7 piercing), HP 5 -> 0  [gob3 damage r1 p0.0]
+  #30         ally1 drops to 0 HP and falls Unconscious
+  #31           ally1 is Unconscious (downed)
+  #32           ally1 is Incapacitated (downed)
+  #33           ally1 is Prone (fell-prone)
+  #34   gob3 chooses pass  [greedy @6]
+  #35   gob3's turn ends
+  #36 pc1's turn (H4, 9 HP, 30 ft) [Sample Fighter]
+  #37   pc1 chooses move:N3/p0  [greedy @7]
+  #38     pc1 steps H4 -> I3 (5 ft, 25 left)
+  #39     pc1 steps I3 -> J2 (5 ft, 20 left)
+  #40     pc1 steps J2 -> K1 (5 ft, 15 left)
+  #41     pc1 steps K1 -> L1 (5 ft, 10 left)
+  #42     pc1 steps L1 -> M2 (5 ft, 5 left)
+  #43     pc1 steps M2 -> N3 (5 ft, 0 left)
+  #44     pc1's move ends at N3
+  #45   pc1 chooses attack:longsword>gob1  [greedy @8]
+  #46     pc1: Attack
+  #47     pc1 Longsword -> gob1: d20 5 +6 = 11 vs AC 15, miss  [pc1 attack r1 p0.0]
+  #48   pc1 chooses attack:longsword>gob1  [greedy @9]
+  #49     pc1 Longsword -> gob1: d20 15 +6 = 21 vs AC 15, hit  [pc1 attack r1 p0.1]
+  #50       gob1 takes 9 (9 slashing), HP 10 -> 1  [pc1 damage r1 p0.1]
+  #51   pc1's turn ends
+  #52 ally1's turn (J6, 0 HP, 0 ft) [Guard]
+  #53   ally1 death save: d20 4 (successes 0, failures 1)  [ally1 death r1 p0.0]
+  #54   ally1's turn ends
+  #55 == round 2 ==
+  #56 gob1's turn (O4, 1 HP, 30 ft) [Goblin Warrior]
+  #57   gob1 chooses attack:scimitar>pc1  [greedy @10]
+  #58     gob1: Attack
+  #59     gob1 Scimitar -> pc1: d20 19 +4 = 23 vs AC 18, hit  [gob1 attack r2 p0.0]
+  #60       pc1 takes 5 (5 slashing), HP 9 -> 4  [gob1 damage r2 p0.0]
+  #61   gob1 chooses pass  [greedy @11]
+  #62   gob1's turn ends
+  #63 gob2's turn (O6, 10 HP, 30 ft) [Goblin Warrior]
+  #64   gob2 chooses attack:shortbow>pc1  [greedy @12]
+  #65     gob2: Attack
+  #66     gob2 Shortbow -> pc1: d20 7 +4 = 11 vs AC 18, miss  [gob2 attack r2 p0.0]
+  #67   gob2 chooses pass  [greedy @13]
+  #68   gob2's turn ends
+  #69 gob3's turn (P3, 10 HP, 30 ft) [Goblin Warrior]
+  #70   gob3 chooses attack:shortbow>pc1  [greedy @14]
+  #71     gob3: Attack
+  #72     gob3 Shortbow -> pc1: d20 14 +4 = 18 vs AC 18, hit  [gob3 attack r2 p0.0]
+  #73       pc1 takes 6 (6 piercing), HP 4 -> 0  [gob3 damage r2 p0.0]
+  #74         pc1 drops to 0 HP and falls Unconscious
+  #75           pc1 is Unconscious (downed)
+  #76           pc1 is Incapacitated (downed)
+  #77           pc1 is Prone (fell-prone)
+  #78   gob3's turn ends
+  #79 fight ends: loss in round 2
+logHash 22ec2925ea3b4421
+
+== corpseSpace=difficult (journal held; log identical to default) ==
+   #1   initiative gob1 12 (static)
+   #2   initiative gob2 12 (static)
+   #3   initiative gob3 12 (static)
+   #4   initiative pc1 7 (static)
+   #5   initiative ally1 6 (static)
+   #6 == round 1 ==
+   #7 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+   #8   gob1 chooses attack:shortbow>pc1  [journal @0]
+   #9     gob1: Attack
+  #10     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 20 (Half Cover +2), miss  [gob1 attack r1 p0.0]
+  #11   gob1 chooses pass  [journal @1]
+  #12   gob1's turn ends
+  #13 gob2's turn (O6, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses attack:shortbow>ally1  [journal @2]
+  #15     gob2: Attack
+  #16     gob2 Shortbow -> ally1: d20 15 +4 = 19 vs AC 18 (Half Cover +2), hit  [gob2 attack r1 p0.0]
+  #17       ally1 takes 6 (6 piercing), HP 11 -> 5  [gob2 damage r1 p0.0]
+  #18   gob2 chooses pass  [journal @3]
+  #19   gob2's turn ends
+  #20 gob3's turn (M6, 10 HP, 30 ft) [Goblin Warrior]
+  #21   gob3 chooses move:P3/p0  [greedy @4]
+  #22     gob3 steps M6 -> N5 (5 ft, 25 left)
+  #23     gob3 steps N5 -> O4 (5 ft, 20 left)
+  #24     gob3 steps O4 -> P3 (5 ft, 15 left)
+  #25     gob3's move ends at P3
+  #26   gob3 chooses attack:shortbow>ally1  [greedy @5]
+  #27     gob3: Attack
+  #28     gob3 Shortbow -> ally1: d20 15 +4 = 19 vs AC 16, hit  [gob3 attack r1 p0.0]
+  #29       ally1 takes 7 (7 piercing), HP 5 -> 0  [gob3 damage r1 p0.0]
+  #30         ally1 dies (0 HP)
+  #31   gob3 chooses pass  [greedy @6]
+  #32   gob3's turn ends
+  #33 pc1's turn (H4, 9 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses move:E5/p0  [greedy @7]
+  #35     pc1 steps H4 -> H5 (5 ft, 25 left)
+  #36     pc1 steps H5 -> H6 (5 ft, 20 left)
+  #37     pc1 steps H6 -> G6 (5 ft, 15 left)
+  #38     pc1 steps G6 -> F6 (5 ft, 10 left)
+  #39     pc1 steps F6 -> E5 (5 ft, 5 left)
+  #40     pc1's move ends at E5
+  #41   pc1 chooses attack:handaxe-thrown>gob2  [greedy @8]
+  #42     pc1: Attack
+  #43     pc1 Handaxe (thrown) -> gob2: d20 5/20 dis -> 5 (-long-range) +6 = 11 vs AC 15, miss  [pc1 attack r1 p0.0]
+  #44       pc1 throws Handaxe (1 left)
+  #45   pc1 chooses attack:handaxe-thrown>gob2  [greedy @9]
+  #46     pc1 Handaxe (thrown) -> gob2: d20 15/16 dis -> 15 (-long-range) +6 = 21 vs AC 15, hit  [pc1 attack r1 p0.1]
+  #47       pc1 throws Handaxe (0 left)
+  #48       gob2 takes 7 (7 slashing), HP 10 -> 3  [pc1 damage r1 p0.1]
+  #49   pc1 chooses move:D4/p0  [greedy @10]
+  #50     pc1 steps E5 -> D4 (5 ft, 0 left)
+  #51     pc1's move ends at D4
+  #52   pc1's turn ends
+  #53 == round 2 ==
+  #54 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+  #55   gob1 chooses move:L1/p0  [greedy @11]
+  #56     gob1 steps O4 -> N3 (5 ft, 25 left)
+  #57     gob1 steps N3 -> M2 (5 ft, 20 left)
+  #58     gob1 steps M2 -> L1 (5 ft, 15 left)
+  #59     gob1's move ends at L1
+  #60   gob1 chooses attack:shortbow>pc1  [greedy @12]
+  #61     gob1: Attack
+  #62     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 23 (Three-Quarters Cover +5), hit  [gob1 attack r2 p0.0]
+  #63       pc1 takes 5 (5 piercing), HP 9 -> 4  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [greedy @13]
+  #65   gob1's turn ends
+  #66 gob2's turn (O6, 3 HP, 30 ft) [Goblin Warrior]
+  #67   gob2 chooses move:I1/p0  [greedy @14]
+  #68     gob2 steps O6 -> N5 (5 ft, 25 left)
+  #69     gob2 steps N5 -> M4 (5 ft, 20 left)
+  #70     gob2 steps M4 -> L3 (5 ft, 15 left)
+  #71     gob2 steps L3 -> K2 (5 ft, 10 left)
+  #72     gob2 steps K2 -> J1 (5 ft, 5 left)
+  #73     gob2 steps J1 -> I1 (5 ft, 0 left)
+  #74     gob2's move ends at I1
+  #75   gob2 chooses attack:shortbow>pc1  [greedy @15]
+  #76     gob2: Attack
+  #77     gob2 Shortbow -> pc1: d20 7 +4 = 11 vs AC 18, miss  [gob2 attack r2 p0.0]
+  #78   gob2 chooses pass  [greedy @16]
+  #79   gob2's turn ends
+  #80 gob3's turn (P3, 10 HP, 30 ft) [Goblin Warrior]
+  #81   gob3 chooses move:M1/p0  [greedy @17]
+  #82     gob3 steps P3 -> O2 (5 ft, 25 left)
+  #83     gob3 steps O2 -> N1 (5 ft, 20 left)
+  #84     gob3 steps N1 -> M1 (5 ft, 15 left)
+  #85     gob3's move ends at M1
+  #86   gob3 chooses attack:shortbow>pc1  [greedy @18]
+  #87     gob3: Attack
+  #88     gob3 Shortbow -> pc1: d20 14 +4 = 18 vs AC 23 (Three-Quarters Cover +5), miss  [gob3 attack r2 p0.0]
+  #89   gob3 chooses pass  [greedy @19]
+  #90   gob3's turn ends
+  #91 pc1's turn (D4, 4 HP, 30 ft) [Sample Fighter]
+  #92   pc1 chooses move:C5/p0  [greedy @20]
+  #93     pc1 steps D4 -> C5 (5 ft, 25 left)
+  #94     pc1's move ends at C5
+  #95   pc1 chooses pass  [greedy @21]
+  #96   pc1's turn ends
+  #97 fight ends: stalemate in round 2
+logHash 118422b42fbf70ea
+
+== pauseInOccupiedSpace=true (skipped: unimplemented in FLAG_INFO) ==
+
+== losMethod=centers (journal held) ==
+   #1   initiative gob1 12 (static)
+   #2   initiative gob2 12 (static)
+   #3   initiative gob3 12 (static)
+   #4   initiative pc1 7 (static)
+   #5   initiative ally1 6 (static)
+   #6 == round 1 ==
+   #7 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+   #8   gob1 chooses attack:shortbow>pc1  [journal @0]
+   #9     gob1: Attack
+  #10     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 20 (Half Cover +2), miss  [gob1 attack r1 p0.0]
+  #11   gob1 chooses pass  [journal @1]
+  #12   gob1's turn ends
+  #13 gob2's turn (O6, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses attack:shortbow>ally1  [journal @2]
+  #15     gob2: Attack
+  #16     gob2 Shortbow -> ally1: d20 15 +4 = 19 vs AC 18 (Half Cover +2), hit  [gob2 attack r1 p0.0]
+  #17       ally1 takes 6 (6 piercing), HP 11 -> 5  [gob2 damage r1 p0.0]
+  #18   gob2 chooses pass  [journal @3]
+  #19   gob2's turn ends
+  #20 gob3's turn (M6, 10 HP, 30 ft) [Goblin Warrior]
+  #21   gob3 chooses move:P5/p0  [greedy @4]
+  #22     gob3 steps M6 -> N5 (5 ft, 25 left)
+  #23     gob3 steps N5 -> O4 (5 ft, 20 left)
+  #24     gob3 steps O4 -> P5 (5 ft, 15 left)
+  #25     gob3's move ends at P5
+  #26   gob3 chooses attack:shortbow>ally1  [greedy @5]
+  #27     gob3: Attack
+  #28     gob3 Shortbow -> ally1: d20 15 +4 = 19 vs AC 16, hit  [gob3 attack r1 p0.0]
+  #29       ally1 takes 7 (7 piercing), HP 5 -> 0  [gob3 damage r1 p0.0]
+  #30         ally1 dies (0 HP)
+  #31   gob3 chooses pass  [greedy @6]
+  #32   gob3's turn ends
+  #33 pc1's turn (H4, 9 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses move:E2/p0  [greedy @7]
+  #35     pc1 steps H4 -> H3 (5 ft, 25 left)
+  #36     pc1 steps H3 -> H2 (5 ft, 20 left)
+  #37     pc1 steps H2 -> G1 (5 ft, 15 left)
+  #38     pc1 steps G1 -> F1 (5 ft, 10 left)
+  #39     pc1 steps F1 -> E2 (5 ft, 5 left)
+  #40     pc1's move ends at E2
+  #41   pc1 chooses attack:handaxe-thrown>gob1  [greedy @8]
+  #42     pc1: Attack
+  #43     pc1 Handaxe (thrown) -> gob1: d20 5/20 dis -> 5 (-long-range) +6 = 11 vs AC 15, miss  [pc1 attack r1 p0.0]
+  #44       pc1 throws Handaxe (1 left)
+  #45   pc1 chooses attack:handaxe-thrown>gob1  [greedy @9]
+  #46     pc1 Handaxe (thrown) -> gob1: d20 15/16 dis -> 15 (-long-range) +6 = 21 vs AC 15, hit  [pc1 attack r1 p0.1]
+  #47       pc1 throws Handaxe (0 left)
+  #48       gob1 takes 7 (7 slashing), HP 10 -> 3  [pc1 damage r1 p0.1]
+  #49   pc1 chooses move:D2/p0  [greedy @10]
+  #50     pc1 steps E2 -> D2 (5 ft, 0 left)
+  #51     pc1's move ends at D2
+  #52   pc1's turn ends
+  #53 == round 2 ==
+  #54 gob1's turn (O4, 3 HP, 30 ft) [Goblin Warrior]
+  #55   gob1 chooses move:N3/p0  [greedy @11]
+  #56     gob1 steps O4 -> N3 (5 ft, 25 left)
+  #57     gob1's move ends at N3
+  #58   gob1 chooses attack:shortbow>pc1  [greedy @12]
+  #59     gob1: Attack
+  #60     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 18, hit  [gob1 attack r2 p0.0]
+  #61       pc1 takes 5 (5 piercing), HP 9 -> 4  [gob1 damage r2 p0.0]
+  #62   gob1 chooses pass  [greedy @13]
+  #63   gob1's turn ends
+  #64 gob2's turn (O6, 10 HP, 30 ft) [Goblin Warrior]
+  #65   gob2 chooses move:L3/p0  [greedy @14]
+  #66     gob2 steps O6 -> N5 (5 ft, 25 left)
+  #67     gob2 steps N5 -> M4 (5 ft, 20 left)
+  #68     gob2 steps M4 -> L3 (5 ft, 15 left)
+  #69     gob2's move ends at L3
+  #70   gob2 chooses attack:shortbow>pc1  [greedy @15]
+  #71     gob2: Attack
+  #72     gob2 Shortbow -> pc1: d20 7 +4 = 11 vs AC 18, miss  [gob2 attack r2 p0.0]
+  #73   gob2 chooses pass  [greedy @16]
+  #74   gob2's turn ends
+  #75 gob3's turn (P5, 10 HP, 30 ft) [Goblin Warrior]
+  #76   gob3 chooses move:M2/p0  [greedy @17]
+  #77     gob3 steps P5 -> O4 (5 ft, 25 left)
+  #78     gob3 steps O4 -> N3 (5 ft, 20 left)
+  #79     gob3 steps N3 -> M2 (5 ft, 15 left)
+  #80     gob3's move ends at M2
+  #81   gob3 chooses attack:shortbow>pc1  [greedy @18]
+  #82     gob3: Attack
+  #83     gob3 Shortbow -> pc1: d20 14 +4 = 18 vs AC 18, hit  [gob3 attack r2 p0.0]
+  #84       pc1 takes 6 (6 piercing), HP 4 -> 0  [gob3 damage r2 p0.0]
+  #85         pc1 drops to 0 HP and falls Unconscious
+  #86           pc1 is Unconscious (downed)
+  #87           pc1 is Incapacitated (downed)
+  #88           pc1 is Prone (fell-prone)
+  #89   gob3's turn ends
+  #90 fight ends: loss in round 2
+logHash 2e982e2e938d44e6
+
+== losMethod=stubbed (journal held) ==
+flags read vs default: -losMethod -creatureCover
+   #1   initiative gob1 12 (static)
+   #2   initiative gob2 12 (static)
+   #3   initiative gob3 12 (static)
+   #4   initiative pc1 7 (static)
+   #5   initiative ally1 6 (static)
+   #6 == round 1 ==
+   #7 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+   #8   gob1 chooses attack:shortbow>pc1  [journal @0]
+   #9     gob1: Attack
+  #10     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 18, miss  [gob1 attack r1 p0.0]
+  #11   gob1 chooses pass  [journal @1]
+  #12   gob1's turn ends
+  #13 gob2's turn (O6, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses attack:shortbow>ally1  [journal @2]
+  #15     gob2: Attack
+  #16     gob2 Shortbow -> ally1: d20 15 +4 = 19 vs AC 16, hit  [gob2 attack r1 p0.0]
+  #17       ally1 takes 6 (6 piercing), HP 11 -> 5  [gob2 damage r1 p0.0]
+  #18   gob2 chooses pass  [journal @3]
+  #19   gob2's turn ends
+  #20 gob3's turn (M6, 10 HP, 30 ft) [Goblin Warrior]
+  #21   gob3 chooses move:P3/p0  [greedy @4]
+  #22     gob3 steps M6 -> N5 (5 ft, 25 left)
+  #23     gob3 steps N5 -> O4 (5 ft, 20 left)
+  #24     gob3 steps O4 -> P3 (5 ft, 15 left)
+  #25     gob3's move ends at P3
+  #26   gob3 chooses attack:shortbow>ally1  [greedy @5]
+  #27     gob3: Attack
+  #28     gob3 Shortbow -> ally1: d20 15 +4 = 19 vs AC 16, hit  [gob3 attack r1 p0.0]
+  #29       ally1 takes 7 (7 piercing), HP 5 -> 0  [gob3 damage r1 p0.0]
+  #30         ally1 dies (0 HP)
+  #31   gob3 chooses pass  [greedy @6]
+  #32   gob3's turn ends
+  #33 pc1's turn (H4, 9 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses move:N3/p0  [greedy @7]
+  #35     pc1 steps H4 -> I3 (5 ft, 25 left)
+  #36     pc1 steps I3 -> J2 (5 ft, 20 left)
+  #37     pc1 steps J2 -> K1 (5 ft, 15 left)
+  #38     pc1 steps K1 -> L1 (5 ft, 10 left)
+  #39     pc1 steps L1 -> M2 (5 ft, 5 left)
+  #40     pc1 steps M2 -> N3 (5 ft, 0 left)
+  #41     pc1's move ends at N3
+  #42   pc1 chooses attack:longsword>gob1  [greedy @8]
+  #43     pc1: Attack
+  #44     pc1 Longsword -> gob1: d20 5 +6 = 11 vs AC 15, miss  [pc1 attack r1 p0.0]
+  #45   pc1 chooses attack:longsword>gob1  [greedy @9]
+  #46     pc1 Longsword -> gob1: d20 15 +6 = 21 vs AC 15, hit  [pc1 attack r1 p0.1]
+  #47       gob1 takes 9 (9 slashing), HP 10 -> 1  [pc1 damage r1 p0.1]
+  #48   pc1's turn ends
+  #49 == round 2 ==
+  #50 gob1's turn (O4, 1 HP, 30 ft) [Goblin Warrior]
+  #51   gob1 chooses attack:scimitar>pc1  [greedy @10]
+  #52     gob1: Attack
+  #53     gob1 Scimitar -> pc1: d20 19 +4 = 23 vs AC 18, hit  [gob1 attack r2 p0.0]
+  #54       pc1 takes 5 (5 slashing), HP 9 -> 4  [gob1 damage r2 p0.0]
+  #55   gob1 chooses pass  [greedy @11]
+  #56   gob1's turn ends
+  #57 gob2's turn (O6, 10 HP, 30 ft) [Goblin Warrior]
+  #58   gob2 chooses attack:shortbow>pc1  [greedy @12]
+  #59     gob2: Attack
+  #60     gob2 Shortbow -> pc1: d20 7 +4 = 11 vs AC 18, miss  [gob2 attack r2 p0.0]
+  #61   gob2 chooses pass  [greedy @13]
+  #62   gob2's turn ends
+  #63 gob3's turn (P3, 10 HP, 30 ft) [Goblin Warrior]
+  #64   gob3 chooses attack:shortbow>pc1  [greedy @14]
+  #65     gob3: Attack
+  #66     gob3 Shortbow -> pc1: d20 14 +4 = 18 vs AC 18, hit  [gob3 attack r2 p0.0]
+  #67       pc1 takes 6 (6 piercing), HP 4 -> 0  [gob3 damage r2 p0.0]
+  #68         pc1 drops to 0 HP and falls Unconscious
+  #69           pc1 is Unconscious (downed)
+  #70           pc1 is Incapacitated (downed)
+  #71           pc1 is Prone (fell-prone)
+  #72   gob3's turn ends
+  #73 fight ends: loss in round 2
+logHash d9358a8d945cce06
+
+== creatureCover=off (journal held) ==
+   #1   initiative gob1 12 (static)
+   #2   initiative gob2 12 (static)
+   #3   initiative gob3 12 (static)
+   #4   initiative pc1 7 (static)
+   #5   initiative ally1 6 (static)
+   #6 == round 1 ==
+   #7 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+   #8   gob1 chooses attack:shortbow>pc1  [journal @0]
+   #9     gob1: Attack
+  #10     gob1 Shortbow -> pc1: d20 3 +4 = 7 vs AC 20 (Half Cover +2), miss  [gob1 attack r1 p0.0]
+  #11   gob1 chooses pass  [journal @1]
+  #12   gob1's turn ends
+  #13 gob2's turn (O6, 10 HP, 30 ft) [Goblin Warrior]
+  #14   gob2 chooses attack:shortbow>ally1  [journal @2]
+  #15     gob2: Attack
+  #16     gob2 Shortbow -> ally1: d20 15 +4 = 19 vs AC 16, hit  [gob2 attack r1 p0.0]
+  #17       ally1 takes 6 (6 piercing), HP 11 -> 5  [gob2 damage r1 p0.0]
+  #18   gob2 chooses pass  [journal @3]
+  #19   gob2's turn ends
+  #20 gob3's turn (M6, 10 HP, 30 ft) [Goblin Warrior]
+  #21   gob3 chooses move:P3/p0  [greedy @4]
+  #22     gob3 steps M6 -> N5 (5 ft, 25 left)
+  #23     gob3 steps N5 -> O4 (5 ft, 20 left)
+  #24     gob3 steps O4 -> P3 (5 ft, 15 left)
+  #25     gob3's move ends at P3
+  #26   gob3 chooses attack:shortbow>ally1  [greedy @5]
+  #27     gob3: Attack
+  #28     gob3 Shortbow -> ally1: d20 15 +4 = 19 vs AC 16, hit  [gob3 attack r1 p0.0]
+  #29       ally1 takes 7 (7 piercing), HP 5 -> 0  [gob3 damage r1 p0.0]
+  #30         ally1 dies (0 HP)
+  #31   gob3 chooses pass  [greedy @6]
+  #32   gob3's turn ends
+  #33 pc1's turn (H4, 9 HP, 30 ft) [Sample Fighter]
+  #34   pc1 chooses move:E5/p0  [greedy @7]
+  #35     pc1 steps H4 -> H5 (5 ft, 25 left)
+  #36     pc1 steps H5 -> H6 (5 ft, 20 left)
+  #37     pc1 steps H6 -> G6 (5 ft, 15 left)
+  #38     pc1 steps G6 -> F6 (5 ft, 10 left)
+  #39     pc1 steps F6 -> E5 (5 ft, 5 left)
+  #40     pc1's move ends at E5
+  #41   pc1 chooses attack:handaxe-thrown>gob2  [greedy @8]
+  #42     pc1: Attack
+  #43     pc1 Handaxe (thrown) -> gob2: d20 5/20 dis -> 5 (-long-range) +6 = 11 vs AC 15, miss  [pc1 attack r1 p0.0]
+  #44       pc1 throws Handaxe (1 left)
+  #45   pc1 chooses attack:handaxe-thrown>gob2  [greedy @9]
+  #46     pc1 Handaxe (thrown) -> gob2: d20 15/16 dis -> 15 (-long-range) +6 = 21 vs AC 15, hit  [pc1 attack r1 p0.1]
+  #47       pc1 throws Handaxe (0 left)
+  #48       gob2 takes 7 (7 slashing), HP 10 -> 3  [pc1 damage r1 p0.1]
+  #49   pc1 chooses move:D4/p0  [greedy @10]
+  #50     pc1 steps E5 -> D4 (5 ft, 0 left)
+  #51     pc1's move ends at D4
+  #52   pc1's turn ends
+  #53 == round 2 ==
+  #54 gob1's turn (O4, 10 HP, 30 ft) [Goblin Warrior]
+  #55   gob1 chooses move:L1/p0  [greedy @11]
+  #56     gob1 steps O4 -> N3 (5 ft, 25 left)
+  #57     gob1 steps N3 -> M2 (5 ft, 20 left)
+  #58     gob1 steps M2 -> L1 (5 ft, 15 left)
+  #59     gob1's move ends at L1
+  #60   gob1 chooses attack:shortbow>pc1  [greedy @12]
+  #61     gob1: Attack
+  #62     gob1 Shortbow -> pc1: d20 19 +4 = 23 vs AC 23 (Three-Quarters Cover +5), hit  [gob1 attack r2 p0.0]
+  #63       pc1 takes 5 (5 piercing), HP 9 -> 4  [gob1 damage r2 p0.0]
+  #64   gob1 chooses pass  [greedy @13]
+  #65   gob1's turn ends
+  #66 gob2's turn (O6, 3 HP, 30 ft) [Goblin Warrior]
+  #67   gob2 chooses move:I1/p0  [greedy @14]
+  #68     gob2 steps O6 -> N5 (5 ft, 25 left)
+  #69     gob2 steps N5 -> M4 (5 ft, 20 left)
+  #70     gob2 steps M4 -> L3 (5 ft, 15 left)
+  #71     gob2 steps L3 -> K2 (5 ft, 10 left)
+  #72     gob2 steps K2 -> J1 (5 ft, 5 left)
+  #73     gob2 steps J1 -> I1 (5 ft, 0 left)
+  #74     gob2's move ends at I1
+  #75   gob2 chooses attack:shortbow>pc1  [greedy @15]
+  #76     gob2: Attack
+  #77     gob2 Shortbow -> pc1: d20 7 +4 = 11 vs AC 18, miss  [gob2 attack r2 p0.0]
+  #78   gob2 chooses pass  [greedy @16]
+  #79   gob2's turn ends
+  #80 gob3's turn (P3, 10 HP, 30 ft) [Goblin Warrior]
+  #81   gob3 chooses move:M1/p0  [greedy @17]
+  #82     gob3 steps P3 -> O2 (5 ft, 25 left)
+  #83     gob3 steps O2 -> N1 (5 ft, 20 left)
+  #84     gob3 steps N1 -> M1 (5 ft, 15 left)
+  #85     gob3's move ends at M1
+  #86   gob3 chooses attack:shortbow>pc1  [greedy @18]
+  #87     gob3: Attack
+  #88     gob3 Shortbow -> pc1: d20 14 +4 = 18 vs AC 23 (Three-Quarters Cover +5), miss  [gob3 attack r2 p0.0]
+  #89   gob3 chooses pass  [greedy @19]
+  #90   gob3's turn ends
+  #91 pc1's turn (D4, 4 HP, 30 ft) [Sample Fighter]
+  #92   pc1 chooses move:C5/p0  [greedy @20]
+  #93     pc1 steps D4 -> C5 (5 ft, 25 left)
+  #94     pc1's move ends at C5
+  #95   pc1 chooses pass  [greedy @21]
+  #96   pc1's turn ends
+  #97 fight ends: stalemate in round 2
+logHash ee59ee0aea99bf1e

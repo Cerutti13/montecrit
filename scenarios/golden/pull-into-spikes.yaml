@@ -1,0 +1,23 @@
+# M1b demo: a pull cantrip drags a goblin a chosen distance through Spike Growth.
+# pc1 grows spikes centered on E4 (a 20-ft radius: on row 1 that's C1..G1, so B1 and H1 are
+# outside). On its next turn its synthetic 30-ft melee spell attack hits, and it pulls the
+# goblin two squares, H1 -> G1 -> F1: entering, then moving within, 2d4 per 5 ft traveled.
+# The pull is forced movement: no opportunity attacks, none of the goblin's movement spent.
+# Static initiative: pc1 12, gob1 12 - 5 (surprised) = 7.
+kind: scenario
+id: pull-into-spikes
+name: Pull into Spike Growth
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid:
+  w: 10
+  h: 7
+flags:
+  initiativeMode: static
+# Two rounds is the whole demo; the cap keeps flag-matrix variants (where the goblin survives)
+# from turning into long placeholder-AI fights that churn whenever the AI changes.
+knobs:
+  maxRounds: 2
+units:
+  - { seat: pc1, team: party, use: 'test:sample-druid', at: B1 }
+  - { seat: gob1, team: enemies, use: 'srd:goblin-warrior', at: H1, surprised: true }

@@ -1,0 +1,37 @@
+{
+  "name": "montecrit",
+  "private": true,
+  "type": "module",
+  "description": "Combat simulator for 5e (SRD 5.2.1): seeded Monte Carlo fights on a 5-ft grid, exact check odds, practice mode, build comparison.",
+  "license": "AGPL-3.0-only",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": "26.9.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:slow": "MONTECRIT_SLOW=1 vitest run",
+    "typecheck": "tsc -p packages/engine && tsc -p packages/engine/tsconfig.test.json && tsc -p packages/host && tsc -p packages/host/tsconfig.test.json && tsc -p apps/cli && tsc -p apps/web && tsc -p apps/web/tsconfig.node.json && tsc -p apps/web/tsconfig.worker.json && tsc -p tools",
+    "lint": "node tools/lint-determinism.ts && node tools/check-private.ts --all && npm run typecheck",
+    "montecrit": "node apps/cli/src/main.ts",
+    "perf": "node tools/perf.ts",
+    "bench": "node tools/bench-classes.ts",
+    "heroes": "node tools/gen-heroes.ts",
+    "import:srd": "node tools/import-srd/main.ts",
+    "import:verify": "node tools/import-srd/verify.ts",
+    "web": "vite -c apps/web/vite.config.ts",
+    "web:preview": "vite preview -c apps/web/vite.config.ts",
+    "build:web": "vite build -c apps/web/vite.config.ts && node tools/check-private.ts --dir apps/web/dist",
+    "prepare": "node tools/install-hooks.ts"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "fast-check": "4.10.2",
+    "typescript": "7.0.2",
+    "vite": "8.3.4",
+    "vitest": "5.0.5"
+  }
+}

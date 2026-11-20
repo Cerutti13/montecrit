@@ -1,0 +1,13 @@
+# Reviewed against SRD 5.2.1 p.87 (srd-raw.txt:20027-20036), the Alert origin feat (coverage W1,
+# docs/design/w1-plan.md section 3). Foundry's record carries its Initiative bonus as a flag the
+# importer has no mapping for, so the feat had no feature item; this patch gives it the one written
+# from the PDF, srd:alert/alert (overrides/feature/alert/alert.yaml), as Defense's feat lists
+# srd:defense/defense. The feat is data; its feature carries the fidelity. Initiative Swap
+# (20034-20036) isn't modeled, so the feat stays partial with that line.
+features: [srd:alert/alert]
+fidelity: partial
+unimplemented:
+  - part initiative-swap not modeled
+provenance:
+  review: reviewed
+  pdfPage: 87

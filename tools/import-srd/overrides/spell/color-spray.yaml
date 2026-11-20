@@ -1,0 +1,32 @@
+# SRD 5.2.1 p.116, Color Spray (srd-raw.txt:25014-25027), read by hand at coverage step 7.4. A 15-foot
+# Cone from the caster; CON save or Blinded "until the end of your next turn". The zone lasts exactly
+# as long: a condition from a zone's hook ends with its zone, so a shorter zone would cut it short.
+replace: true
+foundryPath: packs/_source/spells24/1st-level/color-spray.yml
+kind: spell
+id: srd:color-spray
+name: Color Spray
+source: SRD 5.2.1 p.116
+fidelity: full
+level: 1
+castingTime: action
+range: self
+components: { v: true, s: true, m: focus }
+duration: instant
+area: spray
+effects:
+  - id: spray
+    name: Color Spray
+    zone: { shape: cone, size: 15 }
+    duration: { until: endOfNextTurn, of: caster }
+    on:
+      - when: [appear]
+        do:
+          - save:
+              ability: con
+              onFail:
+                - condition: { id: blinded, until: { until: endOfNextTurn, of: caster } }
+do: [{ apply: { effect: spray, to: point } }]
+provenance:
+  review: reviewed
+  pdfPage: 116

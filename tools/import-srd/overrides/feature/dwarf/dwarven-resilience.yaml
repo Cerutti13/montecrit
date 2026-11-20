@@ -1,0 +1,9 @@
+# Hand fix from SRD 5.2.1 p.84 (srd-raw.txt:19710-19712): "You have Resistance to Poison damage.
+# You also have Advantage on saving throws you make to avoid or end the Poisoned condition."
+# The resistance maps (the race's Trait grant). The Advantage has no record data and no primitive:
+# a save roll key carries no condition bit yet (M3 step 4 census), so no mod can name "saves
+# against Poisoned". Without this line the gap would be silent. A merge patch: the list replaces
+# the mapped one, so it repeats the mapper's review line.
+unimplemented:
+  - advantage on saves against the poisoned condition not modeled
+  - not a bucket-A shape (needs a reviewed override to be full)

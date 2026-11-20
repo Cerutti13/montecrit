@@ -1,0 +1,20 @@
+# Coverage step 7.6 golden (docs/design/step7-plan.md section 6): a monster's limited action. The White
+# Dragon Wyrmling's Cold Breath (srd-raw.txt:56054-56056): CON DC 12, 15-foot Cone, 5d8 Cold, half on a
+# success, Recharge 5-6 (44017-44025). The book rule (43608-43615): breath first, Multiattack otherwise.
+# Static initiative. pc1 and pc2 are scripted to pass, so the wyrmling's choices are the demo: it's greedy.
+#   Round 1: it starts charged, rolls no recharge, walks into cone range and breathes on both; one damage
+#   roll for the group (p.16). Round 2: spent, it rolls 4, not yet, so Multiattack. Round 3: it rolls 5,
+#   the breath comes back and it breathes again. Round 4: it rolls 1, Multiattack.
+# Its fly, swim and burrow speeds stay lines, as the notes print.
+kind: scenario
+id: breath-cone
+name: A white dragon wyrmling's Cold Breath
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid: { w: 14, h: 9 }
+flags: { initiativeMode: static }
+knobs: { maxRounds: 4, downEnds: false }
+units:
+  - { seat: drake, team: enemies, use: 'srd:white-dragon-wyrmling', at: C5, decider: greedy }
+  - { seat: pc1, team: party, use: 'test:sample-fighter', at: J4, decider: greedy }
+  - { seat: pc2, team: party, use: 'test:sample-fighter', at: J6, decider: greedy }

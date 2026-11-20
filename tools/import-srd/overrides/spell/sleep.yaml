@@ -1,0 +1,50 @@
+# SRD 5.2.1 p.163, Sleep (srd-raw.txt:30819-30835), read by hand at coverage step 7.4.
+# "Each creature of your choice" in a 5-foot-radius Sphere (foes: the caster spares every ally [U]).
+# WIS save or Incapacitated "until the end of its next turn, at which point it must repeat the save";
+# a second failure is Unconscious "for the duration" (30829-30833). "The spell ends on a target if it
+# takes damage" (30833-30834) is endsOnDamage on both stages. Under the default flags a 5-foot radius
+# covers one square (grid/area.ts), so this is a single-target spell in the sim and `foes` does
+# nothing there; other coverage flags make it an area. The two lines say what the engine does: the
+# choice is modeled as `foes`, not ignored, and an Unconscious immunity (conditionImmune) skips only
+# the Unconscious stage (sim/conditions.ts imposeCondition checks the stage's own bit).
+replace: true
+foundryPath: packs/_source/spells24/1st-level/sleep.yml
+kind: spell
+id: srd:sleep
+name: Sleep
+source: SRD 5.2.1 p.163
+fidelity: partial
+unimplemented:
+  - someone within 5 feet can take an action to shake it out of the effect
+  - "creatures that don't sleep or have Immunity to Exhaustion automatically succeed: not modeled; a listed Unconscious immunity blocks only the second stage, so such a creature is still Incapacitated by the first"
+  - "creatures of your choice: read as every foe and no ally (affects: foes), with no decision [U]"
+level: 1
+castingTime: action
+range: 60
+components: { v: true, s: true, m: focus }
+concentration: true
+duration: { minutes: 1 }
+area: motes
+effects:
+  - id: motes
+    name: Sleep
+    zone: { shape: sphere, radius: 5, affects: foes }
+    on:
+      - when: [appear]
+        do:
+          - save:
+              ability: wis
+              onFail:
+                - condition:
+                    id: incapacitated
+                    until: { until: endOfNextTurn, of: bearer }
+                    endsOnDamage: true
+                    save:
+                      ability: wis
+                      at: turnEnd
+                      onFail:
+                        - condition: { id: unconscious, until: parent, endsOnDamage: true }
+do: [{ apply: { effect: motes, to: point } }]
+provenance:
+  review: reviewed
+  pdfPage: 163

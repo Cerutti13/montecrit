@@ -1,0 +1,32 @@
+# Round 1: pc1 passes on Uncanny Metabolism (nothing spent yet), hits the Boss with an Unarmed
+# Strike and spends 1 Focus Point on Stunning Strike; the Boss fails its CON save and is Stunned.
+# pc1's second strike hits too, and no Stunning Strike is offered (once per turn). The Stunned
+# Boss passes (it can still move: the 2024 Stunned gives no Speed 0, srd-raw.txt:34372-34379; the
+# journal keeps the log short). Round 2: Stunned ends as pc1's turn starts; its Shortsword hit is
+# offered Stunning Strike again (a new turn) and passes. Every seat is scripted, so the AI never
+# moves this golden.
+kind: journal
+scenario: monk-stunning-strike
+seed: 30
+run: 0
+engine: '0.8.0'
+contentHash: 'c78006367086638f'
+scenarioHash: '93ab788df05a509a'
+entries:
+  - { seat: pc1, key: 'pick:pass' }
+  - { seat: pc1, key: 'attack:unarmed-strike>boss1' }
+  - { seat: pc1, key: 'rider:stunning-strike' }
+  - { seat: pc1, key: 'attack:unarmed-strike>boss1' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: boss1, key: 'pass' }
+  - { seat: gob1, key: 'attack:shortbow>pc1' }
+  - { seat: pc1, key: 'react:monk/deflect-attacks' }
+  - { seat: gob1, key: 'pass' }
+  - { seat: pc1, key: 'attack:shortsword>boss1' }
+  - { seat: pc1, key: 'use:monk/monks-focus/flurry' }
+  - { seat: pc1, key: 'attack:shortsword>boss1' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: gob1, key: 'attack:shortbow>pc1' }
+  - { seat: pc1, key: 'react:monk/deflect-attacks' }
+  - { seat: gob1, key: 'pass' }

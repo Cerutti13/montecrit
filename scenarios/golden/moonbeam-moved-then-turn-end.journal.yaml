@@ -1,0 +1,19 @@
+# Round 1: Moonbeam in the empty corner A7; the enemies hold. Round 2: pc1 moves it onto the
+# knight (a save), and the knight ends its own turn in it (a save on a different turn).
+kind: journal
+scenario: moonbeam-moved-then-turn-end
+seed: 1
+run: 0
+engine: '0.8.0'
+contentHash: '25eb38c6319e14d5'
+entries:
+  - { seat: pc1, key: 'cast:moonbeam@2' }
+  - { seat: pc1, key: 'place:A7' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: gob2, key: 'pass' }
+  - { seat: knight, key: 'pass' }
+  - { seat: pc1, key: 'use:pc1/beam/move' }
+  - { seat: pc1, key: 'place:H3' }
+  - { seat: pc1, key: 'pass' }
+  - { seat: gob2, key: 'pass' }
+  - { seat: knight, key: 'pass' }

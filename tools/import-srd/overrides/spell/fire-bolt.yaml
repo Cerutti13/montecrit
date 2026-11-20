@@ -1,0 +1,7 @@
+# Fire Bolt, SRD 5.2.1 p.132, read against the mapped item (M3 step 6): ranged spell attack, 1d10 Fire on a hit, Cantrip Upgrade 2d10/3d10/4d10 at 5/11/17; the burning object is out of scope.
+# Nothing in the text is left out, so the importer's C7 review lines are cleared and the spell is full.
+fidelity: full
+unimplemented: null
+provenance:
+  review: reviewed
+  pdfPage: 132

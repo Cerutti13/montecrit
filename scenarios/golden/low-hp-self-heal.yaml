@@ -1,0 +1,17 @@
+# M3 step 0 (docs/design/m3.md 6): the greedy AI at very low HP. pc1 is down to 3 of 45 HP with
+# two goblin bosses next to it and its ally across the room. Under greedy v3 a self-heal was worth
+# only the HP it restored (the drop risk it removes never counted), so pc1 swung at a boss
+# instead; from v4 the heal's post-heal end cost counts and `--explain pc1` ranks Healing Word
+# on itself first. Static initiative: pc1 acts first. One round is the whole demo.
+kind: scenario
+id: low-hp-self-heal
+name: Low-HP self-heal
+rules: '2024'
+packs: [srd-5.2.1, test]
+grid: { w: 10, h: 8 }
+flags: { initiativeMode: static, focusHandSomatic: lenient }
+knobs: { maxRounds: 1, downEnds: false }
+units:
+  - { seat: pc1, team: party, use: 'test:sample-druid', at: D4, hp: 3, decider: greedy }
+  - { seat: boss1, team: enemies, use: 'srd:goblin-boss', at: E4, decider: greedy }
+  - { seat: boss2, team: enemies, use: 'srd:goblin-boss', at: D5, decider: greedy }

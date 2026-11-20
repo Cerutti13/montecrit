@@ -1,0 +1,56 @@
+replay   engine 0.8.0 | content ac52cef5f68b3928 | scenario pull-into-spikes 6f383339b1242faa | seed 21 run 0 | journal 8
+policy   gob1 journal>baseline | pc1 journal>baseline
+knobs    maxRounds=2 attackDowned=ifNoOtherTarget lossCounts=pcs downEnds=true
+flags read:
+  diagonalCost=uniform [verified: SRD 5.2.1 p.13 "Playing on a Grid": any adjacent square costs 1; alternating 5/10 is a 2024 DMG option (its use for range is unverified)]
+  initiativeMode=static [verified: SRD 5.2.1 p.184 "Initiative" and p.254: static initiative is a GM option]
+  groupInitiative=shared [verified: SRD 5.2.1 p.13: a group of identical creatures gets one roll]
+  monsterHp=listed [verified: SRD 5.2.1 p.255: use the number or the dice, the GM's choice]
+  statBlockAtZeroHp=dies [verified: SRD 5.2.1 p.17 "Monster Death": dies at 0 HP unless the GM treats it like a character]
+  focusHandSomatic=strict [verified: 2024 Sage Advice SAC-SpellComponents3 and SRD 5.2.1 p.105-106: the focus hand does Somatic only for spells with a Material component; lenient is a common table ruling]
+  conjuredHandEffectBlocksHand=false [UNVERIFIED: SRD 5.2.1 p.156 Produce Flame: the flame is "in your hand"; unlike Flame Blade (p.132) it never says it needs or occupies a free hand]
+  areaOriginOnGrid=squareCenter [UNVERIFIED: Shane's table ruling 2026-11-01 (areas land on a square); SRD 5.2.1 has no grid-area rule; the 2024 DMG intersection rule is known only secondhand]
+  areaGridCoverage=atLeastHalfSquare [UNVERIFIED: SRD 5.2.1 has no grid-area rule (p.13 covers movement and range); the 2024 DMG half-square rule is known only secondhand; 2024 SAC-Spells-CloudofDaggers1]
+  involuntaryMovementTriggersArea=true [UNVERIFIED: SRD 5.2.1 p.150-151 and p.164 say "enters" and "moves" with no "willingly"; 2024 text says "willingly" when it means it (p.138, p.145); no ruling]
+  perDistanceDamageRolls=perIncrement [UNVERIFIED: SRD 5.2.1 p.164 "damage for every 5 feet it travels" doesn't say whether each 5 ft is a separate damage instance]
+  forcedMovementPath=eachStepCloser [UNVERIFIED: No 2024 rule defines "closer" or "away" on a grid; effects whose text says "straight" still need a straight line]
+  forcedMovementTerrainCost=ignoresTerrain [UNVERIFIED: SRD 5.2.1 p.181: Difficult Terrain taxes movement a creature spends; forced moves state feet moved; no 2024 text links them]
+  zoneKnowledge=sawCast [UNVERIFIED: Not a rule: which zones a creature avoids when it plans a move. sawCast (coverage step 9) = a hidden zone (SRD 5.2.1 p.164 Spike Growth, srd-raw.txt:31015-31021: camouflaged; a creature that can't see the area when the spell is cast must take a Search action to recognize it) only once it saw it appear or recognized it, every other zone once it has line of sight to one of its squares (or saw it appear); all = every zone; none = only zones it created. Movement cost through Difficult Terrain is physical and applies either way]
+notes    LOS: grid (losMethod=corners, creatureCover=on)
+notes    ending concentration or dismissing an effect: offered only on your own turn
+notes    srd:goblin-warrior partial: unimplemented Nimble Escape: the Hide option
+
+   #1   initiative pc1 12 (static)
+   #2   initiative gob1 7 (static)
+   #3 == round 1 ==
+   #4 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+   #5   pc1 chooses cast:spike-growth@2  [journal @0]
+   #6     pc1 casts Spike Growth with a level 2 slot (2 left)
+   #7       pc1 is concentrating on Spike Growth
+   #8       pc1 chooses place:E4  [journal @1]
+   #9       Spike Growth appears at E4: 45 squares, Difficult Terrain (seen by gob1, pc1)
+  #10   pc1 chooses pass  [journal @2]
+  #11   pc1's turn ends
+  #12 gob1's turn (H1, 10 HP, 30 ft) [Goblin Warrior]
+  #13   gob1 chooses attack:shortbow>pc1  [journal @3]
+  #14     gob1: Attack
+  #15     gob1 Shortbow -> pc1: d20 5 +4 = 9 vs AC 15, miss  [gob1 attack r1 p0.0]
+  #16   gob1 chooses pass  [journal @4]
+  #17   gob1's turn ends
+  #18 == round 2 ==
+  #19 pc1's turn (B1, 45 HP, 30 ft) [Sample Druid]
+  #20   pc1 chooses cast:tether@0  [journal @5]
+  #21     pc1 casts Tether (cantrip)
+  #22       pc1 Tether -> gob1: d20 14 +7 = 21 vs AC 15, hit  [pc1 attack r2 p0.0]
+  #23         gob1 takes 3 (3 piercing), HP 10 -> 7  [pc1 damage r2 p0.0]
+  #24         pc1 chooses pull:G1  [journal @6]
+  #25         pc1 chooses pull:F1  [journal @7]
+  #26           gob1 is pulled H1 -> G1 (5 ft, forced)
+  #27             gob1 takes 5 (5 piercing) from Spike Growth, HP 7 -> 2  [pc1 zone r2 p0.0]
+  #28           gob1 is pulled G1 -> F1 (5 ft, forced)
+  #29             gob1 takes 3 (3 piercing) from Spike Growth, HP 2 -> 0  [pc1 zone r2 p0.1]
+  #30               gob1 dies (0 HP)
+  #31           gob1's forced move ends at F1: died, 2 of 2 steps
+  #32   pc1's turn ends
+  #33 fight ends: win in round 2
+logHash b2beadc97c2df031

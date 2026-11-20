@@ -1,0 +1,30 @@
+# The Paladin of the aura-emanation golden (coverage step 7.5): character-built, level 6, for Aura of
+# Protection with CHA 16 (+3). Synthetic test fixture built only from SRD 5.2.1 data. The pack has two Paladin
+# spells, so off-list ones fill the table's count; the golden's journal never casts those.
+kind: character
+id: test:sample-sentinel
+name: Sample Sentinel
+source: synthetic test fixture
+rules: '2024'
+classes: [{ class: srd:paladin, level: 6, subclass: srd:oath-of-devotion }]
+species: srd:dwarf
+background: srd:soldier
+abilities: { str: 16, dex: 10, con: 14, int: 8, wis: 10, cha: 16 }
+hp: average
+picks:
+  srd:paladin#skills: [insight, religion]
+  srd:paladin#fighting-style: [srd:defense]
+  srd:paladin#weapon-mastery: [srd:longsword, srd:javelin]
+  srd:paladin#asi-4: { asi: { cha: 2 } }
+  srd:soldier#tools: [Gaming Set (Dice)]
+  srd:soldier#abilities: { asi: { str: 2, con: 1 } }
+equipment:
+  armor: srd:chain-mail
+  shield: srd:shield
+  weapons: [srd:longsword]
+  hands: [longsword, shield]
+casting:
+  - { source: srd:paladin, cantrips: [], prepared: [srd:shield-of-faith, srd:cure-wounds, srd:longstrider, srd:faerie-fire, srd:entangle, srd:thunderwave] }
+features: []
+overrides: {}
+flags: {}

@@ -1,0 +1,12 @@
+# Stunning Strike on every eligible hit: whenever the engine offers the rider (a hit with an
+# Unarmed Strike or a Monk weapon, a Focus Point left, not yet used this turn; SRD 5.2.1 Monk,
+# Stunning Strike), take it, even against a target that is already Stunned or nearly dead. The
+# greedy AI plays everything else, including Open Hand Technique and Deflect Attacks. A
+# sensitivity arm against greedy's own Focus spending (test:sample-monk; monk-ambush).
+kind: policy
+id: stun-first
+name: Stunning Strike on every hit
+seats: pcs
+base: greedy
+riders:
+  - { rider: stunning-strike }

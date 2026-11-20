@@ -1,0 +1,24 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      # determinism lint, private-content and API-key check, typecheck
+      - run: npm run lint
+      - run: npm test
+      # the SRD import's committed output against itself: overrides, provenance, IMPORT.json (no network, no cache)
+      - run: npm run import:verify
+      # the browser app: build it, then scan its output for private content and API keys (fails closed)
+      - run: npm run build:web
+      - run: "! grep -rI 'sk-ant' apps/web/dist"

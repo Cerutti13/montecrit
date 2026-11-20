@@ -1,0 +1,14 @@
+{
+  "name": "@montecrit/engine",
+  "private": true,
+  "type": "module",
+  "description": "Headless, deterministic rules engine. No DOM, no Node APIs, no Math.random, no Date.",
+  "license": "AGPL-3.0-only",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "yaml": "2.9.1",
+    "zod": "4.6.7"
+  }
+}

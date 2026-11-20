@@ -1,0 +1,31 @@
+# SRD 5.2.1 p.164, Spike Growth. Stat line and effect checked in docs/research/m1b-rules-2024.md ("The six spells").
+# Moved here unchanged at M3 step 6 (docs/design/m3.md 4.6): the hand-written item stands
+# in for the Foundry record as replace: true, so its compiled spell, every closure hash and
+# every golden stay byte-identical (tools/import-srd/test/spell-overrides.test.ts).
+replace: true
+foundryPath: packs/_source/spells24/2nd-level/spike-growth.yml
+kind: spell
+id: srd:spike-growth
+name: Spike Growth
+source: SRD 5.2.1 p.164
+fidelity: full
+level: 2
+castingTime: action
+range: 150
+components: { v: true, s: true, m: focus }
+concentration: true
+duration: { minutes: 10 }
+area: spikes
+effects:
+  - id: spikes
+    name: Spike Growth
+    zone: { shape: sphere, radius: 20, difficult: true }
+    # Camouflaged (srd-raw.txt:31015-31021): a creature that didn't see it appear must Search,
+    # a WIS (Perception or Survival) check against the caster's spell save DC (coverage step 9).
+    hidden: { dc: caster }
+    # 2d4 Piercing for every 5 feet traveled in the area. No cap, nothing on casting, no turn triggers.
+    on: [{ when: [travel], do: [{ damage: [{ roll: 2d4, type: piercing }] }] }]
+do: [{ apply: { effect: spikes, to: point } }]
+provenance:
+  review: reviewed
+  pdfPage: 164

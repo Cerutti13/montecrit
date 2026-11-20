@@ -1,0 +1,38 @@
+# Multiattack alternatives whose groups overlap: two strikes from claw or bite, or one
+# bite plus one tail.
+kind: monster
+id: test:three-limbed-beast
+name: Three-Limbed Beast
+source: synthetic test fixture
+size: medium
+cr: 2
+pb: 2
+ac: 13
+hp: { average: 33, formula: 6d8 + 6 }
+speed: { walk: 30 }
+initiative: { mod: 1, score: 11 }
+abilities: { str: 15, dex: 12, con: 12, int: 4, wis: 10, cha: 5 }
+attacks:
+  - id: claw
+    name: Claw
+    kind: melee
+    toHit: 4
+    damage:
+      - { roll: 1d6 + 2, type: slashing, avg: 5 }
+  - id: bite
+    name: Bite
+    kind: melee
+    toHit: 4
+    damage:
+      - { roll: 1d8 + 2, type: piercing, avg: 6 }
+  - id: tail
+    name: Tail
+    kind: melee
+    toHit: 4
+    reach: 10
+    damage:
+      - { roll: 1d10 + 2, type: bludgeoning, avg: 7 }
+multiattack:
+  alternatives:
+    - [{ count: 2, from: [claw, bite] }]
+    - [{ count: 1, from: [bite] }, { count: 1, from: [tail] }]
